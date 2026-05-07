@@ -1,0 +1,14 @@
+# Sensitive data
+.env
+*.env.local
+
+# Dependency folders
+frontend/node_modules/
+backend/node_modules/
+
+# Build outputs
+frontend/.next/
+
+# OS specific files
+.DS_Store
+Thumbs.db
