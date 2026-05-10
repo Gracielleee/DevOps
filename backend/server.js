@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import generateResponse from './aiService.js';
+import LearningMaterial from './models/LearningMaterial.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,15 +27,6 @@ const messageSchema = new mongoose.Schema({
 });
 
 const Message = mongoose.model('Message', messageSchema);
-
-const learningMaterialSchema = new mongoose.Schema({
-  subject: { type: String, required: true },
-  topic: { type: String, required: true },
-  content: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now }
-});
-
-const LearningMaterial = mongoose.model('LearningMaterial', learningMaterialSchema);
 
 // API Routes
 app.get('/', (req, res) => {
