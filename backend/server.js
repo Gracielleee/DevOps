@@ -27,6 +27,15 @@ const messageSchema = new mongoose.Schema({
 
 const Message = mongoose.model('Message', messageSchema);
 
+const learningMaterialSchema = new mongoose.Schema({
+  subject: { type: String, required: true },
+  topic: { type: String, required: true },
+  content: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now }
+});
+
+const LearningMaterial = mongoose.model('LearningMaterial', learningMaterialSchema);
+
 // API Routes
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the BrainBytes API' });
@@ -84,6 +93,32 @@ app.post('/api/messages', async (req, res) => {
     });
   } catch (err) {
     console.error('Error in /api/messages route:', err);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Get all learning materials
+app.get('/api/materials', async (req, res) => {
+  try {
+    const materials = await LearningMaterial.find().sort({ createdAt: -1 });
+    res.json(materials);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Create a new learning material
+app.post('/api/materials', async (req, res) => {
+  try {
+    const material = new LearningMaterial({
+      subject: req.body.subject,
+      topic: req.body.topic,
+      content: req.body.content
+    });
+    await material.save();
+    res.status(201).json(material);
+  } catch (err) {
+    console.error('Error in /api/materials route:', err);
     res.status(400).json({ error: err.message });
   }
 });
