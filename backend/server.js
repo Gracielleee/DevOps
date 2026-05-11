@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import { generateResponse } from './src/services/ai-service.js';
 import logger from './logger.js';
+import LearningMaterial from './models/LearningMaterial.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -63,7 +64,7 @@ app.post('/api/messages', async (req, res) => {
     // Race between the AI response and the timeout
     const aiResult = await Promise.race([aiResultPromise, timeoutPromise])
       .catch(error => {
-        console.error('AI response timed out or failed:', error);
+        logger.error('AI response timed out or failed:', error);
         return {
           category: 'error',
           response: "I'm sorry, but I couldn't process your request in time. Please try again with a simpler question."
@@ -85,6 +86,32 @@ app.post('/api/messages', async (req, res) => {
     });
   } catch (err) {
     console.error('Error in /api/messages route:', err);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Get all learning materials
+app.get('/api/materials', async (req, res) => {
+  try {
+    const materials = await LearningMaterial.find().sort({ createdAt: -1 });
+    res.json(materials);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Create a new learning material
+app.post('/api/materials', async (req, res) => {
+  try {
+    const material = new LearningMaterial({
+      subject: req.body.subject,
+      topic: req.body.topic,
+      content: req.body.content
+    });
+    await material.save();
+    res.status(201).json(material);
+  } catch (err) {
+    console.error('Error in /api/materials route:', err);
     res.status(400).json({ error: err.message });
   }
 });
