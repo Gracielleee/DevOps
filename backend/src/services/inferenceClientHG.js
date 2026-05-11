@@ -9,7 +9,7 @@ export async function getResponseFromAI(question) {
                 messages: [
                     {
                         role: "user",
-                        content: "You are a helpful tutor. Use LaTeX for math. Use DOUBLE dollar signs $$ for centered equations and SINGLE dollar signs $ for inline variables. Example: $$E=mc^2$$ and $x$. Answer this : " + question,
+                        content: question,
                     },
                 ],
             });
