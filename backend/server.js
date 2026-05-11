@@ -1,7 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import generateResponse from './aiService.js';
+import { generateResponse } from './src/services/ai-service.js';
+import logger from './logger.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,9 +14,9 @@ app.use(express.json());
 // Connect to MongoDB
 mongoose.connect('mongodb://mongo:27017/brainbytes', {
 }).then(() => {
-  console.log('Connected to MongoDB');
+  logger.info('Connected to MongoDB');
 }).catch(err => {
-  console.error('Failed to connect to MongoDB:', err);
+  logger.error('Failed to connect to MongoDB:', err);
 });
 
 // Define schemas
@@ -90,5 +91,5 @@ app.post('/api/messages', async (req, res) => {
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  logger.info(`Server running on port ${PORT}`);
 });
