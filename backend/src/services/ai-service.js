@@ -1,6 +1,8 @@
 import { get } from "mongoose";
-import { getResponseFromAI } from "./inferenceClientHG.js";
+import { getResponseFromAI } from "./ai-client-text-gen.js";
+import { analyzeSentiment } from "./ai-client-sentiment-analysis.js";
 import { getAnswerFromKnowledgeBase, generatePromptPrefix, getBackupResponse, detectSubjectCategory} from "./ai-helper.js";
+import logger from "../../logger.js";
   
 // Function to get response from Hugging Face API
 export async function generateResponse(question) {
@@ -18,9 +20,15 @@ export async function generateResponse(question) {
   // 2. For other questions, try the API with a strict timeout
     try {
     // Call the function (it returns a string)
-    const aiResponseString = await getResponseFromAI(promptprefix + question); 
 
-    logger.info("Prompt:", promptprefix + question);
+    const sentimentResult = await analyzeSentiment(question);
+    logger.info("Sentiment analysis result of question:", question, sentimentResult);
+
+    const completePrompt = promptprefix + "Adjust your tone based on the sentiment result. Sentiment analysis result of question: " + JSON.stringify(sentimentResult) + ". Actual question: " + question;
+
+    const aiResponseString = await getResponseFromAI(completePrompt);
+
+    logger.info("Prompt:", completePrompt);
 
     // Check if we actually got text back
     if (aiResponseString) {

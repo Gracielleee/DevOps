@@ -1,4 +1,5 @@
-import { InferenceClient  } from '@huggingface/inference';
+import { InferenceClient } from '@huggingface/inference';
+import logger from "../../logger.js";
 
 const client = new InferenceClient(process.env.HF_TOKEN, {timeout: 30});
 
@@ -13,11 +14,11 @@ export async function getResponseFromAI(question) {
                     },
                 ],
             });
-            console.log("Inference Client response:", chatCompletion.choices[0].message);
+            logger.info("Inference Client response:", chatCompletion.choices[0].message);
             return chatCompletion.choices[0].message.content;
 
     } catch (error){
-        console.error("Inference Client Error:", error.message);
+        logger.error("Inference Client Error:", error.message);
         return null;
     }
 }
