@@ -1,5 +1,6 @@
 import Message from "../models/message.js";
-import generateResponse from '..services/ai-service.js';
+import generateResponse from '../services/ai-service.js';
+import logger from "../../logger.js";
 
 const messageController = {
   createMessage: async (req, res) => {
@@ -21,7 +22,7 @@ const messageController = {
     // Race between the AI response and the timeout
     const aiResult = await Promise.race([aiResultPromise, timeoutPromise])
       .catch(error => {
-        console.error('AI response timed out or failed:', error);
+        logger.error('AI response timed out or failed:', error);
         return {
           category: 'error',
           response: "I'm sorry, but I couldn't process your request in time. Please try again with a simpler question."
@@ -42,9 +43,21 @@ const messageController = {
       category: aiResult.category
     });
   } catch (err) {
-    console.error('Error in /api/messages route:', err);
+    logger.error('Error in /api/messages route:', err);
     res.status(400).json({ error: err.message });
   }
-}};
+},
+
+  getMessages: async (req, res) => {
+    try {
+      const messages = await Message.find().sort({ createdAt: -1 });
+      
+      res.json(messages);
+    } catch (error) {
+      logger.error('Error fetching messages:', error);
+      res.status(500).json({ error: 'Failed to fetch messages' });
+    }
+  }
+};
 
 export default messageController;

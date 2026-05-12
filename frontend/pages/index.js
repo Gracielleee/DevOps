@@ -7,6 +7,8 @@ import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
 import Link from 'next/link'; // Added for Member #4 navigation
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+
 export default function Home() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -29,7 +31,7 @@ export default function Home() {
   // Fetch messages from the API
   const fetchMessages = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/messages');
+      const response = await axios.get(`${API_URL}/messages`);
       setMessages(response.data);
       setLoading(false);
     } catch (error) {
@@ -59,7 +61,7 @@ export default function Home() {
       
       // Send to backend and get AI response
       // Updated to include selectedSubject
-      const response = await axios.post('http://localhost:3000/api/messages', { 
+      const response = await axios.post(`${API_URL}/messages`, { 
         text: userMsg,
         subject: selectedSubject 
       });

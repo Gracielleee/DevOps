@@ -1,1 +1,349 @@
 {"level":"info","message":"Connected to MongoDB","service":"brainbytes-api","timestamp":"2026-05-11T10:37:15.695Z"}
+{"level":"info","message":"Server running on port 3000","service":"brainbytes-api","timestamp":"2026-05-12T05:54:47.260Z"}
+{"level":"info","message":"Connected to MongoDB","service":"brainbytes-api","timestamp":"2026-05-12T05:54:47.277Z"}
+{"level":"info","message":"Server running on port 3000","service":"brainbytes-api","timestamp":"2026-05-12T08:01:24.154Z"}
+{"level":"info","message":"Connected to MongoDB","service":"brainbytes-api","timestamp":"2026-05-12T08:01:24.169Z"}
+{"level":"info","message":"Server running on port 3000","service":"brainbytes-api","timestamp":"2026-05-12T08:37:00.659Z"}
+{"level":"info","message":"Connected to MongoDB","service":"brainbytes-api","timestamp":"2026-05-12T08:37:00.679Z"}
+{"level":"info","message":"Server running on port 3000","service":"brainbytes-api","timestamp":"2026-05-12T08:56:46.484Z"}
+{"level":"info","message":"Connected to MongoDB","service":"brainbytes-api","timestamp":"2026-05-12T08:56:46.499Z"}
+{"level":"info","message":"Server running on port 3000","service":"brainbytes-api","timestamp":"2026-05-12T09:06:50.576Z"}
+{"level":"info","message":"Connected to MongoDB","service":"brainbytes-api","timestamp":"2026-05-12T09:06:50.599Z"}
+{"level":"info","message":"Server running on port 3000","service":"brainbytes-api","timestamp":"2026-05-12T09:28:06.885Z"}
+{"level":"info","message":"Connected to MongoDB","service":"brainbytes-api","timestamp":"2026-05-12T09:28:06.899Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:28:34.229Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:28:49.341Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:30:55.335Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:31:04.210Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:32:34.006Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:32:59.629Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:37:19.509Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:37:25.549Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:37:36.977Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:39:08.733Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:40:03.823Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:40:15.823Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:41:23.063Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:41:32.334Z"}
+{"level":"error","message":"Error calling Hugging Face API: logger is not defined","service":"brainbytes-api","stack":"ReferenceError: logger is not defined\n    at analyzeSentiment (file:///usr/src/app/src/services/ai-client-sentiment-analysis.js:19:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async generateResponse (file:///usr/src/app/src/services/ai-service.js:24:29)\n    at async createMessage (file:///usr/src/app/src/controllers/message-controller.js:23:22)","timestamp":"2026-05-12T09:41:50.796Z"}
+{"level":"info","message":"Server running on port 3000","service":"brainbytes-api","timestamp":"2026-05-12T09:42:39.738Z"}
+{"level":"info","message":"Connected to MongoDB","service":"brainbytes-api","timestamp":"2026-05-12T09:42:39.760Z"}
+{"level":"info","message":"Server running on port 3000","service":"brainbytes-api","timestamp":"2026-05-12T09:44:05.379Z"}
+{"level":"info","message":"Connected to MongoDB","service":"brainbytes-api","timestamp":"2026-05-12T09:44:05.405Z"}
+{"level":"info","message":"Sentiment analysis result of question:","service":"brainbytes-api","timestamp":"2026-05-12T09:44:15.463Z"}
+{"content":"Hello! How can I assist you today? If you have any specific questions or topics you'd like to discuss, feel free to let me know.","level":"info","message":"Inference Client response:","role":"assistant","service":"brainbytes-api","timestamp":"2026-05-12T09:44:16.517Z","tool_calls":[]}
+{"level":"info","message":"Prompt:","service":"brainbytes-api","timestamp":"2026-05-12T09:44:16.517Z"}
+{"level":"info","message":"Sentiment analysis result of question:","service":"brainbytes-api","timestamp":"2026-05-12T09:44:57.071Z"}
+{"content":"Hello! How can I assist you today? If you have any specific questions or topics you'd like to discuss, feel free to let me know.","level":"info","message":"Inference Client response:","role":"assistant","service":"brainbytes-api","timestamp":"2026-05-12T09:44:57.910Z","tool_calls":[]}
+{"level":"info","message":"Prompt:","service":"brainbytes-api","timestamp":"2026-05-12T09:44:57.910Z"}
+{"level":"info","message":"Sentiment analysis result of question:","service":"brainbytes-api","timestamp":"2026-05-12T09:45:06.444Z"}
+{"content":"Sure! Cars are a type of motor vehicle designed for transportation on roads. They typically have four wheels and are powered by an internal combustion engine or an electric motor. Cars come in various sizes, from compact city cars to large SUVs, and are used for personal transportation, commuting, and sometimes for leisure activities like road trips.\n\nCars have several key components:\n1. **Engine**: Converts fuel into motion.\n2. **Transmission**: Transfers power from the engine to the wheels.\n3. **Wheels and Tires**: Provide traction and allow the car to move.\n4. **Suspension System**: Helps maintain a smooth ride by absorbing shocks.\n5. **Brakes**: Stop the car safely.\n6. **Steering System**: Controls the direction of the vehicle.\n7. **Body**: Protects the passengers and houses the internal components.\n\nModern cars also include advanced features such as:\n- **Safety Features**: Airbags, anti-lock brakes, and electronic stability control.\n- **Entertainment Systems**: Audio systems, GPS navigation, and infotainment screens.\n- **Fuel Efficiency**: Hybrid and electric vehicles that are more environmentally friendly.\n\nIf you have any specific questions about cars or would like more details on any particular aspect, feel free to ask!","level":"info","message":"Inference Client response:","role":"assistant","service":"brainbytes-api","timestamp":"2026-05-12T09:45:09.382Z","tool_calls":[]}
+{"level":"info","message":"Prompt:","service":"brainbytes-api","timestamp":"2026-05-12T09:45:09.382Z"}
+{"level":"info","message":"Sentiment analysis result of question:","service":"brainbytes-api","timestamp":"2026-05-12T09:46:59.913Z"}
+{"content":"Hello! How can I assist you today? If you have any specific questions or topics you'd like to discuss, feel free to let me know.","level":"info","message":"Inference Client response:","role":"assistant","service":"brainbytes-api","timestamp":"2026-05-12T09:47:00.905Z","tool_calls":[]}
+{"level":"info","message":"Prompt:","service":"brainbytes-api","timestamp":"2026-05-12T09:47:00.905Z"}
+{"level":"info","message":"Sentiment analysis result of question:","service":"brainbytes-api","timestamp":"2026-05-12T09:47:16.715Z"}
+{"content":"Hello! How can I assist you today? If you have any specific questions or topics you'd like to discuss, feel free to let me know.","level":"info","message":"Inference Client response:","role":"assistant","service":"brainbytes-api","timestamp":"2026-05-12T09:47:17.865Z","tool_calls":[]}
+{"level":"info","message":"Prompt:","service":"brainbytes-api","timestamp":"2026-05-12T09:47:17.865Z"}
+{"level":"info","message":"Sentiment analysis result of question:","service":"brainbytes-api","timestamp":"2026-05-12T09:48:52.337Z"}
+{"content":"Hello! How can I assist you today? If you have any specific questions or topics you'd like to discuss, feel free to let me know.","level":"info","message":"Inference Client response:","role":"assistant","service":"brainbytes-api","timestamp":"2026-05-12T09:48:53.527Z","tool_calls":[]}
+{"level":"info","message":"Prompt:","service":"brainbytes-api","timestamp":"2026-05-12T09:48:53.527Z"}
+{"level":"info","message":"Sentiment analysis result of question:","service":"brainbytes-api","timestamp":"2026-05-12T09:52:30.528Z"}
+{"content":"Hello! It seems like you might have sent a short message without a specific question or statement. Could you please provide more details so I can assist you better? Whether you have a query about Halo, a game or a concept, or need help with something else, feel free to elaborate!","level":"info","message":"Inference Client response:","role":"assistant","service":"brainbytes-api","timestamp":"2026-05-12T09:52:31.882Z","tool_calls":[]}
+{"level":"info","message":"Prompt:","service":"brainbytes-api","timestamp":"2026-05-12T09:52:31.882Z"}
+{"level":"info","message":"Sentiment analysis result of question:","service":"brainbytes-api","timestamp":"2026-05-12T09:56:24.537Z"}
+{"content":"Hello! How can I assist you today? If you have any specific questions or topics you'd like to discuss, feel free to let me know.","level":"info","message":"Inference Client response:","role":"assistant","service":"brainbytes-api","timestamp":"2026-05-12T09:56:25.339Z","tool_calls":[]}
+{"level":"info","message":"Prompt:","service":"brainbytes-api","timestamp":"2026-05-12T09:56:25.339Z"}
+{"level":"info","message":"Sentiment analysis result of question:","service":"brainbytes-api","timestamp":"2026-05-12T09:56:36.178Z"}
+{"content":"Hello! How can I assist you today? If you have any specific questions or topics you'd like to discuss, feel free to let me know.","level":"info","message":"Inference Client response:","role":"assistant","service":"brainbytes-api","timestamp":"2026-05-12T09:56:36.968Z","tool_calls":[]}
+{"level":"info","message":"Prompt:","service":"brainbytes-api","timestamp":"2026-05-12T09:56:36.969Z"}
+{"level":"info","message":"Sentiment analysis result of question:","service":"brainbytes-api","timestamp":"2026-05-12T10:01:36.608Z"}
+{"content":"Hello! How can I assist you today? If you have any specific questions or topics you'd like to discuss, feel free to let me know.","level":"info","message":"Inference Client response:","role":"assistant","service":"brainbytes-api","timestamp":"2026-05-12T10:01:37.633Z","tool_calls":[]}
+{"level":"info","message":"Prompt:","service":"brainbytes-api","timestamp":"2026-05-12T10:01:37.633Z"}
+2026-05-12 10:02:36 [brainbytes-api] INFO: Server running on port 3000 
+2026-05-12 10:02:36 [brainbytes-api] INFO: Connected to MongoDB 
+2026-05-12 10:02:50 [brainbytes-api] INFO: Received question from user: {
+  "0": "h",
+  "1": "i"
+}
+2026-05-12 10:02:50 [brainbytes-api] INFO: Question: hi 
+2026-05-12 10:02:50 [brainbytes-api] INFO: Detected category: general 
+2026-05-12 10:02:50 [brainbytes-api] INFO: Detected question type: general 
+2026-05-12 10:02:50 [brainbytes-api] INFO: Generated prompt:
+You are a helpful AI academic tutor. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question:  
+2026-05-12 10:02:50 [brainbytes-api] INFO: Knowledge base has an answer: {
+  "category": "general",
+  "response": "Hi there! How can I help you?"
+}
+2026-05-12 10:23:58 [brainbytes-api] INFO: Received question from user: {
+  "0": "H",
+  "1": "e",
+  "2": "l",
+  "3": "l",
+  "4": "o"
+}
+2026-05-12 10:23:58 [brainbytes-api] INFO: Question: Hello 
+2026-05-12 10:23:58 [brainbytes-api] INFO: Detected category: general 
+2026-05-12 10:23:58 [brainbytes-api] INFO: Detected question type: general 
+2026-05-12 10:23:58 [brainbytes-api] INFO: Generated prompt:
+You are a helpful AI academic tutor. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question:  
+2026-05-12 10:23:58 [brainbytes-api] INFO: Knowledge base has an answer: {
+  "category": "general",
+  "response": "Hello! How can I assist you today?"
+}
+2026-05-12 10:24:10 [brainbytes-api] INFO: Received question from user: {
+  "0": "h",
+  "1": "i",
+  "2": "h",
+  "3": "i"
+}
+2026-05-12 10:24:10 [brainbytes-api] INFO: Question: hihi 
+2026-05-12 10:24:10 [brainbytes-api] INFO: Detected category: general 
+2026-05-12 10:24:10 [brainbytes-api] INFO: Detected question type: general 
+2026-05-12 10:24:10 [brainbytes-api] INFO: Generated prompt:
+You are a helpful AI academic tutor. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question:  
+2026-05-12 10:24:10 [brainbytes-api] INFO: Knowledge base has an answer: {
+  "category": "general",
+  "response": "Hi there! How can I help you?"
+}
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: hi
+🔍 DEBUG [ai-service.js] → Detecting subject category...
+🔍 DEBUG [ai-helper.js] → [detectSubjectCategory] Analyzing subject category for: "hi"
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Final category: "general"
+ℹ️ INFO [ai-service.js] → Category detected: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "hi"
+🔍 DEBUG [ai-helper.js] → [detectSubjectCategory] Analyzing subject category for: "hi"
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Final category: "general"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "hi"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: hi
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → Generated prompt:
+You are a helpful AI academic tutor. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "hi"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what is a cat?
+🔍 DEBUG [ai-service.js] → Detecting subject category...
+🔍 DEBUG [ai-helper.js] → [detectSubjectCategory] Analyzing subject category for: "what is a cat?"
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Final category: "general"
+ℹ️ INFO [ai-service.js] → Category detected: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what is a cat?"
+🔍 DEBUG [ai-helper.js] → [detectSubjectCategory] Analyzing subject category for: "what is a cat?"
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Final category: "general"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what is a cat?"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: what is a cat?
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → Generated prompt:
+You are a helpful AI academic tutor. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what is a cat?"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Analyzing sentiment of question...
+❌ ERROR  → Sentiment Analysis Error:
+ℹ️ INFO [ai-service.js] → Sentiment analysis complete: null
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what is carbon dioxide
+🔍 DEBUG [ai-service.js] → Detecting subject category...
+🔍 DEBUG [ai-helper.js] → [detectSubjectCategory] Analyzing subject category for: "what is carbon dioxide"
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Final category: "general"
+ℹ️ INFO [ai-service.js] → Category detected: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what is carbon dioxide"
+🔍 DEBUG [ai-helper.js] → [detectSubjectCategory] Analyzing subject category for: "what is carbon dioxide"
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Final category: "general"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what is carbon dioxide"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: what is carbon dioxide
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → Generated prompt:
+You are a helpful AI academic tutor. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what is carbon dioxide"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Analyzing sentiment of question...
+❌ ERROR  → Sentiment Analysis Error:
+ℹ️ INFO [ai-service.js] → Sentiment analysis complete: null
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: hi
+🔍 DEBUG [ai-service.js] → Detecting subject category...
+🔍 DEBUG [ai-helper.js] → [detectSubjectCategory] Analyzing subject category for: "hi"
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Final category: "general"
+ℹ️ INFO [ai-service.js] → Category detected: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "hi"
+🔍 DEBUG [ai-helper.js] → [detectSubjectCategory] Analyzing subject category for: "hi"
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Final category: "general"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "hi"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: hi
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "hi"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: how to walk
+🔍 DEBUG [ai-service.js] → Detecting subject category...
+🔍 DEBUG [ai-helper.js] → [detectSubjectCategory] Analyzing subject category for: "how to walk"
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Final category: "general"
+ℹ️ INFO [ai-service.js] → Category detected: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "how to walk"
+🔍 DEBUG [ai-helper.js] → [detectSubjectCategory] Analyzing subject category for: "how to walk"
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Final category: "general"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "how to walk"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: how to walk
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "how to walk"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Analyzing sentiment of question...
+❌ ERROR  → Sentiment Analysis Error:
+ℹ️ INFO [ai-service.js] → Sentiment analysis complete: null
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI

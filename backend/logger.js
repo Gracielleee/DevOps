@@ -1,13 +1,21 @@
-import winston from 'winston'; 
+import winston from 'winston';
 
-// Singleton logger
+const levelEmojis = {
+  error: '❌',
+  warn: '⚠️',
+  info: 'ℹ️',
+  debug: '🔍',
+};
+
 const logger = winston.createLogger({
-  level: 'info',
+  level: 'debug',
   format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.json()
+    winston.format.printf(({ level, message, file }) => {
+      const emoji = levelEmojis[level] || '📝';
+      const fileStr = file ? `[${file}]` : '';
+      return `${emoji} ${level.toUpperCase()} ${fileStr} → ${message}`;
+    })
   ),
-  defaultMeta: { service: 'brainbytes-api' },
   transports: [
     new winston.transports.Console(),
     new winston.transports.File({ filename: 'logs/app.log' })
