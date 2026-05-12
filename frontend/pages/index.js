@@ -5,12 +5,16 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
+import Link from 'next/link'; // Added for Member #4 navigation
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [isTyping, setIsTyping] = useState(false);
+  const [selectedSubject, setSelectedSubject] = useState('General'); // Added for Member #4 Subject Filter
   const messageEndRef = useRef(null);
 
   // !!!CURRENTLY DOES NOT WORK. Function to format math expressions in the response text
@@ -27,7 +31,7 @@ export default function Home() {
   // Fetch messages from the API
   const fetchMessages = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/messages');
+      const response = await axios.get(`${API_URL}/messages`);
       setMessages(response.data);
       setLoading(false);
     } catch (error) {
@@ -56,7 +60,11 @@ export default function Home() {
       setMessages(prev => [...prev, tempUserMsg]);
       
       // Send to backend and get AI response
-      const response = await axios.post('http://localhost:3000/api/messages', { text: userMsg });
+      // Updated to include selectedSubject
+      const response = await axios.post(`${API_URL}/messages`, { 
+        text: userMsg,
+        subject: selectedSubject 
+      });
       
       // Replace the temporary message with the actual one and add AI response
       setMessages(prev => {
@@ -101,6 +109,13 @@ export default function Home() {
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px', fontFamily: 'Nunito, sans-serif' }}>
+      
+      {/* Navigation Links Added */}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '10px' }}>
+        <Link href="/profile" style={{ color: '#2196f3', textDecoration: 'none', fontWeight: 'bold' }}>👤 My Profile</Link>
+        <Link href="/dashboard" style={{ color: '#2196f3', textDecoration: 'none', fontWeight: 'bold' }}>📊 Dashboard</Link>
+      </div>
+
       <h1 style={{ textAlign: 'center', color: '#333' }}>BrainBytes AI Tutor</h1>
       
       <div 
@@ -183,6 +198,21 @@ export default function Home() {
         )}
       </div>
       
+      {/* Subject Filter Dropdown Added */}
+      <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#666' }}>Current Subject:</span>
+        <select 
+          value={selectedSubject} 
+          onChange={(e) => setSelectedSubject(e.target.value)}
+          style={{ padding: '8px', borderRadius: '8px', border: '1px solid #ddd', backgroundColor: 'white' }}
+        >
+          <option value="General">General</option>
+          <option value="Math">Math</option>
+          <option value="Science">Science</option>
+          <option value="History">History</option>
+        </select>
+      </div>
+
       <form onSubmit={handleSubmit} style={{ display: 'flex' }}>
         <input
           type="text"
