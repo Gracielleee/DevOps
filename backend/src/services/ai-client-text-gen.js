@@ -3,6 +3,8 @@ import logger from "../../logger.js";
 
 const client = new InferenceClient(process.env.HF_TOKEN, {timeout: 30});
 
+const fileName = "ai-client-text-gen.js";
+
 export async function getResponseFromAI(question) {
     try{
         const chatCompletion = await client.chatCompletion({
@@ -14,11 +16,12 @@ export async function getResponseFromAI(question) {
                     },
                 ],
             });
-            logger.info("Inference Client response:", chatCompletion.choices[0].message);
+            logger.debug("question:", question, { file: fileName });
+            logger.info("Inference Client response:", chatCompletion.choices[0].message, { file: fileName });
             return chatCompletion.choices[0].message.content;
 
     } catch (error){
-        logger.error("Inference Client Error:", error.message);
+        logger.error("Inference Client Error:", error.message, { file: fileName });
         return null;
     }
 }
