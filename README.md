@@ -26,14 +26,14 @@ BrainBytes is an AI-powered tutoring platform designed to provide accessible aca
     Configure environment
         visit .env.example and follow the instructions.
     Start with Docker Compose
-        docker compose up --build
+        docker-compose up
     Open the app
         http://localhost:8080/
     Stop
         Ctrl+C then docker-compose down
 
 ## API Overview
-Authentication is not implemented yet for all endpoints. (Note: user profile endpoints are designed for auth but auth is not yet implemented.)
+Authentication is not implemented yet for all endpoints.
 
 ### 1) Learning Materials
 - **GET /api/materials**  
@@ -141,12 +141,15 @@ Design patterns:
 
 - Timestamps: models use createdAt (Date.now)
 - Validation: email validated, password hidden by default (select: false)
-- Flat schema structure for simplicity, for noe
+- Flat schema structure for simplicity, for now
 
 ## AI Enhancements
 - Expanded training data with more examples across subjects through hardcoded keyword matching.
 - Basic question-type detection (definitions, explanations, examples)through hardcoded keyword matching.
 - Basic sentiment analysis to detect user frustration/confusion through integration with a Hugging Face text classification model for intent/sentiment
 
-## Notes:
-- Comprehensive tests in Postman to be done in the future.
+## On to-do list:
+- Comprehensive tests in Postman for CRUD endpoints.
+- Implement Authentication.
+- Connect new frontend components to backend.
+- Week 3 tasks
