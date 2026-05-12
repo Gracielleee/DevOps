@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import validator from 'validator';
 import Subject from './subject.js';
 
 const userProfileSchema = new mongoose.Schema({
@@ -14,7 +13,10 @@ const userProfileSchema = new mongoose.Schema({
         unique: true,
         lowercase: true,
         validate: {
-            validator: validator.isEmail,
+            validator: (email) => {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            },
             message: 'Invalid email format'
         },
     },

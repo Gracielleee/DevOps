@@ -12,3 +12,6 @@ frontend/.next/
 # OS specific files
 .DS_Store
 Thumbs.db
+
+#logs
+.log
