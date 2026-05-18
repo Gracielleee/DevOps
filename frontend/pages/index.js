@@ -5,10 +5,55 @@ import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import rehypeHighlight from 'rehype-highlight';
 import 'katex/dist/katex.min.css';
 import Link from 'next/link';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+
+function LoginForm({ onLogin, error }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!username.trim() || !password.trim()) {
+      onLogin(null, 'Please enter both username and password.');
+      return;
+    }
+    onLogin({ username: username.trim(), password: password.trim() });
+  };
+
+  return (
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f7fb', padding: '24px' }}>
+      <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: '420px', background: '#fff', padding: '28px', borderRadius: '16px', boxShadow: '0 16px 40px rgba(0,0,0,0.08)' }}>
+        <h2 style={{ marginBottom: '20px', textAlign: 'center', color: '#222' }}>Login to BrainBytes AI Tutor</h2>
+        <label style={{ display: 'block', marginBottom: '12px', color: '#444' }}>
+          Username
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            style={{ width: '100%', padding: '12px 14px', marginTop: '6px', borderRadius: '10px', border: '1px solid #ccc' }}
+          />
+        </label>
+        <label style={{ display: 'block', marginBottom: '18px', color: '#444' }}>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{ width: '100%', padding: '12px 14px', marginTop: '6px', borderRadius: '10px', border: '1px solid #ccc' }}
+          />
+        </label>
+        {error && <div style={{ marginBottom: '16px', color: '#d32f2f' }}>{error}</div>}
+        <button type="submit" style={{ width: '100%', padding: '14px', borderRadius: '12px', backgroundColor: '#1976d2', color: '#fff', border: 'none', fontSize: '16px', cursor: 'pointer' }}>
+          Sign In
+        </button>
+      </form>
+    </div>
+  );
+}
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
@@ -17,38 +62,65 @@ export default function Home() {
   const [isTyping, setIsTyping] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState('General');
   const messageEndRef = useRef(null);
+  const [authHeader, setAuthHeader] = useState('');
+  const [authError, setAuthError] = useState('');
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+
+  const handleLogin = ({ username, password }, errorMessage = '') => {
+    if (!username || !password) {
+      setAuthError(errorMessage || 'Authentication failed.');
+      return;
+    }
+
+    const encoded = btoa(`${username}:${password}`);
+    const token = `Basic ${encoded}`;
+    setAuthHeader(token);
+    localStorage.setItem('authHeader', token);
+    setAuthError('');
+  };
+
+  const formatMath = (text) => {
+    return text
+    // 1. Handle Block Math: \[ ... \] or [ ... ] (on its own line)
+      .replace(/\\\[|(?<=\\n)\[(?=.*\\])/g, '$$')
+      .replace(/\\\]|(?<=.*\[)\](?=\\n|$)/g, '$$')
+    // 2. Handle Inline Math: \( ... \) or ( F )
+      .replace(/\\\(|(?<=\s)\((?=[a-zA-Z0-9\s]{1,3}\))/g, '$')
+      .replace(/\\\)|(?<=\$[a-zA-Z0-9\s]{1,3})\)/g, '$');
+  };
 
   const fetchMessages = async () => {
+    if (!authHeader) return;
     try {
-      const response = await axios.get(`${API_URL}/messages`);
+      const response = await axios.get(`${API_BASE_URL}/api/messages`, {
+        headers: { 'Authorization': authHeader }
+      });
       setMessages(response.data);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching messages:', error);
+      if (error.response && error.response.status === 401) {
+        localStorage.removeItem('authHeader');
+        setAuthHeader('');
+        alert('Authentication failed. Please refresh and try again.');
+      }
       setLoading(false);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!newMessage.trim()) return;
-
+    if (!newMessage.trim() || !authHeader) return;
+    
     try {
       setIsTyping(true);
       const userMsg = newMessage;
       setNewMessage('');
-
-      const tempUserMsg = {
-        _id: Date.now().toString(),
-        text: userMsg,
-        isUser: true,
-        createdAt: new Date().toISOString(),
-      };
+      const tempUserMsg = { _id: Date.now().toString(), text: userMsg, isUser: true, createdAt: new Date().toISOString() };
       setMessages(prev => [...prev, tempUserMsg]);
       
-      const response = await axios.post(`${API_URL}/messages`, { 
-        text: userMsg,
-        subject: selectedSubject 
+      const response = await axios.post(`${API_BASE_URL}/api/messages`, { text: userMsg }, {
+        headers: { 'Authorization': authHeader }
       });
       
       setMessages(prev => {
@@ -57,15 +129,10 @@ export default function Home() {
       });
     } catch (error) {
       console.error('Error posting message:', error);
-      setMessages((prev) => [
-        ...prev,
-        {
-          _id: Date.now().toString(),
-          text: "Sorry, I couldn't process your request. Please try again later.",
-          isUser: false,
-          createdAt: new Date().toISOString(),
-        },
-      ]);
+      if (error.response && error.response.status === 401) {
+        alert('Authentication failed. Please refresh and try again.');
+      }
+      setMessages(prev => [...prev, { _id: Date.now().toString(), text: "Sorry, I couldn't process your request. Please try again later.", isUser: false, createdAt: new Date().toISOString() }]);
     } finally {
       setIsTyping(false);
     }
@@ -76,201 +143,55 @@ export default function Home() {
   }, [messages]);
 
   useEffect(() => {
-    fetchMessages();
+    const storedToken = localStorage.getItem('authHeader');
+    if (storedToken) {
+      setAuthHeader(storedToken);
+    }
   }, []);
 
-  return (
-    <div className="chat-page">
-      <div className="chat-nav">
-        <Link href="/profile">👤 My Profile</Link>
-        <Link href="/dashboard">📊 Dashboard</Link>
-      </div>
+  useEffect(() => {
+    if (authHeader) fetchMessages();
+  }, [authHeader]);
 
-      <h1>BrainBytes AI Tutor</h1>
+  if (!authHeader) {
+    return <LoginForm onLogin={handleLogin} error={authError} />;
+  }
 
   return (
     <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', fontFamily: 'Nunito, sans-serif', backgroundColor: '#f4f6f8' }}>
-      
-      {/* ================= TASK 4: REORGANIZED SIDEBAR NAVIGATION ================= */}
-      <aside style={{
-        width: '260px',
-        backgroundColor: '#1e293b',
-        color: '#ffffff',
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '24px 16px',
-        boxShadow: '2px 0 5px rgba(0,0,0,0.05)',
-        flexShrink: 0
-      }}>
+      <aside style={{ width: '260px', backgroundColor: '#1e293b', color: '#ffffff', display: 'flex', flexDirection: 'column', padding: '24px 16px', boxShadow: '2px 0 5px rgba(0,0,0,0.05)', flexShrink: 0 }}>
         <div style={{ marginBottom: '40px', paddingLeft: '8px' }}>
-          <h2 style={{ margin: 0, fontSize: '22px', color: '#fff', letterSpacing: '0.5px' }}>🧠 BrainBytes</h2>
-          <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 'bold' }}>DevOps Platform</span>
+          <h2 style={{ margin: 0, fontSize: '22px', color: '#fff' }}>🧠 BrainBytes</h2>
+          <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase' }}>DevOps Platform</span>
         </div>
-
-      <h1 style={{ textAlign: 'center', color: '#333' }}>BrainBytes AI Tutor</h1>
-      
-      <div 
-        style={{ 
-          border: '1px solid #ddd', 
-          borderRadius: '12px', 
-          height: '500px', 
-          overflowY: 'auto',
-          padding: '16px',
-          marginBottom: '20px',
-          backgroundColor: '#f9f9f9',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-        }}
-      >
-        {loading ? (
-          <div className="chat-loading">
-            <p>Loading conversation history...</p>
-          </div>
-        ) : (
-          <div>
-            {messages.length === 0 ? (
-              <div className="chat-empty">
-                <h3>Welcome to BrainBytes AI Tutor!</h3>
-                <p>Ask me any question about math, science, or history.</p>
-              </div>
-            ) : (
-              <ul className="message-list">
-                {messages.map((message) => (
-                  <li
-                    key={message._id}
-                    className={`message-bubble ${message.isUser ? 'message-bubble--user' : 'message-bubble--ai'}`}
-                  >
-                    <div className="message-body">
-                      <ReactMarkdown
-                        remarkPlugins={[remarkGfm, remarkBreaks, remarkMath]}
-                        rehypePlugins={[rehypeKatex, rehypeHighlight]}
-                      >
-                        {formatMath(message.text)}
-                      </ReactMarkdown>
-                    </div>
-                    <div
-                      className={`message-meta ${message.isUser ? 'message-meta--user' : 'message-meta--ai'}`}
-                    >
-                      {message.isUser ? 'You' : 'AI Tutor'} •{' '}
-                      {new Date(message.createdAt).toLocaleTimeString()}
-                    </div>
-                  </li>
-                ))}
-                {isTyping && (
-                  <li className="message-bubble message-bubble--typing">
-                    <div>AI tutor is typing...</div>
-                  </li>
-                )}
-              </div>
-            )}
-          </div>
-          
-          {/* Subject Filter Dropdown Area */}
-          <div style={{ marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#64748b' }}>Current Subject:</span>
-            <select 
-              value={selectedSubject} 
-              onChange={(e) => setSelectedSubject(e.target.value)}
-              style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #cbd5e1', backgroundColor: 'white', outline: 'none', color: '#334155', fontWeight: '600' }}
-            >
-              <option value="General">General</option>
-              <option value="Math">Math</option>
-              <option value="Science">Science</option>
-              <option value="History">History</option>
-            </select>
-          </div>
-
-          {/* Prompt Form Input Area */}
-          <form onSubmit={handleSubmit} style={{ display: 'flex', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', borderRadius: '12px' }}>
-            <input
-              type="text"
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Ask a question..."
-              style={{ 
-                flex: '1', 
-                padding: '14px 16px',
-                borderRadius: '12px 0 0 12px',
-                border: '1px solid #cbd5e1',
-                borderRight: 'none',
-                fontSize: '16px',
-                outline: 'none',
-                color: '#334155'
-              }}
-              disabled={isTyping}
-            />
-            <button 
-              type="submit" 
-              style={{ 
-                padding: '14px 28px',
-                backgroundColor: isTyping ? '#93c5fd' : '#2563eb',
-                color: 'white',
-                border: 'none',
-                borderRadius: '0 12px 12px 0',
-                fontSize: '16px',
-                fontWeight: 'bold',
-                cursor: isTyping ? 'not-allowed' : 'pointer',
-                transition: 'background-color 0.2s'
-              }}
-              disabled={isTyping}
-            />
-          </form>
-
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          <Link href="/profile" style={{ color: '#fff', textDecoration: 'none' }}>👤 My Profile</Link>
+          <Link href="/dashboard" style={{ color: '#fff', textDecoration: 'none' }}>📊 Dashboard</Link>
+        </nav>
+      </aside>
+      <main style={{ flex: '1', display: 'flex', flexDirection: 'column', padding: '20px', overflow: 'hidden' }}>
+        <h1 style={{ textAlign: 'center', color: '#333' }}>BrainBytes AI Tutor</h1>
+        <div style={{ border: '1px solid #ddd', borderRadius: '12px', flex: '1', overflowY: 'auto', padding: '16px', marginBottom: '20px', backgroundColor: '#f9f9f9' }}>
+          {loading ? <p>Loading conversation history...</p> : (
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              {messages.map((message) => (
+                <li key={message._id} style={{ marginBottom: '10px', padding: '10px', borderRadius: '8px', backgroundColor: message.isUser ? '#d1e7dd' : '#fff' }}>
+                  <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks, remarkMath]} rehypePlugins={[rehypeKatex, rehypeHighlight]}>
+                    {formatMath(message.text)}
+                  </ReactMarkdown>
+                </li>
+              ))}
+              <div ref={messageEndRef} />
+            </ul>
+          )}
         </div>
-      </main>
-
-      <form onSubmit={handleSubmit} style={{ display: 'flex' }}>
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Ask a question..."
-          style={{ 
-            flex: '1', 
-            padding: '14px 16px',
-            borderRadius: '12px 0 0 12px',
-            border: '1px solid #ddd',
-            fontSize: '16px',
-            outline: 'none'
-          }}
-          disabled={isTyping}
-        />
-        <button 
-          type="submit" 
-          style={{ 
-            padding: '14px 24px',
-            backgroundColor: isTyping ? '#90caf9' : '#2196f3',
-            color: 'white',
-            border: 'none',
-            borderRadius: '0 12px 12px 0',
-            fontSize: '16px',
-            cursor: isTyping ? 'not-allowed' : 'pointer',
-            transition: 'background-color 0.3s'
-          }}
-          disabled={isTyping}
-        >
-          <option value="General">General</option>
-          <option value="Math">Math</option>
-          <option value="Science">Science</option>
-          <option value="History">History</option>
-        </select>
-      </div>
-
-      <form className="chat-form" onSubmit={handleSubmit}>
-        <div className="chat-input-row">
-          <input
-            className="chat-input"
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Ask a question..."
-            autoComplete="off"
-            disabled={isTyping}
-          />
-          <button className="chat-send" type="submit" disabled={isTyping}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '10px' }}>
+          <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder="Ask a question..." style={{ flex: '1', padding: '12px', borderRadius: '8px', border: '1px solid #ddd' }} />
+          <button type="submit" disabled={isTyping} style={{ padding: '12px 24px', borderRadius: '8px', backgroundColor: '#2563eb', color: '#fff', border: 'none' }}>
             {isTyping ? 'Sending...' : 'Send'}
           </button>
-        </div>
-      </form>
+        </form>
+      </main>
     </div>
   );
 }

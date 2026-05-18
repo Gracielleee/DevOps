@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import basicAuth from 'express-basic-auth';
+import userProfileRouter from './userProfile.js';
 import { generateResponse } from './src/services/ai-service.js';
 import logger from './logger.js';
 import LearningMaterial from './src/models/learning-material.js';
@@ -20,6 +22,20 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+
+// Basic Authentication
+const users = {
+  'admin': 'password'
+};
+
+app.use('/api', basicAuth({
+  users,
+  challenge: false,
+  unauthorizedResponse: 'Unauthorized'
+}));
+
+// User Profile Routes
+app.use('/api/user-profiles', userProfileRouter);
 
 // Connect to MongoDB
 mongoose.connect('mongodb://mongo:27017/brainbytes', {
