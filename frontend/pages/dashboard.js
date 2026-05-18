@@ -9,9 +9,13 @@ export default function Dashboard() {
   const router = useRouter();
 
   const fetchMessages = async () => {
+    const authHeader = localStorage.getItem('authHeader');
+    if (!authHeader) return;
     try {
-      // Connecting to backend port 3000 as seen in your logs
-      const response = await axios.get('http://axios:3000/api/messages'); 
+      // Use the environment variable and add auth header
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/messages`, {
+        headers: { 'Authorization': authHeader }
+      }); 
       setMessages(response.data);
       setLoading(false);
     } catch (error) {

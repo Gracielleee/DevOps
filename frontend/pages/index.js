@@ -73,16 +73,20 @@ export default function Home() {
     }
 
     const encoded = btoa(`${username}:${password}`);
-    setAuthHeader(`Basic ${encoded}`);
+    const token = `Basic ${encoded}`;
+    setAuthHeader(token);
+    localStorage.setItem('authHeader', token);
     setAuthError('');
   };
 
   const formatMath = (text) => {
     return text
-      .replace(/\\\[|(?<=\\n)\[(?=.*\\])/g, '$$$')
-      .replace(/\\\]|(?<=.*\[)\](?=\\n|$)/g, '$$$')
-      .replace(/\(|(?<=\s)\((?=[a-zA-Z0-9\s]{1,3}\))/g, '$')
-      .replace(/\)|(?<=\$[a-zA-Z0-9\s]{1,3})\)/g, '$');
+    // 1. Handle Block Math: \[ ... \] or [ ... ] (on its own line)
+      .replace(/\\\[|(?<=\\n)\[(?=.*\\])/g, '$$')
+      .replace(/\\\]|(?<=.*\[)\](?=\\n|$)/g, '$$')
+    // 2. Handle Inline Math: \( ... \) or ( F )
+      .replace(/\\\(|(?<=\s)\((?=[a-zA-Z0-9\s]{1,3}\))/g, '$')
+      .replace(/\\\)|(?<=\$[a-zA-Z0-9\s]{1,3})\)/g, '$');
   };
 
   const fetchMessages = async () => {
@@ -96,6 +100,8 @@ export default function Home() {
     } catch (error) {
       console.error('Error fetching messages:', error);
       if (error.response && error.response.status === 401) {
+        localStorage.removeItem('authHeader');
+        setAuthHeader('');
         alert('Authentication failed. Please refresh and try again.');
       }
       setLoading(false);
@@ -135,6 +141,13 @@ export default function Home() {
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('authHeader');
+    if (storedToken) {
+      setAuthHeader(storedToken);
+    }
+  }, []);
 
   useEffect(() => {
     if (authHeader) fetchMessages();
