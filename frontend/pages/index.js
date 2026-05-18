@@ -6,7 +6,7 @@ import remarkBreaks from 'remark-breaks';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
-import Link from 'next/link'; // Added for Member #4 navigation
+import Link from 'next/link';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 
@@ -15,7 +15,7 @@ export default function Home() {
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [isTyping, setIsTyping] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState('General'); // Added for Member #4 Subject Filter
+  const [selectedSubject, setSelectedSubject] = useState('General');
   const messageEndRef = useRef(null);
 
   const fetchMessages = async () => {
@@ -46,18 +46,13 @@ export default function Home() {
       };
       setMessages(prev => [...prev, tempUserMsg]);
       
-      // Send to backend and get AI response
-      // Updated to include selectedSubject
       const response = await axios.post(`${API_URL}/messages`, { 
         text: userMsg,
         subject: selectedSubject 
       });
       
-      // Replace the temporary message with the actual one and add AI response
       setMessages(prev => {
-        // Filter out the temporary message
         const filteredMessages = prev.filter(msg => msg._id !== tempUserMsg._id);
-        // Add the real messages from the API
         return [...filteredMessages, response.data.userMessage, response.data.aiMessage];
       });
     } catch (error) {
@@ -94,13 +89,23 @@ export default function Home() {
       <h1>BrainBytes AI Tutor</h1>
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px', fontFamily: 'Nunito, sans-serif' }}>
+    <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', fontFamily: 'Nunito, sans-serif', backgroundColor: '#f4f6f8' }}>
       
-      {/* Navigation Links Added */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '10px' }}>
-        <Link href="/profile" style={{ color: '#2196f3', textDecoration: 'none', fontWeight: 'bold' }}>👤 My Profile</Link>
-        <Link href="/dashboard" style={{ color: '#2196f3', textDecoration: 'none', fontWeight: 'bold' }}>📊 Dashboard</Link>
-      </div>
+      {/* ================= TASK 4: REORGANIZED SIDEBAR NAVIGATION ================= */}
+      <aside style={{
+        width: '260px',
+        backgroundColor: '#1e293b',
+        color: '#ffffff',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '24px 16px',
+        boxShadow: '2px 0 5px rgba(0,0,0,0.05)',
+        flexShrink: 0
+      }}>
+        <div style={{ marginBottom: '40px', paddingLeft: '8px' }}>
+          <h2 style={{ margin: 0, fontSize: '22px', color: '#fff', letterSpacing: '0.5px' }}>🧠 BrainBytes</h2>
+          <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 'bold' }}>DevOps Platform</span>
+        </div>
 
       <h1 style={{ textAlign: 'center', color: '#333' }}>BrainBytes AI Tutor</h1>
       
@@ -155,27 +160,63 @@ export default function Home() {
                     <div>AI tutor is typing...</div>
                   </li>
                 )}
-                <div ref={messageEndRef} />
-              </ul>
+              </div>
             )}
           </div>
-        )}
-      </div>
-      
-      {/* Subject Filter Dropdown Added */}
-      <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#666' }}>Current Subject:</span>
-        <select 
-          value={selectedSubject} 
-          onChange={(e) => setSelectedSubject(e.target.value)}
-          style={{ padding: '8px', borderRadius: '8px', border: '1px solid #ddd', backgroundColor: 'white' }}
-        >
-          <option value="General">General</option>
-          <option value="Math">Math</option>
-          <option value="Science">Science</option>
-          <option value="History">History</option>
-        </select>
-      </div>
+          
+          {/* Subject Filter Dropdown Area */}
+          <div style={{ marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#64748b' }}>Current Subject:</span>
+            <select 
+              value={selectedSubject} 
+              onChange={(e) => setSelectedSubject(e.target.value)}
+              style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #cbd5e1', backgroundColor: 'white', outline: 'none', color: '#334155', fontWeight: '600' }}
+            >
+              <option value="General">General</option>
+              <option value="Math">Math</option>
+              <option value="Science">Science</option>
+              <option value="History">History</option>
+            </select>
+          </div>
+
+          {/* Prompt Form Input Area */}
+          <form onSubmit={handleSubmit} style={{ display: 'flex', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', borderRadius: '12px' }}>
+            <input
+              type="text"
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              placeholder="Ask a question..."
+              style={{ 
+                flex: '1', 
+                padding: '14px 16px',
+                borderRadius: '12px 0 0 12px',
+                border: '1px solid #cbd5e1',
+                borderRight: 'none',
+                fontSize: '16px',
+                outline: 'none',
+                color: '#334155'
+              }}
+              disabled={isTyping}
+            />
+            <button 
+              type="submit" 
+              style={{ 
+                padding: '14px 28px',
+                backgroundColor: isTyping ? '#93c5fd' : '#2563eb',
+                color: 'white',
+                border: 'none',
+                borderRadius: '0 12px 12px 0',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                cursor: isTyping ? 'not-allowed' : 'pointer',
+                transition: 'background-color 0.2s'
+              }}
+              disabled={isTyping}
+            />
+          </form>
+
+        </div>
+      </main>
 
       <form onSubmit={handleSubmit} style={{ display: 'flex' }}>
         <input
