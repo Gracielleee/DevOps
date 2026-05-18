@@ -347,3 +347,57 @@ Question:
 ℹ️ INFO  → Inference Client response:
 ℹ️ INFO [ai-service.js] → AI response received successfully
 🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what is 3/5
+🔍 DEBUG [ai-service.js] → Detecting subject category...
+🔍 DEBUG [ai-helper.js] → [detectSubjectCategory] Analyzing subject category for: "what is 3/5"
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Math keywords detected: true
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Final category: "math"
+ℹ️ INFO [ai-service.js] → Category detected: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what is 3/5"
+🔍 DEBUG [ai-helper.js] → [detectSubjectCategory] Analyzing subject category for: "what is 3/5"
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Math keywords detected: true
+ℹ️ INFO [ai-helper.js] → [detectSubjectCategory] Final category: "math"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what is 3/5"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: what is 3/5
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what is 3/5"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Analyzing sentiment of question...
+❌ ERROR  → Sentiment Analysis Error:
+ℹ️ INFO [ai-service.js] → Sentiment analysis complete: null
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
