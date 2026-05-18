@@ -2,9 +2,9 @@
 
 | Team Member | Docker Installed | Git Installed | VS Code Installed | Can Run Hello World Container |
 |----------------|-------------------|--------------|---------------------|-----------------------------------|
-| J.R           |                            |                   |                                |                                                    |
+| J.R           | ✓                           | ✓                  | ✓                               | ✓                                                   |
 | Ralph           |                            |                   |                                |                                                    |
-| Krizia            |                            |                   |                                |                                                    |
+| Krizia            |       ✓                    |             ✓     |          ✓                     |                         ✓                          |
 | Gracielle            | ✓                           | ✓                  | ✓                                | ✓                                                  |
 
 ## Docker Version Information

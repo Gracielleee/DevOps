@@ -8,6 +8,8 @@ services:
     volumes:
       - ./frontend:/usr/src/app
       - /usr/src/app/node_modules
+    environment:
+          - NEXT_PUBLIC_API_URL=http://localhost:3000/api # Points to the backend service
     depends_on:
       - backend
     restart: unless-stopped
