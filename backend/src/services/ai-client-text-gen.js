@@ -1,6 +1,9 @@
-import { InferenceClient  } from '@huggingface/inference';
+import { InferenceClient } from '@huggingface/inference';
+import logger from "../../logger.js";
 
 const client = new InferenceClient(process.env.HF_TOKEN, {timeout: 30});
+
+const fileName = "ai-client-text-gen.js";
 
 export async function getResponseFromAI(question) {
     try{
@@ -9,15 +12,16 @@ export async function getResponseFromAI(question) {
                 messages: [
                     {
                         role: "user",
-                        content: "You are a helpful tutor. Use LaTeX for math. Use DOUBLE dollar signs $$ for centered equations and SINGLE dollar signs $ for inline variables. Example: $$E=mc^2$$ and $x$. Answer this : " + question,
+                        content: question,
                     },
                 ],
             });
-            console.log("Inference Client response:", chatCompletion.choices[0].message);
+            logger.debug("question:", question, { file: fileName });
+            logger.info("Inference Client response:", chatCompletion.choices[0].message, { file: fileName });
             return chatCompletion.choices[0].message.content;
 
     } catch (error){
-        console.error("Inference Client Error:", error.message);
+        logger.error("Inference Client Error:", error.message, { file: fileName });
         return null;
     }
 }
