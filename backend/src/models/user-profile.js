@@ -46,4 +46,4 @@ const userProfileSchema = new mongoose.Schema({
     timestamps: true
 });
 
-export default mongoose.model('UserProfile', userProfileSchema);
+export default mongoose.models.UserProfile || mongoose.model('UserProfile', userProfileSchema);

@@ -401,3 +401,23 @@ Question:
 🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
 ℹ️ INFO  → Server running on port 3000
 ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
