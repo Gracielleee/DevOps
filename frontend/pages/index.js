@@ -6,32 +6,98 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
 
+function LoginForm({ onLogin, error }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!username.trim() || !password.trim()) {
+      onLogin(null, 'Please enter both username and password.');
+      return;
+    }
+    onLogin({ username: username.trim(), password: password.trim() });
+  };
+
+  return (
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f7fb', padding: '24px' }}>
+      <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: '420px', background: '#fff', padding: '28px', borderRadius: '16px', boxShadow: '0 16px 40px rgba(0,0,0,0.08)' }}>
+        <h2 style={{ marginBottom: '20px', textAlign: 'center', color: '#222' }}>Login to BrainBytes AI Tutor</h2>
+        <label style={{ display: 'block', marginBottom: '12px', color: '#444' }}>
+          Username
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            style={{ width: '100%', padding: '12px 14px', marginTop: '6px', borderRadius: '10px', border: '1px solid #ccc' }}
+          />
+        </label>
+        <label style={{ display: 'block', marginBottom: '18px', color: '#444' }}>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{ width: '100%', padding: '12px 14px', marginTop: '6px', borderRadius: '10px', border: '1px solid #ccc' }}
+          />
+        </label>
+        {error && <div style={{ marginBottom: '16px', color: '#d32f2f' }}>{error}</div>}
+        <button type="submit" style={{ width: '100%', padding: '14px', borderRadius: '12px', backgroundColor: '#1976d2', color: '#fff', border: 'none', fontSize: '16px', cursor: 'pointer' }}>
+          Sign In
+        </button>
+      </form>
+    </div>
+  );
+}
+
 export default function Home() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [isTyping, setIsTyping] = useState(false);
   const messageEndRef = useRef(null);
+  const [authHeader, setAuthHeader] = useState('');
+  const [authError, setAuthError] = useState('');
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+
+  const handleLogin = ({ username, password }, errorMessage = '') => {
+    if (!username || !password) {
+      setAuthError(errorMessage || 'Authentication failed.');
+      return;
+    }
+
+    const encoded = btoa(`${username}:${password}`);
+    setAuthHeader(`Basic ${encoded}`);
+    setAuthError('');
+  };
 
   // !!!CURRENTLY DOES NOT WORK. Function to format math expressions in the response text
   const formatMath = (text) => {
     return text
       // 1. Handle Block Math: \[ ... \] or [ ... ] (on its own line)
-    .replace(/\\\[|(?<=\n)\[(?=.*\])/g, '$$$')
-    .replace(/\\\]|(?<=.*\[)\](?=\n|$)/g, '$$$')
+    .replace(/\\\[|(?<=\\n)\[(?=.*\\])/g, '$$$')
+    .replace(/\\\]|(?<=.*\[)\](?=\\n|$)/g, '$$$')
     // 2. Handle Inline Math: \( ... \) or ( F ) 
-    .replace(/\\\(|(?<=\s)\((?=[a-zA-Z0-9\s]{1,3}\))/g, '$')
-    .replace(/\\\)|(?<=\$[a-zA-Z0-9\s]{1,3})\)/g, '$');
+    .replace(/\(|(?<=\s)\((?=[a-zA-Z0-9\s]{1,3}\))/g, '$')
+    .replace(/\)|(?<=\$[a-zA-Z0-9\s]{1,3})\)/g, '$');
   };
 
   // Fetch messages from the API
   const fetchMessages = async () => {
+    if (!authHeader) return; // Don't fetch if no auth
     try {
-      const response = await axios.get('http://localhost:3000/api/messages');
+      const response = await axios.get(`${API_BASE_URL}/api/messages`, {
+        headers: {
+          'Authorization': authHeader
+        }
+      });
       setMessages(response.data);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching messages:', error);
+      if (error.response && error.response.status === 401) {
+        alert('Authentication failed. Please refresh and try again.');
+      }
       setLoading(false);
     }
   };
@@ -39,7 +105,7 @@ export default function Home() {
   // Submit a new message
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!newMessage.trim()) return;
+    if (!newMessage.trim() || !authHeader) return; // Don't submit if no message or no auth
     
     try {
       setIsTyping(true); // Show typing indicator
@@ -56,7 +122,11 @@ export default function Home() {
       setMessages(prev => [...prev, tempUserMsg]);
       
       // Send to backend and get AI response
-      const response = await axios.post('http://localhost:3000/api/messages', { text: userMsg });
+      const response = await axios.post(`${API_BASE_URL}/api/messages`, { text: userMsg }, {
+        headers: {
+          'Authorization': authHeader
+        }
+      });
       
       // Replace the temporary message with the actual one and add AI response
       setMessages(prev => {
@@ -67,6 +137,9 @@ export default function Home() {
       });
     } catch (error) {
       console.error('Error posting message:', error);
+      if (error.response && error.response.status === 401) {
+        alert('Authentication failed. Please refresh and try again.');
+      }
       // Show error in chat
       setMessages(prev => [...prev, {
         _id: Date.now().toString(),
@@ -86,18 +159,14 @@ export default function Home() {
 
   // Load messages on component mount
   useEffect(() => {
-    fetchMessages();
-  }, []);
+    if (authHeader) { // Only fetch messages if authHeader is set
+      fetchMessages();
+    }
+  }, [authHeader]);
 
-  //#####
-  // const hasFetched = useRef(false);
-
-  // useEffect(() => {
-  //   if (!hasFetched.current) {
-  //     fetchMessages();
-  //     hasFetched.current = true;
-  //   }
-  // }, []);
+  if (!authHeader) {
+    return <LoginForm onLogin={handleLogin} error={authError} />;
+  }
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px', fontFamily: 'Nunito, sans-serif' }}>
