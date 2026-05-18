@@ -36,6 +36,6 @@ app.listen(PORT, () => {
 
 // Routes
 app.use('/api', messageRoutes);
-app.use('/api', learningMaterialsRoutes);
+app.use('/api/materials', learningMaterialsRoutes);
 app.use('/api/subjects', subjectRoutes);
 app.use('/api/profile', userProfileRoutes);
