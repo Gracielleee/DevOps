@@ -2,7 +2,7 @@ import { get } from "mongoose";
 import { getResponseFromAI } from "./ai-client-text-gen.js";
 import { analyzeSentiment } from "./ai-client-sentiment-analysis.js";
 import { getAnswerFromKnowledgeBase, generatePromptPrefix, getBackupResponse, detectSubjectCategory} from "./ai-helper.js";
-import logger from "../../logger.js";
+import logger from "../logger.js";
 
 const fileName = "ai-service.js";
 
@@ -33,12 +33,12 @@ export async function generateResponse(question) {
 
   // 2. For other questions, try the API with a strict timeout
   try {
-    logger.debug("Analyzing sentiment of question...", { file: fileName });
-    const sentimentResult = await analyzeSentiment(question);
-    logger.info("Sentiment analysis complete: " + JSON.stringify(sentimentResult), { file: fileName });
+    // logger.debug("Analyzing sentiment of question...", { file: fileName });
+    // const sentimentResult = await analyzeSentiment(question);
+    // logger.info("Sentiment analysis complete: " + JSON.stringify(sentimentResult), { file: fileName });
 
     logger.debug("Constructing complete prompt...", { file: fileName });
-    const completePrompt = promptprefix + "Adjust your tone based on the sentiment result. Sentiment analysis result of question: " + JSON.stringify(sentimentResult) + ". Actual question: " + question;
+    const completePrompt = promptprefix + ". Actual question: " + question;
 
     logger.debug("Calling AI API with prompt...", { file: fileName });
     const aiResponseString = await getResponseFromAI(completePrompt);
