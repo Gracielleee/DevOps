@@ -1,7 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import basicAuth from 'express-basic-auth';
 import userProfileRouter from './src/userProfile.js';
 import { generateResponse } from './src/services/ai-service.js';
 import logger from './src/logger.js';

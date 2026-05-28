@@ -11,6 +11,11 @@ const messageSchema = new mongoose.Schema({
   isUser: { 
     type: Boolean, 
     default: true },
+  subject: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Subject',
+    required: false
+  },
   createdAt: { 
     type: Date, 
     default: Date.now }

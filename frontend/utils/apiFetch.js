@@ -1,15 +1,79 @@
-// A global fetch wrapper to handle API calls for expired jwt errors.
+// Global fetch wrapper for API calls with expired/invalid JWT handling.
+
+const SESSION_EXPIRED_KEY = "sessionExpired";
+
+let sessionExpiredHandler = null;
+let isHandlingAuthError = false;
+
+export function setSessionExpiredHandler(handler) {
+  sessionExpiredHandler = handler;
+}
+
+export function wasSessionExpired() {
+  if (typeof window === "undefined") return false;
+  return sessionStorage.getItem(SESSION_EXPIRED_KEY) === "true";
+}
+
+export function clearSessionExpiredFlag() {
+  if (typeof window === "undefined") return;
+  sessionStorage.removeItem(SESSION_EXPIRED_KEY);
+}
+
+function getAuthHeader(headers = {}) {
+  return headers.Authorization || headers.authorization || null;
+}
+
+function isAuthErrorResponse(status, data) {
+  if (status === 401) return true;
+
+  const message = String(data?.message || data?.error || "").toLowerCase();
+  return (
+    message.includes("jwt expired") ||
+    message.includes("invalid or expired token") ||
+    message.includes("token expired")
+  );
+}
+
+function handleSessionExpired() {
+  if (typeof window === "undefined") return;
+
+  localStorage.removeItem("token");
+
+  if (typeof sessionExpiredHandler === "function") {
+    sessionExpiredHandler();
+  }
+
+  if (isHandlingAuthError) return;
+  isHandlingAuthError = true;
+
+  sessionStorage.setItem(SESSION_EXPIRED_KEY, "true");
+  window.location.href = "/login";
+}
+
+const DEFAULT_API_BASE_URL = "http://localhost:3000/api/";
+
+function buildApiUrl(base, endpoint) {
+  const baseClean = (base || DEFAULT_API_BASE_URL).replace(/\/+$/, "");
+  const pathClean = endpoint.replace(/^\/+/, "");
+  return `${baseClean}/${pathClean}`;
+}
 
 export default async function apiFetch(endpoint, options = {}) {
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-  const url = endpoint.startsWith("http") ? endpoint : `${API_BASE_URL}${endpoint.replace(/^\//, "")}`;
+  const API_BASE_URL =
+    process.env.NEXT_PUBLIC_API_URL || DEFAULT_API_BASE_URL;
+  const url = endpoint.startsWith("http")
+    ? endpoint
+    : buildApiUrl(API_BASE_URL, endpoint);
 
-  const { redirectOnAuthError = false, ...fetchOptions } = options;
+  const { redirectOnAuthError = true, softFail = false, ...fetchOptions } = options;
 
   const defaultHeaders = {
     "Content-Type": "application/json",
     ...fetchOptions.headers,
   };
+
+  const authHeader = getAuthHeader(defaultHeaders);
+  const tokenWasSent = !!authHeader;
 
   try {
     const response = await fetch(url, { ...fetchOptions, headers: defaultHeaders });
@@ -20,42 +84,40 @@ export default async function apiFetch(endpoint, options = {}) {
       data = await response.json();
     }
 
-    const isAuthError =
-      response.status === 401 ||
-      data?.message === "jwt expired" ||
-      data?.error === "jwt expired";
-
-    if (isAuthError) {
+    if (isAuthErrorResponse(response.status, data)) {
       console.warn("Global Fetch Wrapper: Token expired or unauthorized.");
 
-      // 1. Wipe out the dead token from local storage
-      localStorage.removeItem("token"); 
-
-      // 2. Check if the component actually sent an Authorization token
-      const tokenWasSent = !!defaultHeaders["Authorization"];
-
-      // Only trigger the alert/redirect if a token was sent and it expired.
-      if (redirectOnAuthError && tokenWasSent && typeof window !== "undefined") {
-        alert("Your session has expired. Please log in again.");
-        window.location.href = "/login";
+      if (tokenWasSent && redirectOnAuthError) {
+        handleSessionExpired();
         return null;
       }
 
-      const authError = new Error("UNAUTHORIZED_OR_EXPIRED");
+      const authError = new Error(
+        data?.message || "UNAUTHORIZED_OR_EXPIRED",
+      );
       authError.status = 401;
       authError.isAuthError = true;
       throw authError;
     }
 
     if (!response.ok) {
-      const errorObj = new Error(data?.message || `HTTP error! status: ${response.status}`);
+      if (softFail) {
+        console.warn(`apiFetch softFail: ${response.status} ${url}`);
+        return null;
+      }
+      const errorObj = new Error(
+        data?.message || `HTTP error! status: ${response.status}`,
+      );
       errorObj.status = response.status;
       throw errorObj;
     }
 
     return data;
-
   } catch (error) {
+    if (error.isAuthError && tokenWasSent && redirectOnAuthError) {
+      handleSessionExpired();
+      return null;
+    }
     throw error;
   }
 }

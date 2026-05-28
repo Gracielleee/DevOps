@@ -20,11 +20,27 @@ try {
 
 // --------------------------------------------------------------
 
-function getAnswerFromKnowledgeBase(question) {
+function subjectNameToCategory(subjectName) {
+  const name = (subjectName || '').toLowerCase();
+  const mapping = {
+    general: 'general',
+    math: 'math',
+    mathematics: 'math',
+    history: 'history',
+    science: 'science',
+  };
+  return mapping[name] || 'general';
+}
+
+function getAnswerFromKnowledgeBase(question, subjectCategory = null) {
 
   logger.debug(`[getAnswerFromKnowledgeBase] Starting search for question: "${question}"`, { file: fileName });
   const lowerQuestion = question.toLowerCase();
-  for (const category in knowledgeBase) {
+  const categoriesToSearch = subjectCategory && knowledgeBase[subjectCategory]
+    ? [subjectCategory]
+    : Object.keys(knowledgeBase);
+
+  for (const category of categoriesToSearch) {
     for (const item of knowledgeBase[category]) {
       if (lowerQuestion.includes(item.question.toLowerCase())) {
         return {
@@ -111,9 +127,9 @@ function detectSubjectCategory(question) {
   return category;
 }
 
-function generatePromptPrefix(question) {
+function generatePromptPrefix(question, subjectCategory = 'general') {
   logger.info(`[generatePromptPrefix] Starting prompt generation for question: "${question}"`, { file: fileName });
-  const category = detectSubjectCategory(question);
+  const category = subjectCategory || 'general';
   const questionType = detectQuestionType(question);
   
   logger.debug(`[generatePromptPrefix] Category: ${category}, Question Type: ${questionType}`, { file: fileName });
@@ -121,7 +137,7 @@ function generatePromptPrefix(question) {
   const promptSections = [];
   
   // Add system-level context
-  promptSections.push('You are a helpful AI academic tutor. Please respond to the following question.');
+  promptSections.push(`You are a helpful AI academic tutor specializing in ${category}. Please respond to the following question.`);
   
   // Add category-specific instructions
   const categoryInstructions = {
@@ -187,4 +203,4 @@ function getBackupResponse(category, question) {
   return "I'm not sure I understand your question completely. Could you please provide more details or rephrase it? I can help with topics related to science, math, history, and general knowledge.";
 }
 
-export { getAnswerFromKnowledgeBase, generatePromptPrefix, detectSubjectCategory, getBackupResponse };
+export { getAnswerFromKnowledgeBase, generatePromptPrefix, detectSubjectCategory, getBackupResponse, subjectNameToCategory };
