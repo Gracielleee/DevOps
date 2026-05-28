@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import AuthPage from "../components/AuthForm";
 import Sidebar from "../components/Sidebar";
+import apiFetch from "../utils/apiFetch";
 
 export default function Dashboard({ authHeader, onLogout }) {
   const [messages, setMessages] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-  const API_ENDPOINT = `${API_BASE_URL}messages/`;
 
   const fetchMessages = async () => {
     if (!authHeader) {
@@ -18,11 +15,14 @@ export default function Dashboard({ authHeader, onLogout }) {
       return;
     }
     try {
-      const response = await fetch(API_ENDPOINT, {
+      const data = await apiFetch("messages/?page=1&limit=20", {
         headers: { Authorization: authHeader },
+        redirectOnAuthError: true,
       });
-      const data = await response.json();
-      setMessages(data);
+      if (data) {
+        setMessages(data.messages || []);
+        setTotalCount(data.totalCount ?? 0);
+      }
       setLoading(false);
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
@@ -199,7 +199,7 @@ export default function Dashboard({ authHeader, onLogout }) {
                         marginBottom: "20px",
                       }}
                     >
-                      📈 Total Q&A Sets Saved: {Math.floor(messages.length / 2)}
+                      📈 Total Q&A Sets Saved: {Math.floor(totalCount / 2)}
                     </div>
 
                     <ul

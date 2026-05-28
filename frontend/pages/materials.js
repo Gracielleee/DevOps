@@ -72,6 +72,7 @@ export default function MaterialsPage({ authHeader, onLogout }) {
             content: formData.description,
             subject: subject,
           }),
+          redirectOnAuthError: true,
         });
 
         if (updatedData) {
@@ -90,6 +91,7 @@ export default function MaterialsPage({ authHeader, onLogout }) {
             content: formData.description,
             subject: subject,
           }),
+          redirectOnAuthError: true,
         });
 
         if (createdData) {
@@ -124,6 +126,7 @@ export default function MaterialsPage({ authHeader, onLogout }) {
       await apiFetch(`materials/${id}`, {
         method: "DELETE",
         headers: { Authorization: authHeader },
+        redirectOnAuthError: true,
       });
 
       setMaterials((prev) =>
