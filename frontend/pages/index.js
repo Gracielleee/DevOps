@@ -1,35 +1,28 @@
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeHighlight from "rehype-highlight";
-import "katex/dist/katex.min.css";
-import Link from "next/link";
+import "highlight.js/styles/github.css"; // 🔥 FIXED: Added missing code block syntax highlighting theme style sheet
 
-import LoginForm from "../components/LoginForm";
 import Sidebar from "../components/Sidebar";
 import formatMath from "../utils/formatMath";
 import apiFetch from "../utils/apiFetch";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-export default function Home({ authHeader, onLogout }) {
+export default function Home({ authHeader, onLogout, setGlobalError }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(true);
   const [isTyping, setIsTyping] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState("General");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const messageEndRef = useRef(null);
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
   const API_ENDPOINT = `${API_BASE_URL}messages/`;
 
-  // Fetch Messages function with support for anonymous users (no auth header)
   const fetchMessages = async () => {
-    // Load empty array if no auth header is found
     if (!authHeader) {
       setMessages([]);
       setLoading(false);
@@ -38,25 +31,19 @@ export default function Home({ authHeader, onLogout }) {
 
     try {
       const data = await apiFetch(API_ENDPOINT, {
-        headers: {
-          Authorization: authHeader,
-        },
+        headers: { Authorization: authHeader },
         redirectOnAuthError: true,
       });
 
-      if (data) {
-        setMessages(data);
-      }
+      if (data) setMessages(data);
     } catch (error) {
       console.error("Error fetching messages:", error);
-      setMessages([]);
-    }
-    {
+      if (setGlobalError) setGlobalError("Failed to load conversation history.");
+    } finally {
       setLoading(false);
     }
   };
 
-  // Handle submit function with support for anonymous users (no auth header)
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newMessage.trim()) return;
@@ -73,13 +60,10 @@ export default function Home({ authHeader, onLogout }) {
       const userMsg = newMessage;
       setNewMessage("");
 
-      // Prepend user's message to the chat immediately for instant UI feedback
       setMessages((prev) => [tempUserMsg, ...prev]);
 
       const requestHeaders = {};
-      if (authHeader) {
-        requestHeaders["Authorization"] = authHeader;
-      }
+      if (authHeader) requestHeaders["Authorization"] = authHeader;
 
       const responseData = await apiFetch(API_ENDPOINT, {
         method: "POST",
@@ -102,7 +86,6 @@ export default function Home({ authHeader, onLogout }) {
           createdAt: new Date().toISOString(),
         };
 
-        // Remove the temporary message and slot in the clean server ones
         setMessages((prev) => {
           const filtered = prev.filter((msg) => msg._id !== tempUserMsg._id);
           return [finalAiMsg, finalUserMsg, ...filtered];
@@ -110,18 +93,8 @@ export default function Home({ authHeader, onLogout }) {
       }
     } catch (error) {
       console.error("Error posting message:", error);
-
-      setMessages((prev) => {
-        return [
-          {
-            _id: Date.now().toString() + "-error",
-            text: "Sorry, I couldn't process your request. Please try again later.",
-            isUser: false,
-            createdAt: new Date().toISOString(),
-          },
-          ...prev,
-        ];
-      });
+      if (setGlobalError) setGlobalError("Unable to reach server. Please check your network.");
+      setMessages((prev) => prev.filter((msg) => msg._id !== tempUserMsg._id));
     } finally {
       setIsTyping(false);
     }
@@ -136,101 +109,108 @@ export default function Home({ authHeader, onLogout }) {
   }, [messages]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        width: "100vw",
-        overflow: "hidden",
-        fontFamily: "Nunito, sans-serif",
-        backgroundColor: "#f4f6f8",
-      }}
-    >
-      <Sidebar authHeader={authHeader} onLogout={onLogout} />
-
-      <main
+    <div style={{ display: "flex", height: "100vh", width: "100vw", overflow: "hidden", fontFamily: "Nunito, sans-serif", backgroundColor: "#f4f6f8", position: "relative" }}>
+      
+      {/* Mobile Hamburger Trigger */}
+      <button
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         style={{
-          flex: "1",
-          display: "flex",
+          position: "absolute",
+          top: "15px",
+          left: "15px",
+          zIndex: 110,
           flexDirection: "column",
-          padding: "20px",
-          overflow: "hidden",
+          justifyContent: "space-around",
+          width: "35px",
+          height: "30px",
+          background: "#fff",
+          border: "1px solid #ddd",
+          borderRadius: "6px",
+          cursor: "pointer",
+          padding: "6px",
+          display: "none"
         }}
+        className="mobile-hamburger-trigger"
       >
-        <h1 style={{ textAlign: "center", color: "#333" }}>
-          BrainBytes AI Tutor
-        </h1>
+        <div style={{ width: "100%", height: "2px", backgroundColor: "#333" }}></div>
+        <div style={{ width: "100%", height: "2px", backgroundColor: "#333" }}></div>
+        <div style={{ width: "100%", height: "2px", backgroundColor: "#333" }}></div>
+      </button>
 
-        {/* Show guest user heads up if no auth header is present */}
+      {/* Sidebar Responsive Container */}
+      <div className={`sidebar-wrapper-panel ${isMobileMenuOpen ? "drawer-open" : ""}`} style={{ display: "flex", flexDirection: "column" }}>
+        <Sidebar authHeader={authHeader} onLogout={onLogout} />
         {!authHeader && (
-          <p style={{ textAlign: "center", color: "#666", marginBottom: "20px" }}>  You are using our service as a Guest user. Please log in to save your conversation history. All chats on guest mode are not saved on our server.</p>
+          <div style={{ padding: "12px", backgroundColor: "#fff3cd", color: "#856404", fontSize: "12px", borderTop: "1px solid #ffeeba", textAlign: "center" }}>
+            🔒 Login to save user preferences.
+          </div>
         )}
-        <div
-          style={{
-            border: "1px solid #ddd",
-            borderRadius: "12px",
-            flex: "1",
-            overflowY: "auto",
-            padding: "16px",
-            marginBottom: "20px",
-            backgroundColor: "#f9f9f9",
-          }}
-        >
+      </div>
+
+      {/* Overlay backdrop dimmer */}
+      {isMobileMenuOpen && (
+        <div onClick={() => setIsMobileMenuOpen(false)} style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", backgroundColor: "rgba(0,0,0,0.4)", zIndex: 95 }} />
+      )}
+
+      <main style={{ flex: "1", display: "flex", flexDirection: "column", padding: "20px", overflow: "hidden" }} className="main-viewport-layout">
+        <h1 style={{ textAlign: "center", color: "#333" }}>BrainBytes AI Tutor</h1>
+
+        {!authHeader && (
+          <p style={{ textAlign: "center", color: "#666", marginBottom: "20px" }}>
+            You are using our service as a Guest user. Please log in to save your conversation history. All chats on guest mode are not saved on our server.
+          </p>
+        )}
+
+        <div style={{ border: "1px solid #ddd", borderRadius: "12px", flex: "1", overflowY: "auto", padding: "16px", marginBottom: "20px", backgroundColor: "#f9f9f9" }}>
           {loading ? (
             <p>Loading conversation history...</p>
           ) : (
-            <ul style={{ listStyle: "none", padding: 0 }}>
-              {/* Copy and reverse the array to put oldest at the top, newest at the bottom */}
-              {[...messages].reverse().map((message) => (
-                <li
-                  key={message._id || message.id}
-                  style={{
-                    marginBottom: "10px",
-                    padding: "10px",
-                    borderRadius: "8px",
-                    backgroundColor: message.isUser ? "#d1e7dd" : "#fff",
-                  }}
-                >
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm, remarkBreaks, remarkMath]}
-                    rehypePlugins={[rehypeKatex, rehypeHighlight]}
-                  >
-                    {formatMath(message.text)}
-                  </ReactMarkdown>
-                </li>
-              ))}
+            <div style={{ display: "flex", flexDirection: "column-reverse", gap: "12px" }}>
               <div ref={messageEndRef} />
-            </ul>
+              {[...messages].reverse().map((message) => {
+                const isUserMsg = message.isUser;
+                return (
+                  <div key={message._id || message.id} style={{ display: "flex", justifyContent: isUserMsg ? "flex-end" : "flex-start", width: "100%" }}>
+                    {/* Chat bubbles restricted to 85% width */}
+                    <div style={{
+                      maxWidth: "85%",
+                      padding: "10px 14px",
+                      borderRadius: "8px",
+                      backgroundColor: isUserMsg ? "#d1e7dd" : "#fff",
+                      color: "#212529",
+                      boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
+                      wordBreak: "break-word"
+                    }}>
+                      <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks, remarkMath]} rehypePlugins={[rehypeKatex, rehypeHighlight]}>
+                        {formatMath(message.text)}
+                      </ReactMarkdown>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           )}
         </div>
+
         <form onSubmit={handleSubmit} style={{ display: "flex", gap: "10px" }}>
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Ask a question..."
-            style={{
-              flex: "1",
-              padding: "12px",
-              borderRadius: "8px",
-              border: "1px solid #ddd",
-            }}
-          />
-          <button
-            type="submit"
-            disabled={isTyping}
-            style={{
-              padding: "12px 24px",
-              borderRadius: "8px",
-              backgroundColor: "#2563eb",
-              color: "#fff",
-              border: "none",
-            }}
-          >
+          <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder="Ask a question..." style={{ flex: "1", padding: "12px", borderRadius: "8px", border: "1px solid #ddd" }} />
+          <button type="submit" disabled={isTyping} style={{ padding: "12px 24px", borderRadius: "8px", backgroundColor: "#2563eb", color: "#fff", border: "none" }}>
             {isTyping ? "Sending..." : "Send"}
           </button>
         </form>
       </main>
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .mobile-hamburger-trigger { display: flex !important; }
+          .sidebar-wrapper-panel {
+            position: fixed !important; top: 0 !important; left: 0 !important; height: 100vh !important;
+            transform: translateX(-100%) !important; transition: transform 0.3s ease-in-out !important; z-index: 100 !important;
+          }
+          .sidebar-wrapper-panel.drawer-open { transform: translateX(0) !important; }
+          .main-viewport-layout { padding: 70px 15px 15px 15px !important; }
+        }
+      `}</style>
     </div>
   );
 }
