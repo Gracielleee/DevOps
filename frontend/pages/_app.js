@@ -2,11 +2,12 @@ import '../styles/globals.css';
 import 'katex/dist/katex.min.css';
 import 'highlight.js/styles/github.css';
 import { useState, useEffect } from 'react';
+import Toast from '../components/Toast'; // Uses your repo's exact Toast component
 
 export default function App({ Component, pageProps }) {
   const [authHeader, setAuthHeader] = useState(null);
+  const [globalError, setGlobalError] = useState("");
 
-  // On initial load, grab the raw token out of local storage
   useEffect(() => {
     const storedToken = localStorage.getItem("token"); 
     if (storedToken) {
@@ -14,25 +15,38 @@ export default function App({ Component, pageProps }) {
     }
   }, []);
 
-  // Custom function passed down to children to trigger state changes upon active login
   const handleLoginSuccess = (rawToken) => {
     localStorage.setItem("token", rawToken);
     setAuthHeader(`Bearer ${rawToken}`); 
   };
 
-  //Custom function to handle user sign out
   const handleLogout = () => {
     localStorage.removeItem("token");
     setAuthHeader(null);
   };
-  
-  // Pass down the authHeader state and control handlers to every route page view
+
+  const triggerGlobalError = (msg) => {
+    setGlobalError(msg);
+  };
+
   return (
-    <Component 
-      {...pageProps} 
-      authHeader={authHeader} 
-      onLoginSuccess={handleLoginSuccess}
-      onLogout={handleLogout}
-    />
+    <>
+      {/* Global Toast listening to state changes */}
+      {globalError && (
+        <Toast 
+          message={globalError} 
+          type="error" 
+          onClose={() => setGlobalError("")} 
+        />
+      )}
+      
+      <Component 
+        {...pageProps} 
+        authHeader={authHeader} 
+        onLoginSuccess={handleLoginSuccess}
+        onLogout={handleLogout}
+        setGlobalError={triggerGlobalError}
+      />
+    </>
   );
 }
