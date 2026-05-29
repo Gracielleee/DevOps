@@ -28,8 +28,10 @@ const userProfileSchema = new mongoose.Schema({
     },
     preferredSubject: { 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Subject', 
-        required: true },
+        ref: 'Subject',
+        required: true,
+        index: true 
+    },
     createdAt: {
         type: Date,
         default: Date.now

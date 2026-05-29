@@ -3,6 +3,11 @@ import LearningMaterial from '../models/learning-material.js';
 import logger from '../logger.js';
 import message from '../models/message.js';
 import {authenticate, isMaterialOwner} from '../middleware/auth.js';
+import { validationResult } from 'express-validator';
+import {
+    validateLearningMaterialCreation,
+    validateLearningMaterialUpdate,
+} from '../middleware/validation/learningMaterialValidation.js';
 
 const router = express.Router();
 const fileName = 'learning-material.js';
@@ -28,8 +33,12 @@ router.get('/', authenticate, async (req, res) => {
 });
 
 // Create a new learning material
-router.post('/', authenticate, async (req, res) => {
+router.post('/', authenticate, validateLearningMaterialCreation, async (req, res) => {
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         const { subject, topic, content } = req.body;
         const newMaterial = new LearningMaterial({
             owner: req.user.id,
@@ -75,8 +84,12 @@ router.get('/:id', authenticate, isMaterialOwner, async (req, res) => {
 });
 
 // Update a learning material
-router.put('/:id', authenticate, isMaterialOwner, async (req, res) => {
+router.put('/:id', authenticate, isMaterialOwner, validateLearningMaterialUpdate, async (req, res) => {
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         const { subject, topic, content } = req.body;
         const updateData = {};
         if (subject !== undefined) updateData.subject = subject;

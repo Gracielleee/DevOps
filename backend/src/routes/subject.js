@@ -1,6 +1,11 @@
 import express from 'express';
 import Subject from '../models/subject.js';
 import logger from '../logger.js';
+import { validationResult } from 'express-validator';
+import {
+    validateSubjectCreation,
+    validateSubjectUpdate,
+} from '../middleware/validation/subjectValidation.js';
 
 const router = express.Router();
 const fileName = 'subject.js';
@@ -22,14 +27,14 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/subjects/ - Create new subject
-router.post('/', async (req, res) => {
+router.post('/', validateSubjectCreation, async (req, res) => {
     try {
-        const { name, description} = req.body;
-        if (!name || !description) {
-            return res.status(400).json({
-                message: 'Name and description are required'
-            });
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
         }
+        const { name, description} = req.body;
+        // Original checks removed as express-validator handles them
         const newSubject = new Subject({
             name,
             description
@@ -70,8 +75,12 @@ router.get('/:id', async (req, res) => {
 });
 
 // PUT /api/subjects/:id - Update subject
-router.put('/:id', async (req, res) => {
+router.put('/:id', validateSubjectUpdate, async (req, res) => {
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         const { name, description } = req.body;
         const updateData = {}
         if (name !== undefined) updateData.name = name
