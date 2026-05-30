@@ -27,7 +27,29 @@ The AI adapts its responses based on user input and selected context:
 *   **Subject-Specific Context:**
     *   Users select a **Subject** via the chat dropdown menu.
     *   The selected subject is passed directly to the AI model, providing essential context to ensure responses are relevant and accurate to the specific domain.
+ 
+---
+### Architecture
+#### Architecture Components
+|Component	|Role	|Technology	|Port|
+|----|-----|------|-------|
+|User/Browser|	Client interface for application acces|s	Web browser|	N/A|
+|Frontend Container (Next.js)	|Serves the user interface and handles client-side rendering|	Next.js	|3000-3020|
+|Backend Container (Node.js)|	Processes business logic and manages API requests|	Node.js|	3000-3020|
+|MongoDB (Cloud)	Persists application data	MongoDB Atlas	|27017/27017|
+|Inference Provider	|External machine learning service for AI operations|	Hugging Face API	|N/A|
 
+#### Request Flow
+1. User interacts with the browser
+2. Frontend Container serves the UI and sends API requests to the Backend Container
+3. ackend Container processes requests and may call external services (Inference Provider or MongoDB)
+4. Responses flow back through the stack to the user's browser
+   
+#### Key Benefits of This Architecture
+- Containerization: Each service runs in isolation, ensuring independence and scalability
+- Separation of concerns: Frontend, backend, and database have distinct responsibilities
+- Scalability: Services can be scaled independently based on demand
+- Cloud integration: Uses managed cloud services (MongoDB Atlas, Hugging Face) to offload infrastructure burden
 
 ### Project Goals
 - Implement a containerized application with proper networking
