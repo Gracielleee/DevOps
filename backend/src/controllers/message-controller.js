@@ -1,5 +1,7 @@
 import Message from "../models/message.js";
+import Subject from "../models/subject.js";
 import generateResponse from '../services/ai-service.js';
+import { subjectNameToCategory } from '../services/ai-helper.js';
 import logger from "../logger.js";
 
 const fileName = 'message-controller.js';
@@ -11,12 +13,30 @@ const messageController = {
 
     try {
       const content = req.body.text;
+      const subjectId = req.body.subject;
+
+      let subjectCategory = 'general';
+      let subjectRef = null;
+
+      if (subjectId) {
+        const subjectDoc = await Subject.findById(subjectId);
+        if (subjectDoc) {
+          subjectRef = subjectDoc._id;
+          subjectCategory = subjectNameToCategory(subjectDoc.name);
+        }
+      } else {
+        const defaultSubject = await Subject.findOne({ name: 'General' });
+        if (defaultSubject) {
+          subjectRef = defaultSubject._id;
+          subjectCategory = subjectNameToCategory(defaultSubject.name);
+        }
+      }
 
       const timeoutPromise = new Promise((_, reject) => {
         timerId = setTimeout(() => reject(new Error('Request timeout')), 15000);
       });
       
-      const aiResultPromise = generateResponse(content);
+      const aiResultPromise = generateResponse(content, subjectCategory);
       
       const aiResult = await Promise.race([aiResultPromise, timeoutPromise])
         .then(result => {
@@ -33,15 +53,18 @@ const messageController = {
         });
 
       if (req.user) {
+        const messageFields = subjectRef ? { subject: subjectRef } : {};
         await Message.create({ 
           user: req.user.id, 
           text: content, 
-          isUser: true 
+          isUser: true,
+          ...messageFields
         });
         await Message.create({ 
           user: req.user.id, 
           text: aiResult.response, 
-          isUser: false 
+          isUser: false,
+          ...messageFields
         });
       } else {
         logger.info('Guest messages generated in-memory', { file: fileName });
@@ -63,22 +86,46 @@ const messageController = {
 
   getMessages: async (req, res) => {
     try {
+      const emptyPaginatedResponse = {
+        messages: [],
+        totalCount: 0,
+        currentPage: 1,
+        totalPages: 0,
+        hasNextPage: false,
+      };
 
       if (!req.user) {
-        logger.info('Guest user attempted to fetch messages. Returning empty array.', { file: fileName });
-        return res.status(200).json([]); 
+        logger.info('Guest user attempted to fetch messages. Returning empty paginated response.', { file: fileName });
+        return res.status(200).json(emptyPaginatedResponse);
       }
-      
+
+      const page = Math.max(1, parseInt(req.query.page, 10) || 1);
+      const limit = Math.min(100, Math.max(1, parseInt(req.query.limit, 10) || 20));
+      const skip = (page - 1) * limit;
+
+      const filter = { user: req.user.id };
+      const totalCount = await Message.countDocuments(filter);
+
       const messages = await Message
-        .find({ user: req.user.id })
-        .sort({ createdAt: -1 });
-      
-    if (!messages || messages.length === 0) {
-      logger.info('No messages found from user.', { file: fileName });
-      return res.status(200).json([]); 
-    }
-      
-    res.json(messages);
+        .find(filter)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit);
+
+      const totalPages = totalCount === 0 ? 0 : Math.ceil(totalCount / limit);
+      const hasNextPage = page < totalPages;
+
+      if (messages.length === 0) {
+        logger.info('No messages found from user.', { file: fileName });
+      }
+
+      res.json({
+        messages,
+        totalCount,
+        currentPage: page,
+        totalPages,
+        hasNextPage,
+      });
 
     } catch (error) {
       logger.error('Error fetching messages:', error, { file: fileName });

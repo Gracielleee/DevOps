@@ -1,5 +1,6 @@
 // hooks/useSubjects.js
 import { useState, useEffect } from "react";
+import apiFetch from "../utils/apiFetch";
 
 export default function useSubjects() {
   const [subjectsList, setSubjectsList] = useState([]);
@@ -8,23 +9,14 @@ export default function useSubjects() {
 
   useEffect(() => {
     const fetchSubjects = async () => {
-      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-      const SUBJECTS_ENDPOINT = `${API_BASE_URL}subjects`;
-
       try {
         setLoadingSubjects(true);
-        const response = await fetch(SUBJECTS_ENDPOINT);
-        
-        if (!response.ok) {
-          throw new Error("Failed to fetch subjects");
-        }
-        
-        const resBody = await response.json();
-        
-        setSubjectsList(resBody.data || []); 
+        const resBody = await apiFetch("subjects", { softFail: true });
+        setSubjectsList(resBody?.data || []);
       } catch (error) {
         console.error("Error fetching available subjects:", error);
-        setSubjectsError(error.message);
+        setSubjectsError(error.message || "Failed to load subjects");
+        setSubjectsList([]);
       } finally {
         setLoadingSubjects(false);
       }
