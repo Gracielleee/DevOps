@@ -148,6 +148,18 @@ Design patterns:
 - Basic question-type detection (definitions, explanations, examples)through hardcoded keyword matching.
 - Basic sentiment analysis to detect user frustration/confusion through integration with a Hugging Face text classification model for intent/sentiment
 
+## Documentation of Errors
+
+| Error / Symptom | Cause | Resolution |
+| --- | --- | --- |
+| Session expired toast on login | JWT expired or invalid while user was on an authenticated page; `apiFetch` cleared `localStorage` and redirected to `/login` | Sign in again with valid credentials |
+| `UNAUTHORIZED_OR_EXPIRED` in console | Authenticated request returned 401 without redirect (e.g. `redirectOnAuthError: false`) | Ensure `Authorization` header is sent only when logged in; re-login if token is stale |
+| Guest chat works but history empty | Expected: guests have no persisted messages | Log in to save and load conversation history |
+| 401 on login/register form | Invalid email/password (not a session expiry) | Correct credentials; login/register use unauthenticated `fetch` and do not trigger session redirect |
+| Multiple rapid 401s during navigation | Several in-flight requests failed after token expiry | Handled by `apiFetch` redirect guard (`isHandlingAuthError`); user lands on login once |
+| `HTTP error! status: 404` on subjects (`useSubjects`) | `NEXT_PUBLIC_API_URL` missing or wrong; browser called the Next.js app (e.g. `:8080/api/...`) instead of the API on `:3000` | Copy `frontend/.env.example` to `frontend/.env.local`, set `NEXT_PUBLIC_API_URL=http://localhost:3000/api/`, restart the frontend dev server |
+| `HTTP error! status: 500` on profile/messages | Backend container crash (often `bcrypt` Exec format error on Docker/Windows) | Rebuild: `docker compose build backend && docker compose up -d`. Backend uses `bcryptjs` (no native bindings). If persists: `docker compose rm -f backend && docker volume prune -f` then bring stack up again |
+
 ## On to-do list:
 - Comprehensive tests in Postman for CRUD endpoints.
 - Implement Authentication.
