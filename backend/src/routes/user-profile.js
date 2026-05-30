@@ -5,14 +5,24 @@ import logger from '../logger.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { authenticate } from '../middleware/auth.js';
+import { validationResult } from 'express-validator';
+import {
+    validateRegistration,
+    validateLogin,
+    validateProfileUpdate,
+} from '../middleware/validation/userProfileValidation.js';
 
 const router = express.Router();
 const fileName = 'user-profile.js';
 
 const saltRounds = 10;
 
-router.post('/register', async (req, res) => {
+router.post('/register', validateRegistration, async (req, res) => {
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         const { name, email, password, preferredSubject } = req.body;
 
         let finalSubjectId = preferredSubject;
@@ -53,12 +63,15 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+router.post('/login', validateLogin, async (req, res) => {
     try {
-        if (!email || !password) {
-            return res.status(400).json({ message: 'Email and password are required' });
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
         }
+        const { email, password } = req.body;
+        // The original check for email and password presence can be removed
+        // as express-validator now handles it with notEmpty()
         const user = await User.findOne({ email }).select('+password');
         logger.debug(`User found for email: ${email} ? ${!!user}`, { file: fileName });
 
@@ -103,8 +116,12 @@ router.get('/profile/', authenticate, async (req, res) => {
     }
 });
 
-router.put('/profile/', authenticate, async (req, res) => {
+router.put('/profile/', authenticate, validateProfileUpdate, async (req, res) => {
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         const { name, email, password, preferredSubject } = req.body;
         const updateData = {};
         if (name !== undefined) updateData.name = name;

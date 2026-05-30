@@ -58,6 +58,10 @@ mongoose.connect(MONGO_URI, {
   logger.error('Failed to connect to MongoDB:', err);
 });
 
+// Error handling middleware (should be last)
+import errorHandler from './src/middleware/errorHandler.js';
+app.use(errorHandler);
+
 // Start the server
 app.listen(PORT, () => {
   logger.info(`Server running on port ${PORT}`);
