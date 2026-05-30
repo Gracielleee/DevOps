@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Toast from "./Toast";
+import { wasSessionExpired, clearSessionExpiredFlag } from "../utils/apiFetch";
 
 export default function AuthPage({ mode, onLoginSuccess }) {
   const [email, setEmail] = useState("");
@@ -8,6 +9,13 @@ export default function AuthPage({ mode, onLoginSuccess }) {
   const [name, setName] = useState("");
   const [toastMsg, setToastMsg] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    if (wasSessionExpired()) {
+      setToastMsg("Your session has expired. Please log in again.");
+      clearSessionExpiredFlag();
+    }
+  }, []);
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
   const LOGIN_ENDPOINT = `${API_BASE_URL}login`;
@@ -265,7 +273,11 @@ export default function AuthPage({ mode, onLoginSuccess }) {
         </p>
       </div>
       {toastMsg && (
-        <Toast message={toastMsg} onClose={() => setToastMsg("")} />
+        <Toast
+          message={toastMsg}
+          type={toastMsg.toLowerCase().includes("expired") ? "error" : "info"}
+          onClose={() => setToastMsg("")}
+        />
       )}
     </div>
   );
