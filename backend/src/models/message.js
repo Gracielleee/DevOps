@@ -4,7 +4,9 @@ const messageSchema = new mongoose.Schema({
   user: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'User', 
-    required: false }, // user can be null for anonymous guests
+    required: false, // user can be null for anonymous guests
+    index: true
+  }, 
   text: { 
     type: String, 
     required: true },
@@ -14,11 +16,14 @@ const messageSchema = new mongoose.Schema({
   subject: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Subject',
-    required: false
+    required: false,
+    index: true
   },
   createdAt: { 
     type: Date, 
-    default: Date.now }
+    default: Date.now,
+    index: true
+  }
 }, {
   toJSON: { //Mongo doc cleanup
     transform: function (doc, ret) {
@@ -29,5 +34,8 @@ const messageSchema = new mongoose.Schema({
     }
   }
 });
+
+// Compound index for user and createdAt for efficient querying and sorting
+messageSchema.index({ user: 1, createdAt: -1 });
 
 export default mongoose.model('Message', messageSchema);

@@ -5,11 +5,15 @@ const learningMaterialSchema = new mongoose.Schema({
   owner: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'User', 
-    required: true },
+    required: true,
+    index: true
+  },
   subject: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Subject', 
-    required: true },
+    required: true,
+    index: true
+  },
   topic: { 
     type: String, 
     required: true },
@@ -18,7 +22,9 @@ const learningMaterialSchema = new mongoose.Schema({
     required: true },
   createdAt: { 
     type: Date, 
-    default: Date.now }
+    default: Date.now,
+    index: true
+  }
 }, {
   toJSON: {
     transform: function (doc, ret) {
@@ -30,5 +36,7 @@ const learningMaterialSchema = new mongoose.Schema({
   }
 });
 
+// Compound index for owner and createdAt for efficient querying and sorting
+learningMaterialSchema.index({ owner: 1, createdAt: -1 });
 
 export default mongoose.model('LearningMaterial', learningMaterialSchema);
