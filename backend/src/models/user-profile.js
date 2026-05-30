@@ -24,26 +24,27 @@ const userProfileSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 8,
-        select: false // Don't return password in queries by default
+        select: false // Should be false. Don't return password in queries by default
     },
-    age: { // We can use this to tailor AI responses based on age
-        type: Number,
-        min: 12,
-        max: 150
-    },
-    preferredSubjects: {
-        type: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Subject'
-        }],
-        default: []
+    preferredSubject: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Subject',
+        required: true,
+        index: true 
     },
     createdAt: {
         type: Date,
         default: Date.now
     }
 }, {
-    timestamps: true
+  toJSON: {
+    transform: function (doc, ret) {
+      ret.id = ret._id; 
+      delete ret._id;   
+      delete ret.__v;
+      return ret;
+    }
+  }
 });
 
-export default mongoose.model('UserProfile', userProfileSchema);
+export default mongoose.model('User', userProfileSchema);

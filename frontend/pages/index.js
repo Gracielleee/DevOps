@@ -1,251 +1,371 @@
-import { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import 'katex/dist/katex.min.css';
-import Link from 'next/link'; // Added for Member #4 navigation
+import { useState, useEffect, useRef } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import rehypeHighlight from "rehype-highlight";
+import "katex/dist/katex.min.css";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+import Layout from "../components/ResponsiveLayout";
+import Sidebar from "../components/Sidebar";
+import useSubjects from "../hooks/useSubjects";
+import formatMath from "../utils/formatMath";
+import apiFetch from "../utils/apiFetch";
+import log from "../utils/logger";
 
-export default function Home() {
+// Create a targeted tracker for this specific file
+const logger = log.getLogger("ChatContainer");
+
+export default function Home({ authHeader, onLogout }) {
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
+  const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState('General'); // Added for Member #4 Subject Filter
+  const [selectedSubject, setSelectedSubject] = useState("");
+  const { subjectsList, loadingSubjects } = useSubjects();
   const messageEndRef = useRef(null);
+  const chatContainerRef = useRef(null);
+  const shouldScrollToBottomRef = useRef(false);
 
-  // !!!CURRENTLY DOES NOT WORK. Function to format math expressions in the response text
-  const formatMath = (text) => {
-    return text
-      // 1. Handle Block Math: \[ ... \] or [ ... ] (on its own line)
-    .replace(/\\\[|(?<=\n)\[(?=.*\])/g, '$$$')
-    .replace(/\\\]|(?<=.*\[)\](?=\n|$)/g, '$$$')
-    // 2. Handle Inline Math: \( ... \) or ( F ) 
-    .replace(/\\\(|(?<=\s)\((?=[a-zA-Z0-9\s]{1,3}\))/g, '$')
-    .replace(/\\\)|(?<=\$[a-zA-Z0-9\s]{1,3})\)/g, '$');
-  };
+  const MESSAGES_PAGE_SIZE = 20;
 
-  // Fetch messages from the API
-  const fetchMessages = async () => {
+  // Fetch Messages function with support for anonymous users (no auth header)
+  const fetchMessages = async (page = 1, append = false) => {
+    if (!authHeader) {
+      logger.debug("Anonymous user: skipping fetchMessages");
+      setMessages([]);
+      setHasNextPage(false);
+      setCurrentPage(1);
+      setLoading(false);
+      return;
+    }
+
+    if (append) {
+      setLoadingMore(true);
+    } else {
+      setLoading(true);
+    }
+
     try {
-      const response = await axios.get(`${API_URL}/messages`);
-      setMessages(response.data);
-      setLoading(false);
+      logger.debug(`Fetching messages page=${page} append=${append}`);
+      const data = await apiFetch(
+        `messages/?page=${page}&limit=${MESSAGES_PAGE_SIZE}`,
+        {
+          headers: {
+            Authorization: authHeader,
+          },
+          redirectOnAuthError: true,
+        },
+      );
+
+      if (data) {
+        const pageMessages = data.messages || [];
+        if (append) {
+          const container = chatContainerRef.current;
+          const prevScrollHeight = container?.scrollHeight ?? 0;
+
+          setMessages((prev) => [...prev, ...pageMessages]);
+
+          requestAnimationFrame(() => {
+            if (container) {
+              const newScrollHeight = container.scrollHeight;
+              container.scrollTop += newScrollHeight - prevScrollHeight;
+            }
+          });
+        } else {
+          setMessages(pageMessages);
+          shouldScrollToBottomRef.current = true;
+        }
+        setCurrentPage(data.currentPage ?? page);
+        setHasNextPage(data.hasNextPage ?? false);
+      }
     } catch (error) {
-      console.error('Error fetching messages:', error);
+      logger.error("Error fetching messages", error);
+      if (!append) {
+        setMessages([]);
+        setHasNextPage(false);
+        setCurrentPage(1);
+      }
+    } finally {
       setLoading(false);
+      setLoadingMore(false);
     }
   };
 
-  // Submit a new message
+  const loadMoreMessages = () => {
+    if (!hasNextPage || loadingMore || loading) return;
+    logger.debug("User triggered pagination flow");
+    fetchMessages(currentPage + 1, true);
+  };
+
+  // Handle submit function with support for anonymous users (no auth header)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!newMessage.trim()) return;
-    
+    if (!newMessage.trim() || !selectedSubject) {
+      logger.debug("Submit blocked: missing message or subject");
+      return;
+    }
+
+    const tempUserMsg = {
+      _id: Date.now().toString(),
+      text: newMessage,
+      isUser: true,
+      createdAt: new Date().toISOString(),
+    };
+
     try {
-      setIsTyping(true); // Show typing indicator
+      logger.trace("Submitting user message to backend...");
+      setIsTyping(true);
       const userMsg = newMessage;
-      setNewMessage('');
-      
-      // Optimistically add user message to UI
-      const tempUserMsg = {
-        _id: Date.now().toString(),
-        text: userMsg,
-        isUser: true,
-        createdAt: new Date().toISOString()
-      };
-      setMessages(prev => [...prev, tempUserMsg]);
-      
-      // Send to backend and get AI response
-      // Updated to include selectedSubject
-      const response = await axios.post(`${API_URL}/messages`, { 
-        text: userMsg,
-        subject: selectedSubject 
+      setNewMessage("");
+
+      // Prepend user's message to the chat immediately for instant UI feedback
+      setMessages((prev) => [tempUserMsg, ...prev]);
+      shouldScrollToBottomRef.current = true;
+
+      const requestHeaders = {};
+      if (authHeader) {
+        requestHeaders["Authorization"] = authHeader;
+      }
+
+      const responseData = await apiFetch("messages/", {
+        method: "POST",
+        headers: requestHeaders,
+        body: JSON.stringify({ text: userMsg, subject: selectedSubject }),
+        redirectOnAuthError: !!authHeader,
+        allowAnonymous: true,
       });
-      
-      // Replace the temporary message with the actual one and add AI response
-      setMessages(prev => {
-        // Filter out the temporary message
-        const filteredMessages = prev.filter(msg => msg._id !== tempUserMsg._id);
-        // Add the real messages from the API
-        return [...filteredMessages, response.data.userMessage, response.data.aiMessage];
-      });
+
+      if (responseData) {
+        const finalUserMsg = {
+          _id: Date.now().toString() + "-user",
+          text: responseData.content,
+          isUser: true,
+          createdAt: new Date().toISOString(),
+        };
+
+        const finalAiMsg = {
+          _id: Date.now().toString() + "-ai",
+          text: responseData.aiMessage,
+          isUser: false,
+          createdAt: new Date().toISOString(),
+        };
+
+        // Remove the temporary message and slot in the clean server ones
+        setMessages((prev) => {
+          const filtered = prev.filter((msg) => msg._id !== tempUserMsg._id);
+          return [finalAiMsg, finalUserMsg, ...filtered];
+        });
+        shouldScrollToBottomRef.current = true;
+        logger.trace("Message submission successful, updated chat with server response");
+      }
     } catch (error) {
-      console.error('Error posting message:', error);
-      // Show error in chat
-      setMessages(prev => [...prev, {
-        _id: Date.now().toString(),
-        text: "Sorry, I couldn't process your request. Please try again later.",
-        isUser: false,
-        createdAt: new Date().toISOString()
-      }]);
+      logger.error("Error posting message", error);
+
+      setMessages((prev) => {
+        return [
+          {
+            _id: Date.now().toString() + "-error",
+            text: "Sorry, I couldn't process your request. Please try again later.",
+            isUser: false,
+            createdAt: new Date().toISOString(),
+          },
+          ...prev,
+        ];
+      });
     } finally {
       setIsTyping(false);
     }
   };
 
-  // Scroll to bottom when messages change
-  useEffect(() => {
-    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
-  // Load messages on component mount
   useEffect(() => {
     fetchMessages();
-  }, []);
+  }, [authHeader]);
 
-  //#####
-  // const hasFetched = useRef(false);
+  useEffect(() => {
+    if (!authHeader) return;
 
-  // useEffect(() => {
-  //   if (!hasFetched.current) {
-  //     fetchMessages();
-  //     hasFetched.current = true;
-  //   }
-  // }, []);
+    const fetchPreferredSubject = async () => {
+      try {
+        logger.trace("Fetching user's preferred subject...");
+        const data = await apiFetch("profile", {
+          headers: { Authorization: authHeader },
+          redirectOnAuthError: true,
+        });
+        if (data?.data?.preferredSubject) {
+          const prefId =
+            data.data.preferredSubject.id ||
+            data.data.preferredSubject._id ||
+            data.data.preferredSubject;
+          logger.debug(`User's preferred subject ID: ${prefId}`);
+          setSelectedSubject(prefId);
+        }
+      } catch (error) {
+        logger.error("Error fetching preferred subject", error);
+      }
+    };
+
+    fetchPreferredSubject();
+  }, [authHeader]);
+
+  useEffect(() => {
+    if (selectedSubject || loadingSubjects || subjectsList.length === 0) return;
+    const general = subjectsList.find((s) => s.name === "General");
+    setSelectedSubject(general?.id || subjectsList[0].id);
+  }, [selectedSubject, loadingSubjects, subjectsList]);
+
+  useEffect(() => {
+    if (shouldScrollToBottomRef.current) {
+      messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      shouldScrollToBottomRef.current = false;
+    }
+  }, [messages]);
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px', fontFamily: 'Nunito, sans-serif' }}>
-      
-      {/* Navigation Links Added */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '10px' }}>
-        <Link href="/profile" style={{ color: '#2196f3', textDecoration: 'none', fontWeight: 'bold' }}>👤 My Profile</Link>
-        <Link href="/dashboard" style={{ color: '#2196f3', textDecoration: 'none', fontWeight: 'bold' }}>📊 Dashboard</Link>
-      </div>
+    <Layout authHeader={authHeader} onLogout={onLogout}>
+      <h1 style={{ textAlign: "center", color: "#333" }}>
+        BrainBytes AI Tutor
+      </h1>
 
-      <h1 style={{ textAlign: 'center', color: '#333' }}>BrainBytes AI Tutor</h1>
-      
-      <div 
-        style={{ 
-          border: '1px solid #ddd', 
-          borderRadius: '12px', 
-          height: '500px', 
-          overflowY: 'auto',
-          padding: '16px',
-          marginBottom: '20px',
-          backgroundColor: '#f9f9f9',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      {/* Show guest user heads up if no auth header is present */}
+      {!authHeader && (
+        <p style={{ textAlign: "center", color: "#666", marginBottom: "20px" }}>
+          {" "}
+          You are using our service as a Guest user. Please log in to save your
+          conversation history. All chats on guest mode are not saved on our
+          server.
+        </p>
+      )}
+      <div
+        ref={chatContainerRef}
+        style={{
+          border: "1px solid #ddd",
+          borderRadius: "12px",
+          flex: "1",
+          overflowY: "auto",
+          padding: "16px",
+          marginBottom: "20px",
+          backgroundColor: "#f9f9f9",
         }}
       >
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '20px' }}>
-            <p>Loading conversation history...</p>
-          </div>
+          <p>Loading conversation history...</p>
         ) : (
-          <div>
-            {messages.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-                <h3>Welcome to BrainBytes AI Tutor!</h3>
-                <p>Ask me any question about math, science, or history.</p>
+          <>
+            {authHeader && hasNextPage && (
+              <div style={{ textAlign: "center", marginBottom: "12px" }}>
+                <button
+                  type="button"
+                  onClick={loadMoreMessages}
+                  disabled={loadingMore}
+                  style={{
+                    padding: "8px 16px",
+                    borderRadius: "8px",
+                    border: "1px solid #cbd5e1",
+                    backgroundColor: "#fff",
+                    color: "#334155",
+                    cursor: loadingMore ? "not-allowed" : "pointer",
+                    fontSize: "14px",
+                  }}
+                >
+                  {loadingMore ? "Loading older messages..." : "Load more"}
+                </button>
               </div>
-            ) : (
-              <ul style={{ listStyleType: 'none', padding: 0 }}>
-                {messages.map((message) => (
-                  <li 
-                    key={message._id} 
-                    style={{ 
-                      padding: '12px 16px', 
-                      margin: '8px 0', 
-                      backgroundColor: message.isUser ? '#e3f2fd' : '#e8f5e9',
-                      color: '#333',
-                      borderRadius: '12px',
-                      maxWidth: '80%',
-                      wordBreak: 'break-word',
-                      marginLeft: message.isUser ? 'auto' : '0',
-                      marginRight: message.isUser ? '0' : 'auto',
-                      boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
-                    }}
-                  >
-                    <div style={{ margin: '0 0 5px 0', lineHeight: '1.5' }}>
-                    <ReactMarkdown 
-                      remarkPlugins={[remarkGfm, remarkMath]}
-                      rehypePlugins={[rehypeKatex]}>
-                      {formatMath(message.text)}
-                    </ReactMarkdown></div>
-                    <div style={{ 
-                      fontSize: '12px', 
-                      color: '#666',
-                      textAlign: message.isUser ? 'right' : 'left'
-                    }}>
-                      {message.isUser ? 'You' : 'AI Tutor'} • {new Date(message.createdAt).toLocaleTimeString()}
-                    </div>
-                  </li>
-                ))}
-                {isTyping && (
-                  <li 
-                    style={{ 
-                      padding: '12px 16px', 
-                      margin: '8px 0', 
-                      backgroundColor: '#e8f5e9',
-                      color: '#333',
-                      borderRadius: '12px',
-                      maxWidth: '80%',
-                      marginLeft: '0',
-                      marginRight: 'auto',
-                      boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
-                    }}
-                  >
-                    <div style={{ margin: '0' }}>AI tutor is typing...</div>
-                  </li>
-                )}
-                <div ref={messageEndRef} />
-              </ul>
             )}
-          </div>
+            <ul style={{ listStyle: "none", padding: 0 }}>
+              {/* Copy and reverse the array to put oldest at the top, newest at the bottom */}
+              {[...messages].reverse().map((message) => (
+                <li
+                  key={message._id || message.id}
+                  style={{
+                    marginBottom: "10px",
+                    padding: "10px",
+                    borderRadius: "8px",
+                    backgroundColor: message.isUser ? "#d1e7dd" : "#fff",
+                  }}
+                >
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm, remarkBreaks, remarkMath]}
+                    rehypePlugins={[rehypeKatex, rehypeHighlight]}
+                  >
+                    {formatMath(message.text)}
+                  </ReactMarkdown>
+                </li>
+              ))}
+              <div ref={messageEndRef} />
+            </ul>
+          </>
         )}
       </div>
-      
-      {/* Subject Filter Dropdown Added */}
-      <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#666' }}>Current Subject:</span>
-        <select 
-          value={selectedSubject} 
-          onChange={(e) => setSelectedSubject(e.target.value)}
-          style={{ padding: '8px', borderRadius: '8px', border: '1px solid #ddd', backgroundColor: 'white' }}
+      <div style={{ marginBottom: "12px" }}>
+        <label
+          htmlFor="chat-subject"
+          style={{
+            display: "block",
+            marginBottom: "6px",
+            fontWeight: "bold",
+            color: "#334155",
+            fontSize: "14px",
+          }}
         >
-          <option value="General">General</option>
-          <option value="Math">Math</option>
-          <option value="Science">Science</option>
-          <option value="History">History</option>
+          Subject
+        </label>
+        <select
+          id="chat-subject"
+          value={selectedSubject}
+          onChange={(e) => setSelectedSubject(e.target.value)}
+          disabled={loadingSubjects || isTyping}
+          style={{
+            width: "100%",
+            maxWidth: "320px",
+            padding: "10px 12px",
+            borderRadius: "8px",
+            border: "1px solid #cbd5e1",
+            backgroundColor: "white",
+            fontSize: "14px",
+          }}
+        >
+          <option value="" disabled>
+            {loadingSubjects ? "Loading subjects..." : "-- Select a Subject --"}
+          </option>
+          {subjectsList.map((sub) => (
+            <option key={sub.id} value={sub.id}>
+              {sub.name}
+            </option>
+          ))}
         </select>
       </div>
-
-      <form onSubmit={handleSubmit} style={{ display: 'flex' }}>
+      <form onSubmit={handleSubmit} style={{ display: "flex", gap: "10px" }}>
         <input
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           placeholder="Ask a question..."
-          style={{ 
-            flex: '1', 
-            padding: '14px 16px',
-            borderRadius: '12px 0 0 12px',
-            border: '1px solid #ddd',
-            fontSize: '16px',
-            outline: 'none'
+          style={{
+            flex: "1",
+            padding: "12px",
+            borderRadius: "8px",
+            border: "1px solid #ddd",
           }}
-          disabled={isTyping}
         />
-        <button 
-          type="submit" 
-          style={{ 
-            padding: '14px 24px',
-            backgroundColor: isTyping ? '#90caf9' : '#2196f3',
-            color: 'white',
-            border: 'none',
-            borderRadius: '0 12px 12px 0',
-            fontSize: '16px',
-            cursor: isTyping ? 'not-allowed' : 'pointer',
-            transition: 'background-color 0.3s'
+        <button
+          type="submit"
+          disabled={isTyping || !selectedSubject}
+          style={{
+            padding: "12px 24px",
+            borderRadius: "8px",
+            backgroundColor: "#2563eb",
+            color: "#fff",
+            border: "none",
           }}
-          disabled={isTyping}
         >
-          {isTyping ? 'Sending...' : 'Send'}
+          {isTyping ? "Sending..." : "Send"}
         </button>
       </form>
-    </div>
+    </Layout>
   );
 }
