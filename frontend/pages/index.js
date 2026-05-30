@@ -1,197 +1,371 @@
-import { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import remarkBreaks from 'remark-breaks';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import rehypeHighlight from 'rehype-highlight';
-import 'katex/dist/katex.min.css';
-import Link from 'next/link';
+import { useState, useEffect, useRef } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import rehypeHighlight from "rehype-highlight";
+import "katex/dist/katex.min.css";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+import Layout from "../components/ResponsiveLayout";
+import Sidebar from "../components/Sidebar";
+import useSubjects from "../hooks/useSubjects";
+import formatMath from "../utils/formatMath";
+import apiFetch from "../utils/apiFetch";
+import log from "../utils/logger";
 
-function LoginForm({ onLogin, error }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+// Create a targeted tracker for this specific file
+const logger = log.getLogger("ChatContainer");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!username.trim() || !password.trim()) {
-      onLogin(null, 'Please enter both username and password.');
-      return;
-    }
-    onLogin({ username: username.trim(), password: password.trim() });
-  };
-
-  return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f7fb', padding: '24px' }}>
-      <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: '420px', background: '#fff', padding: '28px', borderRadius: '16px', boxShadow: '0 16px 40px rgba(0,0,0,0.08)' }}>
-        <h2 style={{ marginBottom: '20px', textAlign: 'center', color: '#222' }}>Login to BrainBytes AI Tutor</h2>
-        <label style={{ display: 'block', marginBottom: '12px', color: '#444' }}>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            style={{ width: '100%', padding: '12px 14px', marginTop: '6px', borderRadius: '10px', border: '1px solid #ccc' }}
-          />
-        </label>
-        <label style={{ display: 'block', marginBottom: '18px', color: '#444' }}>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{ width: '100%', padding: '12px 14px', marginTop: '6px', borderRadius: '10px', border: '1px solid #ccc' }}
-          />
-        </label>
-        {error && <div style={{ marginBottom: '16px', color: '#d32f2f' }}>{error}</div>}
-        <button type="submit" style={{ width: '100%', padding: '14px', borderRadius: '12px', backgroundColor: '#1976d2', color: '#fff', border: 'none', fontSize: '16px', cursor: 'pointer' }}>
-          Sign In
-        </button>
-      </form>
-    </div>
-  );
-}
-
-export default function Home() {
+export default function Home({ authHeader, onLogout }) {
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
+  const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState('General');
+  const [selectedSubject, setSelectedSubject] = useState("");
+  const { subjectsList, loadingSubjects } = useSubjects();
   const messageEndRef = useRef(null);
-  const [authHeader, setAuthHeader] = useState('');
-  const [authError, setAuthError] = useState('');
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+  const chatContainerRef = useRef(null);
+  const shouldScrollToBottomRef = useRef(false);
 
-  const handleLogin = ({ username, password }, errorMessage = '') => {
-    if (!username || !password) {
-      setAuthError(errorMessage || 'Authentication failed.');
+  const MESSAGES_PAGE_SIZE = 20;
+
+  // Fetch Messages function with support for anonymous users (no auth header)
+  const fetchMessages = async (page = 1, append = false) => {
+    if (!authHeader) {
+      logger.debug("Anonymous user: skipping fetchMessages");
+      setMessages([]);
+      setHasNextPage(false);
+      setCurrentPage(1);
+      setLoading(false);
       return;
     }
 
-    const encoded = btoa(`${username}:${password}`);
-    const token = `Basic ${encoded}`;
-    setAuthHeader(token);
-    localStorage.setItem('authHeader', token);
-    setAuthError('');
-  };
+    if (append) {
+      setLoadingMore(true);
+    } else {
+      setLoading(true);
+    }
 
-  const formatMath = (text) => {
-    return text
-    // 1. Handle Block Math: \[ ... \] or [ ... ] (on its own line)
-      .replace(/\\\[|(?<=\\n)\[(?=.*\\])/g, '$$')
-      .replace(/\\\]|(?<=.*\[)\](?=\\n|$)/g, '$$')
-    // 2. Handle Inline Math: \( ... \) or ( F )
-      .replace(/\\\(|(?<=\s)\((?=[a-zA-Z0-9\s]{1,3}\))/g, '$')
-      .replace(/\\\)|(?<=\$[a-zA-Z0-9\s]{1,3})\)/g, '$');
-  };
-
-  const fetchMessages = async () => {
-    if (!authHeader) return;
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/messages`, {
-        headers: { 'Authorization': authHeader }
-      });
-      setMessages(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching messages:', error);
-      if (error.response && error.response.status === 401) {
-        localStorage.removeItem('authHeader');
-        setAuthHeader('');
-        alert('Authentication failed. Please refresh and try again.');
+      logger.debug(`Fetching messages page=${page} append=${append}`);
+      const data = await apiFetch(
+        `messages/?page=${page}&limit=${MESSAGES_PAGE_SIZE}`,
+        {
+          headers: {
+            Authorization: authHeader,
+          },
+          redirectOnAuthError: true,
+        },
+      );
+
+      if (data) {
+        const pageMessages = data.messages || [];
+        if (append) {
+          const container = chatContainerRef.current;
+          const prevScrollHeight = container?.scrollHeight ?? 0;
+
+          setMessages((prev) => [...prev, ...pageMessages]);
+
+          requestAnimationFrame(() => {
+            if (container) {
+              const newScrollHeight = container.scrollHeight;
+              container.scrollTop += newScrollHeight - prevScrollHeight;
+            }
+          });
+        } else {
+          setMessages(pageMessages);
+          shouldScrollToBottomRef.current = true;
+        }
+        setCurrentPage(data.currentPage ?? page);
+        setHasNextPage(data.hasNextPage ?? false);
       }
+    } catch (error) {
+      logger.error("Error fetching messages", error);
+      if (!append) {
+        setMessages([]);
+        setHasNextPage(false);
+        setCurrentPage(1);
+      }
+    } finally {
       setLoading(false);
+      setLoadingMore(false);
     }
   };
 
+  const loadMoreMessages = () => {
+    if (!hasNextPage || loadingMore || loading) return;
+    logger.debug("User triggered pagination flow");
+    fetchMessages(currentPage + 1, true);
+  };
+
+  // Handle submit function with support for anonymous users (no auth header)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!newMessage.trim() || !authHeader) return;
-    
+    if (!newMessage.trim() || !selectedSubject) {
+      logger.debug("Submit blocked: missing message or subject");
+      return;
+    }
+
+    const tempUserMsg = {
+      _id: Date.now().toString(),
+      text: newMessage,
+      isUser: true,
+      createdAt: new Date().toISOString(),
+    };
+
     try {
+      logger.trace("Submitting user message to backend...");
       setIsTyping(true);
       const userMsg = newMessage;
-      setNewMessage('');
-      const tempUserMsg = { _id: Date.now().toString(), text: userMsg, isUser: true, createdAt: new Date().toISOString() };
-      setMessages(prev => [...prev, tempUserMsg]);
-      
-      const response = await axios.post(`${API_BASE_URL}/api/messages`, { text: userMsg }, {
-        headers: { 'Authorization': authHeader }
-      });
-      
-      setMessages(prev => {
-        const filteredMessages = prev.filter(msg => msg._id !== tempUserMsg._id);
-        return [...filteredMessages, response.data.userMessage, response.data.aiMessage];
-      });
-    } catch (error) {
-      console.error('Error posting message:', error);
-      if (error.response && error.response.status === 401) {
-        alert('Authentication failed. Please refresh and try again.');
+      setNewMessage("");
+
+      // Prepend user's message to the chat immediately for instant UI feedback
+      setMessages((prev) => [tempUserMsg, ...prev]);
+      shouldScrollToBottomRef.current = true;
+
+      const requestHeaders = {};
+      if (authHeader) {
+        requestHeaders["Authorization"] = authHeader;
       }
-      setMessages(prev => [...prev, { _id: Date.now().toString(), text: "Sorry, I couldn't process your request. Please try again later.", isUser: false, createdAt: new Date().toISOString() }]);
+
+      const responseData = await apiFetch("messages/", {
+        method: "POST",
+        headers: requestHeaders,
+        body: JSON.stringify({ text: userMsg, subject: selectedSubject }),
+        redirectOnAuthError: !!authHeader,
+        allowAnonymous: true,
+      });
+
+      if (responseData) {
+        const finalUserMsg = {
+          _id: Date.now().toString() + "-user",
+          text: responseData.content,
+          isUser: true,
+          createdAt: new Date().toISOString(),
+        };
+
+        const finalAiMsg = {
+          _id: Date.now().toString() + "-ai",
+          text: responseData.aiMessage,
+          isUser: false,
+          createdAt: new Date().toISOString(),
+        };
+
+        // Remove the temporary message and slot in the clean server ones
+        setMessages((prev) => {
+          const filtered = prev.filter((msg) => msg._id !== tempUserMsg._id);
+          return [finalAiMsg, finalUserMsg, ...filtered];
+        });
+        shouldScrollToBottomRef.current = true;
+        logger.trace("Message submission successful, updated chat with server response");
+      }
+    } catch (error) {
+      logger.error("Error posting message", error);
+
+      setMessages((prev) => {
+        return [
+          {
+            _id: Date.now().toString() + "-error",
+            text: "Sorry, I couldn't process your request. Please try again later.",
+            isUser: false,
+            createdAt: new Date().toISOString(),
+          },
+          ...prev,
+        ];
+      });
     } finally {
       setIsTyping(false);
     }
   };
 
   useEffect(() => {
-    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
-  useEffect(() => {
-    const storedToken = localStorage.getItem('authHeader');
-    if (storedToken) {
-      setAuthHeader(storedToken);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (authHeader) fetchMessages();
+    fetchMessages();
   }, [authHeader]);
 
-  if (!authHeader) {
-    return <LoginForm onLogin={handleLogin} error={authError} />;
-  }
+  useEffect(() => {
+    if (!authHeader) return;
+
+    const fetchPreferredSubject = async () => {
+      try {
+        logger.trace("Fetching user's preferred subject...");
+        const data = await apiFetch("profile", {
+          headers: { Authorization: authHeader },
+          redirectOnAuthError: true,
+        });
+        if (data?.data?.preferredSubject) {
+          const prefId =
+            data.data.preferredSubject.id ||
+            data.data.preferredSubject._id ||
+            data.data.preferredSubject;
+          logger.debug(`User's preferred subject ID: ${prefId}`);
+          setSelectedSubject(prefId);
+        }
+      } catch (error) {
+        logger.error("Error fetching preferred subject", error);
+      }
+    };
+
+    fetchPreferredSubject();
+  }, [authHeader]);
+
+  useEffect(() => {
+    if (selectedSubject || loadingSubjects || subjectsList.length === 0) return;
+    const general = subjectsList.find((s) => s.name === "General");
+    setSelectedSubject(general?.id || subjectsList[0].id);
+  }, [selectedSubject, loadingSubjects, subjectsList]);
+
+  useEffect(() => {
+    if (shouldScrollToBottomRef.current) {
+      messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      shouldScrollToBottomRef.current = false;
+    }
+  }, [messages]);
 
   return (
-    <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', fontFamily: 'Nunito, sans-serif', backgroundColor: '#f4f6f8' }}>
-      <aside style={{ width: '260px', backgroundColor: '#1e293b', color: '#ffffff', display: 'flex', flexDirection: 'column', padding: '24px 16px', boxShadow: '2px 0 5px rgba(0,0,0,0.05)', flexShrink: 0 }}>
-        <div style={{ marginBottom: '40px', paddingLeft: '8px' }}>
-          <h2 style={{ margin: 0, fontSize: '22px', color: '#fff' }}>🧠 BrainBytes</h2>
-          <span style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase' }}>DevOps Platform</span>
-        </div>
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          <Link href="/profile" style={{ color: '#fff', textDecoration: 'none' }}>👤 My Profile</Link>
-          <Link href="/dashboard" style={{ color: '#fff', textDecoration: 'none' }}>📊 Dashboard</Link>
-        </nav>
-      </aside>
-      <main style={{ flex: '1', display: 'flex', flexDirection: 'column', padding: '20px', overflow: 'hidden' }}>
-        <h1 style={{ textAlign: 'center', color: '#333' }}>BrainBytes AI Tutor</h1>
-        <div style={{ border: '1px solid #ddd', borderRadius: '12px', flex: '1', overflowY: 'auto', padding: '16px', marginBottom: '20px', backgroundColor: '#f9f9f9' }}>
-          {loading ? <p>Loading conversation history...</p> : (
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-              {messages.map((message) => (
-                <li key={message._id} style={{ marginBottom: '10px', padding: '10px', borderRadius: '8px', backgroundColor: message.isUser ? '#d1e7dd' : '#fff' }}>
-                  <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks, remarkMath]} rehypePlugins={[rehypeKatex, rehypeHighlight]}>
+    <Layout authHeader={authHeader} onLogout={onLogout}>
+      <h1 style={{ textAlign: "center", color: "#333" }}>
+        BrainBytes AI Tutor
+      </h1>
+
+      {/* Show guest user heads up if no auth header is present */}
+      {!authHeader && (
+        <p style={{ textAlign: "center", color: "#666", marginBottom: "20px" }}>
+          {" "}
+          You are using our service as a Guest user. Please log in to save your
+          conversation history. All chats on guest mode are not saved on our
+          server.
+        </p>
+      )}
+      <div
+        ref={chatContainerRef}
+        style={{
+          border: "1px solid #ddd",
+          borderRadius: "12px",
+          flex: "1",
+          overflowY: "auto",
+          padding: "16px",
+          marginBottom: "20px",
+          backgroundColor: "#f9f9f9",
+        }}
+      >
+        {loading ? (
+          <p>Loading conversation history...</p>
+        ) : (
+          <>
+            {authHeader && hasNextPage && (
+              <div style={{ textAlign: "center", marginBottom: "12px" }}>
+                <button
+                  type="button"
+                  onClick={loadMoreMessages}
+                  disabled={loadingMore}
+                  style={{
+                    padding: "8px 16px",
+                    borderRadius: "8px",
+                    border: "1px solid #cbd5e1",
+                    backgroundColor: "#fff",
+                    color: "#334155",
+                    cursor: loadingMore ? "not-allowed" : "pointer",
+                    fontSize: "14px",
+                  }}
+                >
+                  {loadingMore ? "Loading older messages..." : "Load more"}
+                </button>
+              </div>
+            )}
+            <ul style={{ listStyle: "none", padding: 0 }}>
+              {/* Copy and reverse the array to put oldest at the top, newest at the bottom */}
+              {[...messages].reverse().map((message) => (
+                <li
+                  key={message._id || message.id}
+                  style={{
+                    marginBottom: "10px",
+                    padding: "10px",
+                    borderRadius: "8px",
+                    backgroundColor: message.isUser ? "#d1e7dd" : "#fff",
+                  }}
+                >
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm, remarkBreaks, remarkMath]}
+                    rehypePlugins={[rehypeKatex, rehypeHighlight]}
+                  >
                     {formatMath(message.text)}
                   </ReactMarkdown>
                 </li>
               ))}
               <div ref={messageEndRef} />
             </ul>
-          )}
-        </div>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '10px' }}>
-          <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder="Ask a question..." style={{ flex: '1', padding: '12px', borderRadius: '8px', border: '1px solid #ddd' }} />
-          <button type="submit" disabled={isTyping} style={{ padding: '12px 24px', borderRadius: '8px', backgroundColor: '#2563eb', color: '#fff', border: 'none' }}>
-            {isTyping ? 'Sending...' : 'Send'}
-          </button>
-        </form>
-      </main>
-    </div>
+          </>
+        )}
+      </div>
+      <div style={{ marginBottom: "12px" }}>
+        <label
+          htmlFor="chat-subject"
+          style={{
+            display: "block",
+            marginBottom: "6px",
+            fontWeight: "bold",
+            color: "#334155",
+            fontSize: "14px",
+          }}
+        >
+          Subject
+        </label>
+        <select
+          id="chat-subject"
+          value={selectedSubject}
+          onChange={(e) => setSelectedSubject(e.target.value)}
+          disabled={loadingSubjects || isTyping}
+          style={{
+            width: "100%",
+            maxWidth: "320px",
+            padding: "10px 12px",
+            borderRadius: "8px",
+            border: "1px solid #cbd5e1",
+            backgroundColor: "white",
+            fontSize: "14px",
+          }}
+        >
+          <option value="" disabled>
+            {loadingSubjects ? "Loading subjects..." : "-- Select a Subject --"}
+          </option>
+          {subjectsList.map((sub) => (
+            <option key={sub.id} value={sub.id}>
+              {sub.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <form onSubmit={handleSubmit} style={{ display: "flex", gap: "10px" }}>
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder="Ask a question..."
+          style={{
+            flex: "1",
+            padding: "12px",
+            borderRadius: "8px",
+            border: "1px solid #ddd",
+          }}
+        />
+        <button
+          type="submit"
+          disabled={isTyping || !selectedSubject}
+          style={{
+            padding: "12px 24px",
+            borderRadius: "8px",
+            backgroundColor: "#2563eb",
+            color: "#fff",
+            border: "none",
+          }}
+        >
+          {isTyping ? "Sending..." : "Send"}
+        </button>
+      </form>
+    </Layout>
   );
 }
