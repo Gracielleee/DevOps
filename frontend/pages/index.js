@@ -44,6 +44,12 @@ export default function Home({ authHeader, onLogout }) {
       setLoading(true);
     }
 
+    if (append) {
+      setLoadingMore(true);
+    } else {
+      setLoading(true);
+    }
+
     try {
       const data = await apiFetch(
         `messages/?page=${page}&limit=${MESSAGES_PAGE_SIZE}`,
@@ -111,14 +117,11 @@ export default function Home({ authHeader, onLogout }) {
       const userMsg = newMessage;
       setNewMessage("");
 
-      // Prepend user's message to the chat immediately for instant UI feedback
       setMessages((prev) => [tempUserMsg, ...prev]);
       shouldScrollToBottomRef.current = true;
 
       const requestHeaders = {};
-      if (authHeader) {
-        requestHeaders["Authorization"] = authHeader;
-      }
+      if (authHeader) requestHeaders["Authorization"] = authHeader;
 
       const responseData = await apiFetch("messages/", {
         method: "POST",
@@ -142,7 +145,6 @@ export default function Home({ authHeader, onLogout }) {
           createdAt: new Date().toISOString(),
         };
 
-        // Remove the temporary message and slot in the clean server ones
         setMessages((prev) => {
           const filtered = prev.filter((msg) => msg._id !== tempUserMsg._id);
           return [finalAiMsg, finalUserMsg, ...filtered];
@@ -151,18 +153,8 @@ export default function Home({ authHeader, onLogout }) {
       }
     } catch (error) {
       console.error("Error posting message:", error);
-
-      setMessages((prev) => {
-        return [
-          {
-            _id: Date.now().toString() + "-error",
-            text: "Sorry, I couldn't process your request. Please try again later.",
-            isUser: false,
-            createdAt: new Date().toISOString(),
-          },
-          ...prev,
-        ];
-      });
+      if (setGlobalError) setGlobalError("Unable to reach server. Please check your network.");
+      setMessages((prev) => prev.filter((msg) => msg._id !== tempUserMsg._id));
     } finally {
       setIsTyping(false);
     }
@@ -210,34 +202,56 @@ export default function Home({ authHeader, onLogout }) {
   }, [messages]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        width: "100vw",
-        overflow: "hidden",
-        fontFamily: "Nunito, sans-serif",
-        backgroundColor: "#f4f6f8",
-      }}
-    >
-      <Sidebar authHeader={authHeader} onLogout={onLogout} />
-
-      <main
+    <div style={{ display: "flex", height: "100vh", width: "100vw", overflow: "hidden", fontFamily: "Nunito, sans-serif", backgroundColor: "#f4f6f8", position: "relative" }}>
+      
+      {/* Mobile Hamburger Trigger */}
+      <button
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         style={{
-          flex: "1",
-          display: "flex",
+          position: "absolute",
+          top: "15px",
+          left: "15px",
+          zIndex: 110,
           flexDirection: "column",
-          padding: "20px",
-          overflow: "hidden",
+          justifyContent: "space-around",
+          width: "35px",
+          height: "30px",
+          background: "#fff",
+          border: "1px solid #ddd",
+          borderRadius: "6px",
+          cursor: "pointer",
+          padding: "6px",
+          display: "none"
         }}
+        className="mobile-hamburger-trigger"
       >
-        <h1 style={{ textAlign: "center", color: "#333" }}>
-          BrainBytes AI Tutor
-        </h1>
+        <div style={{ width: "100%", height: "2px", backgroundColor: "#333" }}></div>
+        <div style={{ width: "100%", height: "2px", backgroundColor: "#333" }}></div>
+        <div style={{ width: "100%", height: "2px", backgroundColor: "#333" }}></div>
+      </button>
 
-        {/* Show guest user heads up if no auth header is present */}
+      {/* Sidebar Responsive Container */}
+      <div className={`sidebar-wrapper-panel ${isMobileMenuOpen ? "drawer-open" : ""}`} style={{ display: "flex", flexDirection: "column" }}>
+        <Sidebar authHeader={authHeader} onLogout={onLogout} />
         {!authHeader && (
-          <p style={{ textAlign: "center", color: "#666", marginBottom: "20px" }}>  You are using our service as a Guest user. Please log in to save your conversation history. All chats on guest mode are not saved on our server.</p>
+          <div style={{ padding: "12px", backgroundColor: "#fff3cd", color: "#856404", fontSize: "12px", borderTop: "1px solid #ffeeba", textAlign: "center" }}>
+            🔒 Login to save user preferences.
+          </div>
+        )}
+      </div>
+
+      {/* Overlay backdrop dimmer */}
+      {isMobileMenuOpen && (
+        <div onClick={() => setIsMobileMenuOpen(false)} style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", backgroundColor: "rgba(0,0,0,0.4)", zIndex: 95 }} />
+      )}
+
+      <main style={{ flex: "1", display: "flex", flexDirection: "column", padding: "20px", overflow: "hidden" }} className="main-viewport-layout">
+        <h1 style={{ textAlign: "center", color: "#333" }}>BrainBytes AI Tutor</h1>
+
+        {!authHeader && (
+          <p style={{ textAlign: "center", color: "#666", marginBottom: "20px" }}>
+            You are using our service as a Guest user. Please log in to save your conversation history. All chats on guest mode are not saved on our server.
+          </p>
         )}
         <div
           ref={chatContainerRef}
@@ -366,6 +380,18 @@ export default function Home({ authHeader, onLogout }) {
           </button>
         </form>
       </main>
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .mobile-hamburger-trigger { display: flex !important; }
+          .sidebar-wrapper-panel {
+            position: fixed !important; top: 0 !important; left: 0 !important; height: 100vh !important;
+            transform: translateX(-100%) !important; transition: transform 0.3s ease-in-out !important; z-index: 100 !important;
+          }
+          .sidebar-wrapper-panel.drawer-open { transform: translateX(0) !important; }
+          .main-viewport-layout { padding: 70px 15px 15px 15px !important; }
+        }
+      `}</style>
     </div>
   );
 }
