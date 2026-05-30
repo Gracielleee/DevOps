@@ -3006,3 +3006,908 @@ Question:
 ℹ️ INFO  → Inference Client response:
 ℹ️ INFO [ai-service.js] → AI response received successfully
 🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [user-profile.js] → User found for email: hello@test.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user hello@test.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user hello@test.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+🔍 DEBUG [user-profile.js] → User found for email: hello@test.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user hello@test.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user hello@test.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [auth.js] → Checking ownership for user 6a16bfd30d65b4654472a4dc on material 6a1a517bada80742767e2e99 owned by 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG [auth.js] → Checking ownership for user 6a16bfd30d65b4654472a4dc on material 6a1a5537ada80742767e2e9d owned by 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG [user-profile.js] → User found for email: hello@test.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user hello@test.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user hello@test.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+❌ ERROR  → Authentication error: jwt expired
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [user-profile.js] → User found for email: hello@test.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user hello@test.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user hello@test.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+❌ ERROR  → Authentication error: jwt expired
+ℹ️ INFO [message-controller.js] → Guest user attempted to fetch messages. Returning empty paginated response.
+❌ ERROR  → Authentication error: jwt expired
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [user-profile.js] → User found for email: hello@test.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user hello@test.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user hello@test.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: hello
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "hello"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "hello"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: hello
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "hello"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [message-controller.js] → Guest user attempted to fetch messages. Returning empty paginated response.
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: Hello
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "Hello"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "Hello"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: Hello
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "Hello"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+ℹ️ INFO [message-controller.js] → Guest messages generated in-memory
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: hi
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "hi"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "hi"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: hi
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "hi"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+ℹ️ INFO [message-controller.js] → Guest messages generated in-memory
+🔍 DEBUG [user-profile.js] → User found for email: hello@test.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user hello@test.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user hello@test.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: hello
+ℹ️ INFO [ai-service.js] → Subject context category: science
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "hello"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "hello"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: science, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: hello
+🔍 DEBUG [ai-helper.js] → Detected category: science
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in science. Please respond to the following question.
+
+Use scientific terminology and explain concepts clearly.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "hello"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: hi
+ℹ️ INFO [ai-service.js] → Subject context category: science
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "hi"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "hi"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: science, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: hi
+🔍 DEBUG [ai-helper.js] → Detected category: science
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in science. Please respond to the following question.
+
+Use scientific terminology and explain concepts clearly.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "hi"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+❌ ERROR  → Authentication error: invalid token
+❌ ERROR  → Authentication error: invalid token
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: Hello
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "Hello"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "Hello"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: Hello
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "Hello"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+ℹ️ INFO [message-controller.js] → Guest messages generated in-memory
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+🔍 DEBUG [user-profile.js] → User found for email: test4@email.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user test4@email.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user test4@email.com: true
+ℹ️ INFO  → Login successful
+🔍 DEBUG [auth.js] → Checking ownership for user 6a12f886f2f01bfd8e13ce0c on material 6a1ae63590dedbe7fda51d5b owned by 6a12f886f2f01bfd8e13ce0c
+🔍 DEBUG [auth.js] → Checking ownership for user 6a12f886f2f01bfd8e13ce0c on material 6a1ae63590dedbe7fda51d5b owned by 6a12f886f2f01bfd8e13ce0c
+🔍 DEBUG [auth.js] → Checking ownership for user 6a12f886f2f01bfd8e13ce0c on material 6a1ae63590dedbe7fda51d5b owned by 6a12f886f2f01bfd8e13ce0c
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+ℹ️ INFO [message-controller.js] → Guest user attempted to fetch messages. Returning empty paginated response.
+ℹ️ INFO [message-controller.js] → Guest user attempted to fetch messages. Returning empty paginated response.
+🔍 DEBUG [user-profile.js] → User found for email: test4@email.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user test4@email.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user test4@email.com: true
+ℹ️ INFO  → Login successful
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+🔍 DEBUG [user-profile.js] → User found for email: test4@email.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user test4@email.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user test4@email.com: true
+ℹ️ INFO  → Login successful
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: Hello
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "Hello"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "Hello"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: Hello
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "Hello"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile created successfully
+🔍 DEBUG [user-profile.js] → User found for email: test3@email.com ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user test3@email.com: false
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+❌ ERROR  → Authentication error: jwt expired
+🔍 DEBUG [user-profile.js] → User found for email: test6@email.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user test6@email.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user test6@email.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1ae6d268993d1827498df8
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1ae6d268993d1827498df8
+ℹ️ INFO [user-profile.js] → User profile deleted successfully: 6a1ae6d268993d1827498df8
+ℹ️ INFO [user-profile.js] → User profile created successfully
+🔍 DEBUG [user-profile.js] → User found for email: test3@email.com ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user test3@email.com: false
+🔍 DEBUG [user-profile.js] → User found for email: test6@email.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user test6@email.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user test6@email.com: true
+ℹ️ INFO  → Login successful
+🔍 DEBUG [user-profile.js] → User found for email: test6@email.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user test6@email.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user test6@email.com: true
+ℹ️ INFO  → Login successful
+❌ ERROR  → Error creating user profile: E11000 duplicate key error collection: BrainBytes_DevOps.users index: email_1 dup key: { email: "test6@email.com" }
+🔍 DEBUG [user-profile.js] → User found for email: test3@email.com ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user test3@email.com: false
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1ae70568993d1827498df9
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1ae70568993d1827498df9
+ℹ️ INFO [user-profile.js] → User profile deleted successfully: 6a1ae70568993d1827498df9
+ℹ️ INFO [user-profile.js] → User profile created successfully
+❌ ERROR  → Error creating user profile: E11000 duplicate key error collection: BrainBytes_DevOps.users index: email_1 dup key: { email: "test6@email.com" }
+🔍 DEBUG [user-profile.js] → User found for email: test6@email.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user test6@email.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user test6@email.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1ae73968993d1827498dfc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1ae73968993d1827498dfc
+ℹ️ INFO [user-profile.js] → User profile deleted successfully: 6a1ae73968993d1827498dfc
+ℹ️ INFO [user-profile.js] → User profile created successfully
+🔍 DEBUG [user-profile.js] → User found for email: test6@email.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user test6@email.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user test6@email.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1ae74e68993d1827498dfe
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1ae74e68993d1827498dfe
+ℹ️ INFO [user-profile.js] → User profile deleted successfully: 6a1ae74e68993d1827498dfe
+ℹ️ INFO [user-profile.js] → User profile created successfully
+🔍 DEBUG [user-profile.js] → User found for email: test6@email.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user test6@email.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user test6@email.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1ae79068993d1827498e00
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1ae79068993d1827498e00
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1ae79068993d1827498e00 on material 6a1ae79268993d1827498e02 owned by 6a1ae79068993d1827498e00
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1ae79068993d1827498e00 on material 6a1ae79268993d1827498e02 owned by 6a1ae79068993d1827498e00
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1ae79068993d1827498e00 on material 6a1ae79268993d1827498e02 owned by 6a1ae79068993d1827498e00
+ℹ️ INFO [message-controller.js] → No messages found from user.
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: Hello
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "Hello"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "Hello"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: Hello
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "Hello"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+ℹ️ INFO [user-profile.js] → User profile deleted successfully: 6a1ae79068993d1827498e00
+ℹ️ INFO [user-profile.js] → User profile created successfully
+🔍 DEBUG [user-profile.js] → User found for email: test6@email.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user test6@email.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user test6@email.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1ae96668993d1827498e06
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1ae96668993d1827498e06
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1ae96668993d1827498e06 on material 6a1ae96968993d1827498e08 owned by 6a1ae96668993d1827498e06
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1ae96668993d1827498e06 on material 6a1ae96968993d1827498e08 owned by 6a1ae96668993d1827498e06
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1ae96668993d1827498e06 on material 6a1ae96968993d1827498e08 owned by 6a1ae96668993d1827498e06
+ℹ️ INFO [message-controller.js] → No messages found from user.
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: Hello
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "Hello"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "Hello"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: Hello
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "Hello"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+ℹ️ INFO [user-profile.js] → User profile deleted successfully: 6a1ae96668993d1827498e06
+ℹ️ INFO [user-profile.js] → User profile created successfully
+🔍 DEBUG [user-profile.js] → User found for email: test6@email.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user test6@email.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user test6@email.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1ae9b768993d1827498e0b
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1ae9b768993d1827498e0b
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1ae9b768993d1827498e0b on material 6a1ae9b968993d1827498e0d owned by 6a1ae9b768993d1827498e0b
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1ae9b768993d1827498e0b on material 6a1ae9b968993d1827498e0d owned by 6a1ae9b768993d1827498e0b
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1ae9b768993d1827498e0b on material 6a1ae9b968993d1827498e0d owned by 6a1ae9b768993d1827498e0b
+ℹ️ INFO [message-controller.js] → No messages found from user.
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: Hello
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "Hello"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "Hello"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: Hello
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "Hello"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+ℹ️ INFO [user-profile.js] → User profile deleted successfully: 6a1ae9b768993d1827498e0b
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: hi
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "hi"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "hi"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: hi
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "hi"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+ℹ️ INFO [message-controller.js] → Guest messages generated in-memory
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: What is ww2
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "What is ww2"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "What is ww2"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: What is ww2
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "What is ww2"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+ℹ️ INFO [message-controller.js] → Guest messages generated in-memory
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: When did it start?
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "When did it start?"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "When did it start?"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: When did it start?
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "When did it start?"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+ℹ️ INFO [message-controller.js] → Guest messages generated in-memory
+🔍 DEBUG [user-profile.js] → User found for email: hello@test.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user hello@test.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user hello@test.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: hello
+ℹ️ INFO [ai-service.js] → Subject context category: science
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "hello"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "hello"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: science, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: hello
+🔍 DEBUG [ai-helper.js] → Detected category: science
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in science. Please respond to the following question.
+
+Use scientific terminology and explain concepts clearly.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "hello"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what is ww2?
+ℹ️ INFO [ai-service.js] → Subject context category: science
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what is ww2?"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what is ww2?"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: science, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: what is ww2?
+🔍 DEBUG [ai-helper.js] → Detected category: science
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in science. Please respond to the following question.
+
+Use scientific terminology and explain concepts clearly.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what is ww2?"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: when did it start?
+ℹ️ INFO [ai-service.js] → Subject context category: science
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "when did it start?"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "when did it start?"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: science, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: when did it start?
+🔍 DEBUG [ai-helper.js] → Detected category: science
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in science. Please respond to the following question.
+
+Use scientific terminology and explain concepts clearly.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "when did it start?"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: who started it and who won?
+ℹ️ INFO [ai-service.js] → Subject context category: science
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "who started it and who won?"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "who started it and who won?"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: science, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: who started it and who won?
+🔍 DEBUG [ai-helper.js] → Detected category: science
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in science. Please respond to the following question.
+
+Use scientific terminology and explain concepts clearly.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "who started it and who won?"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI

@@ -13,7 +13,7 @@ const fileName = 'message.js';
 router.get('/', optionalAuthentication, messageController.getMessages);
 
 // POST: guest allowed without Authorization; any header present must pass JWT validation
-router.post('/', validateMessageCreation, authenticate, async (req, res) => {
+router.post('/', optionalAuthentication, validateMessageCreation, async (req, res) => {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

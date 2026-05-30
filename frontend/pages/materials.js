@@ -4,15 +4,19 @@ import { useRouter } from "next/router";
 import Sidebar from "../components/Sidebar";
 import useSubjects from "../hooks/useSubjects";
 import apiFetch from "../utils/apiFetch";
+import Layout from "../components/ResponsiveLayout";
 
-export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) {
+export default function MaterialsPage({
+  authHeader,
+  onLogout,
+  setGlobalError,
+}) {
   const router = useRouter();
   const [subject, setSubject] = useState("");
   const { subjectsList, loadingSubjects } = useSubjects();
 
   const [materials, setMaterials] = useState([]);
   const [loadingMaterials, setLoadingMaterials] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const [formData, setFormData] = useState({
     subject: "",
@@ -40,7 +44,8 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
       }
     } catch (error) {
       console.error("Failed to pull materials database records:", error);
-      if (setGlobalError) setGlobalError("Failed to pull materials database records.");
+      if (setGlobalError)
+        setGlobalError("Failed to pull materials database records.");
     } finally {
       setLoadingMaterials(false);
     }
@@ -59,7 +64,10 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
   const handleSave = async (e) => {
     e.preventDefault();
     if (!formData.title || !formData.description || !subject) {
-      if (setGlobalError) setGlobalError("Please ensure all parameters and subject spaces are set.");
+      if (setGlobalError)
+        setGlobalError(
+          "Please ensure all parameters and subject spaces are set.",
+        );
       return;
     }
 
@@ -143,15 +151,26 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
         setFormData({ id: null, title: "", description: "" });
       }
     } catch (error) {
-      console.error("Failed executing target database deletion sequence:", error);
-      if (setGlobalError) setGlobalError("Failed executing deletion layout task.");
+      console.error(
+        "Failed executing target database deletion sequence:",
+        error,
+      );
+      if (setGlobalError)
+        setGlobalError("Failed executing deletion layout task.");
     }
   };
 
   // Inner layout markup shared between Guest and Auth views
   const renderMainContent = () => (
     <div style={{ maxWidth: "1000px", margin: "0 auto", width: "100%" }}>
-      <header style={{ marginBottom: "30px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <header
+        style={{
+          marginBottom: "30px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <div>
           <h1 style={{ margin: "0 0 5px 0", color: "#0f172a" }}>
             📚 Learning Materials Repositories
@@ -160,12 +179,6 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
             Manage course files and curriculum notes.
           </p>
         </div>
-        <button 
-          className="hamburger-btn"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          ☰
-        </button>
       </header>
 
       {!authHeader ? (
@@ -184,8 +197,16 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
             marginTop: "20px",
           }}
         >
-          <h4 style={{ margin: 0, color: "#1e293b", fontSize: "18px", textAlign: "center" }}>
-            🔒 Please log in to save and manage your learning materials preferences.
+          <h4
+            style={{
+              margin: 0,
+              color: "#1e293b",
+              fontSize: "18px",
+              textAlign: "center",
+            }}
+          >
+            🔒 Please log in to save and manage your learning materials
+            preferences.
           </h4>
           <button
             onClick={() => router.push("/login")}
@@ -226,19 +247,40 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
               {isEditing ? "✏️ Modify Material" : "➕ Create Material Entry"}
             </h3>
             <form onSubmit={handleSave}>
-              <div style={{ display: "flex", flexDirection: "column", marginBottom: "16px" }}>
-                <label style={{ fontSize: "14px", fontWeight: "bold", color: "#475569", marginBottom: "6px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginBottom: "16px",
+                }}
+              >
+                <label
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    color: "#475569",
+                    marginBottom: "6px",
+                  }}
+                >
                   Subject Area
                 </label>
                 <select
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   disabled={loadingSubjects}
-                  style={{ width: "100%", padding: "12px", borderRadius: "8px", border: "1px solid #cbd5e1", backgroundColor: "white" }}
+                  style={{
+                    width: "100%",
+                    padding: "12px",
+                    borderRadius: "8px",
+                    border: "1px solid #cbd5e1",
+                    backgroundColor: "white",
+                  }}
                   required
                 >
                   <option value="" disabled>
-                    {loadingSubjects ? "Loading subjects..." : "-- Select a Subject --"}
+                    {loadingSubjects
+                      ? "Loading subjects..."
+                      : "-- Select a Subject --"}
                   </option>
                   {subjectsList.map((sub) => (
                     <option key={sub.id || sub._id} value={sub.id || sub._id}>
@@ -247,7 +289,15 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
                   ))}
                 </select>
 
-                <label style={{ fontSize: "14px", fontWeight: "bold", color: "#475569", marginTop: "16px", marginBottom: "6px" }}>
+                <label
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    color: "#475569",
+                    marginTop: "16px",
+                    marginBottom: "6px",
+                  }}
+                >
                   Document Title
                 </label>
                 <input
@@ -255,14 +305,33 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
                   name="title"
                   value={formData.title}
                   onChange={handleInputChange}
-                  style={{ padding: "10px", border: "1px solid #cbd5e1", borderRadius: "6px", fontSize: "15px", outline: "none" }}
+                  style={{
+                    padding: "10px",
+                    border: "1px solid #cbd5e1",
+                    borderRadius: "6px",
+                    fontSize: "15px",
+                    outline: "none",
+                  }}
                   placeholder="e.g., Week 3 container tuning specs"
                   required
                 />
               </div>
 
-              <div style={{ display: "flex", flexDirection: "column", marginBottom: "20px" }}>
-                <label style={{ fontSize: "14px", fontWeight: "bold", color: "#475569", marginBottom: "6px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginBottom: "20px",
+                }}
+              >
+                <label
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    color: "#475569",
+                    marginBottom: "6px",
+                  }}
+                >
                   Content Description
                 </label>
                 <textarea
@@ -270,7 +339,15 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
                   value={formData.description}
                   onChange={handleInputChange}
                   rows="4"
-                  style={{ padding: "10px", border: "1px solid #cbd5e1", borderRadius: "6px", fontSize: "15px", fontFamily: "inherit", resize: "vertical", outline: "none" }}
+                  style={{
+                    padding: "10px",
+                    border: "1px solid #cbd5e1",
+                    borderRadius: "6px",
+                    fontSize: "15px",
+                    fontFamily: "inherit",
+                    resize: "vertical",
+                    outline: "none",
+                  }}
                   placeholder="Provide summary context logs here..."
                   required
                 ></textarea>
@@ -279,7 +356,16 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
               <div style={{ display: "flex", gap: "10px" }}>
                 <button
                   type="submit"
-                  style={{ flexGrow: 1, padding: "10px", background: "#10b981", color: "white", border: "none", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}
+                  style={{
+                    flexGrow: 1,
+                    padding: "10px",
+                    background: "#10b981",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "6px",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                  }}
                 >
                   {isEditing ? "Update Document" : "Commit Entry"}
                 </button>
@@ -290,7 +376,14 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
                       setIsEditing(false);
                       setFormData({ id: null, title: "", description: "" });
                     }}
-                    style={{ padding: "10px", background: "#94a3b8", color: "white", border: "none", borderRadius: "6px", cursor: "pointer" }}
+                    style={{
+                      padding: "10px",
+                      background: "#94a3b8",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                    }}
                   >
                     Cancel
                   </button>
@@ -301,11 +394,13 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
 
           {/* CRUD CONTENT RENDER LIST */}
           <div>
-            <h3 style={{ margin: "0 0 16px 0", color: "#1e293b" }}>
+            <h3 style={{ margin: "20px 0 16px 0", color: "#1e293b" }}>
               Learning Materials ({materials.length})
             </h3>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+            >
               {loadingMaterials ? (
                 <p style={{ color: "#64748b", textAlign: "center" }}>
                   Loading resources network logs...
@@ -320,24 +415,67 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
                   return (
                     <div
                       key={itemId}
-                      style={{ backgroundColor: "white", padding: "20px", borderRadius: "12px", boxShadow: "0 2px 4px rgba(0,0,0,0.02)", border: "1px solid #e2e8f0" }}
+                      style={{
+                        backgroundColor: "white",
+                        padding: "20px",
+                        borderRadius: "12px",
+                        boxShadow: "0 2px 4px rgba(0,0,0,0.02)",
+                        border: "1px solid #e2e8f0",
+                      }}
                     >
-                      <h4 style={{ margin: "0 0 8px 0", color: "#1e293b", fontSize: "17px" }}>
+                      <h4
+                        style={{
+                          margin: "0 0 8px 0",
+                          color: "#1e293b",
+                          fontSize: "17px",
+                        }}
+                      >
                         {item.topic}
                       </h4>
-                      <p style={{ margin: "0 0 16px 0", color: "#475569", fontSize: "14px", lineHeight: "1.5" }}>
+                      <p
+                        style={{
+                          margin: "0 0 16px 0",
+                          color: "#475569",
+                          fontSize: "14px",
+                          lineHeight: "1.5",
+                        }}
+                      >
                         {item.content}
                       </p>
-                      <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "10px",
+                          justifyContent: "flex-end",
+                        }}
+                      >
                         <button
                           onClick={() => handleEditSelect(item)}
-                          style={{ padding: "6px 12px", border: "none", borderRadius: "4px", background: "#eff6ff", color: "#2563eb", fontWeight: "bold", cursor: "pointer", fontSize: "13px" }}
+                          style={{
+                            padding: "6px 12px",
+                            border: "none",
+                            borderRadius: "4px",
+                            background: "#eff6ff",
+                            color: "#2563eb",
+                            fontWeight: "bold",
+                            cursor: "pointer",
+                            fontSize: "13px",
+                          }}
                         >
                           Modify
                         </button>
                         <button
                           onClick={() => handleDelete(itemId)}
-                          style={{ padding: "6px 12px", border: "none", borderRadius: "4px", background: "#fef2f2", color: "#dc2626", fontWeight: "bold", cursor: "pointer", fontSize: "13px" }}
+                          style={{
+                            padding: "6px 12px",
+                            border: "none",
+                            borderRadius: "4px",
+                            background: "#fef2f2",
+                            color: "#dc2626",
+                            fontWeight: "bold",
+                            cursor: "pointer",
+                            fontSize: "13px",
+                          }}
                         >
                           Delete
                         </button>
@@ -354,85 +492,9 @@ export default function MaterialsPage({ authHeader, onLogout, setGlobalError }) 
   );
 
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        width: "100vw",
-        overflow: "hidden",
-        fontFamily: "Nunito, sans-serif",
-        backgroundColor: "#f4f6f8",
-      }}
-    >
-      {/* Mobile Drawer Overlay */}
-      {isMobileMenuOpen && (
-        <div 
-          className="drawer-overlay"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
-      {/* Sidebar Wrapper Container */}
-      <div className={`sidebar-wrapper ${isMobileMenuOpen ? "drawer-open" : ""}`}>
-        <Sidebar authHeader={authHeader} onLogout={onLogout} />
-      </div>
-
-      <main style={{ flexGrow: 1, overflowY: "auto", padding: "40px" }}>
-        {renderMainContent()}
-      </main>
-
-      <style jsx global>{`
-        .sidebar-wrapper {
-          display: block;
-          height: 100%;
-        }
-        .hamburger-btn {
-          display: none;
-          font-size: 24px;
-          background: none;
-          border: none;
-          color: #0f172a;
-          cursor: pointer;
-          padding: 8px;
-        }
-        .materials-grid {
-          display: grid;
-          grid-template-columns: 1fr 1.5fr;
-          gap: "30px";
-          align-items: start;
-        }
-        @media (max-width: 768px) {
-          .hamburger-btn {
-            display: block;
-          }
-          .sidebar-wrapper {
-            position: fixed;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            z-index: 999;
-            transform: translateX(-100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          }
-          .sidebar-wrapper.drawer-open {
-            transform: translateX(0);
-          }
-          .drawer-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(2px);
-            z-index: 998;
-          }
-          .materials-grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
-          }
-        }
-      `}</style>
-    </div>
+    <Layout authHeader={authHeader} onLogout={onLogout}>
+      {/* 📚 Everything inside here automatically becomes the "children" prop! */}
+      <div className="materials-grid">{renderMainContent()}</div>
+    </Layout>
   );
 }

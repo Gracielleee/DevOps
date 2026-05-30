@@ -65,7 +65,7 @@ export default async function apiFetch(endpoint, options = {}) {
     ? endpoint
     : buildApiUrl(API_BASE_URL, endpoint);
 
-  const { redirectOnAuthError = true, softFail = false, ...fetchOptions } = options;
+  const { redirectOnAuthError = true, allowAnonymous = false, softFail = false, ...fetchOptions } = options;
 
   const defaultHeaders = {
     "Content-Type": "application/json",
@@ -90,6 +90,10 @@ export default async function apiFetch(endpoint, options = {}) {
       if (tokenWasSent && redirectOnAuthError) {
         handleSessionExpired();
         return null;
+      }
+
+      if (allowAnonymous && !tokenWasSent) {
+      return data; 
       }
 
       const authError = new Error(

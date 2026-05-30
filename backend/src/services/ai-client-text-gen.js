@@ -5,11 +5,12 @@ const client = new InferenceClient(process.env.HF_TOKEN, {timeout: 30});
 
 const fileName = "ai-client-text-gen.js";
 
-export async function getResponseFromAI(question) {
+export async function getResponseFromAI(question, conversationHistory = []) {
     try{
         const chatCompletion = await client.chatCompletion({
                 model: "Qwen/Qwen2.5-7B-Instruct:cheapest",
                 messages: [
+                    ...conversationHistory,
                     {
                         role: "user",
                         content: question,

@@ -55,7 +55,7 @@ export default function AuthPage({ mode, onLoginSuccess }) {
 
       setTimeout(() => {
         router.push("/"); 
-      }, 2000);
+      }, 1000);
 
     } catch (error) {
       console.error("Login failed:", error.message);
