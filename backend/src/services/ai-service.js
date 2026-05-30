@@ -5,7 +5,7 @@ import logger from "../logger.js";
 
 const fileName = "ai-service.js";
 
-export async function generateResponse(question, subjectCategory = 'general') {
+export async function generateResponse(question, subjectCategory = 'general', conversationHistory = []) {
   logger.debug("Starting generateResponse function", { file: fileName });
   logger.info("Received question from user: " + question, { file: fileName });
 
@@ -37,7 +37,7 @@ export async function generateResponse(question, subjectCategory = 'general') {
     const completePrompt = promptprefix + ". Actual question: " + question;
 
     logger.debug("Calling AI API with prompt...", { file: fileName });
-    const aiResponseString = await getResponseFromAI(completePrompt);
+    const aiResponseString = await getResponseFromAI(completePrompt, conversationHistory);
     logger.info("AI response received successfully", { file: fileName });
 
     if (aiResponseString) {

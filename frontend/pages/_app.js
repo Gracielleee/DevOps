@@ -4,11 +4,12 @@ import 'highlight.js/styles/github.css';
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { setSessionExpiredHandler } from '../utils/apiFetch';
-import Toast from '../components/Toast'; // Uses your repo's exact Toast component
+import Toast from '../components/Toast';
 
 export default function App({ Component, pageProps }) {
   const [authHeader, setAuthHeader] = useState(null);
   const router = useRouter();
+  const [globalError, setGlobalError] = useState("");
 
   const handleSessionExpired = useCallback(() => {
     localStorage.removeItem("token");
@@ -19,7 +20,6 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     setSessionExpiredHandler(handleSessionExpired);
   }, [handleSessionExpired]);
-  const [globalError, setGlobalError] = useState("");
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token"); 

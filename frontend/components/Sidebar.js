@@ -9,6 +9,7 @@ export default function Sidebar({ authHeader, onLogout }) {
     <aside
       style={{
         width: "260px",
+        height: "100%",
         backgroundColor: "#1e293b",
         color: "#ffffff",
         display: "flex",
@@ -22,6 +23,7 @@ export default function Sidebar({ authHeader, onLogout }) {
         <h2
           style={{
             margin: 0,
+            marginTop: "20px",
             fontSize: "22px",
             color: "#fff",
             letterSpacing: "0.5px",
@@ -88,7 +90,7 @@ export default function Sidebar({ authHeader, onLogout }) {
         <Link
           href="/materials"
           style={{
-            color: "#ffffff",
+            color: "#cbd5e1",
             backgroundColor:
               currentPath === "/materials" ? "#334155" : "transparent",
             fontWeight: currentPath === "/materials" ? "bold" : "normal",

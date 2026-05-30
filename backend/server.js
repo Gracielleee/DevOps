@@ -1,7 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import userProfileRouter from './src/userProfile.js';
 import { generateResponse } from './src/services/ai-service.js';
 import logger from './src/logger.js';
 import LearningMaterial from './src/models/learning-material.js';
@@ -37,9 +36,6 @@ app.use(express.json());
 //   challenge: false,
 //   unauthorizedResponse: 'Unauthorized'
 // }));
-
-// Routes
-// app.use('/api/user-profiles', userProfileRouter);
 
 // Routes
 app.use('/api/materials', learningMaterialsRoutes);
