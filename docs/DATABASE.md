@@ -41,10 +41,10 @@ erDiagram
     
     MESSAGE {
         ObjectId _id PK
-        ObjectId user FK "nullable for guests"
+        ObjectId user FK 
         String text
         Boolean isUser
-        ObjectId subject FK "nullable"
+        ObjectId subject FK 
         Date createdAt
     }
 ```
