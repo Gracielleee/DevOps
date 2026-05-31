@@ -11,7 +11,7 @@ The API uses two authentication patterns:
 | **None** | `/register`, `/login`, `/subjects/*` | Not required |
 | **Bearer Token** | `/profile`, `/materials/*`, `/messages/*` | `Authorization: Bearer {{jwt_token}}` |
 
-> **Note:** The JWT token is obtained from the `/login` response and should be saved for subsequent authenticated requests.
+</br>
 
 ---
 
@@ -37,7 +37,7 @@ The API uses two authentication patterns:
 | 9 | PUT | `/subjects/:id` | `{ "name", "description" }` |  None |
 | 10 | DELETE | `/subjects/:id` | — | None |
 
-> ⚠️ **Security Note:** `/subjects` endpoints lack backend authentication to facilitate development. The frontend's access to this endpoint is limited to fetch requests only.
+>  **Security Note:** `/subjects` endpoints lack backend authentication to facilitate development. The frontend's access to this endpoint is limited to fetch requests only.
 
 ### Materials
 
@@ -56,6 +56,8 @@ The API uses two authentication patterns:
 | 16 | GET | `/messages/` | — | Bearer |
 | 17 | POST | `/messages/` | `{ "text", "isUser": true/false }` | Bearer |
 
+</br>
+
 ---
 
 ## Postman Collection
@@ -63,9 +65,11 @@ The API uses two authentication patterns:
 Test the API using our official Postman collection.
 
 ### Quick Start
-1. **Import Collection:** [Download JSON](../postman-api-collection.json) or click "Run in Postman".
+1. **Import Collection:** Download and import the [official collection](https://drive.google.com/drive/folders/1TH-Jpycz6pvIeUCc8KHME3SNfxrFGUEI?usp=drive_link) into [Postman](https://www.postman.com/).
 2. **Set Variables:** Update the `base_url` variable in the collection settings.
-`variable: base_url `
-` value: http://localhost:3000/api/ `
-3. **Login First:** Execute the `Login` request to obtain your JWT token. The test script automatically saves the token for subsequent requests.
-4. **Run the Collection:** You can run the whole collection to see the results in a glance.
+    ```
+    variable: base_url 
+    value: http://localhost:3000/api/
+    ```
+4. **Login First:** Execute the `Login` request to obtain your JWT token. The test script automatically saves the token for subsequent requests.
+5. **Run the Collection:** Click the `Run` button on the collection to execute all requests sequentially. This provides a quick overview of the API's status and validates all the test cases in one go.
