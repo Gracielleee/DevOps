@@ -3,9 +3,10 @@
 ## Overview
 Our team of 4 uses **Google Space** for communication and task distribution. We follow a **milestone-based branching strategy** where tasks are self-selected, developed in feature branches, reviewed via PRs, and merged into a milestone branch before reaching `main`.
 
----
+</br>
 
-### Visual Workflow
+Here is a visual representation of our workflow:
+
 
 ```mermaid
 graph TD
@@ -24,9 +25,9 @@ graph TD
     end
     
     subgraph "Google Space"
-        TASKS[📋 Task Distribution]
-        SELECT[👥 Member Selection]
-        REVIEW[🔍 Code Review]
+        TASKS[ Task Distribution]
+        SELECT[ Member Selection]
+        REVIEW[ Code Review]
     end
     
     MAIN -->|Create| MILESTONE
@@ -57,35 +58,36 @@ graph TD
 
 ```
 
-### Detailed Process
+### Process
 #### 1. Communication & Task Distribution
 
-    Platform: Google Space
-    Process:
+  - Platform: Google Space
+- Process:
         Tasks are posted in the space.
         Team members self-select tasks they wish to work on.
+
 
 #### 2. Branching Strategy
 
 We use a milestone-based model:
+- Main Branch: `main`
+- Milestone Branch: `milestone-X` (Created for each sprint/milestone)
+- Feature Branches: `feature/<feature-name>` (Created from the milestone branch)
 
-    Main Branch: main (Production ready)
-    Milestone Branch: milestone-X (Created for each sprint/milestone)
-    Feature Branches: feature/<feature-name> (Created from the milestone branch)
 
-Flow:
+**Flow:**
+  1. A new `milestone-X` branch is created from `main`.
+  2. Developers branch off `milestone-X` to create `feature/...` branches.
+  3. Once features are complete, they are merged back into `milestone-X`.
+  4. Finally, `milestone-X` is merged into main.
 
-    A new milestone-X branch is created from main.
-    Developers branch off milestone-X to create feature/... branches.
-    Once features are complete, they are merged back into milestone-X.
-    Finally, milestone-X is merged into main.
 
 #### 3. Pull Request (PR) Workflow
 
-    Develop: Work on your feature/<name> branch.
-    Submit PR: Open a Pull Request targeting the milestone-X branch.
-    Review: Team members review the code.
-    Merge: After approval and passing checks, merge into milestone-X.
+1. Develop: Work on your `feature/<name>` branch.
+2. Submit PR: Open a Pull Request targeting the `milestone-X` branch.
+3. Review: Team members review the code.
+4. Merge: After approval and passing checks, merge into `milestone-X`.
 
 #### 4. Code Quality Standards
 
@@ -97,4 +99,4 @@ All code must meet the following criteria before merging:
 |Functionality|	All features must work as intended.|
 |Peer Review	|At least one team member must approve the PR.|
 
-Note: If the errors are minor, the peer reviewer may correct and approve the merge. But if errors are significant, the submission will be returned for revision.
+> Note: If the errors are minor, the peer reviewer may correct and approve the merge. But if errors are significant, the submission will be returned to the team member for revision.
