@@ -1,4 +1,4 @@
-version: '3'
+
 services:
   # Frontend container
   frontend:
@@ -8,9 +8,18 @@ services:
     volumes:
       - ./frontend:/usr/src/app
       - /usr/src/app/node_modules
+    environment:
+      - NEXT_PUBLIC_API_URL=/api/
+      - BACKEND_URL=http://backend:3000
     depends_on:
       - backend
     restart: unless-stopped
+    healthcheck:
+      test: curl -f http://localhost:3000 || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   # Backend API container
   backend:
@@ -21,20 +30,26 @@ services:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
     environment:
-      - HF_TOKEN=${HF_TOKEN} # Passes the Hugging Face token from .env
-    depends_on:
-      - mongo
+      - HF_TOKEN=${HF_TOKEN}
+      - MONGO_URI=${MONGO_URI:-mongodb://mongo:27017/brainbytes}
+      - JWT_SECRET=my_super_secret_jwt_key
+      - FE_URL=http://localhost:8080,http://frontend:3000
     restart: unless-stopped
+    healthcheck:
+      test: curl -f http://localhost:3000/health || exit 1
+      interval: 10s        
+      timeout: 5s        
+      retries: 5        
+      start_period: 30s
 
-  # MongoDB container
-  mongo:
-    image: mongo:4.4
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
-    restart: unless-stopped
+# Cloud MongoDB Atkas is used, so this is commented out for now.
+#   mongo:
+#     image: mongo:4.4
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - mongo-data:/data/db
+#     restart: unless-stopped
 
-# Define volumes for persistent data
-volumes:
-  mongo-data:
+# volumes:
+#   mongo-data:
