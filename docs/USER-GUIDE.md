@@ -16,7 +16,8 @@ At the bottom of the sidebar, you can **Log In** or **Log Out** at any time.
 </br>
 
 ## Features
-Below are the main features of the BrainBytes Platform. You can see the video guide here:
+Below are the main features of the BrainBytes Platform. You can see the **video guide** here: [Go to Recording of Features](https://drive.google.com/drive/folders/1zt61lzrjVZkezEFQP70KPaLSYESRHQf-?usp=sharing)
+
 
 ### 1. AI Chat Client
 Interact with the BrainBytes AI Tutor to get instant answers, explanations, and examples.
