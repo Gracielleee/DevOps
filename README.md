@@ -180,7 +180,7 @@ Create the .env file as described above and fill it in.
 
 </br>
 
-#### 1. Error: connect ECONNREFUSED 127.0.0.1:3000
+#### 2. Error: connect ECONNREFUSED 127.0.0.1:3000
 
   Cause: The backend container hasn't started yet, or the health check failed. 
 
@@ -189,7 +189,7 @@ Create the .env file as described above and fill it in.
 
 </br>
 
-#### 2. HuggingFace Inference Error: 401 Unauthorized
+#### 3. HuggingFace Inference Error: 401 Unauthorized
 
 Cause: Invalid or missing HF_TOKEN. 
 
@@ -202,7 +202,7 @@ Fix:
 
 </br>
 
-#### 3. MongoServerError: Authentication failed
+#### 4. MongoServerError: Authentication failed
 
 Cause: Incorrect MongoDB URI or credentials. 
 
@@ -213,7 +213,7 @@ Fix:
 </br>
 
 
-#### 4. Port Already in Use (bind: address already in use)
+#### 5. Port Already in Use (bind: address already in use)
 
 Cause: Another application is using port 8080 or 3000. 
 
@@ -223,7 +223,7 @@ Fix:
 
 </br> 
 
-#### 5. CORS Error in Browser Console
+#### 6. CORS Error in Browser Console
 
 Cause: The frontend is trying to access the backend from a different origin without permission. 
 
@@ -234,7 +234,7 @@ Fix:
 
 </br>
 
-#### 6. npm install fails inside container
+#### 7. npm install fails inside container
 
 Cause: Node version mismatch or corrupted cache. 
 
