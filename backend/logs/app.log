@@ -3911,3 +3911,245 @@ Question:
 ℹ️ INFO  → Inference Client response:
 ℹ️ INFO [ai-service.js] → AI response received successfully
 🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: hi
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "hi"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "hi"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: hi
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "hi"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+ℹ️ INFO [message-controller.js] → Guest messages generated in-memory
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what's up?
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what's up?"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what's up?"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: what's up?
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what's up?"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+ℹ️ INFO [message-controller.js] → Guest messages generated in-memory
+🔍 DEBUG [user-profile.js] → User found for email: hello@test.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user hello@test.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user hello@test.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [user-profile.js] → User found for email: hi@test.com ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user hi@test.com: false
+🔍 DEBUG [user-profile.js] → User found for email: hi@test.com ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user hi@test.com: false
+🔍 DEBUG [user-profile.js] → User found for email: hi@test.com ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user hi@test.com: false
+🔍 DEBUG [user-profile.js] → User found for email: hi@test.com ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user hi@test.com: false
+🔍 DEBUG [user-profile.js] → User found for email: hi@test.com ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user hi@test.com: false
+🔍 DEBUG [user-profile.js] → User found for email: hi@test.com ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user hi@test.com: false
+🔍 DEBUG [user-profile.js] → User found for email: hi@test.com ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user hi@test.com: false
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [user-profile.js] → User found for email: hi@test.com ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user hi@test.com: false
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [user-profile.js] → User found for email: hello@test.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user hello@test.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user hello@test.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a16bfd30d65b4654472a4dc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: lacus eu lectus rutrum pellentesque vitae in elit. Praesent congue libero in dolor hendrerit condimentum. Aenean nec neque eu felis eleifend blandit. Morbi volutpat nunc diam, eu efficitur orci aliquet ullamcorper. Nunc volutpat mi ipsum, sed lacinia lacus aliquam vitae. Pellentesque dapibus dignissim sem, ac cursus lacus volutpat eget. Sed libero diam, pharetra sed dui nec, mollis condimentum tellus. Vestibulum consectetur eu turpis vel convallis.  Maecenas eget feugiat neque, id pretium nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec bibendum dolor nec turpis pulvinar, ut euismod orci feugiat. Maecenas ullamcorper mauris nec nunc dignissim dignissim. Aenean sodales varius orci quis pharetra. Vivamus efficitur risus eget placerat cursus. Suspendisse sed bibendum augue. Nulla lobortis odio non urna posuere dapibus. Aenean pellentesque, sem non eleifend finibus, eros libero volutpat magna, id vestibulum libero nisi eu orci. Curabitur sem dui, lacinia tristique odio ut, facilisis sagittis lorem. Donec facilisis ornare lectus id vulputate. Sed eget eros ut nibh blandit euismod sed eu nunc. Praesent cursus elit ex, et scelerisque risus lacinia id. Nullam aliquam magna ex, vitae sodales eros lacinia eget.
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "lacus eu lectus rutrum pellentesque vitae in elit. Praesent congue libero in dolor hendrerit condimentum. Aenean nec neque eu felis eleifend blandit. Morbi volutpat nunc diam, eu efficitur orci aliquet ullamcorper. Nunc volutpat mi ipsum, sed lacinia lacus aliquam vitae. Pellentesque dapibus dignissim sem, ac cursus lacus volutpat eget. Sed libero diam, pharetra sed dui nec, mollis condimentum tellus. Vestibulum consectetur eu turpis vel convallis.  Maecenas eget feugiat neque, id pretium nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec bibendum dolor nec turpis pulvinar, ut euismod orci feugiat. Maecenas ullamcorper mauris nec nunc dignissim dignissim. Aenean sodales varius orci quis pharetra. Vivamus efficitur risus eget placerat cursus. Suspendisse sed bibendum augue. Nulla lobortis odio non urna posuere dapibus. Aenean pellentesque, sem non eleifend finibus, eros libero volutpat magna, id vestibulum libero nisi eu orci. Curabitur sem dui, lacinia tristique odio ut, facilisis sagittis lorem. Donec facilisis ornare lectus id vulputate. Sed eget eros ut nibh blandit euismod sed eu nunc. Praesent cursus elit ex, et scelerisque risus lacinia id. Nullam aliquam magna ex, vitae sodales eros lacinia eget."
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "lacus eu lectus rutrum pellentesque vitae in elit. Praesent congue libero in dolor hendrerit condimentum. Aenean nec neque eu felis eleifend blandit. Morbi volutpat nunc diam, eu efficitur orci aliquet ullamcorper. Nunc volutpat mi ipsum, sed lacinia lacus aliquam vitae. Pellentesque dapibus dignissim sem, ac cursus lacus volutpat eget. Sed libero diam, pharetra sed dui nec, mollis condimentum tellus. Vestibulum consectetur eu turpis vel convallis.  Maecenas eget feugiat neque, id pretium nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec bibendum dolor nec turpis pulvinar, ut euismod orci feugiat. Maecenas ullamcorper mauris nec nunc dignissim dignissim. Aenean sodales varius orci quis pharetra. Vivamus efficitur risus eget placerat cursus. Suspendisse sed bibendum augue. Nulla lobortis odio non urna posuere dapibus. Aenean pellentesque, sem non eleifend finibus, eros libero volutpat magna, id vestibulum libero nisi eu orci. Curabitur sem dui, lacinia tristique odio ut, facilisis sagittis lorem. Donec facilisis ornare lectus id vulputate. Sed eget eros ut nibh blandit euismod sed eu nunc. Praesent cursus elit ex, et scelerisque risus lacinia id. Nullam aliquam magna ex, vitae sodales eros lacinia eget."
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: lacus eu lectus rutrum pellentesque vitae in elit. Praesent congue libero in dolor hendrerit condimentum. Aenean nec neque eu felis eleifend blandit. Morbi volutpat nunc diam, eu efficitur orci aliquet ullamcorper. Nunc volutpat mi ipsum, sed lacinia lacus aliquam vitae. Pellentesque dapibus dignissim sem, ac cursus lacus volutpat eget. Sed libero diam, pharetra sed dui nec, mollis condimentum tellus. Vestibulum consectetur eu turpis vel convallis.  Maecenas eget feugiat neque, id pretium nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec bibendum dolor nec turpis pulvinar, ut euismod orci feugiat. Maecenas ullamcorper mauris nec nunc dignissim dignissim. Aenean sodales varius orci quis pharetra. Vivamus efficitur risus eget placerat cursus. Suspendisse sed bibendum augue. Nulla lobortis odio non urna posuere dapibus. Aenean pellentesque, sem non eleifend finibus, eros libero volutpat magna, id vestibulum libero nisi eu orci. Curabitur sem dui, lacinia tristique odio ut, facilisis sagittis lorem. Donec facilisis ornare lectus id vulputate. Sed eget eros ut nibh blandit euismod sed eu nunc. Praesent cursus elit ex, et scelerisque risus lacinia id. Nullam aliquam magna ex, vitae sodales eros lacinia eget.
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "lacus eu lectus rutrum pellentesque vitae in elit. Praesent congue libero in dolor hendrerit condimentum. Aenean nec neque eu felis eleifend blandit. Morbi volutpat nunc diam, eu efficitur orci aliquet ullamcorper. Nunc volutpat mi ipsum, sed lacinia lacus aliquam vitae. Pellentesque dapibus dignissim sem, ac cursus lacus volutpat eget. Sed libero diam, pharetra sed dui nec, mollis condimentum tellus. Vestibulum consectetur eu turpis vel convallis.  Maecenas eget feugiat neque, id pretium nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec bibendum dolor nec turpis pulvinar, ut euismod orci feugiat. Maecenas ullamcorper mauris nec nunc dignissim dignissim. Aenean sodales varius orci quis pharetra. Vivamus efficitur risus eget placerat cursus. Suspendisse sed bibendum augue. Nulla lobortis odio non urna posuere dapibus. Aenean pellentesque, sem non eleifend finibus, eros libero volutpat magna, id vestibulum libero nisi eu orci. Curabitur sem dui, lacinia tristique odio ut, facilisis sagittis lorem. Donec facilisis ornare lectus id vulputate. Sed eget eros ut nibh blandit euismod sed eu nunc. Praesent cursus elit ex, et scelerisque risus lacinia id. Nullam aliquam magna ex, vitae sodales eros lacinia eget."
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+ℹ️ INFO [message-controller.js] → Guest messages generated in-memory
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what is lorem ipsum
+ℹ️ INFO [ai-service.js] → Subject context category: general
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what is lorem ipsum"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what is lorem ipsum"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: general, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: what is lorem ipsum
+🔍 DEBUG [ai-helper.js] → Detected category: general
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in general. Please respond to the following question.
+
+Provide a helpful, informative response.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what is lorem ipsum"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+ℹ️ INFO [message-controller.js] → Guest messages generated in-memory

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import Subject from './subject.js';
+import { CHARACTER_LIMITS } from '../config/characterLimits.js';
 
 const learningMaterialSchema = new mongoose.Schema({
   owner: { 
@@ -16,10 +17,14 @@ const learningMaterialSchema = new mongoose.Schema({
   },
   topic: { 
     type: String, 
-    required: true },
+    required: true,
+    trim: true,
+    maxlength: [CHARACTER_LIMITS.MATERIAL_TOPIC_MAX_LENGTH, `Topic cannot exceed ${CHARACTER_LIMITS.MATERIAL_TOPIC_MAX_LENGTH} characters`] },
   content: { 
     type: String, 
-    required: true },
+    required: true,
+    trim: true,
+    maxlength: [CHARACTER_LIMITS.MATERIAL_CONTENT_MAX_LENGTH, `Content cannot exceed ${CHARACTER_LIMITS.MATERIAL_CONTENT_MAX_LENGTH} characters`] },
   createdAt: { 
     type: Date, 
     default: Date.now,
