@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar";
 import useSubjects from "../hooks/useSubjects";
 import apiFetch from "../utils/apiFetch";
 import Layout from "../components/ResponsiveLayout";
+import { parseApiError } from "../utils/errorParser";
 
 export default function MaterialsPage({
   authHeader,
@@ -43,9 +44,10 @@ export default function MaterialsPage({
         setMaterials(response);
       }
     } catch (error) {
-      console.error("Failed to pull materials database records:", error);
+      const errorMessage = parseApiError(error);
       if (setGlobalError)
-        setGlobalError("Failed to pull materials database records.");
+        setGlobalError("Failed to pull materials database records: " + errorMessage.summary);
+      console.error("Failed to pull materials database records:", error);
     } finally {
       setLoadingMaterials(false);
     }
@@ -113,8 +115,9 @@ export default function MaterialsPage({
 
       setFormData({ id: null, title: "", description: "" });
     } catch (error) {
+      const errorMessage = parseApiError(error);
+      if (setGlobalError) setGlobalError("Failed to save material entry: " + errorMessage.summary);
       console.error("Failed to commit materials mutation action:", error);
-      if (setGlobalError) setGlobalError("Failed to save material entry.");
     }
   };
 
@@ -151,12 +154,13 @@ export default function MaterialsPage({
         setFormData({ id: null, title: "", description: "" });
       }
     } catch (error) {
+      const errorMessage = parseApiError(error);
+      if (setGlobalError)
+        setGlobalError("Failed deleting learning material: "+ errorMessage.summary);
       console.error(
-        "Failed executing target database deletion sequence:",
+        "Failed deleting learning material:",
         error,
       );
-      if (setGlobalError)
-        setGlobalError("Failed executing deletion layout task.");
     }
   };
 

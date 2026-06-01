@@ -13,11 +13,12 @@ import useSubjects from "../hooks/useSubjects";
 import formatMath from "../utils/formatMath";
 import apiFetch from "../utils/apiFetch";
 import log from "../utils/logger";
+import { parseApiError } from "../utils/errorParser";
 
 // Create a targeted tracker for this specific file
 const logger = log.getLogger("ChatContainer");
 
-export default function Home({ authHeader, onLogout }) {
+export default function Home({ authHeader, onLogout, setGlobalError }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(true);
@@ -89,6 +90,10 @@ export default function Home({ authHeader, onLogout }) {
         setMessages([]);
         setHasNextPage(false);
         setCurrentPage(1);
+      }
+      if (setGlobalError) {
+        const errorMessage = parseApiError(error);
+        setGlobalError("Failed to fetch messages: " + errorMessage.summary);
       }
     } finally {
       setLoading(false);
@@ -165,6 +170,10 @@ export default function Home({ authHeader, onLogout }) {
       }
     } catch (error) {
       logger.error("Error posting message", error);
+      if (setGlobalError) {
+        const errorMessage = parseApiError(error);
+        setGlobalError("Failed to post message: " + errorMessage.summary);
+      }
 
       setMessages((prev) => {
         return [
