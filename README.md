@@ -254,7 +254,7 @@ Fix:
 For detailed technical information, please refer to the dedicated docs:
 |Topic	| Description	| Link
 |---------|-----------|--------|
-**Key Features** | Feature descriptions, user guide, recording of features | View Key Features
+**Key Features** | Feature descriptions, user guide, recording of features | [View Key Features](docs/USER-GUIDE.md)
 **API Reference**	| Full endpoint list, auth requirements, and examples | [View API Docs](docs/API.md)
 **Database Schema** |	ERD, field definitions, and indexing strategies |	[View DB Schema](docs/DATABASE.md)
 **Development Workflow**|	Branching strategy, PR rules, and team process	| [View Workflow](docs/WORKFLOW.md)
