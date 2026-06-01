@@ -3,8 +3,9 @@ import Sidebar from "../components/Sidebar";
 import useSubjects from "../hooks/useSubjects";
 import apiFetch from "../utils/apiFetch";
 import Layout from "../components/ResponsiveLayout";
+import { parseApiError } from "../utils/errorParser";
 
-export default function Profile({ authHeader, onLogout }) {
+export default function Profile({ authHeader, onLogout, setGlobalError }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -29,6 +30,8 @@ export default function Profile({ authHeader, onLogout }) {
         }
       }
     } catch (error) {
+      const errorMessage = parseApiError(error);
+      if (setGlobalError) setGlobalError("Failed to fetch profile data: " + errorMessage.summary);
       console.error("Error fetching profile data:", error);
     }
   };
@@ -57,6 +60,8 @@ export default function Profile({ authHeader, onLogout }) {
       fetchProfile(); // Refresh profile data after save
       setTimeout(() => setSaveSuccess(false), 3000);
     } catch (error) {
+      const errorMessage = parseApiError(error);
+      if (setGlobalError) setGlobalError("Failed to save profile data: " + errorMessage.summary);
       console.error("Error saving profile data:", error);
     }
   };

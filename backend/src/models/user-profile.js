@@ -1,17 +1,20 @@
 import mongoose from 'mongoose';
 import Subject from './subject.js';
+import { CHARACTER_LIMITS } from '../config/characterLimits.js';
 
 const userProfileSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        maxlength: [CHARACTER_LIMITS.USER_NAME_MAX_LENGTH, `Name cannot exceed ${CHARACTER_LIMITS.USER_NAME_MAX_LENGTH} characters`]
     },
     email: {
         type: String,
         required: true,
         unique: true,
         lowercase: true,
+        trim: true,
         validate: {
             validator: (email) => {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -23,7 +26,7 @@ const userProfileSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 8,
+        minlength: [CHARACTER_LIMITS.USER_PASSWORD_MIN_LENGTH, `Password must be at least ${CHARACTER_LIMITS.USER_PASSWORD_MIN_LENGTH} characters long`],
         select: false // Should be false. Don't return password in queries by default
     },
     preferredSubject: { 

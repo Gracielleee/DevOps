@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { CHARACTER_LIMITS } from '../config/characterLimits.js';
 
 const messageSchema = new mongoose.Schema({
   user: { 
@@ -9,7 +10,10 @@ const messageSchema = new mongoose.Schema({
   }, 
   text: { 
     type: String, 
-    required: true },
+    required: true,
+    trim: true,
+    maxlength: [CHARACTER_LIMITS.MESSAGE_TEXT_MAX_LENGTH, `Message too long. Maximum length is ${CHARACTER_LIMITS.MESSAGE_TEXT_MAX_LENGTH} characters`]
+  },
   isUser: { 
     type: Boolean, 
     default: true },

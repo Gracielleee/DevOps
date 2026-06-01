@@ -101,6 +101,7 @@ export default async function apiFetch(endpoint, options = {}) {
       );
       authError.status = 401;
       authError.isAuthError = true;
+      authError.data = data;
       throw authError;
     }
 
@@ -113,6 +114,7 @@ export default async function apiFetch(endpoint, options = {}) {
         data?.message || `HTTP error! status: ${response.status}`,
       );
       errorObj.status = response.status;
+      errorObj.data = data;
       throw errorObj;
     }
 
