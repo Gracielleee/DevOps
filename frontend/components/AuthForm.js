@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Toast from "./Toast";
 import { wasSessionExpired, clearSessionExpiredFlag } from "../utils/apiFetch";
+import { parseApiError } from "../utils/errorParser";
 
-export default function AuthPage({ mode, onLoginSuccess }) {
+export default function AuthPage({ mode, onLoginSuccess, setGlobalError }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -45,7 +46,10 @@ export default function AuthPage({ mode, onLoginSuccess }) {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Something went wrong during login");
+        const error = new Error(data.message || "Something went wrong during login");
+        error.status = response.status;
+        error.data = data;
+        throw error;
       }
 
       console.log("Login successful! Token payload:", data.token);
@@ -58,8 +62,17 @@ export default function AuthPage({ mode, onLoginSuccess }) {
       }, 1000);
 
     } catch (error) {
-      console.error("Login failed:", error.message);
-      setToastMsg(error.message);
+      
+      const parsed = parseApiError(error);
+      const finalMessage = parsed.summary;
+
+      console.error("Login failed:", finalMessage);
+
+      setToastMsg("Login failed: " + finalMessage);
+
+      if (setGlobalError) {
+        setGlobalError("Failed to login: " + finalMessage);
+      }
     }
     
   };
@@ -78,7 +91,10 @@ export default function AuthPage({ mode, onLoginSuccess }) {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Something went wrong during registration");
+        const error = new Error(data.message || "Registration failed");
+        error.status = response.status;
+        error.data = data;
+        throw error;
       }
 
       console.log("Registration successful! User email:", data.email);
@@ -89,9 +105,17 @@ export default function AuthPage({ mode, onLoginSuccess }) {
       }, 2000); //
 
     } catch (error) {
-      console.error("Registration failed:", error.message);
-      setToastMsg(error.message);
+    const parsed = parseApiError(error);
+    const finalMessage = parsed.summary;
+
+    console.error("Registration failed:", finalMessage);
+
+    setToastMsg("Registration failed: " + finalMessage);
+
+    if (setGlobalError) {
+      setGlobalError("Failed to register: " + finalMessage);
     }
+  }
   };
 
   return (
