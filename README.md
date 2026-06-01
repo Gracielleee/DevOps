@@ -170,6 +170,16 @@ Create the .env file as described above and fill it in.
 
 ## Common Errors & Troubleshooting
 
+
+#### 1. Terminal Error: Failed to connect to the docker API
+
+  Common Cause: Docker Desktop is not running.
+
+  Fix:
+      Ensure Docker Desktop is up and running.
+
+</br>
+
 #### 1. Error: connect ECONNREFUSED 127.0.0.1:3000
 
   Cause: The backend container hasn't started yet, or the health check failed. 
