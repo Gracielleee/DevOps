@@ -95,7 +95,7 @@ jobs:
           echo "Backend is up!"
 
       - name: Run integration test
-        run: node scripts/integration-test.js
+        run: node scripts/integration-test.mjs
 
       - name: Stop services
         run: docker compose down
