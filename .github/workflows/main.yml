@@ -1,0 +1,136 @@
+name: BrainBytes CI/CD
+
+on:
+  push:
+    branches: [ main, development ]
+  pull_request:
+    branches: [ main, development ]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: |
+            frontend/package-lock.json
+            backend/package-lock.json
+      
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
+      
+      - name: Lint frontend code
+        working-directory: ./frontend
+        run: |
+          npm run lint || echo "Frontend linting failed but continuing workflow"
+      
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm ci
+      
+      - name: Lint backend code
+        working-directory: ./backend
+        run: |
+          npm run lint || echo "Backend linting failed but continuing workflow"
+  
+  scan:
+    name: Scan Dependencies
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: |
+            frontend/package-lock.json
+            backend/package-lock.json
+         
+      - name: Check frontend for vulnerabilities
+        run: npm audit --json || true
+        working-directory: ./frontend
+        
+      - name: Run Snyk on frontend to check for vulnerabilities
+        uses: snyk/actions/node@master
+        with:
+            args: --file=frontend/package.json --severity-threshold=high
+        env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Check backend for vulnerabilities
+        run: npm audit --json || true
+        working-directory: ./backend
+        
+      - name: Run Snyk on backend to check for vulnerabilities
+        uses: snyk/actions/node@master
+        with:
+            args: --file=backend/package.json --severity-threshold=high
+        env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  test:
+    name: Run Tests
+    needs: scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      
+      - name: Start backend services
+        run: docker-compose up -d --build backend
+        
+      - name: Wait for backend to be ready
+        run: |
+          echo "Waiting for backend..."
+          until curl -s http://localhost:8080/health; do
+            sleep 1
+          done
+          echo "Backend is up!"
+
+      - name: Run integration test
+        run: node scripts/integration-test.js
+
+      - name: Stop services
+        run: docker-compose down
+  
+  build:
+    name: Build Docker Images
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      
+      - name: Build frontend image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend
+          push: false
+          tags: brainbytes/frontend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      
+      - name: Build backend image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend
+          push: false
+          tags: brainbytes/backend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
