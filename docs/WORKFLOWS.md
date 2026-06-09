@@ -25,8 +25,8 @@ To deploy manually, go to the Actions tab, select "BrainBytes Deploy", and click
 
 ## Workflow Status Badges
 
-- [![BrainBytes CI/CD](https://github.com/Gracielle/DevOps/actions/workflows/main.yml/badge.svg)](https://github.com/Gracielle/DevOps/actions/workflows/main.yml) - Shows the status of the main CI/CD pipeline
-- [![BrainBytes Deploy](https://github.com/Gracielle/DevOps/actions/workflows/deploy.yml/badge.svg)](https://github.com/Gracielle/DevOps/actions/workflows/deploy.yml) - Shows the status of the deployment workflow
+[![BrainBytes CI/CD](https://github.com/Gracielleee/DevOps/actions/workflows/main.yml/badge.svg)](https://github.com/Gracielleee/DevOps/actions/workflows/main.yml)
+[![BrainBytes Deploy](https://github.com/Gracielleee/DevOps/actions/workflows/deploy.yml/badge.svg)](https://github.com/Gracielleee/DevOps/actions/workflows/deploy.yml)
 
 ## Troubleshooting
 
