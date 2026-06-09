@@ -70,6 +70,8 @@ jobs:
     name: Run Tests
     needs: lint-and-scan
     runs-on: ubuntu-latest
+    env:
+      MONGO_URI: ${{ secrets.MONGO_URI }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
