@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
-    name: Lint Code
+  lint-and-scan:
+    name: Lint Code and Scan Dependencies
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -28,45 +28,22 @@ jobs:
         working-directory: ./frontend
         run: npm ci
       
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm ci
+      
+      # Lint code
       - name: Lint frontend code
         working-directory: ./frontend
         run: |
           npm run lint || echo "Frontend linting failed but continuing workflow"
       
-      - name: Install backend dependencies
-        working-directory: ./backend
-        run: npm ci
-      
       - name: Lint backend code
         working-directory: ./backend
         run: |
           npm run lint || echo "Backend linting failed but continuing workflow"
-  
-  scan:
-    name: Scan Dependencies
-    needs: lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '16'
-          cache: 'npm'
-          cache-dependency-path: |
-            frontend/package-lock.json
-            backend/package-lock.json
 
-      - name: Install frontend dependencies
-        working-directory: ./frontend
-        run: npm ci
-      
-      - name: Install backend dependencies
-        working-directory: ./backend
-        run: npm ci
-         
+      # Scan for vulnerabilities
       - name: Check frontend for vulnerabilities
         run: npm audit --json || true
         working-directory: ./frontend
@@ -91,7 +68,7 @@ jobs:
 
   test:
     name: Run Tests
-    needs: scan
+    needs: lint-and-scan
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -103,7 +80,16 @@ jobs:
       - name: Wait for backend to be ready
         run: |
           echo "Waiting for backend..."
-          until curl -s http://localhost:8080/health; do
+          ATTEMPTS=0
+          MAX_ATTEMPTS=30
+          
+          until curl -s http://localhost:3000/health; do
+            if [ ${ATTEMPTS} -eq ${MAX_ATTEMPTS} ]; then
+              echo "Max attempts reached! Backend failed to start."
+              exit 1
+            fi
+            
+            ATTEMPTS=$((ATTEMPTS+1))
             sleep 1
           done
           echo "Backend is up!"
