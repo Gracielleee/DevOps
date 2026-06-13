@@ -58,7 +58,7 @@ export default function AuthPage({ mode, onLoginSuccess, setGlobalError }) {
       onLoginSuccess(data.token);
 
       setTimeout(() => {
-        router.push("/"); 
+        router.push("/dashboard"); 
       }, 1000);
 
     } catch (error) {

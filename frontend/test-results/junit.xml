@@ -1,0 +1,74 @@
+<testsuites id="" name="" tests="18" failures="0" skipped="0" errors="0" time="22.696941000000002">
+<testsuite name="dashboard.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="chromium" tests="1" failures="0" skipped="0" time="2.874" errors="0">
+<testcase name="Dashboard Page › should display the welcome message for logged-in users" classname="dashboard.spec.js" time="2.874">
+</testcase>
+</testsuite>
+<testsuite name="error.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="chromium" tests="1" failures="0" skipped="0" time="2.074" errors="0">
+<testcase name="should show 404 for unknown pages" classname="error.spec.js" time="2.074">
+</testcase>
+</testsuite>
+<testsuite name="home.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="chromium" tests="1" failures="0" skipped="0" time="3.551" errors="0">
+<testcase name="has title and main heading" classname="home.spec.js" time="3.551">
+</testcase>
+</testsuite>
+<testsuite name="layout.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="chromium" tests="1" failures="0" skipped="0" time="2.362" errors="0">
+<testcase name="footer elements are visible" classname="layout.spec.js" time="2.362">
+</testcase>
+</testsuite>
+<testsuite name="login.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="chromium" tests="1" failures="0" skipped="0" time="2.638" errors="0">
+<testcase name="Login Page › should show error messages for invalid credentials" classname="login.spec.js" time="2.638">
+</testcase>
+</testsuite>
+<testsuite name="navigation.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="chromium" tests="1" failures="0" skipped="0" time="3.149" errors="0">
+<testcase name="navigation links work correctly" classname="navigation.spec.js" time="3.149">
+</testcase>
+</testsuite>
+<testsuite name="dashboard.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="firefox" tests="1" failures="0" skipped="0" time="3.105" errors="0">
+<testcase name="Dashboard Page › should display the welcome message for logged-in users" classname="dashboard.spec.js" time="3.105">
+</testcase>
+</testsuite>
+<testsuite name="error.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="firefox" tests="1" failures="0" skipped="0" time="5.367" errors="0">
+<testcase name="should show 404 for unknown pages" classname="error.spec.js" time="5.367">
+</testcase>
+</testsuite>
+<testsuite name="home.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="firefox" tests="1" failures="0" skipped="0" time="6.44" errors="0">
+<testcase name="has title and main heading" classname="home.spec.js" time="6.44">
+</testcase>
+</testsuite>
+<testsuite name="layout.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="firefox" tests="1" failures="0" skipped="0" time="4.142" errors="0">
+<testcase name="footer elements are visible" classname="layout.spec.js" time="4.142">
+</testcase>
+</testsuite>
+<testsuite name="login.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="firefox" tests="1" failures="0" skipped="0" time="5.635" errors="0">
+<testcase name="Login Page › should show error messages for invalid credentials" classname="login.spec.js" time="5.635">
+</testcase>
+</testsuite>
+<testsuite name="navigation.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="firefox" tests="1" failures="0" skipped="0" time="9.249" errors="0">
+<testcase name="navigation links work correctly" classname="navigation.spec.js" time="9.249">
+</testcase>
+</testsuite>
+<testsuite name="dashboard.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="webkit" tests="1" failures="0" skipped="0" time="4.066" errors="0">
+<testcase name="Dashboard Page › should display the welcome message for logged-in users" classname="dashboard.spec.js" time="4.066">
+</testcase>
+</testsuite>
+<testsuite name="error.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="webkit" tests="1" failures="0" skipped="0" time="2.05" errors="0">
+<testcase name="should show 404 for unknown pages" classname="error.spec.js" time="2.05">
+</testcase>
+</testsuite>
+<testsuite name="home.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="webkit" tests="1" failures="0" skipped="0" time="2.909" errors="0">
+<testcase name="has title and main heading" classname="home.spec.js" time="2.909">
+</testcase>
+</testsuite>
+<testsuite name="layout.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="webkit" tests="1" failures="0" skipped="0" time="2.014" errors="0">
+<testcase name="footer elements are visible" classname="layout.spec.js" time="2.014">
+</testcase>
+</testsuite>
+<testsuite name="login.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="webkit" tests="1" failures="0" skipped="0" time="2.05" errors="0">
+<testcase name="Login Page › should show error messages for invalid credentials" classname="login.spec.js" time="2.05">
+</testcase>
+</testsuite>
+<testsuite name="navigation.spec.js" timestamp="2026-06-13T11:24:18.188Z" hostname="webkit" tests="1" failures="0" skipped="0" time="3.37" errors="0">
+<testcase name="navigation links work correctly" classname="navigation.spec.js" time="3.37">
+</testcase>
+</testsuite>
+</testsuites>
