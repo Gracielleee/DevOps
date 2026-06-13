@@ -4153,3 +4153,630 @@ Question:
 ℹ️ INFO [ai-service.js] → AI response received successfully
 🔍 DEBUG [ai-service.js] → Valid text response from AI
 ℹ️ INFO [message-controller.js] → Guest messages generated in-memory
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+❌ ERROR  → Failed to connect to MongoDB: getaddrinfo EAI_AGAIN mongo
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+❌ ERROR  → Failed to connect to MongoDB: getaddrinfo EAI_AGAIN mongo
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+❌ ERROR  → Authentication error: jwt malformed
+❌ ERROR  → Authentication error: jwt malformed
+🔍 DEBUG [user-profile.js] → User found for email: lr.jgportillo@mmdc.mcl.edu.ph ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user lr.jgportillo@mmdc.mcl.edu.ph: false
+🔍 DEBUG [user-profile.js] → User found for email: lr.jgportillo@mmdc.mcl.edu.ph ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user lr.jgportillo@mmdc.mcl.edu.ph: false
+🔍 DEBUG [user-profile.js] → User found for email: lr.jgportillo@mmdc.mcl.edu.ph ? false
+🔍 DEBUG [user-profile.js] → Login attempt for user lr.jgportillo@mmdc.mcl.edu.ph: false
+ℹ️ INFO [user-profile.js] → User profile created successfully
+🔍 DEBUG [user-profile.js] → User found for email: lr.jgportillo@mmdc.mcl.edu.ph ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user lr.jgportillo@mmdc.mcl.edu.ph: true
+🔍 DEBUG [user-profile.js] → Login attempt for user lr.jgportillo@mmdc.mcl.edu.ph: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [message-controller.js] → No messages found from user.
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d7a7e655fef4e195a41ca
+🔍 DEBUG [user-profile.js] → User found for email: lr.jgportillo@mmdc.mcl.edu.ph ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user lr.jgportillo@mmdc.mcl.edu.ph: true
+🔍 DEBUG [user-profile.js] → Login attempt for user lr.jgportillo@mmdc.mcl.edu.ph: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [message-controller.js] → No messages found from user.
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d7a7e655fef4e195a41ca
+ℹ️ INFO [message-controller.js] → No messages found from user.
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d7a7e655fef4e195a41ca
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d7a7e655fef4e195a41ca
+ℹ️ INFO [message-controller.js] → No messages found from user.
+ℹ️ INFO [user-profile.js] → User profile created successfully
+ℹ️ INFO [user-profile.js] → User profile created successfully
+🔍 DEBUG [user-profile.js] → User found for email: gabrielportillo5120@gmail.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user gabrielportillo5120@gmail.com: false
+🔍 DEBUG [user-profile.js] → Login attempt for user gabrielportillo5120@gmail.com: false
+🔍 DEBUG [user-profile.js] → User found for email: gabrielportillo5120@gmail.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user gabrielportillo5120@gmail.com: false
+🔍 DEBUG [user-profile.js] → Login attempt for user gabrielportillo5120@gmail.com: false
+🔍 DEBUG [user-profile.js] → User found for email: gabrielportillo5120@gmail.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user gabrielportillo5120@gmail.com: false
+🔍 DEBUG [user-profile.js] → Login attempt for user gabrielportillo5120@gmail.com: false
+🔍 DEBUG [user-profile.js] → User found for email: gabrielportillo5120@gmail.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user gabrielportillo5120@gmail.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user gabrielportillo5120@gmail.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [message-controller.js] → No messages found from user.
+ℹ️ INFO [message-controller.js] → No messages found from user.
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [message-controller.js] → No messages found from user.
+ℹ️ INFO [message-controller.js] → No messages found from user.
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [message-controller.js] → No messages found from user.
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [message-controller.js] → No messages found from user.
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [message-controller.js] → No messages found from user.
+ℹ️ INFO [message-controller.js] → No messages found from user.
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [message-controller.js] → No messages found from user.
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what is evaporation?
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what is evaporation?"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what is evaporation?"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: what is evaporation?
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what is evaporation?"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: gg
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "gg"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "gg"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: gg
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "gg"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what is gg?
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what is gg?"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what is gg?"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: what is gg?
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what is gg?"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what is your name
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what is your name"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what is your name"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: what is your name
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what is your name"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: how are you
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "how are you"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "how are you"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: how are you
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "how are you"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: give me a long sample python code
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "give me a long sample python code"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "give me a long sample python code"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "example"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: example
+🔍 DEBUG [ai-helper.js] → Question: give me a long sample python code
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: example
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Provide a practical, real-world example.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "give me a long sample python code"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: again
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "again"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "again"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: again
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "again"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: give me again a long sample python
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "give me again a long sample python"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "give me again a long sample python"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "example"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: example
+🔍 DEBUG [ai-helper.js] → Question: give me again a long sample python
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: example
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Provide a practical, real-world example.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "give me again a long sample python"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what is evaporation?
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what is evaporation?"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what is evaporation?"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: what is evaporation?
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what is evaporation?"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: show me a python for loop
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "show me a python for loop"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "show me a python for loop"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "example"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: example
+🔍 DEBUG [ai-helper.js] → Question: show me a python for loop
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: example
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Provide a practical, real-world example.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "show me a python for loop"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what is the quadratic formula?
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what is the quadratic formula?"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what is the quadratic formula?"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: what is the quadratic formula?
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what is the quadratic formula?"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1d82a5655fef4e195a41cc on material 6a1d87df655fef4e195a41e3 owned by 6a1d82a5655fef4e195a41cc
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1d82a5655fef4e195a41cc on material 6a1d87df655fef4e195a41e3 owned by 6a1d82a5655fef4e195a41cc
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1d82a5655fef4e195a41cc on material 6a1d87df655fef4e195a41e3 owned by 6a1d82a5655fef4e195a41cc
+🔍 DEBUG [user-profile.js] → User found for email: gabrielportillo5120@gmail.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user gabrielportillo5120@gmail.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user gabrielportillo5120@gmail.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: dadad
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "dadad"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "dadad"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: general
+🔍 DEBUG [ai-helper.js] → Question: dadad
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: general
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Answer the question directly and helpfully.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "dadad"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+ℹ️ INFO [user-profile.js] → User profile created successfully
+🔍 DEBUG [user-profile.js] → User found for email: gabrielportillo5120@gmail.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user gabrielportillo5120@gmail.com: false
+🔍 DEBUG [user-profile.js] → Login attempt for user gabrielportillo5120@gmail.com: false
+ℹ️ INFO [user-profile.js] → User profile created successfully
+🔍 DEBUG [user-profile.js] → User found for email: gabrielportillo5120@gmail.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user gabrielportillo5120@gmail.com: false
+🔍 DEBUG [user-profile.js] → Login attempt for user gabrielportillo5120@gmail.com: false
+🔍 DEBUG [user-profile.js] → User found for email: gabrielportillo5120@gmail.com ? true
+🔍 DEBUG [user-profile.js] → Password comparison result for user gabrielportillo5120@gmail.com: true
+🔍 DEBUG [user-profile.js] → Login attempt for user gabrielportillo5120@gmail.com: true
+ℹ️ INFO  → Login successful
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile updated successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what is evaportaion?
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what is evaportaion?"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what is evaportaion?"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: what is evaportaion?
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what is evaportaion?"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: show me apython code
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "show me apython code"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "show me apython code"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "example"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: example
+🔍 DEBUG [ai-helper.js] → Question: show me apython code
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: example
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Provide a practical, real-world example.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "show me apython code"
+🔍 DEBUG [ai-service.js] → No direct match in knowledge base, proceeding to call AI
+🔍 DEBUG [ai-service.js] → Constructing complete prompt...
+🔍 DEBUG [ai-service.js] → Calling AI API with prompt...
+🔍 DEBUG  → question:
+ℹ️ INFO  → Inference Client response:
+ℹ️ INFO [ai-service.js] → AI response received successfully
+🔍 DEBUG [ai-service.js] → Valid text response from AI
+🔍 DEBUG [ai-service.js] → Starting generateResponse function
+ℹ️ INFO [ai-service.js] → Received question from user: what is the quadratic formula?
+ℹ️ INFO [ai-service.js] → Subject context category: math
+🔍 DEBUG [ai-service.js] → Generating prompt prefix...
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Starting prompt generation for question: "what is the quadratic formula?"
+🔍 DEBUG [ai-helper.js] → [detectQuestionType] Analyzing question type for: "what is the quadratic formula?"
+ℹ️ INFO [ai-helper.js] → [detectQuestionType] Detected type: "definition"
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Category: math, Question Type: definition
+🔍 DEBUG [ai-helper.js] → Question: what is the quadratic formula?
+🔍 DEBUG [ai-helper.js] → Detected category: math
+🔍 DEBUG [ai-helper.js] → Detected question type: definition
+🔍 DEBUG [ai-helper.js] → [generatePromptPrefix] Generated prompt:
+You are a helpful AI academic tutor specializing in math. Please respond to the following question.
+
+Focus on accuracy and show your work when applicable.
+
+Give a clear, concise definition with key terms highlighted.
+
+
+
+Question: 
+ℹ️ INFO [ai-helper.js] → [generatePromptPrefix] Prompt generation complete
+🔍 DEBUG [ai-service.js] → Prompt prefix generated
+🔍 DEBUG [ai-service.js] → Checking knowledge base for direct matches...
+🔍 DEBUG [ai-helper.js] → [getAnswerFromKnowledgeBase] Starting search for question: "what is the quadratic formula?"
+ℹ️ INFO [ai-service.js] → Found answer in knowledge base
+ℹ️ INFO [user-profile.js] → User profile fetched successfully: 6a1d82a5655fef4e195a41cc
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1d82a5655fef4e195a41cc on material 6a1d8c7c655fef4e195a41f1 owned by 6a1d82a5655fef4e195a41cc
+🔍 DEBUG [auth.js] → Checking ownership for user 6a1d82a5655fef4e195a41cc on material 6a1d8c7c655fef4e195a41f1 owned by 6a1d82a5655fef4e195a41cc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+🔍 DEBUG [auth.js] → Checking ownership for user 6a2a2dba30854abdf372e9b6 on material 6a2a2dba30854abdf372e9b7 owned by 6a2a2dba30854abdf372e9b6
+🔍 DEBUG [auth.js] → Checking ownership for user 6a2a2dba30854abdf372e9bc on material 6a2a2dba30854abdf372e9bd owned by 6a2a2dba30854abdf372e9bc
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+❌ ERROR  → An error occurred: Cast to ObjectId failed for value "invalid-id-format" (type string) at path "_id" for model "LearningMaterial"
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+❌ ERROR  → An error occurred: Simulated unexpected database error
+❌ ERROR  → An error occurred: Cast to ObjectId failed for value "invalid-id-format" (type string) at path "_id" for model "LearningMaterial"
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+🔍 DEBUG [auth.js] → Checking ownership for user 6a2a2dd7c008984a2c762580 on material 6a2a2dd7c008984a2c762581 owned by 6a2a2dd7c008984a2c762580
+🔍 DEBUG [auth.js] → Checking ownership for user 6a2a2dd8c008984a2c762586 on material 6a2a2dd8c008984a2c762587 owned by 6a2a2dd8c008984a2c762586
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+❌ ERROR  → An error occurred: Simulated unexpected database error
+❌ ERROR  → An error occurred: Cast to ObjectId failed for value "invalid-id-format" (type string) at path "_id" for model "LearningMaterial"
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+🔍 DEBUG [auth.js] → Checking ownership for user 6a2a2f5937bdcb23fa06a774 on material 6a2a2f5937bdcb23fa06a775 owned by 6a2a2f5937bdcb23fa06a774
+🔍 DEBUG [auth.js] → Checking ownership for user 6a2a2f5937bdcb23fa06a77a on material 6a2a2f5937bdcb23fa06a77b owned by 6a2a2f5937bdcb23fa06a77a
