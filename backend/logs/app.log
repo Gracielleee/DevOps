@@ -4155,6 +4155,24 @@ Question:
 ℹ️ INFO [message-controller.js] → Guest messages generated in-memory
 🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
 🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+❌ ERROR  → Failed to connect to MongoDB: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+ℹ️ INFO  → Server running on port 3000
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Server running on port 3000
+ℹ️ INFO  → Connected to MongoDB
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO  → Server running on port 3000
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO  → Server running on port 3000
+🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js
+🔍 DEBUG [ai-helper.js] → Knowledge base loaded successfully with 4 categories
+ℹ️ INFO  → Connected to MongoDB
+ℹ️ INFO  → Server running on port 3000
 ℹ️ INFO  → Server running on port 3000
 ❌ ERROR  → Failed to connect to MongoDB: getaddrinfo EAI_AGAIN mongo
 🔍 DEBUG  → Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js

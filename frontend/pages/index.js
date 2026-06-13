@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -235,7 +236,11 @@ export default function Home({ authHeader, onLogout, setGlobalError }) {
   }, [messages]);
 
   return (
-    <Layout authHeader={authHeader} onLogout={onLogout}>
+    <>
+      <Head>
+        <title>BrainBytes AI Tutor</title>
+      </Head>
+      <Layout authHeader={authHeader} onLogout={onLogout}>
       <h1 style={{ textAlign: "center", color: "#333" }}>
         BrainBytes AI Tutor
       </h1>
@@ -374,7 +379,8 @@ export default function Home({ authHeader, onLogout, setGlobalError }) {
         >
           {isTyping ? "Sending..." : "Send"}
         </button>
-      </form>
-    </Layout>
+        </form>
+      </Layout>
+    </>
   );
 }
