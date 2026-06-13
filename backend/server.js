@@ -1,13 +1,13 @@
+import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import { generateResponse } from './src/services/ai-service.js';
 import logger from './src/logger.js';
-import LearningMaterial from './src/models/learning-material.js';
+import userProfileRoutes from './src/routes/user-profile.js';
 import messageRoutes from './src/routes/message.js';
 import learningMaterialsRoutes from './src/routes/learning-material.js';
 import subjectRoutes from './src/routes/subject.js';
-import userProfileRoutes from './src/routes/user-profile.js';
+import errorHandler from './src/middleware/errorHandler.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,18 +25,6 @@ app.use(cors({
 // Body parser
 app.use(express.json());
 
-// TURN OFF FOR NOW
-// Basic Authentication
-// const users = {
-//   'admin': 'password'
-// };
-
-// app.use('/api', basicAuth({
-//   users,
-//   challenge: false,
-//   unauthorizedResponse: 'Unauthorized'
-// }));
-
 // Routes
 app.use('/api/materials', learningMaterialsRoutes);
 app.use('/api/subjects', subjectRoutes);
@@ -46,19 +34,21 @@ app.get('/health', (req, res) => {
 });
 app.use('/api', userProfileRoutes);
 
-// Connect to MongoDB
-mongoose.connect(MONGO_URI, {
-}).then(() => {
-  logger.info('Connected to MongoDB');
-}).catch(err => {
-  logger.error('Failed to connect to MongoDB:', err);
-});
+// Connect to MongoDB and Start server
+const startServer = async () => {
+    try {
+        await mongoose.connect(MONGO_URI);
+        logger.info('Connected to MongoDB');
+        
+        // Error handling middleware
+        app.use(errorHandler);
 
-// Error handling middleware (should be last)
-import errorHandler from './src/middleware/errorHandler.js';
-app.use(errorHandler);
+        app.listen(PORT, () => {
+            logger.info(`Server running on port ${PORT}`);
+        });
+    } catch (err) {
+        logger.error('Failed to connect to MongoDB or start server:', err);
+    }
+};
 
-// Start the server
-app.listen(PORT, () => {
-  logger.info(`Server running on port ${PORT}`);
-});
+startServer();
