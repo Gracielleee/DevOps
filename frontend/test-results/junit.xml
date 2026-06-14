@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="25" failures="0" errors="0" time="8.893">
+  <testsuite name="Frontend Toast Tests" errors="0" failures="0" skipped="0" timestamp="2026-06-14T14:02:02" time="3.63" tests="4">
+    <testcase classname="Frontend Toast Tests returns empty element context when message prop is undefined" name="Frontend Toast Tests returns empty element context when message prop is undefined" time="0.1">
+    </testcase>
+    <testcase classname="Frontend Toast Tests renders dynamic warning symbol design layout for error alerts" name="Frontend Toast Tests renders dynamic warning symbol design layout for error alerts" time="0.077">
+    </testcase>
+    <testcase classname="Frontend Toast Tests invokes onClose click action handler when clicking cancel icon" name="Frontend Toast Tests invokes onClose click action handler when clicking cancel icon" time="0.134">
+    </testcase>
+    <testcase classname="Frontend Toast Tests automatically routes close action event after running for 4 seconds" name="Frontend Toast Tests automatically routes close action event after running for 4 seconds" time="0.018">
+    </testcase>
+  </testsuite>
+  <testsuite name="Root App Architecture Tests" errors="0" failures="0" skipped="0" timestamp="2026-06-14T14:02:02" time="3.654" tests="3">
+    <testcase classname="Root App Architecture Tests reads token on mount and distributes bearer credentials" name="Root App Architecture Tests reads token on mount and distributes bearer credentials" time="0.109">
+    </testcase>
+    <testcase classname="Root App Architecture Tests handles login success by updating storage and credentials" name="Root App Architecture Tests handles login success by updating storage and credentials" time="0.182">
+    </testcase>
+    <testcase classname="Root App Architecture Tests intercepts bubbling errors and displays global toast alert" name="Root App Architecture Tests intercepts bubbling errors and displays global toast alert" time="0.075">
+    </testcase>
+  </testsuite>
+  <testsuite name="Frontend Component Tests - Member #1" errors="0" failures="0" skipped="0" timestamp="2026-06-14T14:02:01" time="3.88" tests="4">
+    <testcase classname="Frontend Component Tests - Member #1 renders component correctly and displays placeholder" name="Frontend Component Tests - Member #1 renders component correctly and displays placeholder" time="0.149">
+    </testcase>
+    <testcase classname="Frontend Component Tests - Member #1 allows users to type and updates input field value" name="Frontend Component Tests - Member #1 allows users to type and updates input field value" time="0.047">
+    </testcase>
+    <testcase classname="Frontend Component Tests - Member #1 calls onSubmit handler with input data when send button is clicked" name="Frontend Component Tests - Member #1 calls onSubmit handler with input data when send button is clicked" time="0.242">
+    </testcase>
+    <testcase classname="Frontend Component Tests - Member #1 displays validation error if user tries to submit an empty field" name="Frontend Component Tests - Member #1 displays validation error if user tries to submit an empty field" time="0.055">
+    </testcase>
+  </testsuite>
+  <testsuite name="Main Core Index Page Chat Tests" errors="0" failures="0" skipped="0" timestamp="2026-06-14T14:02:02" time="3.78" tests="1">
+    <testcase classname="Main Core Index Page Chat Tests renders chatbot layout platform interface successfully" name="Main Core Index Page Chat Tests renders chatbot layout platform interface successfully" time="0.275">
+    </testcase>
+  </testsuite>
+  <testsuite name="Profile Operations Suite" errors="0" failures="0" skipped="0" timestamp="2026-06-14T14:02:02" time="3.935" tests="2">
+    <testcase classname="Profile Operations Suite disables inputs when a guest user views profile settings" name="Profile Operations Suite disables inputs when a guest user views profile settings" time="0.335">
+    </testcase>
+    <testcase classname="Profile Operations Suite performs profile information data saves using PUT requests" name="Profile Operations Suite performs profile information data saves using PUT requests" time="0.263">
+    </testcase>
+  </testsuite>
+  <testsuite name="Frontend Sidebar Tests" errors="0" failures="0" skipped="0" timestamp="2026-06-14T14:02:02" time="4.068" tests="3">
+    <testcase classname="Frontend Sidebar Tests renders log in option link in guest view" name="Frontend Sidebar Tests renders log in option link in guest view" time="0.295">
+    </testcase>
+    <testcase classname="Frontend Sidebar Tests renders sign out panel button in authenticated state view" name="Frontend Sidebar Tests renders sign out panel button in authenticated state view" time="0.07">
+    </testcase>
+    <testcase classname="Frontend Sidebar Tests triggers onLogout property when sign out link is pressed" name="Frontend Sidebar Tests triggers onLogout property when sign out link is pressed" time="0.049">
+    </testcase>
+  </testsuite>
+  <testsuite name="Frontend AuthForm Tests" errors="0" failures="0" skipped="0" timestamp="2026-06-14T14:02:02" time="4.141" tests="4">
+    <testcase classname="Frontend AuthForm Tests renders login form correctly with fields and placeholder text" name="Frontend AuthForm Tests renders login form correctly with fields and placeholder text" time="0.405">
+    </testcase>
+    <testcase classname="Frontend AuthForm Tests allows user to input values into login fields" name="Frontend AuthForm Tests allows user to input values into login fields" time="0.055">
+    </testcase>
+    <testcase classname="Frontend AuthForm Tests successfully processes login and invokes success properties" name="Frontend AuthForm Tests successfully processes login and invokes success properties" time="0.188">
+    </testcase>
+    <testcase classname="Frontend AuthForm Tests handles API errors gracefully and displays custom message notification" name="Frontend AuthForm Tests handles API errors gracefully and displays custom message notification" time="0.119">
+    </testcase>
+  </testsuite>
+  <testsuite name="Dashboard Telemetry Performance Tests" errors="0" failures="0" skipped="0" timestamp="2026-06-14T14:02:01" time="4.217" tests="2">
+    <testcase classname="Dashboard Telemetry Performance Tests renders login warning layout element for guest users" name="Dashboard Telemetry Performance Tests renders login warning layout element for guest users" time="0.435">
+    </testcase>
+    <testcase classname="Dashboard Telemetry Performance Tests displays live activity data streams upon successful API response load" name="Dashboard Telemetry Performance Tests displays live activity data streams upon successful API response load" time="0.213">
+    </testcase>
+  </testsuite>
+  <testsuite name="Materials Repository CRUD Suite" errors="0" failures="0" skipped="0" timestamp="2026-06-14T14:02:02" time="4.11" tests="2">
+    <testcase classname="Materials Repository CRUD Suite pulls and populates existing database entries safely" name="Materials Repository CRUD Suite pulls and populates existing database entries safely" time="0.349">
+    </testcase>
+    <testcase classname="Materials Repository CRUD Suite commits structural POST payloads when form executes completely" name="Materials Repository CRUD Suite commits structural POST payloads when form executes completely" time="0.166">
+    </testcase>
+  </testsuite>
+</testsuites>

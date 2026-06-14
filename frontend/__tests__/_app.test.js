@@ -1,6 +1,17 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "../pages/_app";
 
+// Mock Next.js router to fix "NextRouter was not mounted" error
+jest.mock("next/router", () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    pathname: "/",
+    route: "/",
+    query: {},
+    asPath: "/",
+  }),
+}));
+
 const DummyComponent = ({ authHeader, onLoginSuccess, setGlobalError }) => (
   <div>
     <div data-testid="auth-state">{authHeader || "No Token"}</div>

@@ -8,7 +8,8 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['@testing-library/jest-dom'],
-  testPathIgnorePatterns: ['/node_modules/', '/.next/'],
+  // Added '/tests/' here so Jest ignores the Playwright browser tests folder completely
+  testPathIgnorePatterns: ['/node_modules/', '/.next/', '/tests/'],
   reporters: [
     'default',
     ['jest-junit', { outputDirectory: './test-results', outputName: 'junit.xml' }]
