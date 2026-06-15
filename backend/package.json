@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
-    "lint": "eslint . --config ../eslint.config.mjs"
+    "lint": "eslint . --config eslint.config.mjs"
   },
   "jest": {
     "testEnvironment": "node",
