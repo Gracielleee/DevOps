@@ -21,12 +21,12 @@ jobs:
           node-version: "24"
           cache: npm
           cache-dependency-path: |
-            frontend/package-lock.json
-            backend/package-lock.json
+            ./frontend/package-lock.json
+            ./backend/package-lock.json
 
       - name: Install frontend dependencies
         working-directory: ./frontend
-        run: npm install
+        run: npm ci
 
       - name: Install backend dependencies
         working-directory: ./backend
@@ -34,11 +34,11 @@ jobs:
 
       - name: Lint frontend
         working-directory: ./frontend
-        run: npm run lint -- --resolve-plugins-relative-to .
+        run: npm run lint
 
       - name: Lint backend
         working-directory: ./backend
-        run: npm run lint -- --resolve-plugins-relative-to .
+        run: npm run lint
 
       - name: Frontend audit
         working-directory: ./frontend
