@@ -1,10 +1,11 @@
 import express from 'express';
 import messageController from '../controllers/message-controller.js';
-import { authenticate, optionalAuthentication } from '../middleware/auth.js';
+import { optionalAuthentication } from '../middleware/auth.js';
 import { validationResult } from 'express-validator';
 import {
     validateMessageCreation,
 } from '../middleware/validation/messageValidation.js';
+import logger from '../config/logger.js';
 
 const router = express.Router();
 const fileName = 'message.js';

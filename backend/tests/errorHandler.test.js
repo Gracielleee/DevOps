@@ -1,7 +1,6 @@
 import { jest } from '@jest/globals';
 import request from 'supertest';
 import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
 import app from '../app.js';
 import User from '../src/models/user-profile.js';
 import Subject from '../src/models/subject.js';

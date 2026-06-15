@@ -1,11 +1,11 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import Profile from "../pages/profile";
-import apiFetch from "../utils/apiFetch";
-import useSubjects from "../hooks/useSubjects";
+import Profile from "pages/profile";
+import apiFetch from "utils/apiFetch";
+import useSubjects from "hooks/useSubjects";
 
-jest.mock("../components/Sidebar", () => { return function Mock() { return <div>Sidebar</div>; }; });
-jest.mock("../utils/apiFetch", () => jest.fn());
-jest.mock("../hooks/useSubjects", () => jest.fn());
+jest.mock("components/Sidebar", () => { return function Mock() { return <div>Sidebar</div>; }; });
+jest.mock("utils/apiFetch", () => jest.fn());
+jest.mock("hooks/useSubjects", () => jest.fn());
 
 describe("Profile Operations Suite", () => {
   beforeEach(() => {

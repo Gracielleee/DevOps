@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import Toast from "../components/Toast";
+import Toast from "components/Toast";
 
 describe("Frontend Toast Tests", () => {
   beforeEach(() => { jest.useFakeTimers(); });

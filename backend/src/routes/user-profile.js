@@ -1,7 +1,7 @@
 import express from 'express';
 import User from '../models/user-profile.js';
 import Subject from '../models/subject.js';
-import logger from '../logger.js';
+import logger from '../config/logger.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { authenticate } from '../middleware/auth.js';
@@ -49,7 +49,7 @@ router.post('/register', validateRegistration, async (req, res) => {
 
         await newUserProfile.save();
 
-        logger.info('User profile created successfully', { file: fileName, userId: newUserProfile._id });
+        logger.info('User profile created successfully', { file: fileName });
 
         res.status(201).json({
             message: 'User profile created successfully',
@@ -70,17 +70,12 @@ router.post('/login', validateLogin, async (req, res) => {
             return res.status(400).json({ errors: errors.array() });
         }
         const { email, password } = req.body;
-        // The original check for email and password presence can be removed
-        // as express-validator now handles it with notEmpty()
         const user = await User.findOne({ email }).select('+password');
-        logger.debug(`User found for email: ${email} ? ${!!user}`, { file: fileName });
 
         let passwordMatch = false;
         if (user && user.password) {
             passwordMatch = await bcrypt.compare(password, user.password);
-            logger.debug(`Password comparison result for user ${email}: ${passwordMatch}`, { file: fileName });
         }
-        logger.debug(`Login attempt for user ${email}: ${!!user && passwordMatch}`, { file: fileName });
         if (!user || !passwordMatch) {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
