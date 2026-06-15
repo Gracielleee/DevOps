@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import AuthForm from "../components/AuthForm";
+import AuthForm from "components/AuthForm";
 
 process.env.NEXT_PUBLIC_API_URL = "http://localhost:5000/api/";
 
@@ -8,7 +8,7 @@ jest.mock("next/router", () => ({
   useRouter() { return { push: mockPush }; },
 }));
 
-jest.mock("../components/Toast", () => {
+jest.mock("components/Toast", () => {
   return function MockToast({ message }) { 
     return <div data-testid="mock-toast">{message}</div>; 
   };
@@ -50,6 +50,8 @@ describe("Frontend AuthForm Tests", () => {
       })
     );
 
+    const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+
     render(<AuthForm mode="login" onLoginSuccess={mockLoginSuccess} />);
     
     const emailInput = screen.getByText("Email Address").nextSibling;
@@ -63,10 +65,11 @@ describe("Frontend AuthForm Tests", () => {
       expect(mockLoginSuccess).toHaveBeenCalledWith("mocked-jwt-token-xyz");
       expect(screen.getByTestId("mock-toast")).toHaveTextContent(/login successful/i);
     });
+
+    logSpy.mockRestore();
   });
 
   test("handles API errors gracefully and displays custom message notification", async () => {
-    // Force a complete clearance of anything holding onto fetchMock pipelines
     fetchMock.mockClear();
     
     fetchMock.mockImplementationOnce(() =>
@@ -75,6 +78,8 @@ describe("Frontend AuthForm Tests", () => {
         json: () => Promise.resolve({ message: "Invalid credentials provided" }),
       })
     );
+
+    const errorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
 
     render(<AuthForm mode="login" onLoginSuccess={jest.fn()} />);
     
@@ -88,6 +93,10 @@ describe("Frontend AuthForm Tests", () => {
     await waitFor(() => {
       expect(screen.getByTestId("mock-toast")).toHaveTextContent("Invalid credentials provided");
     });
+
+    expect(errorSpy).toHaveBeenCalledWith("Login failed:", "Invalid credentials provided");
+
+    errorSpy.mockRestore();
   });
 });
 

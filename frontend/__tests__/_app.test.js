@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import App from "../pages/_app";
+import App from "pages/_app";
 
 // Mock Next.js router to fix "NextRouter was not mounted" error
 jest.mock("next/router", () => ({
@@ -20,7 +20,7 @@ const DummyComponent = ({ authHeader, onLoginSuccess, setGlobalError }) => (
   </div>
 );
 
-jest.mock("../components/Toast", () => {
+jest.mock("components/Toast", () => {
   return function MockToast({ message }) {
     return <div data-testid="global-toast">{message}</div>;
   };

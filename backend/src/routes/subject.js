@@ -1,6 +1,6 @@
 import express from 'express';
 import Subject from '../models/subject.js';
-import logger from '../logger.js';
+import logger from '../config/logger.js';
 import { validationResult } from 'express-validator';
 import {
     validateSubjectCreation,

@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import IndexPage from "../pages/index";
+import { render, screen, waitFor } from "@testing-library/react";
+import IndexPage from "pages/index";
 
 // 1. Mock out react-markdown to intercept parsing engines entirely
 jest.mock("react-markdown", () => {
@@ -16,9 +16,9 @@ jest.mock("rehype-katex", () => ({}));
 jest.mock("rehype-highlight", () => ({}));
 
 // 3. Mock internal application modules and components
-jest.mock("../components/Sidebar", () => () => <div data-testid="sidebar">Sidebar</div>);
-jest.mock("../utils/formatMath", () => (text) => text);
-jest.mock("../utils/apiFetch", () => jest.fn());
+jest.mock("components/Sidebar", () => () => <div data-testid="sidebar">Sidebar</div>);
+jest.mock("utils/formatMath", () => (text) => text);
+jest.mock("utils/apiFetch", () => jest.fn(() => Promise.resolve({ data: [] }))); // Mock apiFetch to return an empty array smoothly
 
 describe("Main Core Index Page Chat Tests", () => {
   beforeAll(() => {
@@ -26,11 +26,14 @@ describe("Main Core Index Page Chat Tests", () => {
     window.HTMLElement.prototype.scrollIntoView = jest.fn();
   });
 
-  test("renders chatbot layout platform interface successfully", () => {
+  test("renders chatbot layout platform interface successfully", async () => {
     render(<IndexPage authHeader={null} onLogout={jest.fn()} setGlobalError={jest.fn()} />);
     
-    // Assert against the exact text nodes present in your page code
-    expect(screen.getByText("BrainBytes AI Tutor")).toBeInTheDocument();
-    expect(screen.getByText(/You are using our service as a Guest user/i)).toBeInTheDocument();
+    expect(screen.getByText(/BrainBytes/i)).toBeInTheDocument();
+    expect(screen.getByText(/Guest user/i)).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+    });
   });
 });

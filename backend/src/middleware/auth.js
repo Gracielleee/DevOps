@@ -2,7 +2,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/user-profile.js';
 import LearningMaterial from '../models/learning-material.js';
-import logger from '../logger.js';
+import logger from '../config/logger.js';
 
 const authenticate = async (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -45,7 +45,6 @@ const isMaterialOwner = async (req, res, next) => {
         if (!material) return res.status(404).json({ message: 'Material not found' });
 
         // Validate Ownership
-        logger.debug(`Checking ownership for user ${req.user.id} on material ${material._id} owned by ${material.owner}`, { file: 'auth.js' });
         if (material.owner.toString() !== req.user.id.toString()) {
             return res.status(403).json({ message: 'Forbidden' });
         }

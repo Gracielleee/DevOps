@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import ChatInput from '../components/ChatInput';
+import ChatInput from 'components/ChatInput';
 
 describe('Frontend Component Tests - Member #1', () => {
 

@@ -1,19 +1,22 @@
-const nextJest = require('next/jest');
+const nextJest = require("next/jest");
 
 // This connects Jest to your Next.js project root so it understands your React components
 const createJestConfig = nextJest({
-  dir: './',
+  dir: "./",
 });
 
 const customJestConfig = {
-  testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['@testing-library/jest-dom'],
-  // Added '/tests/' here so Jest ignores the Playwright browser tests folder completely
-  testPathIgnorePatterns: ['/node_modules/', '/.next/', '/tests/'],
+  moduleDirectories: ["node_modules", "<rootDir>/", "<rootDir>/src"],
+  testEnvironment: "jsdom",
+  setupFilesAfterEnv: ["@testing-library/jest-dom"],
+  testPathIgnorePatterns: ["/node_modules/", "/.next/", "/e2e/"],
   reporters: [
-    'default',
-    ['jest-junit', { outputDirectory: './test-results', outputName: 'junit.xml' }]
-  ]
+    "default",
+    [
+      "jest-junit",
+      { outputDirectory: "./test-results", outputName: "junit.xml" },
+    ],
+  ],
 };
 
 module.exports = createJestConfig(customJestConfig);

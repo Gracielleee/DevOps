@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator';
-import logger from '../logger.js';
+import logger from '../config/logger.js';
 
 const errorHandler = (err, req, res, next) => {
   logger.error('An error occurred:', err, { file: 'errorHandler.js', path: req.path });
