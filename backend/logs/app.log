@@ -1,0 +1,58 @@
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: hi"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: general"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"hi\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"hi\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: general, Question Type: general"}
+{"file":"ai-helper.js","level":"debug","message":"Question: hi"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: general"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: general"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in general. Please respond to the following question.\n\nProvide a helpful, informative response.\n\nAnswer the question directly and helpfully.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"hi\""}
+{"file":"ai-service.js","level":"info","message":"Found answer in knowledge base"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: what is calculus"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: math"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"what is calculus\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"what is calculus\""}
+{"file":"ai-helper.js","level":"info","message":"[detectQuestionType] Detected type: \"definition\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: math, Question Type: definition"}
+{"file":"ai-helper.js","level":"debug","message":"Question: what is calculus"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: math"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: definition"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in math. Please respond to the following question.\n\nFocus on accuracy and show your work when applicable.\n\nGive a clear, concise definition with key terms highlighted.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"what is calculus\""}
+{"file":"ai-service.js","level":"debug","message":"No direct match in knowledge base, proceeding to call AI"}
+{"file":"ai-service.js","level":"debug","message":"Constructing complete prompt..."}
+{"file":"ai-service.js","level":"debug","message":"Calling AI API with prompt..."}
+{"level":"debug","message":"question:"}
+{"content":"Calculus is a branch of mathematics that deals with the study of continuous change. It is divided into two main branches: differential calculus and integral calculus.\n\n**Key Terms:**\n\n- **Continuous Change:** The concept of change that occurs smoothly and without abrupt interruptions.\n- **Differential Calculus:** The branch of calculus that focuses on rates of change and slopes of curves. It involves finding the derivative of a function, which describes the instantaneous rate of change at any point.\n- **Integral Calculus:** The branch of calculus that focuses on accumulation of quantities and areas under and between curves. It involves finding the integral of a function, which can be used to calculate the total amount of a quantity that accumulates over a period of time or space.\n\nCalculus is fundamental in many fields, including physics, engineering, economics, and biology, where it is used to model and analyze systems that change over time or space.","level":"info","message":"Inference Client response:","role":"assistant","tool_calls":[]}
+{"file":"ai-service.js","level":"info","message":"AI response received successfully"}
+{"file":"ai-service.js","level":"debug","message":"Valid text response from AI"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: hih"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: general"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"hih\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"hih\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: general, Question Type: general"}
+{"file":"ai-helper.js","level":"debug","message":"Question: hih"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: general"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: general"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in general. Please respond to the following question.\n\nProvide a helpful, informative response.\n\nAnswer the question directly and helpfully.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"hih\""}
+{"file":"ai-service.js","level":"info","message":"Found answer in knowledge base"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}

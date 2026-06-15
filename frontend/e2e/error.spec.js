@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 test('should show 404 for unknown pages', async ({ page }) => {
   // Navigate to a route likely to be 404
