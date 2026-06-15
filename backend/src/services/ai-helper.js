@@ -93,7 +93,7 @@ function detectSubjectCategory(question) {
   const isMath = lowerQuestion.includes('calculate') || 
                  lowerQuestion.includes('math') ||
                  lowerQuestion.includes('1+1') ||
-                 /[+\-*\/=]/.test(lowerQuestion) ||
+                 /[+\-*/=]/.test(lowerQuestion) ||
                  /\d+/.test(lowerQuestion);
   
   const isHistory = lowerQuestion.includes('history') ||
@@ -122,8 +122,6 @@ function detectSubjectCategory(question) {
     category = 'science';
   }
   logger.info(`[detectSubjectCategory] Final category: "${category}"`, { file: fileName });
-  return category;
-
   return category;
 }
 
@@ -178,7 +176,6 @@ function generatePromptPrefix(question, subjectCategory = 'general') {
 // More detailed fallback responses when the API call fails
 function getBackupResponse(category, question) {
   logger.info(`[getBackupResponse] Generating backup response for category: "${category}", question: "${question}"`, { file: fileName });
-  const lowerQuestion = question.toLowerCase();
   
   // Handle science category
   if (category === 'science') {

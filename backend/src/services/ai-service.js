@@ -1,5 +1,4 @@
 import { getResponseFromAI } from "./ai-client-text-gen.js";
-import { analyzeSentiment } from "./ai-client-sentiment-analysis.js";
 import { getAnswerFromKnowledgeBase, generatePromptPrefix, getBackupResponse } from "./ai-helper.js";
 import logger from "../config/logger.js";
 
