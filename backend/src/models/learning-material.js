@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Subject from './subject.js';
 import { CHARACTER_LIMITS } from '../config/characterLimits.js';
 
 const learningMaterialSchema = new mongoose.Schema({

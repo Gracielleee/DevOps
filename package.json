@@ -1,0 +1,26 @@
+{
+  "name": "brainbytes-multi-container",
+  "version": "1.0.0",
+  "description": "BrainBytes is an AI-powered tutoring platform designed to provide accessible academic assistance to Filipino students. This project implements the platform using modern **DevOps** practices and containerization.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gracielleee/DevOps.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Gracielleee/DevOps/issues"
+  },
+  "homepage": "https://github.com/Gracielleee/DevOps#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.9.3"
+  }
+}

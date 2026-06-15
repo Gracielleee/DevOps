@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import { CHARACTER_LIMITS } from '../config/characterLimits.js';
 
+// src/models/subject.js
+
 const subjectSchema = new mongoose.Schema({
     name: {
         type: String,

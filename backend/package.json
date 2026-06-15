@@ -6,7 +6,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
+    "lint": "eslint . --config ../eslint.config.mjs"
   },
   "jest": {
     "testEnvironment": "node",
@@ -41,6 +42,9 @@
     "winston": "^3.19.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "eslint": "^9.39.4",
+    "globals": "^17.6.0",
     "jest": "^30.4.2",
     "jest-junit": "^17.0.0",
     "mongodb-memory-server": "^11.2.0",

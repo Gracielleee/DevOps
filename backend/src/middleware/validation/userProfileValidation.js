@@ -1,4 +1,4 @@
-import { body, param } from 'express-validator';
+import { body } from 'express-validator';
 import mongoose from 'mongoose';
 import { CHARACTER_LIMITS } from '../../config/characterLimits.js';
 

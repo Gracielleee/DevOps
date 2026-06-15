@@ -1,7 +1,6 @@
 import express from 'express';
 import LearningMaterial from '../models/learning-material.js';
-import logger from '../logger.js';
-import message from '../models/message.js';
+import logger from '../config/logger.js';
 import {authenticate, isMaterialOwner} from '../middleware/auth.js';
 import { validationResult } from 'express-validator';
 import {
