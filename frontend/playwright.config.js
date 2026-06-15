@@ -9,8 +9,13 @@ module.exports = defineConfig({
   ],
   
   use: {
-    baseURL: process.env.BASE_URL || 'http://localhost:8080',
+    baseURL: process.env.BASE_URL || 'http://localhost:3001',
     trace: 'on-first-retry',
   },
-  
+  webServer: {
+    command: 'npm run build && npm run start',
+    url: 'http://localhost:3001',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000, 
+  },
 });
