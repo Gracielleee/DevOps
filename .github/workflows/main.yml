@@ -112,7 +112,7 @@ jobs:
         uses: dorny/test-reporter@v1
         with:
           name: Frontend Unit Tests
-          path: frontend/junit.xml
+          path: frontend/test-results/junit.xml
           reporter: jest-junit
 
       - name: Run E2E Tests
