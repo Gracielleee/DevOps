@@ -56,3 +56,41 @@
 {"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"hih\""}
 {"file":"ai-service.js","level":"info","message":"Found answer in knowledge base"}
 {"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: hii"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: general"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"hii\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"hii\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: general, Question Type: general"}
+{"file":"ai-helper.js","level":"debug","message":"Question: hii"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: general"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: general"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in general. Please respond to the following question.\n\nProvide a helpful, informative response.\n\nAnswer the question directly and helpfully.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"hii\""}
+{"file":"ai-service.js","level":"info","message":"Found answer in knowledge base"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
+{"level":"debug","message":"Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js"}
+{"file":"ai-helper.js","level":"debug","message":"Knowledge base loaded successfully with 4 categories"}
+{"level":"info","message":"Server running on port 3000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: hi"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: general"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"hi\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"hi\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: general, Question Type: general"}
+{"file":"ai-helper.js","level":"debug","message":"Question: hi"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: general"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: general"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in general. Please respond to the following question.\n\nProvide a helpful, informative response.\n\nAnswer the question directly and helpfully.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"hi\""}
+{"file":"ai-service.js","level":"info","message":"Found answer in knowledge base"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
