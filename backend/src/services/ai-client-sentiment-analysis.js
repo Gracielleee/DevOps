@@ -1,5 +1,5 @@
 import { InferenceClient } from '@huggingface/inference';
-import logger from "../logger.js";
+import logger from "../config/logger.js";
 
 const client = new InferenceClient(process.env.HF_TOKEN, { timeout: 30 });
 

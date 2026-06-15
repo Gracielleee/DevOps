@@ -2,7 +2,7 @@ import Message from "../models/message.js";
 import Subject from "../models/subject.js";
 import generateResponse from "../services/ai-service.js";
 import { subjectNameToCategory } from "../services/ai-helper.js";
-import logger from "../logger.js";
+import logger from "../config/logger.js";
 
 const fileName = "message-controller.js";
 

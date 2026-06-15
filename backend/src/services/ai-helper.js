@@ -1,6 +1,6 @@
 import fs from 'fs';
 import yaml from 'js-yaml';
-import logger from '../logger.js';
+import logger from '../config/logger.js';
 
 const knowledgeBasePath = process.env.KNOWLEDGE_BASE_PATH || './knowledge-base.yaml';
 
