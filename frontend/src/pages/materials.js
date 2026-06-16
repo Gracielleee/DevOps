@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import Sidebar from "../components/Sidebar";
 import useSubjects from "../hooks/useSubjects";
 import apiFetch from "../utils/apiFetch";
 import Layout from "../components/ResponsiveLayout";
