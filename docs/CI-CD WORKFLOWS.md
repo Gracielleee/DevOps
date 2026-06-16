@@ -10,7 +10,7 @@ This document explains the Continuous Integration and Continuous Deployment (CI/
 
 **Stages**:
 1. **Lint and Scan**: Checks code quality with ESLint and scans vulnerabilites with Snyk
-2. **Test**: Runs integration test
+2. **Test**: Runs comprehensive testing. See our [testing documentation](TESTING.md) for more details.
 3. **Build**: Builds Docker images and verifies Docker Compose configuration
 
 **Manual Execution**:
@@ -27,6 +27,7 @@ To deploy manually, go to the Actions tab, select "BrainBytes Deploy", and click
 
 [![BrainBytes CI/CD](https://github.com/Gracielleee/DevOps/actions/workflows/main.yml/badge.svg)](https://github.com/Gracielleee/DevOps/actions/workflows/main.yml)
 [![BrainBytes Deploy](https://github.com/Gracielleee/DevOps/actions/workflows/deploy.yml/badge.svg)](https://github.com/Gracielleee/DevOps/actions/workflows/deploy.yml)
+
 
 ## Troubleshooting
 
