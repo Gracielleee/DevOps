@@ -30,7 +30,7 @@ jobs:
 
       - name: Install backend dependencies
         working-directory: ./backend
-        run: npm install
+        run: npm ci
 
       - name: Lint frontend
         working-directory: ./frontend

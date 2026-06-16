@@ -9,7 +9,6 @@ import rehypeHighlight from "rehype-highlight";
 import "katex/dist/katex.min.css";
 
 import Layout from "../components/ResponsiveLayout";
-import Sidebar from "../components/Sidebar";
 import useSubjects from "../hooks/useSubjects";
 import formatMath from "../utils/formatMath";
 import apiFetch from "../utils/apiFetch";
