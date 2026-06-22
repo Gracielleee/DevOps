@@ -1,42 +1,67 @@
-# .github/workflows/deploy.yml
 name: BrainBytes Deploy
 
-
 on:
-  push:
-    branches: [main, development]
+  workflow_run:
+    workflows: ["BrainBytes CI/CD"]
+    types:
+      - completed
   workflow_dispatch:
 
 jobs:
   deploy:
-    name: Deploy to Test Environment
+    name: Deploy Stack to Test Environment
     runs-on: ubuntu-latest
     environment: test
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
       
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '16'
-      
-      - name: Build Docker images
-        run: docker compose build
-      
-      - name: Prepare deployment
+      - name: Trigger Backend Render Deployment
         run: |
-          echo "DEPLOY_TIME=$(date)" >> $GITHUB_ENV
-          echo "DEPLOY_SHA=${{ github.sha }}" >> $GITHUB_ENV
+          echo "Triggering backend service build..."
+          curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}"
       
-      - name: Deploy to test environment
+      - name: Trigger Frontend Render Deployment
         run: |
-          echo "Deploying to test environment..."
-          echo "This is a placeholder for your actual deployment script"
-          echo "In future weeks, this will deploy to Oracle Cloud"
+          echo "Triggering frontend service build..."
+          curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}"
       
-      - name: Verify deployment
+      - name: Verify Live Backend Deployment
         run: |
-          echo "Verifying deployment..."
-          curl -s http://localhost:3000/health || echo "Service not available yet"
+          echo "Waiting for Backend to spin up on Render..."
+
+          # Retry every 30 sec for 12 times = 6min total
+          for i in {1..12}; do 
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://brainbytes-zovh.onrender.com/health || echo "000")
+            
+            if [ "$STATUS" = "200" ]; then
+              echo "Success! The backend is live and healthy."
+              exit 0
+            fi
+            
+            echo "Backend Attempt $i: Status is $STATUS. Waiting 30 seconds..."
+            sleep 30
+          done
+          
+          echo "Error: Backend failed to start within 6 minutes."
+          exit 1
+
+      - name: Verify Live Frontend Deployment
+        run: |
+          echo "Waiting for Frontend to spin up on Render..."
+          for i in {1..12}; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://onrender.com || echo "000")
+            
+            if [ "$STATUS" = "200" ]; then
+              echo "Success! The frontend is live and healthy."
+              exit 0
+            fi
+            
+            echo "Frontend Attempt $i: Status is $STATUS. Waiting 30 seconds..."
+            sleep 30
+          done
+          
+          echo "Error: Frontend failed to start within 6 minutes."
+          exit 1
