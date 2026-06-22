@@ -52,7 +52,7 @@ jobs:
         run: |
           echo "Waiting for Frontend to spin up on Render..."
           for i in {1..12}; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://onrender.com || echo "000")
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://devops-fe-4m5i.onrender.com/ || echo "000")
             
             if [ "$STATUS" = "200" ]; then
               echo "Success! The frontend is live and healthy."
