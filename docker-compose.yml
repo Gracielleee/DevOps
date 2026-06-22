@@ -9,6 +9,7 @@ services:
     volumes:
       - ./frontend:/usr/src/app
       - /usr/src/app/node_modules
+      - /usr/src/app/.next
     environment:
       - NEXT_PUBLIC_API_URL=/api/
       - BACKEND_URL=http://backend:3000
@@ -34,7 +35,7 @@ services:
       - HF_TOKEN=${HF_TOKEN}
       - MONGO_URI=${MONGO_URI:-mongodb://mongo:27017/brainbytes}
       - JWT_SECRET=my_super_secret_jwt_key
-      - FE_URL=http://localhost:8080,http://frontend:3001
+      - FE_URL=http://localhost:8080,http://frontend:3001,https://brainbytes-zovh.onrender.com
     restart: unless-stopped
     healthcheck:
       test: curl -f http://localhost:3000/health || exit 1
