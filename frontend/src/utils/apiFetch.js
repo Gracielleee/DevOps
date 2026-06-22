@@ -50,7 +50,7 @@ function handleSessionExpired() {
   window.location.href = "/login";
 }
 
-const DEFAULT_API_BASE_URL = "https://brainbytes-zovh.onrender.com/api";
+const DEFAULT_API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 function buildApiUrl(base, endpoint) {
   const baseClean = (base || DEFAULT_API_BASE_URL).replace(/\/+$/, "");
