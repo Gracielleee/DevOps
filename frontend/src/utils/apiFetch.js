@@ -50,7 +50,7 @@ function handleSessionExpired() {
   window.location.href = "/login";
 }
 
-const DEFAULT_API_BASE_URL = "http://localhost:3000/api/";
+const DEFAULT_API_BASE_URL = "/api/";
 
 function buildApiUrl(base, endpoint) {
   const baseClean = (base || DEFAULT_API_BASE_URL).replace(/\/+$/, "");
