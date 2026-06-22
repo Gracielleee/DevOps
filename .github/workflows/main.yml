@@ -87,9 +87,11 @@ jobs:
       - name: Start Application Stack (Docker)
         run: |
           docker compose up -d frontend
+          echo "Giving the production container 5 seconds to warm up..."
+          sleep 5
           
       - name: Wait for Frontend Container to be Ready
-        run: npx wait-on http://localhost:8080 --timeout 60000
+        run: npx wait-on http://localhost:8080 --timeout 120000
 
       - name: Cache Playwright Browsers
         id: playwright-cache
