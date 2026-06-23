@@ -17,7 +17,7 @@ services:
       - backend
     restart: unless-stopped
     healthcheck:
-      test: curl -f http://localhost:3000 || exit 1
+      test: curl -f http://localhost:3001 || exit 1
       interval: 10s
       timeout: 5s
       retries: 5
@@ -32,10 +32,11 @@ services:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
     environment:
+      - NODE_ENV=${NODE_ENV:-development}
       - HF_TOKEN=${HF_TOKEN}
       - MONGO_URI=${MONGO_URI:-mongodb://mongo:27017/brainbytes}
-      - JWT_SECRET=my_super_secret_jwt_key
-      - FE_URL=http://localhost:8080,http://frontend:3001,https://brainbytes-zovh.onrender.com
+      - JWT_SECRET=${JWT_SECRET:-my_super_secret_jwt_key}
+      - FE_URL=${FE_URL:-http://localhost:8080,http://frontend:3001}
     restart: unless-stopped
     healthcheck:
       test: curl -f http://localhost:3000/health || exit 1
