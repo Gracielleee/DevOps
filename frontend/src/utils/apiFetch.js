@@ -53,17 +53,21 @@ function handleSessionExpired() {
 const DEFAULT_API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 function buildApiUrl(base, endpoint) {
-  const baseClean = (base || DEFAULT_API_BASE_URL).replace(/\/+$/, "");
-  const pathClean = endpoint.replace(/^\/+/, "");
+  const rawBase = base || DEFAULT_API_BASE_URL;
+  if (!rawBase) {
+    throw new Error(
+      "apiFetch: NEXT_PUBLIC_API_URL is missing/empty. Set it to your backend base URL (e.g. https://<backend-domain>/api/)."
+    );
+  }
+
+  const baseClean = String(rawBase).replace(/\/+$/, "");
+  const pathClean = String(endpoint).replace(/^\/+/, "");
   return `${baseClean}/${pathClean}`;
 }
 
 export default async function apiFetch(endpoint, options = {}) {
-  const API_BASE_URL =
-    process.env.NEXT_PUBLIC_API_URL || DEFAULT_API_BASE_URL;
-  const url = endpoint.startsWith("http")
-    ? endpoint
-    : buildApiUrl(API_BASE_URL, endpoint);
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || DEFAULT_API_BASE_URL;
+  const url = endpoint.startsWith("http") ? endpoint : buildApiUrl(API_BASE_URL, endpoint);
 
   const { redirectOnAuthError = true, allowAnonymous = false, softFail = false, ...fetchOptions } = options;
 
