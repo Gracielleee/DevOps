@@ -2,7 +2,10 @@
 services:
   # Frontend container
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        - BACKEND_URL=http://backend:3000
     ipc: host
     ports:
       - "8080:3001"
@@ -12,7 +15,6 @@ services:
       - /usr/src/app/.next
     environment:
       - NEXT_PUBLIC_API_URL=/api/
-      - BACKEND_URL=http://backend:3000
     depends_on:
       - backend
     restart: unless-stopped
