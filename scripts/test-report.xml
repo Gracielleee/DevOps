@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="18" failures="0" errors="0" time="5.563">
-  <testsuite name="BrainBytes API Integration Tests" errors="0" failures="0" skipped="0" timestamp="2026-06-23T03:35:30" time="3.059" tests="10">
-    <testcase classname="BrainBytes API Integration Tests GET /api/subjects should return 200 and list of subjects" name="BrainBytes API Integration Tests GET /api/subjects should return 200 and list of subjects" time="0.045">
+<testsuites name="jest tests" tests="18" failures="0" errors="0" time="5.235">
+  <testsuite name="BrainBytes API Integration Tests" errors="0" failures="0" skipped="0" timestamp="2026-06-23T06:59:05" time="2.753" tests="10">
+    <testcase classname="BrainBytes API Integration Tests GET /api/subjects should return 200 and list of subjects" name="BrainBytes API Integration Tests GET /api/subjects should return 200 and list of subjects" time="0.087">
     </testcase>
-    <testcase classname="BrainBytes API Integration Tests GET /api/messages (guest) should return paginated messages" name="BrainBytes API Integration Tests GET /api/messages (guest) should return paginated messages" time="0.012">
+    <testcase classname="BrainBytes API Integration Tests GET /api/messages (guest) should return paginated messages" name="BrainBytes API Integration Tests GET /api/messages (guest) should return paginated messages" time="0.006">
     </testcase>
-    <testcase classname="BrainBytes API Integration Tests Auth flow should register a new user" name="BrainBytes API Integration Tests Auth flow should register a new user" time="0.083">
+    <testcase classname="BrainBytes API Integration Tests Auth flow should register a new user" name="BrainBytes API Integration Tests Auth flow should register a new user" time="0.082">
     </testcase>
-    <testcase classname="BrainBytes API Integration Tests Auth flow should login and return JWT" name="BrainBytes API Integration Tests Auth flow should login and return JWT" time="0.126">
+    <testcase classname="BrainBytes API Integration Tests Auth flow should login and return JWT" name="BrainBytes API Integration Tests Auth flow should login and return JWT" time="0.13">
     </testcase>
     <testcase classname="BrainBytes API Integration Tests GET /api/profile should return user profile" name="BrainBytes API Integration Tests GET /api/profile should return user profile" time="0.014">
     </testcase>
-    <testcase classname="BrainBytes API Integration Tests GET /api/profile should reject invalid token" name="BrainBytes API Integration Tests GET /api/profile should reject invalid token" time="0.01">
+    <testcase classname="BrainBytes API Integration Tests GET /api/profile should reject invalid token" name="BrainBytes API Integration Tests GET /api/profile should reject invalid token" time="0.011">
     </testcase>
-    <testcase classname="BrainBytes API Integration Tests POST /api/messages should create message with auth and return AI response" name="BrainBytes API Integration Tests POST /api/messages should create message with auth and return AI response" time="0.017">
+    <testcase classname="BrainBytes API Integration Tests POST /api/messages should create message with auth and return AI response" name="BrainBytes API Integration Tests POST /api/messages should create message with auth and return AI response" time="0.018">
     </testcase>
-    <testcase classname="BrainBytes API Integration Tests POST /api/messages should allow guest message creation" name="BrainBytes API Integration Tests POST /api/messages should allow guest message creation" time="0.007">
+    <testcase classname="BrainBytes API Integration Tests POST /api/messages should allow guest message creation" name="BrainBytes API Integration Tests POST /api/messages should allow guest message creation" time="0.006">
     </testcase>
-    <testcase classname="BrainBytes API Integration Tests POST /api/messages should reject invalid JWT" name="BrainBytes API Integration Tests POST /api/messages should reject invalid JWT" time="0.005">
+    <testcase classname="BrainBytes API Integration Tests POST /api/messages should reject invalid JWT" name="BrainBytes API Integration Tests POST /api/messages should reject invalid JWT" time="0.007">
     </testcase>
-    <testcase classname="BrainBytes API Integration Tests GET /api/messages pagination should return paginated structure" name="BrainBytes API Integration Tests GET /api/messages pagination should return paginated structure" time="0.019">
+    <testcase classname="BrainBytes API Integration Tests GET /api/messages pagination should return paginated structure" name="BrainBytes API Integration Tests GET /api/messages pagination should return paginated structure" time="0.021">
     </testcase>
   </testsuite>
-  <testsuite name="Learning Materials API" errors="0" failures="0" skipped="0" timestamp="2026-06-23T03:35:34" time="1.161" tests="5">
-    <testcase classname="Learning Materials API GET /api/materials should return 200 and an array of learning materials" name="Learning Materials API GET /api/materials should return 200 and an array of learning materials" time="0.089">
+  <testsuite name="Learning Materials API" errors="0" failures="0" skipped="0" timestamp="2026-06-23T06:59:08" time="1.17" tests="5">
+    <testcase classname="Learning Materials API GET /api/materials should return 200 and an array of learning materials" name="Learning Materials API GET /api/materials should return 200 and an array of learning materials" time="0.095">
     </testcase>
-    <testcase classname="Learning Materials API GET /api/materials/:id should return 200 for a valid ID" name="Learning Materials API GET /api/materials/:id should return 200 for a valid ID" time="0.011">
+    <testcase classname="Learning Materials API GET /api/materials/:id should return 200 for a valid ID" name="Learning Materials API GET /api/materials/:id should return 200 for a valid ID" time="0.01">
     </testcase>
     <testcase classname="Learning Materials API GET /api/materials/:id should return 404 for a non-existent ID" name="Learning Materials API GET /api/materials/:id should return 404 for a non-existent ID" time="0.007">
     </testcase>
-    <testcase classname="Learning Materials API POST /api/materials should return 201 on success and save data to the database" name="Learning Materials API POST /api/materials should return 201 on success and save data to the database" time="0.022">
+    <testcase classname="Learning Materials API POST /api/materials should return 201 on success and save data to the database" name="Learning Materials API POST /api/materials should return 201 on success and save data to the database" time="0.021">
     </testcase>
     <testcase classname="Learning Materials API POST /api/materials should return 400 if required fields are missing" name="Learning Materials API POST /api/materials should return 400 if required fields are missing" time="0.007">
     </testcase>
   </testsuite>
-  <testsuite name="Error Handling Middleware" errors="0" failures="0" skipped="0" timestamp="2026-06-23T03:35:35" time="1.1" tests="3">
-    <testcase classname="Error Handling Middleware should return 404 for an unknown route" name="Error Handling Middleware should return 404 for an unknown route" time="0.015">
+  <testsuite name="Error Handling Middleware" errors="0" failures="0" skipped="0" timestamp="2026-06-23T06:59:09" time="1.065" tests="3">
+    <testcase classname="Error Handling Middleware should return 404 for an unknown route" name="Error Handling Middleware should return 404 for an unknown route" time="0.013">
     </testcase>
-    <testcase classname="Error Handling Middleware should return JSON with a message field from the global error handler" name="Error Handling Middleware should return JSON with a message field from the global error handler" time="0.037">
+    <testcase classname="Error Handling Middleware should return JSON with a message field from the global error handler" name="Error Handling Middleware should return JSON with a message field from the global error handler" time="0.038">
     </testcase>
-    <testcase classname="Error Handling Middleware should return 400 for invalid ObjectId via CastError handling" name="Error Handling Middleware should return 400 for invalid ObjectId via CastError handling" time="0.011">
+    <testcase classname="Error Handling Middleware should return 400 for invalid ObjectId via CastError handling" name="Error Handling Middleware should return 400 for invalid ObjectId via CastError handling" time="0.013">
     </testcase>
   </testsuite>
 </testsuites>
