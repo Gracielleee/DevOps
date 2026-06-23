@@ -12,7 +12,12 @@ import errorHandler from './src/middleware/errorHandler.js';
 const app = express();
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI;
+const NODE_ENV = process.env.NODE_ENV || 'development';
 const FE_URLS = process.env.FE_URL ? process.env.FE_URL.split(',').map(url => url.trim()) : [];
+
+// Log startup info
+logger.info(`Starting BrainBytes Backend - Environment: ${NODE_ENV}`);
+logger.info(`CORS enabled for: ${FE_URLS.join(', ')}`);
 
 // Cors
 app.use(cors({
