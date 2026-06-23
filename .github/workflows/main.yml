@@ -66,6 +66,7 @@ jobs:
 
   frontend-test:
     name: Frontend Tests
+    needs: lint-and-scan
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
