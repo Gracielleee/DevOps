@@ -14,6 +14,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Trufflehog secret scan
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: .
+          base: main
+          head: ${{ github.head_ref || github.ref_name }}
+          extra_args: --results=verified,unknown --fail
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -42,11 +52,11 @@ jobs:
 
       - name: Frontend audit
         working-directory: ./frontend
-        run: npm audit --audit-level=high || true
+        run: npm audit --audit-level=high
 
       - name: Backend audit
         working-directory: ./backend
-        run: npm audit --audit-level=high || true
+        run: npm audit --audit-level=high
 
       - name: Snyk frontend scan
         uses: snyk/actions/node@master
