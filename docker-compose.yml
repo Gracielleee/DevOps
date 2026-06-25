@@ -32,12 +32,12 @@ services:
       - "3000:3000"
     volumes:
       - ./backend:/usr/src/app
-      - /usr/src/app/node_modules
+      - /usr/src/app/node_modulesz
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - HF_TOKEN=${HF_TOKEN}
       - MONGO_URI=${MONGO_URI:-mongodb://mongo:27017/brainbytes}
-      - JWT_SECRET=${JWT_SECRET:-my_super_secret_jwt_key}
+      - JWT_SECRET=${JWT_SECRET:?JWT_SECRET is not set. Refusing to start.}
       - FE_URL=${FE_URL:-http://localhost:8080,http://frontend:3001}
     restart: unless-stopped
     healthcheck:
