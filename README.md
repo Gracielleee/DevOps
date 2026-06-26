@@ -118,15 +118,6 @@ MONGO_URI=mongodb+srv://<user>:<password>@<cluster-url>/<database_name>
 </br>
 </br>
 
-**Example:**
-
-Actual .env file content used by the development team:
- ```
-HF_TOKEN=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
- 
- MONGO_URI=mongodb://dev-team_read-write:7uxcTPfnoGbLcE9j@ac-5zqjicl-shard-00-00.atrm21i.mongodb.net:27017,ac-5zqjicl-shard-00-01.atrm21i.mongodb.net:27017,ac-5zqjicl-shard-00-02.atrm21i.mongodb.net:27017/BrainBytes_DevOps?ssl=true&replicaSet=atlas-9pizb0-shard-0&appName=my-first-cluster&authSource=admin
- ```
-
  </br>
 
 
