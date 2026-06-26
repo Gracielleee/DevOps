@@ -118,15 +118,6 @@ MONGO_URI=mongodb+srv://<user>:<password>@<cluster-url>/<database_name>
 </br>
 </br>
 
-**Example:**
-
-Actual .env file content used by the development team:
- ```
-HF_TOKEN=***TOKEN_HERE*** 
- 
- MONGO_URI=***MONGO_URI_HERE*** 
- ```
-
  </br>
 
 
