@@ -14,6 +14,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Trufflehog secret scan
+        uses: trufflesecurity/trufflehog@v3.88.0
+        with:
+          path: .
+          base: main
+          head: ${{ github.head_ref || github.ref_name }}
+          extra_args: --results=verified,unknown
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -34,21 +44,19 @@ jobs:
 
       - name: Lint frontend
         working-directory: ./frontend
-        continue-on-error: true
         run: npm run lint
 
       - name: Lint backend
         working-directory: ./backend
-        continue-on-error: true
         run: npm run lint 
 
       - name: Frontend audit
         working-directory: ./frontend
-        run: npm audit --audit-level=high || true
+        run: npm audit --audit-level=high
 
       - name: Backend audit
         working-directory: ./backend
-        run: npm audit --audit-level=high || true
+        run: npm audit --audit-level=high
 
       - name: Snyk frontend scan
         uses: snyk/actions/node@master
@@ -86,6 +94,8 @@ jobs:
         run: npm ci
 
       - name: Start Application Stack (Docker)
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: |
           docker compose up -d frontend
           
@@ -126,7 +136,6 @@ jobs:
 
       - name: Run E2E Tests
         working-directory: ./frontend
-        continue-on-error: true
         run: npx playwright test 
         env:
           BASE_URL: http://localhost:3001
@@ -161,6 +170,9 @@ jobs:
 
       - name: Run backend tests
         working-directory: ./backend
+        env:
+          MONGODB_MEMORY_SERVER_DOWNLOAD_DIR: /tmp/mongodb-memory-server
+          NODE_ENV: test
         run: |
           npm test -- --ci \
             --reporters=default \
