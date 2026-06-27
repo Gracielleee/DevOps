@@ -6,6 +6,11 @@ on:
     types:
       - completed
   workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Docker image tag to deploy (default: latest)'
+        required: false
+        default: 'latest'
 
 jobs:
   deploy:
@@ -20,22 +25,41 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      
-      - name: Trigger Backend Render Deployment
+
+      - name: Determine image tag
+        id: image-tag
         run: |
-          echo "Triggering backend service build..."
-          curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}"
-      
-      - name: Trigger Frontend Render Deployment
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            TAG="${{ github.event.inputs.image_tag }}"
+          else
+            TAG="${{ github.event.workflow_run.head_commit }}" 
+            TAG=${TAG:0:7}
+          fi
+          echo "tag=${TAG}" >> $GITHUB_OUTPUT
+
+      - name: Trigger Backend Render Deployment with Registry Image
         run: |
-          echo "Triggering frontend service build..."
-          curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}"
-      
+          echo "Deploying backend with image tag: ${{ steps.image-tag.outputs.tag }}"
+          curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "imageTag": "${{ steps.image-tag.outputs.tag }}",
+              "service": "backend"
+            }'
+
+      - name: Trigger Frontend Render Deployment with Registry Image
+        run: |
+          echo "Deploying frontend with image tag: ${{ steps.image-tag.outputs.tag }}"
+          curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "imageTag": "${{ steps.image-tag.outputs.tag }}",
+              "service": "frontend"
+            }'
+
       - name: Verify Live Backend Deployment
         run: |
           echo "Waiting for Backend to spin up on Render..."
-
-          # Retry every 30 sec for 12 times = 6min total
           for i in {1..12}; do 
             STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://brainbytes-zovh.onrender.com/health || echo "000")
             
@@ -67,4 +91,46 @@ jobs:
           done
           
           echo "Error: Frontend failed to start within 6 minutes."
+          exit 1
+
+      - name: Record deployment metadata
+        if: always()
+        run: |
+          mkdir -p deployment-logs
+          cat > deployment-logs/deployment-${{ github.run_id }}.json <<EOF
+          {
+            "workflow_run_id": "${{ github.run_id }}",
+            "commit_sha": "${{ github.sha }}",
+            "branch": "${{ github.ref_name }}",
+            "image_tag": "${{ steps.image-tag.outputs.tag }}",
+            "timestamp": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')",
+            "deployed_by": "${{ github.actor }}",
+            "status": "success",
+            "backend_url": "https://brainbytes-zovh.onrender.com",
+            "frontend_url": "https://devops-fe-4m5i.onrender.com"
+          }
+          EOF
+          cat deployment-logs/deployment-${{ github.run_id }}.json
+
+      - name: Upload deployment logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-logs
+          path: deployment-logs/
+          retention-days: 90
+
+      - name: Notify deployment success
+        if: success()
+        run: |
+          echo "✓ Deployment completed successfully at $(date)"
+          echo "Images deployed:"
+          echo "  - Backend: ghcr.io/${{ github.repository_owner }}/brainbytes-backend:${{ steps.image-tag.outputs.tag }}"
+          echo "  - Frontend: ghcr.io/${{ github.repository_owner }}/brainbytes-frontend:${{ steps.image-tag.outputs.tag }}"
+
+      - name: Notify deployment failure
+        if: failure()
+        run: |
+          echo "✗ Deployment failed"
+          echo "Check logs above for details"
           exit 1
