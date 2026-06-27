@@ -1,0 +1,55 @@
+name: Rollback Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        description: 'Service to rollback'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - backend
+          - frontend
+          - both
+      image_tag:
+        description: 'Image tag to deploy (e.g., short SHA or version)'
+        required: true
+
+jobs:
+  rollback:
+    name: Rollback ${{ github.event.inputs.service }}
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Rollback backend
+        if: github.event.inputs.service == 'backend' || github.event.inputs.service == 'both'
+        run: |
+          echo "Rolling back backend to image tag: ${{ github.event.inputs.image_tag }}"
+          curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "imageTag": "${{ github.event.inputs.image_tag }}",
+              "service": "backend"
+            }'
+
+      - name: Rollback frontend
+        if: github.event.inputs.service == 'frontend' || github.event.inputs.service == 'both'
+        run: |
+          echo "Rolling back frontend to image tag: ${{ github.event.inputs.image_tag }}"
+          curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "imageTag": "${{ github.event.inputs.image_tag }}",
+              "service": "frontend"
+            }'
+
+      - name: Verify rollback
+        run: |
+          echo "Waiting for services to stabilize after rollback..."
+          sleep 30
+          # Add verification steps similar to deploy.yml

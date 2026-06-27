@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: brainbytes-backend
+    runtime: docker
+    region: ohio
+    plan: standard
+    numInstances: 1
+    healthCheckPath: /health
+    healthCheckInterval: 30
+    healthCheckTimeout: 5
+    healthCheckStartPeriod: 30
+    dockerfile: ./backend/Dockerfile
+    dockerCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        scope: run
+        sync: false
+      - key: JWT_SECRET
+        scope: run
+        sync: false
+      - key: HF_TOKEN
+        scope: run
+        sync: false
+      - key: FE_URL
+        value: https://devops-fe-4m5i.onrender.com
+
+  - type: web
+    name: brainbytes-frontend
+    runtime: docker
+    region: ohio
+    plan: standard
+    numInstances: 1
+    healthCheckPath: /
+    healthCheckInterval: 30
+    healthCheckTimeout: 5
+    healthCheckStartPeriod: 30
+    dockerfile: ./frontend/Dockerfile
+    dockerCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: /api/
+      - key: BACKEND_URL
+        value: https://brainbytes-zovh.onrender.com
