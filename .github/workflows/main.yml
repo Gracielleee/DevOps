@@ -210,9 +210,11 @@ jobs:
           SHORT_SHA=${COMMIT_SHA:0:7}
           BRANCH=${{ github.ref_name }}
           TIMESTAMP=$(date -u +'%Y%m%d-%H%M%S')
+          OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           echo "short_sha=${SHORT_SHA}" >> $GITHUB_OUTPUT
           echo "branch=${BRANCH}" >> $GITHUB_OUTPUT
           echo "timestamp=${TIMESTAMP}" >> $GITHUB_OUTPUT
+          echo "owner_lower=${OWNER_LOWER}" >> $GITHUB_OUTPUT
 
       - name: Build and push frontend image
         uses: docker/build-push-action@v6
@@ -220,9 +222,9 @@ jobs:
           context: ./frontend
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/brainbytes-frontend:latest
-            ghcr.io/${{ github.repository_owner }}/brainbytes-frontend:${{ steps.meta.outputs.short_sha }}
-            ghcr.io/${{ github.repository_owner }}/brainbytes-frontend:${{ steps.meta.outputs.branch }}-${{ steps.meta.outputs.timestamp }}
+            ghcr.io/${{ steps.meta.outputs.owner_lower }}/brainbytes-frontend:latest
+            ghcr.io/${{ steps.meta.outputs.owner_lower }}/brainbytes-frontend:${{ steps.meta.outputs.short_sha }}
+            ghcr.io/${{ steps.meta.outputs.owner_lower }}/brainbytes-frontend:${{ steps.meta.outputs.branch }}-${{ steps.meta.outputs.timestamp }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
@@ -234,8 +236,9 @@ jobs:
           context: ./backend
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/brainbytes-backend:latest
-            ghcr.io/${{ github.repository_owner }}/brainbytes-backend:${{ steps.meta.outputs.short_sha }}
-            ghcr.io/${{ github.repository_owner }}/brainbytes-backend:${{ steps.meta.outputs.branch }}-${{ steps.meta.outputs.timestamp }}
+            ghcr.io/${{ steps.meta.outputs.owner_lower }}/brainbytes-backend:latest
+            ghcr.io/${{ steps.meta.outputs.owner_lower }}/brainbytes-backend:${{ steps.meta.outputs.short_sha }}
+            ghcr.io/${{ steps.meta.outputs.owner_lower }}/brainbytes-backend:${{ steps.meta.outputs.branch }}-${{ steps.meta.outputs.timestamp }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+

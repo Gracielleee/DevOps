@@ -123,10 +123,11 @@ jobs:
       - name: Notify deployment success
         if: success()
         run: |
+          OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           echo "✓ Deployment completed successfully at $(date)"
           echo "Images deployed:"
-          echo "  - Backend: ghcr.io/${{ github.repository_owner }}/brainbytes-backend:${{ steps.image-tag.outputs.tag }}"
-          echo "  - Frontend: ghcr.io/${{ github.repository_owner }}/brainbytes-frontend:${{ steps.image-tag.outputs.tag }}"
+          echo "  - Backend: ghcr.io/$OWNER_LOWER/brainbytes-backend:${{ steps.image-tag.outputs.tag }}"
+          echo "  - Frontend: ghcr.io/$OWNER_LOWER/brainbytes-frontend:${{ steps.image-tag.outputs.tag }}"
 
       - name: Notify deployment failure
         if: failure()
