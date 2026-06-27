@@ -34,12 +34,10 @@ jobs:
 
       - name: Lint frontend
         working-directory: ./frontend
-        continue-on-error: true
         run: npm run lint
 
       - name: Lint backend
         working-directory: ./backend
-        continue-on-error: true
         run: npm run lint 
 
       - name: Frontend audit
@@ -126,7 +124,6 @@ jobs:
 
       - name: Run E2E Tests
         working-directory: ./frontend
-        continue-on-error: true
         run: npx playwright test 
         env:
           BASE_URL: http://localhost:3001
