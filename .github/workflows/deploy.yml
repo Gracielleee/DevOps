@@ -3,28 +3,30 @@ name: BrainBytes Deploy
 on:
   workflow_run:
     workflows: ["BrainBytes CI/CD"]
-    types:
-      - completed
+    types: [completed]
   workflow_dispatch:
     inputs:
       image_tag:
-        description: 'Docker image tag to deploy (default: latest)'
-        required: false
-        default: 'latest'
+        description: 'Docker image tag to deploy'
+        required: true
 
 jobs:
   deploy:
-    name: Deploy Stack to an Environment
+    name: Deploy Stack
     runs-on: ubuntu-latest
     environment: production
-    if: |
-      github.event.workflow_run.event == 'push' && 
-      github.event.workflow_run.head_branch == 'main' && 
-      github.event.workflow_run.conclusion == 'success'
     
+    if: |
+      github.event_name == 'workflow_dispatch' || 
+      (github.event.workflow_run.event == 'push' && 
+       github.event.workflow_run.head_branch == 'main' && 
+       github.event.workflow_run.conclusion == 'success')
+
     steps:
-      - name: Check out repository
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_commit }}
 
       - name: Determine image tag
         id: image-tag
@@ -32,99 +34,140 @@ jobs:
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             TAG="${{ github.event.inputs.image_tag }}"
           else
-            TAG="${{ github.event.workflow_run.head_commit }}" 
-            TAG=${TAG:0:7}
+            COMMIT="${{ github.event.workflow_run.head_commit }}"
+            TAG=${COMMIT:0:7}
           fi
           echo "tag=${TAG}" >> $GITHUB_OUTPUT
+          echo "Deploying image tag: ${TAG}"
 
-      - name: Trigger Backend Render Deployment with Registry Image
+      - name: Update render.yaml with new image tag
+        env:
+          IMAGE_TAG: ${{ steps.image-tag.outputs.tag }}
         run: |
-          echo "Deploying backend with image tag: ${{ steps.image-tag.outputs.tag }}"
-          curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "imageTag": "${{ steps.image-tag.outputs.tag }}",
-              "service": "backend"
-            }'
-
-      - name: Trigger Frontend Render Deployment with Registry Image
-        run: |
-          echo "Deploying frontend with image tag: ${{ steps.image-tag.outputs.tag }}"
-          curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "imageTag": "${{ steps.image-tag.outputs.tag }}",
-              "service": "frontend"
-            }'
-
-      - name: Verify Live Backend Deployment
-        run: |
-          echo "Waiting for Backend to spin up on Render..."
-          for i in {1..12}; do 
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://brainbytes-zovh.onrender.com/health || echo "000")
-            
-            if [ "$STATUS" = "200" ]; then
-              echo "Success! The backend is live and healthy."
-              exit 0
-            fi
-            
-            echo "Backend Attempt $i: Status is $STATUS. Waiting 30 seconds..."
-            sleep 30
-          done
+          OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           
-          echo "Error: Backend failed to start within 6 minutes."
-          exit 1
+          echo "Updating render.yaml with:"
+          echo "  Backend: ${OWNER_LOWER}/brainbytes-backend:${IMAGE_TAG}"
+          echo "  Frontend: ${OWNER_LOWER}/brainbytes-frontend:${IMAGE_TAG}"
+          
+          python3 << 'EOF'
+          import yaml
+          import os
+          
+          with open('render.yaml', 'r') as f:
+              config = yaml.safe_load(f)
+          
+          owner = os.environ['OWNER_LOWER']
+          tag = os.environ['IMAGE_TAG']
+          
+          for service in config['services']:
+              if service['name'] == 'brainbytes-backend':
+                  service['image']['name'] = f"{owner}/brainbytes-backend"
+                  service['image']['tag'] = tag
+              elif service['name'] == 'brainbytes-frontend':
+                  service['image']['name'] = f"{owner}/brainbytes-frontend"
+                  service['image']['tag'] = tag
+          
+          with open('render.yaml', 'w') as f:
+              yaml.dump(config, f, default_flow_style=False, sort_keys=False)
+          
+          print("✓ render.yaml updated successfully")
+          EOF
 
-      - name: Verify Live Frontend Deployment
+      - name: Verify render.yaml changes
         run: |
-          echo "Waiting for Frontend to spin up on Render..."
+          echo "Updated render.yaml:"
+          cat render.yaml
+          python3 -m yaml render.yaml > /dev/null && echo "✓ YAML is valid"
+
+      - name: Commit and push render.yaml
+        run: |
+          git config user.email "github-actions@github.com"
+          git config user.name "GitHub Actions"
+          
+          if ! git diff --quiet render.yaml; then
+            git add render.yaml
+            git commit -m "chore: deploy image tag ${{ steps.image-tag.outputs.tag }} [skip-ci]"
+            git pull --rebase origin main
+            git push origin main
+            echo "✓ Pushed render.yaml to main (CI skipped)"
+          else
+            echo "✓ No changes to render.yaml"
+          fi
+
+      - name: Wait for Render redeployment
+        run: |
+          echo "GitHub Integration will trigger Render to read render.yaml..."
+          sleep 10
+
+      - name: Verify backend health
+        run: |
+          echo "Checking backend health..."
           for i in {1..12}; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://devops-fe-4m5i.onrender.com/ || echo "000")
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+              https://brainbytes-zovh.onrender.com/health || echo "000")
             
             if [ "$STATUS" = "200" ]; then
-              echo "Success! The frontend is live and healthy."
+              echo "✓ Backend is healthy"
               exit 0
             fi
             
-            echo "Frontend Attempt $i: Status is $STATUS. Waiting 30 seconds..."
+            echo "Attempt $i/12: Status $STATUS, waiting 30s..."
             sleep 30
           done
           
-          echo "Error: Frontend failed to start within 6 minutes."
+          echo "✗ Backend did not become healthy within 6 minutes"
           exit 1
 
-      - name: Record deployment metadata
+      - name: Verify frontend health
+        run: |
+          echo "Checking frontend health..."
+          for i in {1..12}; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+              https://devops-fe-4m5i.onrender.com/ || echo "000")
+            
+            if [ "$STATUS" = "200" ]; then
+              echo "✓ Frontend is healthy"
+              exit 0
+            fi
+            
+            echo "Attempt $i/12: Status $STATUS, waiting 30s..."
+            sleep 30
+          done
+          
+          echo "✗ Frontend did not become healthy within 6 minutes"
+          exit 1
+
+      - name: Record deployment
         if: always()
         run: |
-          mkdir -p deployment-logs
-          cat > deployment-logs/deployment-${{ github.run_id }}.json <<EOF
+          mkdir -p .github/deployments
+          cat > .github/deployments/${{ github.run_id }}.json <<EOF
           {
-            "workflow_run_id": "${{ github.run_id }}",
-            "commit_sha": "${{ github.sha }}",
-            "branch": "${{ github.ref_name }}",
-            "image_tag": "${{ steps.image-tag.outputs.tag }}",
             "timestamp": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')",
+            "commit_sha": "${{ github.sha }}",
+            "image_tag": "${{ steps.image-tag.outputs.tag }}",
             "deployed_by": "${{ github.actor }}",
             "status": "success",
             "backend_url": "https://brainbytes-zovh.onrender.com",
             "frontend_url": "https://devops-fe-4m5i.onrender.com"
           }
           EOF
-          cat deployment-logs/deployment-${{ github.run_id }}.json
+          cat .github/deployments/${{ github.run_id }}.json
 
       - name: Upload deployment logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: deployment-logs
-          path: deployment-logs/
+          path: .github/deployments/
           retention-days: 90
 
       - name: Notify deployment success
         if: success()
         run: |
           OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          echo "✓ Deployment completed successfully at $(date)"
+          echo "✓ Deployment completed successfully"
           echo "Images deployed:"
           echo "  - Backend: ghcr.io/$OWNER_LOWER/brainbytes-backend:${{ steps.image-tag.outputs.tag }}"
           echo "  - Frontend: ghcr.io/$OWNER_LOWER/brainbytes-frontend:${{ steps.image-tag.outputs.tag }}"
