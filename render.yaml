@@ -7,7 +7,7 @@ services:
     plan: free
     numInstances: 1
     image:
-      url: ghcr.io/Gracielleee/brainbytes-backend:latest
+      url: ghcr.io/gracielleee/brainbytes-backend:latest
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
@@ -32,7 +32,7 @@ services:
     plan: free
     numInstances: 1
     image:
-          url: ghcr.io/Gracielleee/brainbytes-frontend:latest
+          url: ghcr.io/gracielleee/brainbytes-frontend:latest
     healthCheckPath: /
     envVars:
       - key: NEXT_PUBLIC_API_URL
