@@ -234,7 +234,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-            BACKEND_URL=http://brainbytes-backend:3000
+            BACKEND_URL=${{secrets.RENDER_SERVICE_BE_URL}}
 
       - name: Build and push backend image
         uses: docker/build-push-action@v6
