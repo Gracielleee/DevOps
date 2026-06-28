@@ -186,7 +186,7 @@ jobs:
           path: backend/test-results
 
   build:
-    name: Build and Push Docker Images
+    name: Build and Push Docker Images for Production
     needs: [backend-test, frontend-test]
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -234,7 +234,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-            BACKEND_URL=http://backend:3000
+            BACKEND_URL=http://brainbytes-backend:3000
 
       - name: Build and push backend image
         uses: docker/build-push-action@v6
