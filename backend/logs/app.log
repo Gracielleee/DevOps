@@ -514,3 +514,223 @@
 {"file":"ai-helper.js","level":"debug","message":"Knowledge base loaded successfully with 4 categories"}
 {"level":"error","message":"An error occurred: Simulated unexpected database error","stack":"Error: Simulated unexpected database error\n    at model.<anonymous> (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\tests\\errorHandler.test.js:46:13)\n    at C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\jest-mock\\build\\index.js:305:39\n    at model.<anonymous> (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\jest-mock\\build\\index.js:312:13)\n    at model.mockConstructor [as findById] (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\jest-mock\\build\\index.js:102:19)\n    at findById (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\src\\middleware\\auth.js:44:49)\n    at Layer.handleRequest (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\router\\lib\\layer.js:152:17)\n    at next (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\router\\lib\\route.js:157:13)\n    at next (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\src\\middleware\\auth.js:25:9)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)"}
 {"kind":"ObjectId","level":"error","message":"An error occurred: Cast to ObjectId failed for value \"invalid-id-format\" (type string) at path \"_id\" for model \"LearningMaterial\"","path":"_id","reason":{},"stack":"CastError: Cast to ObjectId failed for value \"invalid-id-format\" (type string) at path \"_id\" for model \"LearningMaterial\"\n    at SchemaObjectId.cast (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\mongoose\\lib\\schema\\objectId.js:252:11)\n    at SchemaObjectId.SchemaType.applySetters (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\mongoose\\lib\\schemaType.js:1373:12)\n    at SchemaObjectId.SchemaType.castForQuery (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\mongoose\\lib\\schemaType.js:1793:17)\n    at cast (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\mongoose\\lib\\cast.js:386:32)\n    at model.Query.Query.cast (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\mongoose\\lib\\query.js:5228:12)\n    at model.Query.Query._castConditions (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\mongoose\\lib\\query.js:2411:10)\n    at model.Query._findOne (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\mongoose\\lib\\query.js:2758:8)\n    at maybeTracedQueryExec (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\node_modules\\mongoose\\lib\\query.js:4801:83)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at isMaterialOwner (C:\\Users\\Chaz\\Docker\\brainbytes-multi-container\\backend\\src\\middleware\\auth.js:44:26)","stringValue":"\"invalid-id-format\"","value":"invalid-id-format","valueType":"string"}
+{"level":"debug","message":"Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js"}
+{"file":"ai-helper.js","level":"debug","message":"Knowledge base loaded successfully with 4 categories"}
+{"level":"info","message":"Starting BrainBytes Backend - Environment: development"}
+{"level":"info","message":"CORS enabled for: http://localhost:8080, http://frontend:3001"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Server running on port 3000"}
+{"expiredAt":"2026-06-23T07:55:55.000Z","level":"error","message":"Authentication error: jwt expired","name":"TokenExpiredError","stack":"TokenExpiredError: jwt expired\n    at /usr/src/app/node_modules/jsonwebtoken/verify.js:190:21\n    at getSecret (/usr/src/app/node_modules/jsonwebtoken/verify.js:97:14)\n    at module.exports [as verify] (/usr/src/app/node_modules/jsonwebtoken/verify.js:101:10)\n    at authenticate (file:///usr/src/app/src/middleware/auth.js:17:29)\n    at Layer.handleRequest (/usr/src/app/node_modules/router/lib/layer.js:152:17)\n    at next (/usr/src/app/node_modules/router/lib/route.js:157:13)\n    at Route.dispatch (/usr/src/app/node_modules/router/lib/route.js:117:3)\n    at handle (/usr/src/app/node_modules/router/index.js:435:11)\n    at Layer.handleRequest (/usr/src/app/node_modules/router/lib/layer.js:152:17)\n    at /usr/src/app/node_modules/router/index.js:295:15"}
+{"expiredAt":"2026-06-23T07:55:55.000Z","level":"error","message":"Authentication error: jwt expired","name":"TokenExpiredError","stack":"TokenExpiredError: jwt expired\n    at /usr/src/app/node_modules/jsonwebtoken/verify.js:190:21\n    at getSecret (/usr/src/app/node_modules/jsonwebtoken/verify.js:97:14)\n    at module.exports [as verify] (/usr/src/app/node_modules/jsonwebtoken/verify.js:101:10)\n    at authenticate (file:///usr/src/app/src/middleware/auth.js:17:29)\n    at optionalAuthentication (file:///usr/src/app/src/middleware/auth.js:38:12)\n    at Layer.handleRequest (/usr/src/app/node_modules/router/lib/layer.js:152:17)\n    at next (/usr/src/app/node_modules/router/lib/route.js:157:13)\n    at Route.dispatch (/usr/src/app/node_modules/router/lib/route.js:117:3)\n    at handle (/usr/src/app/node_modules/router/index.js:435:11)\n    at Layer.handleRequest (/usr/src/app/node_modules/router/lib/layer.js:152:17)"}
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: he"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: general"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"he\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"he\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: general, Question Type: general"}
+{"file":"ai-helper.js","level":"debug","message":"Question: he"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: general"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: general"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in general. Please respond to the following question.\n\nProvide a helpful, informative response.\n\nAnswer the question directly and helpfully.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"he\""}
+{"file":"ai-service.js","level":"debug","message":"No direct match in knowledge base, proceeding to call AI"}
+{"file":"ai-service.js","level":"debug","message":"Constructing complete prompt..."}
+{"file":"ai-service.js","level":"debug","message":"Calling AI API with prompt..."}
+{"level":"error","message":"Inference Client Error:"}
+{"file":"ai-service.js","level":"info","message":"AI response received successfully"}
+{"file":"ai-service.js","level":"warn","message":"Empty response from AI"}
+{"file":"ai-service.js","level":"error","message":"Error calling Hugging Face API: Empty response from AI"}
+{"file":"ai-service.js","level":"debug","message":"Falling back to backup response for category: general"}
+{"file":"ai-helper.js","level":"info","message":"[getBackupResponse] Generating backup response for category: \"general\", question: \"he\""}
+{"file":"ai-helper.js","level":"info","message":"[getBackupResponse] Returning general backup response"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: give me 3 life advice"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: general"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"give me 3 life advice\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"give me 3 life advice\""}
+{"file":"ai-helper.js","level":"info","message":"[detectQuestionType] Detected type: \"example\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: general, Question Type: example"}
+{"file":"ai-helper.js","level":"debug","message":"Question: give me 3 life advice"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: general"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: example"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in general. Please respond to the following question.\n\nProvide a helpful, informative response.\n\nProvide a practical, real-world example.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"give me 3 life advice\""}
+{"file":"ai-service.js","level":"debug","message":"No direct match in knowledge base, proceeding to call AI"}
+{"file":"ai-service.js","level":"debug","message":"Constructing complete prompt..."}
+{"file":"ai-service.js","level":"debug","message":"Calling AI API with prompt..."}
+{"level":"error","message":"Inference Client Error:"}
+{"file":"ai-service.js","level":"info","message":"AI response received successfully"}
+{"file":"ai-service.js","level":"warn","message":"Empty response from AI"}
+{"file":"ai-service.js","level":"error","message":"Error calling Hugging Face API: Empty response from AI"}
+{"file":"ai-service.js","level":"debug","message":"Falling back to backup response for category: general"}
+{"file":"ai-helper.js","level":"info","message":"[getBackupResponse] Generating backup response for category: \"general\", question: \"give me 3 life advice\""}
+{"file":"ai-helper.js","level":"info","message":"[getBackupResponse] Returning general backup response"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
+{"level":"debug","message":"Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js"}
+{"file":"ai-helper.js","level":"debug","message":"Knowledge base loaded successfully with 4 categories"}
+{"level":"info","message":"Starting BrainBytes Backend - Environment: development"}
+{"level":"info","message":"CORS enabled for: http://localhost:8080, http://frontend:3001"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Server running on port 3000"}
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: give me 3 life advice"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: general"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"give me 3 life advice\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"give me 3 life advice\""}
+{"file":"ai-helper.js","level":"info","message":"[detectQuestionType] Detected type: \"example\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: general, Question Type: example"}
+{"file":"ai-helper.js","level":"debug","message":"Question: give me 3 life advice"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: general"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: example"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in general. Please respond to the following question.\n\nProvide a helpful, informative response.\n\nProvide a practical, real-world example.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"give me 3 life advice\""}
+{"file":"ai-service.js","level":"debug","message":"No direct match in knowledge base, proceeding to call AI"}
+{"file":"ai-service.js","level":"debug","message":"Constructing complete prompt..."}
+{"file":"ai-service.js","level":"debug","message":"Calling AI API with prompt..."}
+{"level":"debug","message":"question:"}
+{"content":"Absolutely! Here are three pieces of life advice, each with a practical, real-world example to help you understand how to apply them in your daily life.\n\n\n### 1. **Build Strong Relationships and Network Thoughtfully**\n**Why it matters:**  \nHuman connections are the foundation of personal and professional success. Strong relationships provide emotional support, open doors to opportunities, and help you grow as a person.\n\n**Real-world example:**  \nImagine you're a recent graduate looking for a job. Instead of just applying online, you reach out to a former professor or a family friend who works in your field. You have a casual coffee chat, share your goals, and ask for advice. A few weeks later, they remember you and refer you for a position that wasn’t even advertised. This is the power of a thoughtful network. It’s not about using people, but about building genuine, long-term relationships.\n\n\n### 2. **Embrace Continuous Learning and Adaptability**\n**Why it matters:**  \nThe world is constantly changing, especially with advancements in technology and shifts in the job market. Staying curious and open to learning new skills keeps you relevant and resilient.\n\n**Real-world example:**  \nConsider a teacher who has been in the classroom for 20 years. When the pandemic forced schools to switch to online learning, they might have felt overwhelmed. But by taking a few online courses on digital teaching tools and adapting their lesson plans, they not only kept their students engaged but also discovered new ways to make learning more interactive. This adaptability made them a more effective educator in the long run.\n\n\n### 3. **Practice Gratitude and Mindfulness**\n**Why it matters:**  \nFocusing on what you have, rather than what you lack, can significantly improve your mental health and overall satisfaction with life. Gratitude helps you stay grounded and appreciate the small things.\n\n**Real-world example:**  \nA busy parent juggling work and family might feel stressed and overwhelmed. To manage this, they start a daily habit of writing down three things they’re grateful for—like a child’s laughter, a supportive partner, or a quiet moment to themselves. Over time, this simple practice helps them notice more positive moments, reduces stress, and improves their mood and relationships.\n\n\nThese pieces of advice are not just theoretical—they’re actionable and can make a real difference in your life. Let me know if you'd like help applying any of them to your specific situation!","level":"info","message":"Inference Client response:","role":"assistant"}
+{"file":"ai-service.js","level":"info","message":"AI response received successfully"}
+{"file":"ai-service.js","level":"debug","message":"Valid text response from AI"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: magbigay ng tatlong natatanging bayani ng Pilipinas"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: history"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"magbigay ng tatlong natatanging bayani ng Pilipinas\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"magbigay ng tatlong natatanging bayani ng Pilipinas\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: history, Question Type: general"}
+{"file":"ai-helper.js","level":"debug","message":"Question: magbigay ng tatlong natatanging bayani ng Pilipinas"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: history"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: general"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in history. Please respond to the following question.\n\nProvide factual, well-sourced information.\n\nAnswer the question directly and helpfully.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"magbigay ng tatlong natatanging bayani ng Pilipinas\""}
+{"file":"ai-service.js","level":"debug","message":"No direct match in knowledge base, proceeding to call AI"}
+{"file":"ai-service.js","level":"debug","message":"Constructing complete prompt..."}
+{"file":"ai-service.js","level":"debug","message":"Calling AI API with prompt..."}
+{"level":"error","message":"AI response timed out or failed: Request timeout","stack":"Error: Request timeout\n    at Timeout.<anonymous> (file:///usr/src/app/src/controllers/message-controller.js:51:43)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
+{"level":"debug","message":"question:"}
+{"content":"Narito ang tatlong natatanging bayani ng Pilipinas, kasama ang kanilang mga ambag at kahalagahan:\n\n1.  **Dr. José Rizal (1861–1896)**\n    -   **Ambag:** Kilala bilang pinakamahalagang bayani ng Pilipinas, si Rizal ay isang manunulat, doktor, at siyentipiko. Ang kanyang mga nobelang *Noli Me Tángere* at *El Filibusterismo* ay naging instrumento ng paggising ng kamalayang Pilipino laban sa kolonyal na pang-aapi ng Espanya.\n    -   **Kahalagahan:** Ang kanyang paghihirap at pagkamatay sa pamamagitan ng pagpapalaglag ay naging simbolo ng pag-ibig sa bayan at pagtutol sa pang-aapi. Ang kanyang mga gawa ay naging batayan ng rebolusyonaryong diwa ng mga Pilipino.\n    -   **Sumber:** National Historical Commission of the Philippines (NHCP), \"José Rizal: The Life and Works,\" [https://www.nhcp.gov.ph](https://www.nhcp.gov.ph)\n\n2.  **Andrés Bonifacio (1863–1897)**\n    -   **Ambag:** Siya ang pinuno ng Katipunan, ang unang sekretong samahan na nag-organisa ng rebolusyon laban sa Espanya. Siya ang nagsulat ng *Kartilya ng Katipunan*, isang dokumento na naglalayong magturo ng mga aral ng pagmamahal sa bayan at moralidad.\n    -   **Kahalagahan:** Kilala bilang \"Ama ng Rebolusyon,\" si Bonifacio ay naging simbolo ng pagkakaisa at pagtutol sa kolonyalismo. Ang kanyang pagkamatay sa kamay ng kanyang sariling mga kasamahan ay naging bahagi ng makasaysayang pag-unawa sa rebolusyon.\n    -   **Sumber:** NHCP, \"Andrés Bonifacio: The Supremo,\" [https://www.nhcp.gov.ph](https://www.nhcp.gov.ph)\n\n3.  **Emilio Aguinaldo (1869–1964)**\n    -   **Ambag:** Siya ang unang Pangulo ng Republika ng Pilipinas at naging pinuno ng rebolusyonaryong hukbo laban sa Espanya at kalaunan ay laban sa Estados Unidos. Siya ang nagpahayag ng kalayaan ng Pilipinas noong Hunyo 12, 1898.\n    -   **Kahalagahan:** Ang kanyang papel sa pagtatatag ng unang republika sa Asya ay naging mahalagang bahagi ng kasaysayan ng Pilipinas. Ang kanyang pamumuno ay nagpapakita ng paghahangad ng kalayaan at pagkakaisa ng bansa.\n    -   **Sumber:** NHCP, \"Emilio Aguinaldo: The First President,\" [https://www.nhcp.gov.ph](https://www.nhcp.gov.ph)\n\nAng mga bayaning ito ay naging simbolo ng pag-ibig sa bayan, pagtutol sa pang-aapi, at paghahangad ng kalayaan ng Pilipinas. Ang kanilang mga ambag ay patuloy na pinag-aaralan at pinahahalagahan sa konteksto ng pambansang kasaysayan.","level":"info","message":"Inference Client response:","role":"assistant"}
+{"file":"ai-service.js","level":"info","message":"AI response received successfully"}
+{"file":"ai-service.js","level":"debug","message":"Valid text response from AI"}
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: magbigay ng tatlong natatanging bayani ng Pilipinas"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: history"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"magbigay ng tatlong natatanging bayani ng Pilipinas\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"magbigay ng tatlong natatanging bayani ng Pilipinas\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: history, Question Type: general"}
+{"file":"ai-helper.js","level":"debug","message":"Question: magbigay ng tatlong natatanging bayani ng Pilipinas"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: history"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: general"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in history. Please respond to the following question.\n\nProvide factual, well-sourced information.\n\nAnswer the question directly and helpfully.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"magbigay ng tatlong natatanging bayani ng Pilipinas\""}
+{"file":"ai-service.js","level":"debug","message":"No direct match in knowledge base, proceeding to call AI"}
+{"file":"ai-service.js","level":"debug","message":"Constructing complete prompt..."}
+{"file":"ai-service.js","level":"debug","message":"Calling AI API with prompt..."}
+{"level":"debug","message":"question:"}
+{"content":"Narito ang tatlong natatanging bayani ng Pilipinas, kasama ang kanilang mga ambag at kahalagahan:\n\n1.  **Dr. José Rizal (1861–1896)**\n    -   **Ambag:** Kilala bilang pinakamahalagang bayani ng Pilipinas, si Rizal ay isang manunulat, doktor, at siyentipiko. Ang kanyang mga nobelang *Noli Me Tángere* at *El Filibusterismo* ay naging instrumento ng paggising ng kamalayang Pilipino laban sa kolonyal na pang-aapi ng Espanya.\n    -   **Kahalagahan:** Ang kanyang paghihirap at pagkamatay sa pamamagitan ng pagpapalaglag ay naging simbolo ng pag-ibig sa bayan at pagtutol sa pang-aapi. Ang kanyang mga gawa ay naging batayan ng rebolusyonaryong diwa ng mga Pilipino.\n    -   **Sumber:** National Historical Commission of the Philippines (NHCP), \"José Rizal: The Life and Works,\" [https://www.nhcp.gov.ph](https://www.nhcp.gov.ph)\n\n2.  **Andrés Bonifacio (1863–1897)**\n    -   **Ambag:** Siya ang pinuno ng Katipunan, ang unang sekretong samahan na nag-organisa ng rebolusyon laban sa Espanya. Siya ang nagsulat ng *Kartilya ng Katipunan*, isang dokumento na naglalayong magturo ng mga aral ng pagmamahal sa bayan at moralidad.\n    -   **Kahalagahan:** Kilala bilang \"Ama ng Rebolusyon,\" si Bonifacio ay naging simbolo ng pagkakaisa at pagtutol sa kolonyalismo. Ang kanyang pagkamatay sa kamay ng kanyang sariling mga kasamahan ay naging bahagi ng makasaysayang pag-unawa sa rebolusyon.\n    -   **Sumber:** NHCP, \"Andrés Bonifacio: The Supremo,\" [https://www.nhcp.gov.ph](https://www.nhcp.gov.ph)\n\n3.  **Emilio Aguinaldo (1869–1964)**\n    -   **Ambag:** Siya ang unang Pangulo ng Republika ng Pilipinas at naging pinuno ng rebolusyonaryong hukbo laban sa Espanya at kalaunan ay laban sa Estados Unidos. Siya ang nagpahayag ng kalayaan ng Pilipinas noong Hunyo 12, 1898.\n    -   **Kahalagahan:** Ang kanyang papel sa pagtatatag ng unang republika sa Asya ay naging mahalagang bahagi ng kasaysayan ng Pilipinas. Ang kanyang pamumuno ay nagpapakita ng paghahangad ng kalayaan at pagkakaisa ng bansa.\n    -   **Sumber:** NHCP, \"Emilio Aguinaldo: The First President,\" [https://www.nhcp.gov.ph](https://www.nhcp.gov.ph)\n\nAng mga bayaning ito ay naging simbolo ng pag-ibig sa bayan, pagtutol sa pang-aapi, at paghahangad ng kalayaan ng Pilipinas. Ang kanilang mga ambag ay patuloy na pinag-aaralan at pinahahalagahan sa konteksto ng pambansang kasaysayan.","level":"info","message":"Inference Client response:","role":"assistant"}
+{"file":"ai-service.js","level":"info","message":"AI response received successfully"}
+{"file":"ai-service.js","level":"debug","message":"Valid text response from AI"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
+{"level":"debug","message":"Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js"}
+{"file":"ai-helper.js","level":"debug","message":"Knowledge base loaded successfully with 4 categories"}
+{"level":"info","message":"Starting BrainBytes Backend - Environment: development"}
+{"level":"info","message":"CORS enabled for: http://localhost:8080, http://frontend:3001"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Server running on port 3000"}
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: bakit nanalo ang kuneho at hindi ang pagong?"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: history"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"bakit nanalo ang kuneho at hindi ang pagong?\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"bakit nanalo ang kuneho at hindi ang pagong?\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: history, Question Type: general"}
+{"file":"ai-helper.js","level":"debug","message":"Question: bakit nanalo ang kuneho at hindi ang pagong?"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: history"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: general"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in history. Please respond to the following question.\n\nProvide factual, well-sourced information.\n\nAnswer the question directly and helpfully.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"bakit nanalo ang kuneho at hindi ang pagong?\""}
+{"file":"ai-service.js","level":"debug","message":"No direct match in knowledge base, proceeding to call AI"}
+{"file":"ai-service.js","level":"debug","message":"Constructing complete prompt..."}
+{"file":"ai-service.js","level":"debug","message":"Calling AI API with prompt..."}
+{"level":"debug","message":"question:"}
+{"content":"Ang tanong mo ay tungkol sa kuwentong \"Ang Pagong at Ang Kuneho\" (The Tortoise and the Hare), isang alamat na nagmula sa mga **fables ni Aesop**. Ang kuwento ay nagtuturo ng aral na **\"ang pagiging matiyaga at disiplinado ay mas mahalaga kaysa sa pagiging mabilis at mapagmataas.\"**\n\n### Bakit nanalo ang kuneho at hindi ang pagong?\n\nSa orihinal na kuwento, **nanalo ang pagong**, hindi ang kuneho. Ang kuwento ay nagsasabi na:\n\n- Ang **kuneho** ay **mabilis** ngunit **mapagmataas** at **nagpapahinga** sa gitna ng laban.\n- Ang **pagong**, bagaman **mabagal**, ay **matiyaga** at **hindi nagpapahinga**.\n- Dahil dito, **nanalo ang pagong** sa laban.\n\n### Mga bersyon ng kuwento:\n- Sa ilang mga bersyon, lalo na sa mga **kultura sa Timog-Silangang Asya**, ang kuwento ay maaaring **binago** upang magbigay ng iba't ibang aral. Halimbawa, sa ilang bersyon, ang **kuneho** ay nanalo dahil sa **kanyang katalinuhan** o **pagiging mapagkumbinsi**.\n- Ang mga pagbabago na ito ay nagpapakita ng **kultural na pag-aangkop** ng kuwento upang masagot ang mga lokal na aral at halagahan.\n\n### Mga pinagmulan:\n- Ang orihinal na kuwento ay mula sa **Aesop's Fables**, isang koleksyon ng mga alamat na nagmula sa **Greece**.\n- Ang mga bersyon na may pagbabago ay maaaring makita sa mga **aklat ng alamat sa Pilipinas** at iba pang bansa sa **Timog-Silangang Asya**.\n\n### Konklusyon:\n- **Sa orihinal na kuwento**, **nanalo ang pagong** dahil sa kanyang **pagiging matiyaga**.\n- **Sa ilang bersyon**, maaaring **nanalo ang kuneho** dahil sa **kanyang katalinuhan** o **pagiging mapagkumbinsi**.\n- Ang kuwento ay isang **magandang halimbawa** kung paano ang mga alamat ay **nagbabago** upang magbigay ng aral na angkop sa kultura at konteksto ng mga tagapakinig.\n\nKung nais mong malaman ang isang partikular na bersyon ng kuwento mula sa Pilipinas o iba pang bansa, maaari kong hanapin ang mga detalye para sa iyo.","level":"info","message":"Inference Client response:","role":"assistant"}
+{"file":"ai-service.js","level":"info","message":"AI response received successfully"}
+{"file":"ai-service.js","level":"debug","message":"Valid text response from AI"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
+{"level":"debug","message":"Attempting to load knowledge base from: ./knowledge-base.yaml, file: ai-helper.js"}
+{"file":"ai-helper.js","level":"debug","message":"Knowledge base loaded successfully with 4 categories"}
+{"level":"info","message":"Starting BrainBytes Backend - Environment: development"}
+{"level":"info","message":"CORS enabled for: http://localhost:8080, http://frontend:3001"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Server running on port 3000"}
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: ano ang paborito mo na alamat?"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: history"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"ano ang paborito mo na alamat?\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"ano ang paborito mo na alamat?\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: history, Question Type: general"}
+{"file":"ai-helper.js","level":"debug","message":"Question: ano ang paborito mo na alamat?"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: history"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: general"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in history. Please respond to the following question.\n\nProvide factual, well-sourced information.\n\nAnswer the question directly and helpfully.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"ano ang paborito mo na alamat?\""}
+{"file":"ai-service.js","level":"debug","message":"No direct match in knowledge base, proceeding to call AI"}
+{"file":"ai-service.js","level":"debug","message":"Constructing complete prompt..."}
+{"file":"ai-service.js","level":"debug","message":"Calling AI API with prompt..."}
+{"level":"error","message":"AI response timed out or failed: Request timeout","stack":"Error: Request timeout\n    at Timeout.<anonymous> (file:///usr/src/app/src/controllers/message-controller.js:51:43)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
+{"level":"debug","message":"question:"}
+{"content":"Ang tanong mo ay tungkol sa aking paboritong alamat. Bilang isang AI, wala akong personal na paborito, ngunit maaari kong ipakilala sa iyo ang ilan sa mga sikat at kahanga-hangang alamat mula sa Pilipinas at iba pang bansa, kasama ang kanilang mga pinagmulan at kahalagahan.\n\n### Mga Sikat na Alamat sa Pilipinas:\n\n1. **Alamat ng Pinya (Pineapple)**  \n   - **Pinagmulan:** Ito ay isang alamat mula sa Bicol.  \n   - **Kwento:** Ang alamat ay nagsasalaysay ng isang magandang dalaga na iniligtas ng isang prinsipe. Bilang pasasalamat, ang dalaga ay nagbigay ng isang prutas na may mga talim-talim sa labas at matamis sa loob—ang pinya.  \n   - **Kahalagahan:** Ito ay nagpapakita ng kagandahan at kahalagahan ng pagtulong sa kapwa.\n\n2. **Alamat ng Ilog Pasig**  \n   - **Pinagmulan:** Mula sa Metro Manila.  \n   - **Kwento:** Ang alamat ay nagsasalaysay ng isang prinsesa na nagmula sa isang puno ng pasig (isang uri ng puno) at naging pinagmulan ng ilog.  \n   - **Kahalagahan:** Ito ay nagpapakita ng ugnayan ng mga Pilipino sa kalikasan at kung paano ang mga ilog ay may kultural at espirituwal na kahalagahan.\n\n3. **Alamat ng Banaue Rice Terraces**  \n   - **Pinagmulan:** Ifugao, Luzon.  \n   - **Kwento:** Ang alamat ay nagsasalaysay ng isang diyos na nagturo sa mga tao kung paano magtanim ng palay sa mga bundok.  \n   - **Kahalagahan:** Ito ay nagpapakita ng kahusayan at pagmamahal ng mga Ifugao sa kanilang lupain at kultura.\n\n### Mga Alamat mula sa Iba't Ibang Bansa:\n\n1. **Alamat ng Japan: The Tale of the Bamboo Cutter (Taketori Monogatari)**  \n   - **Pinagmulan:** Japan, ika-10 siglo.  \n   - **Kwento:** Ang alamat ay nagsasalaysay ng isang batang babae na natagpuan sa loob ng isang kawayan at naging hari ng langit.  \n   - **Kahalagahan:** Ito ay isa sa pinakamatandang alamat sa Japan at nagpapakita ng kultura ng paggalang sa kalikasan at espirituwalidad.\n\n2. **Alamat ng Greece: The Origin of the Moon and the Sun**  \n   - **Pinagmulan:** Griyego.  \n   - **Kwento:** Ang alamat ay nagsasalaysay ng mga diyos na nagtayo ng araw at buwan upang magbigay ng liwanag sa mundo.  \n   - **Kahalagahan:** Ito ay nagpapakita ng paniniwala ng mga Griyego sa mitolohiya at kung paano nila ipinaliwanag ang kalikasan.\n\n### Paano Gamitin ang mga Alamat sa Pag-aaral:\n- Ang mga alamat ay nagbibigay ng pananaw sa kultura, paniniwala, at halaga ng isang lipunan.\n- Maaari itong gamitin upang maunawaan ang kasaysayan at tradisyon ng isang bansa.\n- Ang pag-aaral ng mga alamat ay nagpapalakas ng kritikal na pag-iisip at pag-unawa sa kultura.\n\nKung mayroon kang isang partikular na alamat na nais mong pag-usapan o kung nais mong malaman ang higit pa tungkol sa isang partikular na kwento, maaari kong tulungan ka.","level":"info","message":"Inference Client response:","role":"assistant"}
+{"file":"ai-service.js","level":"info","message":"AI response received successfully"}
+{"file":"ai-service.js","level":"debug","message":"Valid text response from AI"}
+{"file":"ai-service.js","level":"debug","message":"Starting generateResponse function"}
+{"file":"ai-service.js","level":"info","message":"Received question from user: ano ang paborito mo na alamat?"}
+{"file":"ai-service.js","level":"info","message":"Subject context category: history"}
+{"file":"ai-service.js","level":"debug","message":"Generating prompt prefix..."}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Starting prompt generation for question: \"ano ang paborito mo na alamat?\""}
+{"file":"ai-helper.js","level":"debug","message":"[detectQuestionType] Analyzing question type for: \"ano ang paborito mo na alamat?\""}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Category: history, Question Type: general"}
+{"file":"ai-helper.js","level":"debug","message":"Question: ano ang paborito mo na alamat?"}
+{"file":"ai-helper.js","level":"debug","message":"Detected category: history"}
+{"file":"ai-helper.js","level":"debug","message":"Detected question type: general"}
+{"file":"ai-helper.js","level":"debug","message":"[generatePromptPrefix] Generated prompt:\nYou are a helpful AI academic tutor specializing in history. Please respond to the following question.\n\nProvide factual, well-sourced information.\n\nAnswer the question directly and helpfully.\n\n\n\nQuestion: "}
+{"file":"ai-helper.js","level":"info","message":"[generatePromptPrefix] Prompt generation complete"}
+{"file":"ai-service.js","level":"debug","message":"Prompt prefix generated"}
+{"file":"ai-service.js","level":"debug","message":"Checking knowledge base for direct matches..."}
+{"file":"ai-helper.js","level":"debug","message":"[getAnswerFromKnowledgeBase] Starting search for question: \"ano ang paborito mo na alamat?\""}
+{"file":"ai-service.js","level":"debug","message":"No direct match in knowledge base, proceeding to call AI"}
+{"file":"ai-service.js","level":"debug","message":"Constructing complete prompt..."}
+{"file":"ai-service.js","level":"debug","message":"Calling AI API with prompt..."}
+{"level":"debug","message":"question:"}
+{"content":"Ang tanong mo ay tungkol sa aking paboritong alamat. Bilang isang AI, wala akong personal na paborito, ngunit maaari kong ipakilala sa iyo ang ilan sa mga sikat at kahanga-hangang alamat mula sa Pilipinas at iba pang bansa, kasama ang kanilang mga pinagmulan at kahalagahan.\n\n### Mga Sikat na Alamat sa Pilipinas:\n\n1. **Alamat ng Pinya (Pineapple)**  \n   - **Pinagmulan:** Ito ay isang alamat mula sa Bicol.  \n   - **Kwento:** Ang alamat ay nagsasalaysay ng isang magandang dalaga na iniligtas ng isang prinsipe. Bilang pasasalamat, ang dalaga ay nagbigay ng isang prutas na may mga talim-talim sa labas at matamis sa loob—ang pinya.  \n   - **Kahalagahan:** Ito ay nagpapakita ng kagandahan at kahalagahan ng pagtulong sa kapwa.\n\n2. **Alamat ng Ilog Pasig**  \n   - **Pinagmulan:** Mula sa Metro Manila.  \n   - **Kwento:** Ang alamat ay nagsasalaysay ng isang prinsesa na nagmula sa isang puno ng pasig (isang uri ng puno) at naging pinagmulan ng ilog.  \n   - **Kahalagahan:** Ito ay nagpapakita ng ugnayan ng mga Pilipino sa kalikasan at kung paano ang mga ilog ay may kultural at espirituwal na kahalagahan.\n\n3. **Alamat ng Banaue Rice Terraces**  \n   - **Pinagmulan:** Ifugao, Luzon.  \n   - **Kwento:** Ang alamat ay nagsasalaysay ng isang diyos na nagturo sa mga tao kung paano magtanim ng palay sa mga bundok.  \n   - **Kahalagahan:** Ito ay nagpapakita ng kahusayan at pagmamahal ng mga Ifugao sa kanilang lupain at kultura.\n\n### Mga Alamat mula sa Iba't Ibang Bansa:\n\n1. **Alamat ng Japan: The Tale of the Bamboo Cutter (Taketori Monogatari)**  \n   - **Pinagmulan:** Japan, ika-10 siglo.  \n   - **Kwento:** Ang alamat ay nagsasalaysay ng isang batang babae na natagpuan sa loob ng isang kawayan at naging hari ng langit.  \n   - **Kahalagahan:** Ito ay isa sa pinakamatandang alamat sa Japan at nagpapakita ng kultura ng paggalang sa kalikasan at espirituwalidad.\n\n2. **Alamat ng Greece: The Origin of the Moon and the Sun**  \n   - **Pinagmulan:** Griyego.  \n   - **Kwento:** Ang alamat ay nagsasalaysay ng mga diyos na nagtayo ng araw at buwan upang magbigay ng liwanag sa mundo.  \n   - **Kahalagahan:** Ito ay nagpapakita ng paniniwala ng mga Griyego sa mitolohiya at kung paano nila ipinaliwanag ang kalikasan.\n\n### Paano Gamitin ang mga Alamat sa Pag-aaral:\n- Ang mga alamat ay nagbibigay ng pananaw sa kultura, paniniwala, at halaga ng isang lipunan.\n- Maaari itong gamitin upang maunawaan ang kasaysayan at tradisyon ng isang bansa.\n- Ang pag-aaral ng mga alamat ay nagpapalakas ng kritikal na pag-iisip at pag-unawa sa kultura.\n\nKung mayroon kang isang partikular na alamat na nais mong pag-usapan o kung nais mong malaman ang higit pa tungkol sa isang partikular na kwento, maaari kong tulungan ka.","level":"info","message":"Inference Client response:","role":"assistant"}
+{"file":"ai-service.js","level":"info","message":"AI response received successfully"}
+{"file":"ai-service.js","level":"debug","message":"Valid text response from AI"}
+{"file":"message-controller.js","level":"info","message":"Guest messages generated in-memory"}
