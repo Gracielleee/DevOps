@@ -9,6 +9,14 @@ import learningMaterialsRoutes from './src/routes/learning-material.js';
 import subjectRoutes from './src/routes/subject.js';
 import errorHandler from './src/middleware/errorHandler.js';
 
+const requiredEnvVars = ['MONGO_URI', 'JWT_SECRET'];
+const missingEnvVars = requiredEnvVars.filter(key => !process.env[key]);
+
+if (missingEnvVars.length > 0) {
+  console.error(`FATAL ERROR: Missing required environment variables: ${missingEnvVars.join(', ')}`);
+  process.exit(1);
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI;
