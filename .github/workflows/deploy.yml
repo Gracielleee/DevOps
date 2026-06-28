@@ -41,14 +41,25 @@ jobs:
         run: |
           echo "Deploying backend with image tag: ${{ steps.image-tag.outputs.tag }}"
           OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}&imgURL=ghcr.io/$OWNER_LOWER/brainbytes-backend:${{ steps.image-tag.outputs.tag }}"
-            
+          RESPONSE=$(curl -s -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}&imgURL=ghcr.io/$OWNER_LOWER/brainbytes-backend:${{ steps.image-tag.outputs.tag }}")
+
+          echo "Render response: $RESPONSE"
+          if [[ "$RESPONSE" != *"deploy"* ]]; then
+            echo "Error: Render rejected the deployment."
+            exit 1
+          fi
 
       - name: Trigger Frontend Render Deployment with Registry Image
         run: |
           echo "Deploying frontend with image tag: ${{ steps.image-tag.outputs.tag }}"
           OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}&imgURL=ghcr.io/$OWNER_LOWER/brainbytes-frontend:${{ steps.image-tag.outputs.tag }}"
+          RESPONSE=$(curl -s -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}&imgURL=ghcr.io/$OWNER_LOWER/brainbytes-frontend:${{ steps.image-tag.outputs.tag }}")
+
+          echo "Render response: $RESPONSE"
+          if [[ "$RESPONSE" != *"deploy"* ]]; then
+            echo "Error: Render rejected the deployment."
+            exit 1
+          fi
 
       - name: Verify Live Backend Deployment
         run: |
