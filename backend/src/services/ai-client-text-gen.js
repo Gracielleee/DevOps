@@ -8,7 +8,7 @@ const fileName = "ai-client-text-gen.js";
 export async function getResponseFromAI(question, conversationHistory = []) {
     try{
         const chatCompletion = await client.chatCompletion({
-                model: "Qwen/Qwen2.5-7B-Instruct:cheapest",
+                model: "aisingapore/Qwen-SEA-LION-v4-32B-IT:cheapest",
                 messages: [
                     ...conversationHistory,
                     {

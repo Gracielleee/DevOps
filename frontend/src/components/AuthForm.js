@@ -19,8 +19,28 @@ export default function AuthPage({ mode, onLoginSuccess, setGlobalError }) {
   }, []);
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-  const LOGIN_ENDPOINT = `${API_BASE_URL}login`;
-  const REGISTER_ENDPOINT = `${API_BASE_URL}register`;
+
+  function normalizeBaseUrl(base) {
+    if (!base) return null;
+    // remove trailing slashes then we will add exactly one slash when joining
+    return String(base).replace(/\/+$/, "");
+  }
+
+  const normalizedApiBaseUrl = normalizeBaseUrl(API_BASE_URL);
+
+  if (!normalizedApiBaseUrl) {
+    // Fail fast in dev/prod with a clear error rather than creating `undefinedlogin`.
+    console.error(
+      "AuthForm: NEXT_PUBLIC_API_URL is missing/empty. Set it to your backend base URL (e.g. https://<backend-domain>/api/)."
+    );
+  }
+
+  const LOGIN_ENDPOINT = normalizedApiBaseUrl
+    ? `${normalizedApiBaseUrl}/login`
+    : "";
+  const REGISTER_ENDPOINT = normalizedApiBaseUrl
+    ? `${normalizedApiBaseUrl}/register`
+    : "";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,6 +55,11 @@ export default function AuthPage({ mode, onLoginSuccess, setGlobalError }) {
 
   async function login() {
     try {
+      if (!LOGIN_ENDPOINT) {
+        throw new Error(
+          "Missing NEXT_PUBLIC_API_URL. Frontend cannot reach backend."
+        );
+      }
       const response = await fetch(LOGIN_ENDPOINT, {
         method: "POST",
         headers: {
@@ -79,6 +104,11 @@ export default function AuthPage({ mode, onLoginSuccess, setGlobalError }) {
 
   async function register() {
     try {
+      if (!REGISTER_ENDPOINT) {
+        throw new Error(
+          "Missing NEXT_PUBLIC_API_URL. Frontend cannot reach backend."
+        );
+      }
 
       const response = await fetch(REGISTER_ENDPOINT, {
         method: "POST",
