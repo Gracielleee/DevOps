@@ -6,9 +6,11 @@ services:
     region: singapore
     plan: free
     numInstances: 1
-    registryCredentialId: brainbytes-dchr-pull
     image:
       url: ghcr.io/gracielleee/brainbytes-backend:latest
+      creds:
+        fromRegistryCreds:
+          name: brainbytes-dchr-pull
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
@@ -35,6 +37,9 @@ services:
     registryCredentialId: brainbytes-dchr-pull
     image:
       url: ghcr.io/gracielleee/brainbytes-frontend:latest
+      creds:
+        fromRegistryCreds:
+          name: brainbytes-dchr-pull
     healthCheckPath: /
     envVars:
       - key: NEXT_PUBLIC_API_URL
