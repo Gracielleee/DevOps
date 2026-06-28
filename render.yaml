@@ -1,15 +1,13 @@
 services:
   - type: web
     name: brainbytes-backend
-    runtime: docker
+    runtime: image
     autoDeploy: false 
     region: singapore
     plan: free
     numInstances: 1
     image:
-      registry: ghcr.io
-      name: gracielleee/brainbytes-backend
-      tag: latest
+      url: ghcr.io/Gracielleee/brainbytes-backend:latest
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
@@ -28,15 +26,13 @@ services:
 
   - type: web
     name: brainbytes-frontend
-    runtime: docker
+    runtime: image
     autoDeploy: false 
     region: singapore
     plan: free
     numInstances: 1
     image:
-      registry: ghcr.io
-      name: gracielleee/brainbytes-frontend
-      tag: latest
+          url: ghcr.io/Gracielleee/brainbytes-frontend:latest
     healthCheckPath: /
     envVars:
       - key: NEXT_PUBLIC_API_URL
