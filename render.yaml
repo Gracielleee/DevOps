@@ -2,15 +2,15 @@ services:
   - type: web
     name: brainbytes-backend
     runtime: docker
-    region: ohio
-    plan: standard
+    autoDeploy: false 
+    region: singapore
+    plan: free
     numInstances: 1
+    image:
+      registry: ghcr.io
+      name: gracielleee/brainbytes-backend
+      tag: latest
     healthCheckPath: /health
-    healthCheckInterval: 30
-    healthCheckTimeout: 5
-    healthCheckStartPeriod: 30
-    dockerfile: ./backend/Dockerfile
-    dockerCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
@@ -29,17 +29,19 @@ services:
   - type: web
     name: brainbytes-frontend
     runtime: docker
-    region: ohio
-    plan: standard
+    autoDeploy: false 
+    region: singapore
+    plan: free
     numInstances: 1
+    image:
+      registry: ghcr.io
+      name: gracielleee/brainbytes-frontend
+      tag: latest
     healthCheckPath: /
-    healthCheckInterval: 30
-    healthCheckTimeout: 5
-    healthCheckStartPeriod: 30
-    dockerfile: ./frontend/Dockerfile
-    dockerCommand: npm start
     envVars:
       - key: NEXT_PUBLIC_API_URL
         value: /api/
       - key: BACKEND_URL
         value: https://brainbytes-zovh.onrender.com
+      - key: NODE_ENV
+        value: production
