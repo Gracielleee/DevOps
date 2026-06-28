@@ -97,45 +97,43 @@ jobs:
           echo "Error: Frontend failed to start within 6 minutes."
           exit 1
 
-      - name: Record deployment metadata
+      - name: Record rollback metadata
         if: always()
         run: |
           mkdir -p deployment-logs
-          cat > deployment-logs/deployment-${{ github.run_id }}.json <<EOF
+          cat > deployment-logs/rollback-${{ github.run_id }}.json <<EOF
           {
             "workflow_run_id": "${{ github.run_id }}",
-            "commit_sha": "${{ github.sha }}",
-            "branch": "${{ github.ref_name }}",
-            "image_tag": "${{ steps.image-tag.outputs.tag }}",
+            "target_service": "${{ github.event.inputs.service }}",
+            "image_tag": "${{ github.event.inputs.image_tag }}",
             "timestamp": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')",
-            "deployed_by": "${{ github.actor }}",
-            "status": "success",
+            "rolled_back_by": "${{ github.actor }}",
+            "job_status": "${{ job.status }}",
             "backend_url": "${{secrets.RENDER_SERVICE_BE_URL}}",
             "frontend_url": "${{secrets.RENDER_SERVICE_FE_URL}}"
           }
           EOF
-          cat deployment-logs/deployment-${{ github.run_id }}.json
+          cat deployment-logs/rollback-${{ github.run_id }}.json
 
-      - name: Upload deployment logs
+      - name: Upload rollback logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: deployment-logs
+          name: rollback-logs
           path: deployment-logs/
           retention-days: 90
 
-      - name: Notify deployment success
+      - name: Notify rollback success
         if: success()
         run: |
           OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          echo "✓ Deployment completed successfully at $(date)"
-          echo "Images deployed:"
-          echo "  - Backend: ghcr.io/$OWNER_LOWER/brainbytes-backend:${{ steps.image-tag.outputs.tag }}"
-          echo "  - Frontend: ghcr.io/$OWNER_LOWER/brainbytes-frontend:${{ steps.image-tag.outputs.tag }}"
+          echo "✓ Rollback completed successfully at $(date)"
+          echo "Reverted to image tag: ${{ github.event.inputs.image_tag }}"
+          echo "Service(s) affected: ${{ github.event.inputs.service }}"
 
-      - name: Notify deployment failure
+      - name: Notify rollback failure
         if: failure()
         run: |
-          echo "✗ Deployment failed"
-          echo "Check logs above for details"
+          echo "✗ Rollback failed"
+          echo "Check the health verification logs above for details."
           exit 1
