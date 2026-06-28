@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: brainbytes-backend
+    runtime: image
+    autoDeploy: false 
+    region: singapore
+    plan: free
+    numInstances: 1
+    image:
+      url: ghcr.io/gracielleee/brainbytes-backend:latest
+      creds:
+        fromRegistryCreds:
+          name: brainbytes-dchr-pull
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        scope: run
+        sync: false
+      - key: JWT_SECRET
+        scope: run
+        sync: false
+      - key: HF_TOKEN
+        scope: run
+        sync: false
+      - key: FE_URL
+        value: https://brainbytes-frontend-brj1.onrender.com
+      - key: PORT
+        value: 3000
+
+  - type: web
+    name: brainbytes-frontend
+    runtime: image
+    autoDeploy: false 
+    region: singapore
+    plan: free
+    numInstances: 1
+    image:
+      url: ghcr.io/gracielleee/brainbytes-frontend:latest
+      creds:
+        fromRegistryCreds:
+          name: brainbytes-dchr-pull
+    healthCheckPath: /
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: /api/
+      - key: BACKEND_URL
+        value: http://brainbytes-backend:3000
+      - key: NODE_ENV
+        value: production
