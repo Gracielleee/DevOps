@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: brainbytes-backend
+    runtime: docker
+    autoDeploy: false 
+    region: singapore
+    plan: free
+    numInstances: 1
+    image:
+      registry: ghcr.io
+      name: gracielleee/brainbytes-backend
+      tag: latest
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        scope: run
+        sync: false
+      - key: JWT_SECRET
+        scope: run
+        sync: false
+      - key: HF_TOKEN
+        scope: run
+        sync: false
+      - key: FE_URL
+        value: https://devops-fe-4m5i.onrender.com
+
+  - type: web
+    name: brainbytes-frontend
+    runtime: docker
+    autoDeploy: false 
+    region: singapore
+    plan: free
+    numInstances: 1
+    image:
+      registry: ghcr.io
+      name: gracielleee/brainbytes-frontend
+      tag: latest
+    healthCheckPath: /
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: /api/
+      - key: BACKEND_URL
+        value: https://brainbytes-zovh.onrender.com
+      - key: NODE_ENV
+        value: production
