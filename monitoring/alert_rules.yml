@@ -1,9 +1,13 @@
 groups:
 - name: BrainBytes Alert
   rules:
-  - alert: HighCPUUsage
-    expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
-    for: 5m
+  # - alert: HighCPUUsage
+  #   expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+  #   for: 5m
+  - alert: HighContainerCPUUsage
+    expr: sum(rate(container_cpu_usage_seconds_total{container_label_com_docker_compose_service="backend"}[2m])) by (container_label_com_docker_compose_service) * 100 > 80
+    for: 1m
+
     labels:
       severity: warning
     annotations:
@@ -25,25 +29,50 @@ groups:
     labels:
       severity: warning
     annotations:
-      summary: "Low Disk Space detected on {{ $labels.instance }} at {{ $labels.mountpoint }}"
-      description: "Disk space is below 15% for more than 5 minutes."   
+      summary: "Low Disk Space on {{ $labels.instance }}"
+      description: "Disk space is below 15% for more than 5 minutes."
 
-
-  # Application-specific alerts
   - alert: HighErrorRate
-    expr: sum( rate(brainbyte_http_requests_total{status=~"5.."}[5m]) * 100 > 5
+    expr: 100 * sum(rate(brainbytes_http_requests_total{status=~"5.."}[5m])) / sum(rate(brainbytes_http_requests_total[5m])) > 5
     for: 2m
     labels:
       severity: critical
     annotations:
-      summary: "High error rate detected on {{ $labels.instance }}"
-      description: "Error rate is above 5% for more than 2 minutes." 
-  
+      summary: "High error rate detected"
+      description: "Error rate is {{ $value | humanize }}% for more than 2 minutes."
+
   - alert: SlowResponseTime
-    expr: histogram_quantile(0.95, sum(rate(brainbyte_http_request_duration_seconds_bucket[5m])) by (le)) > 2
+    expr: histogram_quantile(0.95, sum(rate(brainbytes_http_request_duration_seconds_bucket[5m])) by (le)) > 2
     for: 2m
     labels:
       severity: warning
     annotations:
-      summary: "Slow response time detected on {{ $labels.instance }}"
-      description: "95th percentile response time is above 2 seconds for more than 2 minutes."
+      summary: "Slow response time detected"
+      description: "95th percentile response time is {{ $value | humanize }}s."
+
+  - alert: NetworkInstability
+    expr: rate(node_network_receive_errs_total[5m]) > 0 or rate(node_network_transmit_errs_total[5m]) > 0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Network instability detected on {{ $labels.instance }}"
+      description: "Network errors detected for more than 5 minutes."
+
+  - alert: AIServiceEmptyResponse
+    expr: sum(rate(brainbytes_ai_empty_responses_total[5m])) > 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "AI service returning empty responses"
+      description: "{{ $value | humanize }} empty responses per second."
+
+  - alert: HighConnectionDrops
+    expr: sum(rate(brainbytes_connection_drops_total[5m])) > 1
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High connection drop rate"
+      description: "{{ $value | humanize }} drops per second due to {{ $labels.reason }}."

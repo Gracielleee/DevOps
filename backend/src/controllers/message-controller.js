@@ -10,8 +10,8 @@ const fileName = "message-controller.js";
 
 const messageController = {
   createMessage: async (req, res) => {
-    let timerId;
     let conversationHistory = [];
+    let timerId;
 
     try {
       const content = req.body.text;
@@ -53,7 +53,6 @@ const messageController = {
       // MONITORING: Start the Prometheus timer shell before the race starts
       const endAiTimer = aiResponseTimeHistogram.startTimer();
 
-      let timerId;
       const timeoutPromise = new Promise((_, reject) => {
         timerId = setTimeout(() => reject(new Error("Request timeout")), 15000);
       });
@@ -83,11 +82,11 @@ const messageController = {
 //-----------------------------------------MONITORING BLOCK ---------------------------------------
       if (aiResult && aiResult.category === "error") {
         // The request timed out or dropped an error
-        trackAiRequest(subjectCategory, endAiTimer, null, false);
+        trackAiRequest(subjectCategory, endAiTimer, content, null, false);
+
       } else {
         // The request succeeded inside the 15-second window
         if (aiResult && aiResult.category !== "error") {
-          
           // Convert the array of history objects into a string
           const formattedHistoryText = conversationHistory
             .map(msg => `${msg.role}: ${msg.content}`)
@@ -95,7 +94,7 @@ const messageController = {
 
           const totalTextPayload = `Prompt: ${content}\nHistory:\n${formattedHistoryText}`;
 
-          trackAiRequest(subjectCategory, endAiTimer, totalTextPayload, true);
+          trackAiRequest(subjectCategory, endAiTimer, totalTextPayload, aiResult.response, true);
         }
       }
 //-------------------------------------------------------------------------------------------------
