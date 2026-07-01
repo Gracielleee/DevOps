@@ -33,7 +33,7 @@ const errorHandler = (err, req, res, _next) => {
       connectionDropCounter.inc({ reason: 'network_error' });
     }
   } catch (e) {
-    // swallow metric errors
+    console.error('Error incrementing connection drop metric:', e);
   }
   res.status(statusCode).json({ message });
 };
