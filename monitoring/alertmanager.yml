@@ -6,12 +6,12 @@ route:
   group_wait: 30s
   group_interval: 5m
   repeat_interval: 4h
-  receiver: 'web-hook'
+  receiver: 'default-receiver'
 
 receivers:
-  - name: 'web-hook'
+  - name: 'default-receiver'
     webhook_configs:
-      - url: 'http://localhost:8080/alert'
+      - url: 'http://backend:3000/api/alerts' 
         send_resolved: true
 
 inhibit_rules:

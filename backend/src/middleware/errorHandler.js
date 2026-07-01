@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator';
 import logger from '../config/logger.js';
+import { connectionDropCounter } from '../monitoring/metrics.js';
 
 const errorHandler = (err, req, res, _next) => {
   logger.error('An error occurred:', err, { file: 'errorHandler.js', path: req.path });
@@ -24,6 +25,16 @@ const errorHandler = (err, req, res, _next) => {
   // General error handling
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Something went wrong on the server.';
+  // Increment connection drop metric for known network/connection errors
+  try {
+    const code = err.code || '';
+    const msg = (err.message || '').toLowerCase();
+    if (['ECONNRESET', 'ECONNABORTED'].includes(code) || msg.includes('socket hang up')) {
+      connectionDropCounter.inc({ reason: 'network_error' });
+    }
+  } catch (e) {
+    // swallow metric errors
+  }
   res.status(statusCode).json({ message });
 };
 

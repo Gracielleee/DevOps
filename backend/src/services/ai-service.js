@@ -1,6 +1,7 @@
 import { getResponseFromAI } from "./ai-client-text-gen.js";
 import { getAnswerFromKnowledgeBase, generatePromptPrefix, getBackupResponse } from "./ai-helper.js";
 import logger from "../config/logger.js";
+import { trackAiResponseLength } from "../monitoring/trackers.js";
 
 const fileName = "ai-service.js";
 
@@ -41,12 +42,14 @@ export async function generateResponse(question, subjectCategory = 'general', co
 
     if (aiResponseString) {
       logger.debug("Valid text response from AI", { file: fileName });
+      trackAiResponseLength(category, aiResponseString, true);
       return {
         category,
         response: aiResponseString
       };
     } else {
       logger.warn("Empty response from AI", { file: fileName });
+      trackAiResponseLength(category, aiResponseString, false);
       throw new Error("Empty response from AI");
     }
 

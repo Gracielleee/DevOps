@@ -56,7 +56,7 @@ function buildApiUrl(base, endpoint) {
   const rawBase = base || DEFAULT_API_BASE_URL;
   if (!rawBase) {
     throw new Error(
-      "apiFetch: NEXT_PUBLIC_API_URL is missing/empty. Set it to your backend base URL (e.g. https://<backend-domain>/api/)."
+      "apiFetch: NEXT_PUBLIC_API_URL is missing/empty. Set it to your backend base URL (e.g. https://<backend-domain>/api/).",
     );
   }
 
@@ -67,12 +67,45 @@ function buildApiUrl(base, endpoint) {
 
 export default async function apiFetch(endpoint, options = {}) {
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || DEFAULT_API_BASE_URL;
-  const url = endpoint.startsWith("http") ? endpoint : buildApiUrl(API_BASE_URL, endpoint);
+  const url = endpoint.startsWith("http")
+    ? endpoint
+    : buildApiUrl(API_BASE_URL, endpoint);
 
-  const { redirectOnAuthError = true, allowAnonymous = false, softFail = false, ...fetchOptions } = options;
+  const {
+    redirectOnAuthError = true,
+    allowAnonymous = false,
+    softFail = false,
+    ...fetchOptions
+  } = options;
+
+  let networkType = "unknown";
+  let clientPlatform = "desktop";
+
+  if (typeof window !== "undefined") {
+    // Read the browser's Network Information API
+    const conn =
+      navigator.connection ||
+      navigator.mozConnection ||
+      navigator.webkitConnection;
+    if (conn && conn.effectiveType) {
+      networkType = conn.effectiveType; 
+    }
+
+    // Determine platform
+    const isMobileBrowser = /Mobi|Android|iPhone|iPad|iPod/i.test(
+      navigator.userAgent,
+    );
+    if (isMobileBrowser) {
+      clientPlatform = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+        ? "ios"
+        : "android";
+    }
+  }
 
   const defaultHeaders = {
     "Content-Type": "application/json",
+    "X-Network-Type": networkType,
+    "X-Client-Platform": clientPlatform,
     ...fetchOptions.headers,
   };
 
@@ -80,7 +113,10 @@ export default async function apiFetch(endpoint, options = {}) {
   const tokenWasSent = !!authHeader;
 
   try {
-    const response = await fetch(url, { ...fetchOptions, headers: defaultHeaders });
+    const response = await fetch(url, {
+      ...fetchOptions,
+      headers: defaultHeaders,
+    });
 
     let data = null;
     const contentType = response.headers.get("content-type");
@@ -97,12 +133,10 @@ export default async function apiFetch(endpoint, options = {}) {
       }
 
       if (allowAnonymous && !tokenWasSent) {
-      return data; 
+        return data;
       }
 
-      const authError = new Error(
-        data?.message || "UNAUTHORIZED_OR_EXPIRED",
-      );
+      const authError = new Error(data?.message || "UNAUTHORIZED_OR_EXPIRED");
       authError.status = 401;
       authError.isAuthError = true;
       authError.data = data;
