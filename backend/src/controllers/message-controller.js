@@ -3,6 +3,8 @@ import Subject from "../models/subject.js";
 import generateResponse from "../services/ai-service.js";
 import { subjectNameToCategory } from "../services/ai-helper.js";
 import logger from "../config/logger.js";
+import { aiResponseTimeHistogram } from '../monitoring/metrics.js';
+import { trackAiRequest } from '../monitoring/trackers.js';
 
 const fileName = "message-controller.js";
 
@@ -47,6 +49,11 @@ const messageController = {
         }));
       }
 
+
+      // MONITORING: Start the Prometheus timer shell before the race starts
+      const endAiTimer = aiResponseTimeHistogram.startTimer();
+
+      let timerId;
       const timeoutPromise = new Promise((_, reject) => {
         timerId = setTimeout(() => reject(new Error("Request timeout")), 15000);
       });
@@ -69,10 +76,29 @@ const messageController = {
           });
           return {
             category: "error",
-            response:
-              "I'm sorry, but I couldn't process your request in time. Please try again with a simpler question.",
+            response: "I'm sorry, but I couldn't process your request in time. Please try again with a simpler question.",
           };
         });
+
+//-----------------------------------------MONITORING BLOCK ---------------------------------------
+      if (aiResult && aiResult.category === "error") {
+        // The request timed out or dropped an error
+        trackAiRequest(subjectCategory, endAiTimer, null, false);
+      } else {
+        // The request succeeded inside the 15-second window
+        if (aiResult && aiResult.category !== "error") {
+          
+          // Convert the array of history objects into a string
+          const formattedHistoryText = conversationHistory
+            .map(msg => `${msg.role}: ${msg.content}`)
+            .join("\n");
+
+          const totalTextPayload = `Prompt: ${content}\nHistory:\n${formattedHistoryText}`;
+
+          trackAiRequest(subjectCategory, endAiTimer, totalTextPayload, true);
+        }
+      }
+//-------------------------------------------------------------------------------------------------
 
       if (req.user) {
         const messageFields = subjectRef ? { subject: subjectRef } : {};
