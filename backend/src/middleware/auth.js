@@ -3,6 +3,10 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user-profile.js';
 import LearningMaterial from '../models/learning-material.js';
 import logger from '../config/logger.js';
+import {sessionCache} from '../monitoring/metrics.js'
+
+// Cache with a 15-minute (900 seconds) expiration window
+
 
 const authenticate = async (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -21,7 +25,9 @@ const authenticate = async (req, res, next) => {
             return res.status(401).json({ message: 'User not found' });
         }
         
-        req.user = user; // Attach user to request object
+        req.user = user;
+        sessionCache.set(user.id, true);
+
         next();
     } catch (error) {
         logger.error('Authentication error:', error, { file: 'auth.js' });
@@ -49,8 +55,6 @@ const isMaterialOwner = async (req, res, next) => {
             return res.status(403).json({ message: 'Forbidden' });
         }
 
-        // 💡 CRITICAL STEP: Attach the document to the request object 
-        // so the subsequent controller doesn't have to query the DB again!
         req.material = material;
         next();
     } catch (error) {
