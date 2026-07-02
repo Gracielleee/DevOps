@@ -1,13 +1,9 @@
 groups:
 - name: BrainBytes Alert
   rules:
-  # - alert: HighCPUUsage
-  #   expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
-  #   for: 5m
-  - alert: HighContainerCPUUsage
-    expr: sum(rate(container_cpu_usage_seconds_total{container_label_com_docker_compose_service="backend"}[2m])) by (container_label_com_docker_compose_service) * 100 > 80
-    for: 1m
-
+  - alert: HighCPUUsage
+    expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+    for: 5m
     labels:
       severity: warning
     annotations:
