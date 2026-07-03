@@ -116,9 +116,11 @@ The BrainBytes monitoring stack uses Prometheus as a time-series database to col
    ├── Parses: status, labels, annotations
    └── Logs to application logger
 
-9. VISUALIZATION/QUERIES (IN PROGRESS)
-   └── Grafana or Prometheus UI queries TSDB
-       └── Returns time-series data for dashboards/analysis
+9. VISUALIZATION/QUERIES
+   └── Grafana (Port 3005) queries Prometheus TSDB
+       ├── Automatically provisioned with Prometheus data source
+       ├── Pre-loaded with 'BrainBytes Overview' dashboard
+       └── Credentials: admin / admin
 ```
 
 </br>
