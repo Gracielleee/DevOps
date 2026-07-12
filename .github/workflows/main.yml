@@ -173,10 +173,8 @@ jobs:
 
       - name: Run backend tests
         working-directory: ./backend
-        run: |
-          npm test -- --ci \
-            --reporters=default \
-            --reporters=jest-junit
+        run:
+          npm test -- --ci 
 
       - name: Publish backend test report
         if: always()
