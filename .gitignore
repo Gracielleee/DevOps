@@ -5,6 +5,7 @@
 # Dependency folders
 frontend/node_modules/
 backend/node_modules/
+.cache
 
 # Build outputs
 frontend/.next/
@@ -16,12 +17,13 @@ Thumbs.db
 #logs
 *.log
 
-# Playwright
+# Tests
 frontend/test-results/
 frontend/playwright-report/
 frontend/blob-report/
 frontend/playwright/.cache/
 frontend/playwright/.auth/
-
+backend/test-results/
+backend/logs/
 # Monitoring envs
 monitoring/prometheus.yml
