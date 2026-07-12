@@ -11,6 +11,7 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "forceExit": true,
     "setupFilesAfterEnv": [
       "<rootDir>/tests/setup.js"
     ],
@@ -19,7 +20,7 @@
       [
         "jest-junit",
         {
-          "outputDirectory": "../scripts",
+          "outputDirectory": "test-results/",
           "outputName": "test-report.xml"
         }
       ]

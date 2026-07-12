@@ -15,6 +15,7 @@ Backend → Prometheus (local) → Grafana Cloud → Grafana (local instance)
 - Backend metrics are scraped by the **local Prometheus instance**
 - Data is written to **Grafana Cloud** for centralized storage
 - The **local Grafana instance** retrieves and visualizes data from Grafana Cloud
+> Currently, prometheus scrapes from the local BrainBytes instance
 
 ---------
 

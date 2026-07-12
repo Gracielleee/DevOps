@@ -8,8 +8,6 @@ import { register } from './src/monitoring/metrics.js';
 const requiredEnvVars = ['MONGO_URI', 'JWT_SECRET'];
 const missingEnvVars = requiredEnvVars.filter(key => !process.env[key]);
 
-console.log(process.env['MONGO_URI']);
-
 if (missingEnvVars.length > 0) {
   console.error(`FATAL ERROR: Missing required environment variables: ${missingEnvVars.join(', ')}`);
   process.exit(1);
