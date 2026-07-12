@@ -25,5 +25,6 @@ frontend/playwright/.cache/
 frontend/playwright/.auth/
 backend/test-results/
 backend/logs/
+
 # Monitoring envs
 monitoring/prometheus.yml
