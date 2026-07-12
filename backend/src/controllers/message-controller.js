@@ -3,13 +3,15 @@ import Subject from "../models/subject.js";
 import generateResponse from "../services/ai-service.js";
 import { subjectNameToCategory } from "../services/ai-helper.js";
 import logger from "../config/logger.js";
+import { aiResponseTimeHistogram } from '../monitoring/metrics.js';
+import { trackAiRequest } from '../monitoring/trackers.js';
 
 const fileName = "message-controller.js";
 
 const messageController = {
   createMessage: async (req, res) => {
-    let timerId;
     let conversationHistory = [];
+    let timerId;
 
     try {
       const content = req.body.text;
@@ -47,6 +49,10 @@ const messageController = {
         }));
       }
 
+
+      // MONITORING: Start the Prometheus timer shell before the race starts
+      const endAiTimer = aiResponseTimeHistogram.startTimer();
+
       const timeoutPromise = new Promise((_, reject) => {
         timerId = setTimeout(() => reject(new Error("Request timeout")), 15000);
       });
@@ -69,10 +75,26 @@ const messageController = {
           });
           return {
             category: "error",
-            response:
-              "I'm sorry, but I couldn't process your request in time. Please try again with a simpler question.",
+            response: "I'm sorry, but I couldn't process your request in time. Please try again with a simpler question.",
           };
         });
+
+//-----------------------------------------MONITORING BLOCK ---------------------------------------
+      const responseTimeSeconds = endAiTimer();
+
+      if (aiResult && aiResult.category === "error") {
+        // The request timed out or dropped an error
+        aiResponseTimeHistogram.observe({ subject: subjectCategory, status: "error" }, responseTimeSeconds);
+        trackAiRequest(subjectCategory, false);
+
+      } else {
+        // The request succeeded inside the 15-second window
+        if (aiResult && aiResult.category !== "error") {
+          aiResponseTimeHistogram.observe({ subject: subjectCategory, status: "success" }, responseTimeSeconds);
+          trackAiRequest(subjectCategory, true);
+        }
+      }
+//-------------------------------------------------------------------------------------------------
 
       if (req.user) {
         const messageFields = subjectRef ? { subject: subjectRef } : {};

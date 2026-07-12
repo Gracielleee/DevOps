@@ -1,15 +1,16 @@
 services:
   - type: web
     name: brainbytes-backend
-    runtime: docker
+    runtime: image
     autoDeploy: false 
     region: singapore
     plan: free
     numInstances: 1
     image:
-      registry: ghcr.io
-      name: gracielleee/brainbytes-backend
-      tag: latest
+      url: ghcr.io/gracielleee/brainbytes-backend:latest
+      creds:
+        fromRegistryCreds:
+          name: brainbytes-dchr-pull
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
@@ -24,24 +25,27 @@ services:
         scope: run
         sync: false
       - key: FE_URL
-        value: https://devops-fe-4m5i.onrender.com
+        value: https://brainbytes-frontend-brj1.onrender.com
+      - key: PORT
+        value: 3000
 
   - type: web
     name: brainbytes-frontend
-    runtime: docker
+    runtime: image
     autoDeploy: false 
     region: singapore
     plan: free
     numInstances: 1
     image:
-      registry: ghcr.io
-      name: gracielleee/brainbytes-frontend
-      tag: latest
+      url: ghcr.io/gracielleee/brainbytes-frontend:latest
+      creds:
+        fromRegistryCreds:
+          name: brainbytes-dchr-pull
     healthCheckPath: /
     envVars:
       - key: NEXT_PUBLIC_API_URL
         value: /api/
       - key: BACKEND_URL
-        value: https://brainbytes-zovh.onrender.com
+        value: http://brainbytes-backend:3000
       - key: NODE_ENV
         value: production
