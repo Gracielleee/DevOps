@@ -78,6 +78,7 @@ export default async function apiFetch(endpoint, options = {}) {
     ...fetchOptions
   } = options;
 
+//-----------------------------Monitoring Block----------------------------------
   let networkType = "unknown";
   let clientPlatform = "desktop";
 
@@ -101,11 +102,12 @@ export default async function apiFetch(endpoint, options = {}) {
         : "android";
     }
   }
+//-------------------------------------------------------------------------------
 
   const defaultHeaders = {
     "Content-Type": "application/json",
-    "X-Network-Type": networkType,
     "X-Client-Platform": clientPlatform,
+    "X-Network-Type": networkType,
     ...fetchOptions.headers,
   };
 

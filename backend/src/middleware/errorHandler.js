@@ -1,9 +1,12 @@
-import { validationResult } from 'express-validator';
-import logger from '../config/logger.js';
-import { connectionDropCounter } from '../monitoring/metrics.js';
+import { validationResult } from "express-validator";
+import logger from "../config/logger.js";
+import { connectionDropCounter } from "../monitoring/metrics.js";
 
 const errorHandler = (err, req, res, _next) => {
-  logger.error('An error occurred:', err, { file: 'errorHandler.js', path: req.path });
+  logger.error("An error occurred:", err, {
+    file: "errorHandler.js",
+    path: req.path,
+  });
 
   // Handle express-validator errors
   const errors = validationResult(req);
@@ -12,30 +15,47 @@ const errorHandler = (err, req, res, _next) => {
   }
 
   // Handle Mongoose CastError (e.g., invalid ObjectId)
-  if (err.name === 'CastError') {
-    return res.status(400).json({ message: `Invalid ${err.path}: ${err.value}` });
+  if (err.name === "CastError") {
+    return res
+      .status(400)
+      .json({ message: `Invalid ${err.path}: ${err.value}` });
   }
 
   // Handle Mongoose duplicate key errors
   if (err.code === 11000) {
     const field = Object.keys(err.keyValue)[0];
-    return res.status(409).json({ message: `Duplicate field value: ${field} already exists.` });
+    return res
+      .status(409)
+      .json({ message: `Duplicate field value: ${field} already exists.` });
   }
 
   // General error handling
   const statusCode = err.statusCode || 500;
-  const message = err.message || 'Something went wrong on the server.';
+  const message = err.message || "Something went wrong on the server.";
+
+//------------------------------------MONITORING BLOCK----------------------------------------------
   // Increment connection drop metric for known network/connection errors
   try {
-    const code = err.code || '';
-    const msg = (err.message || '').toLowerCase();
-    if (['ECONNRESET', 'ECONNABORTED'].includes(code) || msg.includes('socket hang up')) {
-      connectionDropCounter.inc({ reason: 'network_error' });
+    const code = err.code || "";
+    const msg = (err.message || "").toLowerCase();
+
+    if (
+      ["ECONNRESET", "ECONNABORTED"].includes(code) ||
+      msg.includes("socket hang up")
+    ) {
+      connectionDropCounter.inc({ reason: "network_error" });
+    } else if (
+      code === "ETIMEDOUT" ||
+      msg.includes("timeout") ||
+      msg.includes("timed out")
+    ) {
+      connectionDropCounter.inc({ reason: "timeout" });
     }
   } catch (e) {
-    console.error('Error incrementing connection drop metric:', e);
+    console.error("Error incrementing connection drop metric:", e);
   }
   res.status(statusCode).json({ message });
 };
+//--------------------------------------------------------------------------------------------------
 
 export default errorHandler;

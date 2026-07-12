@@ -1,9 +1,22 @@
-const MONITORING_CONSTANTS = {
-  // Message character ranges (0-5000) - exponential buckets
-  MESSAGE_CHARACTER_RANGES: ["1-19", "20-49", "50-199", "200-799", "800-1799", "1800-3199", "3200-5000"],
+import { Buffer } from "node:buffer";
 
-  // Material character ranges (0-20000) - exponential buckets
-  MATERIAL_CHARACTER_RANGES: ["1-19", "20-49", "50-799", "800-3199", "3200-7199", "7200-12799", "12800-20000"],
+const MONITORING_CONSTANTS = {
+  MATERIAL_BYTE_RANGES: [ //Same max in src/config
+    "1-499",
+    "500-2999", 
+    "3000-4999", 
+    "5000-9999", 
+    "10000-19999",
+    "20000+",
+  ],
+  
+  MESSAGE_BYTE_RANGES: [
+    "1-199",
+    "200-799",
+    "800-1999",
+    "2000-3999",
+    "4000+",
+  ],
 };
 
 const CONTENT_TYPES = {
@@ -12,34 +25,40 @@ const CONTENT_TYPES = {
 };
 
 /**
- * Get the character range bucket for a given string
+ * Get the byte range bucket for a given string
  * @param {string} text - The text to measure
  * @param {string} contentType - Either "message" or "material"
- * @returns {string} The range bucket (e.g., "0-19")
+ * @returns {string} The byte range bucket (e.g., "1000-4999")
  */
-function getCharacterRange(text, contentType) {
+function getByteRange(text, contentType = CONTENT_TYPES.MATERIAL) {
   if (!text || typeof text !== 'string') {
     return null;
   }
 
-  const length = text.trim().length;
+  const byteLength = Buffer.byteLength(text.trim(), 'utf8');
 
-  const ranges = contentType === CONTENT_TYPES.MESSAGE
-    ? MONITORING_CONSTANTS.MESSAGE_CHARACTER_RANGES
-    : MONITORING_CONSTANTS.MATERIAL_CHARACTER_RANGES;
+  const ranges = contentType === CONTENT_TYPES.MATERIAL
+    ? MONITORING_CONSTANTS.MATERIAL_BYTE_RANGES
+    : MONITORING_CONSTANTS.MESSAGE_BYTE_RANGES;
 
   for (const range of ranges) {
-    const [min, max] = range.split("-").map(Number);
-    if (length >= min && length <= max) {
+    if (range.endsWith('+')) {
+      const min = parseInt(range.replace(/\D/g, ''));
+      if (byteLength >= min) return range;
+      continue;
+    }
+
+    const [min, max] = range.split('-').map(Number);
+    if (byteLength >= min && byteLength <= max) {
       return range;
     }
   }
 
-  return null; // Length exceeds all ranges
+  return ranges[ranges.length - 1];
 }
 
 export {
   CONTENT_TYPES,
   MONITORING_CONSTANTS,
-  getCharacterRange
-}
+  getByteRange
+};

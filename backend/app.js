@@ -15,14 +15,16 @@ const FE_URLS = process.env.FE_URL ? process.env.FE_URL.split(',').map(url => ur
 app.use(cors({
   origin: FE_URLS,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Client-Platform', 'X-Network-Type'],
   credentials: true
 }));
 
 app.use(express.json());
 
+//----------------------Monitoring Block--------------------------
 // Global HTTP Request Traffic 
 app.use(requestMonitor);
+//----------------------------------------------------------------
 
 // All API Routes
 app.use('/api/materials', learningMaterialsRoutes);
