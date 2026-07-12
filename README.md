@@ -1,5 +1,6 @@
 # BrainBytes AI Tutoring Platform
-
+[![BrainBytes CI/CD](https://github.com/Gracielleee/DevOps/actions/workflows/main.yml/badge.svg)](https://github.com/Gracielleee/DevOps/actions/workflows/main.yml)
+[![BrainBytes Deploy](https://github.com/Gracielleee/DevOps/actions/workflows/deploy.yml/badge.svg)](https://github.com/Gracielleee/DevOps/actions/workflows/deploy.yml)
 ## Project Overview
 BrainBytes is an AI-powered tutoring platform designed to provide accessible academic assistance to Filipino students. This project implements the platform using modern **DevOps** practices and containerization.
 
@@ -9,7 +10,40 @@ See the architecture below:
 
 </br> 
 
-![architecture.png](/architecture.png)
+``` mermaid
+graph TD
+    %% Nodes and implied icons/content
+    UB[User Browser<br/>]
+    
+    %% Next.js logo is not directly representable in standard Mermaid text nodes
+    FC[Frontend Container -Next.js<br/>PORT 8080:3001]
+    
+    %% Use HTML-like formatting to add multiple lines of text
+    IP[Inference Provider - Hugging Face API<br/>]
+    
+    %% Node.js logo is not directly representable
+    BC[Backend Container - Node.js <br/>PORT 3000:3000]
+    
+    %% MongoDB logo is not directly representable
+    MA[MongoDB Atlas<br/>]
+
+    %% Connections and labels
+    UB --> FC
+    
+    %% Define bidirectional flow between Frontend and Backend
+    FC -->|request| BC
+    BC -->|response| FC
+    
+    %% Define bidirectional flow between Backend and Inference Provider
+    BC -->|request| IP
+    IP -->|response| BC
+    
+    %% Data flow to MongoDB
+    BC -->|data persistence/retrieval| MA
+
+    %% Set style to simple rectangles
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px,rx:5,ry:5,color:#000;
+```
 
 </br> 
 
@@ -20,9 +54,9 @@ See the architecture below:
 |Component	|Role	|Technology	|Port|
 |----|-----|------|-------|
 |User Browser|	Client interface for application access|	Web browser|	N/A|
-|Frontend Container	|Serves the user interface and handles client-side rendering|	Next.js	|8080:3000|
+|Frontend Container	|Serves the user interface and handles client-side rendering|	Next.js	|8080:3001|
 |Backend Container |	Processes business logic and manages API requests|	Node.js|	3000:3000|
-|MongoDB Atlas	|Persists application data	| MongoDB	|27017:27017|
+|MongoDB Atlas	|Persists application data	| MongoDB	|N/A|
 |Inference Provider	|External machine learning service for AI operations|	Hugging Face API	|N/A|
 
 </br> 
@@ -92,36 +126,12 @@ Therefore, ensure the following software is installed on your machine:
 
 ### Environment Variables
 
-Create a `.env` file in the **root directory** of the project (same level as `docker-compose.yml`) with the two variables below:
-
-```bash
-# Root .env file
-
-HF_TOKEN=your_huggingface_api_token_here
-MONGO_URI=mongodb+srv://<user>:<password>@<cluster-url>/<database_name>
-
-```
-
-#### Generation Guide
-
-1. Hugging Face Token
-    - Get yours by following their [guide](https://huggingface.co/docs/hub/en/security-tokens).
-    - Permissions needed:
-        - Make calls to inference providers
-        - Make calls to Inference Endpoints
-
-2. MongoDB Connection String
-    - Go to [MongoDB Atlas](https://www.mongodb.com/products/platform/atlas-database), create a free cluster, and get the connection string.
-    > Note: Under "Network Access", ensure your current IP address is whitelisted (or set to 0.0.0.0/0 for testing).
-    - Copy the connection string and set it as the value of the `MONGO_URI` variable.
-
-</br>
-</br>
-
- </br>
+1. Locate the `.env.example` file in the project's **root directory** (alongside `docker-compose.yml`).
+2. Copy its contents into a new file named `.env`.
+3. Follow the instructions provided in `.env.example` to generate and assign the appropriate values for your environment variables.
 
 
-
+<br>
 
 
 ## Running the Project
@@ -206,7 +216,7 @@ Fix:
 
 #### 5. Port Already in Use (bind: address already in use)
 
-Cause: Another application is using port 8080 or 3000. 
+Cause: Another application is using port 8080 or 3001. 
 
 Fix:
 1. Change the port mapping in docker-compose.yml (e.g., "8081:3000").
@@ -220,7 +230,7 @@ Cause: The frontend is trying to access the backend from a different origin with
 
 Fix:
   1. Ensure FE_URL in the backend environment includes your frontend URL.
-  2. In docker-compose.yml, the backend env is set to `http://localhost:8080, http://frontend:3000`. 
+  2. In docker-compose.yml, the backend env is set to `http://localhost:8080, http://frontend:3001`. 
   If you change the port, update this list.
 
 </br>
@@ -258,8 +268,8 @@ For detailed technical information, please refer to the dedicated docs:
 
 ### Project Goals
 - Implement a containerized application with proper networking ✅
-- Create an automated CI/CD pipeline using GitHub Actions
-- Deploy the application to Oracle Cloud Free Tier
+- Create an automated CI/CD pipeline using GitHub Actions ✅
+- Deploy the application to Render ✅
 - Set up monitoring and observability tools
 
 ### Team Members

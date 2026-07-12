@@ -1,0 +1,46 @@
+global:
+  scrape_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['alertmanager:9093']
+
+rule_files:
+  - "/etc/prometheus/alert_rules.yml"
+  - 'recording_rules.yml'
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_timeout: 10s
+    sample_limit: 1500
+    static_configs:
+      - targets: ['localhost:9090']
+  
+  - job_name: 'backend'
+    scrape_timeout: 10s
+    sample_limit: 5000 
+    body_size_limit: 10MB  
+    static_configs:
+      - targets: ['backend:9080']
+  
+  - job_name: 'node-exporter'
+    scrape_timeout: 12s
+    sample_limit: 30000
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  - job_name: 'cadvisor'
+    scrape_timeout: 12s
+    sample_limit: 40000
+    static_configs:
+      - targets: ['cadvisor:8080']
+
+  - job_name: 'alertmanager'
+    scrape_timeout: 10s
+    sample_limit: 1000
+    static_configs:
+      - targets: ['alertmanager:9093']
+
+        
+        

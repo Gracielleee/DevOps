@@ -30,26 +30,47 @@ jobs:
         if: github.event.inputs.service == 'backend' || github.event.inputs.service == 'both'
         run: |
           echo "Rolling back backend to image tag: ${{ github.event.inputs.image_tag }}"
-          curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "imageTag": "${{ github.event.inputs.image_tag }}",
-              "service": "backend"
-            }'
+          # Render requires the full image URL to be URL-encoded (?imgURL=...)
+          curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}&imgURL=ghcr.io%2F${{ github.repository_owner }}%2Fbrainbytes-backend%3A${{ github.event.inputs.image_tag }}"
 
       - name: Rollback frontend
         if: github.event.inputs.service == 'frontend' || github.event.inputs.service == 'both'
         run: |
           echo "Rolling back frontend to image tag: ${{ github.event.inputs.image_tag }}"
-          curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "imageTag": "${{ github.event.inputs.image_tag }}",
-              "service": "frontend"
-            }'
+          curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}&imgURL=ghcr.io%2F${{ github.repository_owner }}%2Fbrainbytes-frontend%3A${{ github.event.inputs.image_tag }}"
 
-      - name: Verify rollback
+      - name: Verify Live Backend Deployment
         run: |
-          echo "Waiting for services to stabilize after rollback..."
-          sleep 30
-          # Add verification steps similar to deploy.yml
+          echo "Waiting for Backend to spin up on Render..."
+          for i in {1..12}; do 
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" ${{secrets.RENDER_SERVICE_BE_URL}}/health || echo "000")
+            
+            if [ "$STATUS" = "200" ]; then
+              echo "Success! The backend is live and healthy."
+              exit 0
+            fi
+            
+            echo "Backend Attempt $i: Status is $STATUS. Waiting 30 seconds..."
+            sleep 30
+          done
+          
+          echo "Error: Backend failed to start within 6 minutes."
+          exit 1
+
+      - name: Verify Live Frontend Deployment
+        run: |
+          echo "Waiting for Frontend to spin up on Render..."
+          for i in {1..12}; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" ${{secrets.RENDER_SERVICE_FE_URL}}/ || echo "000")
+            
+            if [ "$STATUS" = "200" ]; then
+              echo "Success! The frontend is live and healthy."
+              exit 0
+            fi
+            
+            echo "Frontend Attempt $i: Status is $STATUS. Waiting 30 seconds..."
+            sleep 30
+          done
+          
+          echo "Error: Frontend failed to start within 6 minutes."
+          exit 1

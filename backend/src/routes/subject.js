@@ -1,11 +1,11 @@
 import express from 'express';
 import Subject from '../models/subject.js';
 import logger from '../config/logger.js';
-import { validationResult } from 'express-validator';
-import {
-    validateSubjectCreation,
-    validateSubjectUpdate,
-} from '../middleware/validation/subjectValidation.js';
+// import { validationResult } from 'express-validator';
+// import {
+//     validateSubjectCreation,
+//     validateSubjectUpdate,
+// } from '../middleware/validation/subjectValidation.js';
 
 const router = express.Router();
 const fileName = 'subject.js';
@@ -26,32 +26,32 @@ router.get('/', async (req, res) => {
     }
 });
 
-// POST /api/subjects/ - Create new subject
-router.post('/', validateSubjectCreation, async (req, res) => {
-    try {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-        const { name, description} = req.body;
-        // Original checks removed as express-validator handles them
-        const newSubject = new Subject({
-            name,
-            description
-        });
+// // POST /api/subjects/ - Create new subject
+// router.post('/', validateSubjectCreation, async (req, res) => {
+//     try {
+//         const errors = validationResult(req);
+//         if (!errors.isEmpty()) {
+//             return res.status(400).json({ errors: errors.array() });
+//         }
+//         const { name, description} = req.body;
+//         // Original checks removed as express-validator handles them
+//         const newSubject = new Subject({
+//             name,
+//             description
+//         });
         
-        await newSubject.save();
-        res.status(201).json({
-            message: 'Subject created successfully',
-            data: newSubject
-        });
-    } catch (error) {
-        logger.error('Error creating subject:', error, { file: fileName });
-        res.status(400).json({
-            message: error.message || 'Failed to create subject'
-        });
-    }
-});
+//         await newSubject.save();
+//         res.status(201).json({
+//             message: 'Subject created successfully',
+//             data: newSubject
+//         });
+//     } catch (error) {
+//         logger.error('Error creating subject:', error, { file: fileName });
+//         res.status(400).json({
+//             message: error.message || 'Failed to create subject'
+//         });
+//     }
+// });
 
 // GET /api/subjects/:id - Get subject by ID
 router.get('/:id', async (req, res) => {
@@ -74,57 +74,57 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// PUT /api/subjects/:id - Update subject
-router.put('/:id', validateSubjectUpdate, async (req, res) => {
-    try {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-        const { name, description } = req.body;
-        const updateData = {}
-        if (name !== undefined) updateData.name = name
-        if (description !== undefined) updateData.description = description
-        const updatedSubject = await Subject.findByIdAndUpdate(
-            req.params.id, 
-            updateData, 
-            { new: true });
-        if (!updatedSubject) {
-            return res.status(404).json({
-                message: 'Subject not found'
-            });
-        }
-        res.json({
-            message: 'Subject updated successfully',
-            data: updatedSubject
-        });
-    } catch (error) {
-        logger.error('Error updating subject:', error, { file: fileName });
-        res.status(400).json({
-            message: error.message || 'Failed to update subject'
-        });
-    }
-});
+// // PUT /api/subjects/:id - Update subject
+// router.put('/:id', validateSubjectUpdate, async (req, res) => {
+//     try {
+//         const errors = validationResult(req);
+//         if (!errors.isEmpty()) {
+//             return res.status(400).json({ errors: errors.array() });
+//         }
+//         const { name, description } = req.body;
+//         const updateData = {}
+//         if (name !== undefined) updateData.name = name
+//         if (description !== undefined) updateData.description = description
+//         const updatedSubject = await Subject.findByIdAndUpdate(
+//             req.params.id, 
+//             updateData, 
+//             { new: true });
+//         if (!updatedSubject) {
+//             return res.status(404).json({
+//                 message: 'Subject not found'
+//             });
+//         }
+//         res.json({
+//             message: 'Subject updated successfully',
+//             data: updatedSubject
+//         });
+//     } catch (error) {
+//         logger.error('Error updating subject:', error, { file: fileName });
+//         res.status(400).json({
+//             message: error.message || 'Failed to update subject'
+//         });
+//     }
+// });
 
-// DELETE /api/subjects/:id - Delete subject
-router.delete('/:id', async (req, res) => {
-    try {
-        const deletedSubject = await Subject.findByIdAndDelete(req.params.id);
-        if (!deletedSubject) {
-            return res.status(404).json({
-                message: 'Subject not found'
-            });
-        }
-        res.json({
-            message: 'Subject deleted',
-            data: deletedSubject
-        });
-    } catch (error) {
-        logger.error('Error deleting subject:', error, { file: fileName });
-        res.status(400).json({
-            message: error.message || 'Failed to delete subject'
-        });
-    }
-});
+// // DELETE /api/subjects/:id - Delete subject
+// router.delete('/:id', async (req, res) => {
+//     try {
+//         const deletedSubject = await Subject.findByIdAndDelete(req.params.id);
+//         if (!deletedSubject) {
+//             return res.status(404).json({
+//                 message: 'Subject not found'
+//             });
+//         }
+//         res.json({
+//             message: 'Subject deleted',
+//             data: deletedSubject
+//         });
+//     } catch (error) {
+//         logger.error('Error deleting subject:', error, { file: fileName });
+//         res.status(400).json({
+//             message: error.message || 'Failed to delete subject'
+//         });
+//     }
+// });
 
 export default router;

@@ -1,0 +1,12 @@
+groups:
+- name: brainbytes_recording_rules
+  rules:
+  - record: job:http_requests:rate5m
+    expr: sum by (job, endpoint) (rate(brainbytes_http_requests_total[5m]))
+    labels:
+      purpose: recording
+
+  - record: job:ai_empty_responses:rate5m
+    expr: sum by (job, subject) (rate(brainbytes_ai_empty_responses_total[5m]))
+    labels:
+      purpose: recording
