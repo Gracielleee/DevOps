@@ -95,7 +95,7 @@ But you need to manually set the following headers below based on your needs/pre
 - [ ] Identify required charts based on BSRD/SRS, business context, captured metrics, and CAMU instructions
 - [ ] Edit dashboard to add/modify visualizations and layout as needed
 - [ ] Ensure all queries reference `GrafanaCloud_Prometheus` as the datasource
-- [ ] Update the `monitoring/grafana/dashboard/brainbytes_dashboard.json` with the updated dashboard. Add more dashboard if needed.
+- [ ] Update the `monitoring/grafana/dashboard/brainbytes_dashboard.json` with the updated dashboard. Add more dashboards if needed.
 
 ### Grafana Alerting (To Do)
 - [ ] Configure alert rules in Grafana
