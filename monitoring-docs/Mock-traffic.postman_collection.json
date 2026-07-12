@@ -1,0 +1,964 @@
+{
+  "info": {
+    "_postman_id": "4d014786-17f8-418e-82c9-93ef7e1c3ff7",
+    "name": "Mock-traffic",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51514380"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 2xx\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              "",
+              "if (pm.response.code === 200 || pm.response.code === 201) {",
+              "    const response = pm.response.json();",
+              "    if (response.data && response.data.id) {",
+              "        const createdId = response.data.id;",
+              "        pm.environment.set(\"latest_user_id\", createdId);",
+              "        console.log(\"🔄 Variable Updated! Saved ID: \" + createdId);",
+              "    } else {",
+              "        console.warn(\"⚠️ Request succeeded, but 'id' missing from data layout.\");",
+              "    }",
+              "} else {",
+              "    const response = pm.response.json();",
+              "    console.error(`❌ Request Failed with Status ${pm.response.code}: ${response.message}`);",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"test6\",\r\n    \"email\": \"test6@email.com\",\r\n    \"password\": \"password\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{brainbytes}}register",
+          "host": [
+            "{{brainbytes}}register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 2xx\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              "",
+              "if (pm.response.code === 200 || pm.response.code === 201) {",
+              "    const response = pm.response.json();",
+              "    if (response.token) {",
+              "        const createdId = response.token;",
+              "        pm.environment.set(\"latest_jwt_token\", createdId);",
+              "        console.log(\"🔄 Variable Updated! Saved token: \" + createdId);",
+              "    } else {",
+              "        console.warn(\"⚠️ Request succeeded, but 'token' missing from data layout.\");",
+              "    }",
+              "} else {",
+              "    const response = pm.response.json();",
+              "    console.error(`❌ Request Failed with Status ${pm.response.code}: ${response.message}`);",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"test6@email.com\",\r\n    \"password\": \"password\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{brainbytes}}login",
+          "host": [
+            "{{brainbytes}}login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET user-profile",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{latest_jwt_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}"
+          }
+        ],
+        "url": {
+          "raw": "{{brainbytes}}profile",
+          "host": [
+            "{{brainbytes}}profile"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "UPDATE user-profile",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 2xx', function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([",
+              "        200,",
+              "        201",
+              "    ]);",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{latest_jwt_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"preferredSubject\": \"6a12b5c20f0f1a14276fe329\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{brainbytes}}profile",
+          "host": [
+            "{{brainbytes}}profile"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET ALL subjects",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}"
+          }
+        ],
+        "url": {
+          "raw": "{{brainbytes}}subjects/",
+          "host": [
+            "{{brainbytes}}subjects"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET ALL subjects",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{brainbytes}}subjects/",
+              "host": [
+                "{{brainbytes}}subjects"
+              ],
+              "path": [
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "Text",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "371"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"173-CgMMEkVfqa1A+OVw1eCP8QqrB8M\""
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 24 May 2026 08:34:44 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"name\": \"Math\",\n            \"desc\": \"Mathematics deals with numbers.\",\n            \"id\": \"6a1185f40006a6ac31ee08ae\"\n        },\n        {\n            \"name\": \"Science\",\n            \"description\": \"Involves the scientific method.\",\n            \"id\": \"6a12b4830f0f1a14276fe328\"\n        },\n        {\n            \"name\": \"History\",\n            \"description\": \"Past events.\",\n            \"id\": \"6a12b5c20f0f1a14276fe329\"\n        },\n        {\n            \"name\": \"General\",\n            \"description\": \"Everyting.\",\n            \"id\": \"6a12b64d3d721d44d2da2bac\"\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "CREATE message",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 2xx', function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([",
+              "        200,",
+              "        201",
+              "    ]);",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"text\": \"Hello\",\r\n    \"isUser\": \"true\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{brainbytes}}messages/",
+          "host": [
+            "{{brainbytes}}messages"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "CREATE message",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"text\": \"Sino ang pambansang bayani ng Pilipinas?\",\r\n    \"isUser\": \"true\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{brainbytes}}messages/",
+              "host": [
+                "{{brainbytes}}messages"
+              ],
+              "path": [
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "Text",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "638"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"27e-T3vPjVZXL9g9nnMtvj3UJfougOY\""
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 24 May 2026 14:48:33 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"content\": \"Sino ang pambansang bayani ng Pilipinas?\",\n    \"aiMessage\": \"Ang pambansang bayani ng Pilipinas ay si José Rizal. Siya ay pinagmulan ng mga reforma at siyang naglalayong mapabuti ang kalagayan ng mga Pilipino sa loob ng mga taon lamang ng Espanya. Si Rizal ay kilala ng maraming tao dahil sa kanyang mga gawa tulad ng novelang \\\"Noli Me Tangere\\\" at \\\"El Filibusterismo\\\", na naglalayong ipaglaban ang kalayaan ng Pilipinas. Sa huling pagkakataon, siya ay pinatay noong Disyembre 30, 1896, sa Bagumbayan (na ngayon ay Luneta Park) sa Maynila, na naging isang mahalagang pangyayari sa kasaysayan ng Pilipinas.\",\n    \"category\": \"general\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "GET all messages",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{latest_jwt_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}"
+          }
+        ],
+        "url": {
+          "raw": "{{brainbytes}}messages/",
+          "host": [
+            "{{brainbytes}}messages"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET ALL materials",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "})"
+            ]
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{latest_jwt_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{brainbytes}}materials/",
+          "host": [
+            "{{brainbytes}}materials"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREATE a material",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 2xx\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              "",
+              "if (pm.response.code === 200 || pm.response.code === 201) {",
+              "    const response = pm.response.json();",
+              "    if (response.data && response.data.id) {",
+              "        const createdId = response.data.id;",
+              "        pm.environment.set(\"latest_material_id\", createdId);",
+              "        console.log(\"🔄 Variable Updated! Saved ID: \" + createdId);",
+              "    } else {",
+              "        console.warn(\"⚠️ Request succeeded, but 'id' missing from data layout.\");",
+              "    }",
+              "} else {",
+              "    const response = pm.response.json();",
+              "    console.error(`❌ Request Failed with Status ${pm.response.code}: ${response.message}`);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{latest_jwt_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"subject\": \"6a12b64d3d721d44d2da2bac\",\r\n    \"topic\": \"Test\",\r\n    \"content\": \"This will be deleted.\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{brainbytes}}materials/",
+          "host": [
+            "{{brainbytes}}materials"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "CREATE a material",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"subject\": \"6a12b5c20f0f1a14276fe329\",\r\n    \"topic\": \"Independence Day\",\r\n    \"content\": \"The U.S. officially recognized Philippine independence on July 4, 1946.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{brainbytes}}materials/",
+              "host": [
+                "{{brainbytes}}materials"
+              ],
+              "path": [
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "Text",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "244"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"f4-DKrlsvWidPQHtO20yXrnxTRTBEM\""
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 24 May 2026 09:07:15 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"success\": true,\n    \"data\": {\n        \"subject\": \"6a12b5c20f0f1a14276fe329\",\n        \"topic\": \"Independence Day\",\n        \"content\": \"The U.S. officially recognized Philippine independence on July 4, 1946.\",\n        \"createdAt\": \"2026-05-24T09:07:15.098Z\",\n        \"id\": \"6a12bfc33d721d44d2da2bb4\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get a material",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{latest_jwt_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}"
+          }
+        ],
+        "url": {
+          "raw": "{{brainbytes}}materials/{{latest_material_id}}",
+          "host": [
+            "{{brainbytes}}materials"
+          ],
+          "path": [
+            "{{latest_material_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "UPDATE a material",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 2xx', function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([",
+              "        200,",
+              "        201",
+              "    ]);",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{latest_jwt_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"topic\": \"Testing...\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{brainbytes}}materials/{{latest_material_id}}",
+          "host": [
+            "{{brainbytes}}materials"
+          ],
+          "path": [
+            "{{latest_material_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE a material",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 2xx', function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([",
+              "        200,",
+              "        204",
+              "    ]);",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{latest_jwt_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"subject\": \"6a12b4830f0f1a14276fe328\",\r\n    \"topic\": \"Test\",\r\n    \"content\": \"This will be deleted.\"\r\n}"
+        },
+        "url": {
+          "raw": "{{brainbytes}}materials/{{latest_material_id}}",
+          "host": [
+            "{{brainbytes}}materials"
+          ],
+          "path": [
+            "{{latest_material_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE user-profile",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 2xx', function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([",
+              "        200,",
+              "        204",
+              "    ]);",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{latest_jwt_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "X-Client-Platform",
+            "value": "{{X-Client-Platform}}"
+          },
+          {
+            "key": "X-Network-Type",
+            "value": "{{X-Network-Type}}"
+          }
+        ],
+        "url": {
+          "raw": "{{brainbytes}}profile",
+          "host": [
+            "{{brainbytes}}profile"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "DELETE user-profile",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{brainbytes}}profile",
+              "host": [
+                "{{brainbytes}}profile"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "Text",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "214"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"d6-8TQxNrrIILfDMtdcgWYrRsqH9gE\""
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 24 May 2026 14:34:00 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"User profile deleted successfully\",\n    \"data\": {\n        \"name\": \"test3\",\n        \"email\": \"test3@email.com\",\n        \"preferredSubject\": \"6a12b64d3d721d44d2da2bac\",\n        \"createdAt\": \"2026-05-24T11:00:37.372Z\",\n        \"id\": \"6a12da552d77cd666957dd79\"\n    }\n}"
+        }
+      ]
+    }
+  ]
+}

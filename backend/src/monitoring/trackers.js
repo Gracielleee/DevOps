@@ -1,44 +1,25 @@
 import {
   questionCounter,
   learningMaterialsCounter,
-  aiResponseLength,
   aiEmptyResponseCounter,
 } from "./metrics.js";
-import { getCharacterRange, CONTENT_TYPES } from "./monitoringConstants.js";
+import { getByteRange, CONTENT_TYPES } from "./monitoringConstants.js";
 
 /**
  * AI requests
+ * Tracks: questions per subject
  */
-export const trackAiRequest = (
-  subject,
-  endTimer,
-  inputText,
-  isSuccess = true,
-) => {
+export const trackAiRequest = (subject, isSuccess = true) => {
   const status = isSuccess ? "success" : "error";
-
   questionCounter.inc({ subject, status });
-
-  const range =
-    getCharacterRange(inputText, CONTENT_TYPES.MESSAGE) || "unknown";
-
-  if (typeof endTimer === "function") {
-    endTimer({ subject, status, character_range: range });
-  }
 };
 
-export const trackAiResponseLength = (
-  subject,
-  responseText,
-  isSuccess = true,
-) => {
-  const status = isSuccess ? "success" : "error";
-
-  if (responseText) {
-    const length = String(responseText).trim().length;
-    aiResponseLength.observe({ subject, status }, length);
-  } else {
-    aiResponseLength.observe({ subject, status }, 0);
+/**
+ * AI empty response detection
+ * Tracks: empty AI responses for alerting (service degraded)
+ */
+export const trackAiResponse = (subject, responseText) => {
+  if (!responseText || !responseText.trim()) {
     try {
       aiEmptyResponseCounter.inc({ subject });
     } catch (e) {
@@ -49,14 +30,15 @@ export const trackAiResponseLength = (
 
 /**
  * Learning materials
+ * Tracks: materials served by subject and byte size range
  */
 export const trackMaterialCreation = (subject, content) => {
   if (!content) return;
 
-  const range = getCharacterRange(content, CONTENT_TYPES.MATERIAL) || "unknown";
+  const byteRange = getByteRange(content, CONTENT_TYPES.MATERIAL) || "unknown";
 
   learningMaterialsCounter.inc({
     subject,
-    character_range: range,
+    byte_range: byteRange,
   });
 };

@@ -80,21 +80,18 @@ const messageController = {
         });
 
 //-----------------------------------------MONITORING BLOCK ---------------------------------------
+      const responseTimeSeconds = endAiTimer();
+
       if (aiResult && aiResult.category === "error") {
         // The request timed out or dropped an error
-        trackAiRequest(subjectCategory, endAiTimer, content, null, false);
+        aiResponseTimeHistogram.observe({ subject: subjectCategory, status: "error" }, responseTimeSeconds);
+        trackAiRequest(subjectCategory, false);
 
       } else {
         // The request succeeded inside the 15-second window
         if (aiResult && aiResult.category !== "error") {
-          // Convert the array of history objects into a string
-          const formattedHistoryText = conversationHistory
-            .map(msg => `${msg.role}: ${msg.content}`)
-            .join("\n");
-
-          const totalTextPayload = `Prompt: ${content}\nHistory:\n${formattedHistoryText}`;
-
-          trackAiRequest(subjectCategory, endAiTimer, totalTextPayload, aiResult.response, true);
+          aiResponseTimeHistogram.observe({ subject: subjectCategory, status: "success" }, responseTimeSeconds);
+          trackAiRequest(subjectCategory, true);
         }
       }
 //-------------------------------------------------------------------------------------------------

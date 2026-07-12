@@ -5,7 +5,6 @@ import LearningMaterial from '../models/learning-material.js';
 import logger from '../config/logger.js';
 import {sessionCache} from '../monitoring/metrics.js'
 
-// Cache with a 15-minute (900 seconds) expiration window
 
 
 const authenticate = async (req, res, next) => {
@@ -26,7 +25,10 @@ const authenticate = async (req, res, next) => {
         }
         
         req.user = user;
-        sessionCache.set(user.id, true);
+
+//----------------------------MONITORING BLOCK--------------------------------
+        sessionCache.set(user.id, true); // Cache with a 1-hour expiration window (aligned with JWT)
+//----------------------------------------------------------------------------
 
         next();
     } catch (error) {
