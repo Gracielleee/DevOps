@@ -43,7 +43,7 @@ scrape_configs:
     scrape_timeout: 12s
     sample_limit: 40000
     static_configs:
-      - targets: ['cadvisor:8080']
+      - targets: ['cadvisor:8081']
 
   - job_name: 'alertmanager'
     scrape_timeout: 10s
