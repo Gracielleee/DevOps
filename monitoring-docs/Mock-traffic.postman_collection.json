@@ -1,9 +1,9 @@
 {
   "info": {
-    "_postman_id": "4d014786-17f8-418e-82c9-93ef7e1c3ff7",
+    "_postman_id": "85e9fe01-1832-40da-b3ac-f677ac374969",
     "name": "Mock-traffic",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "51514380"
+    "_exporter_id": "51738393"
   },
   "item": [
     {
@@ -53,7 +53,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"name\": \"test6\",\r\n    \"email\": \"test6@email.com\",\r\n    \"password\": \"password\"\r\n}",
+          "raw": "{\r\n    \"name\": \"test11\",\r\n    \"email\": \"test11@email.com\",\r\n    \"password\": \"password\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -116,7 +116,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"email\": \"test6@email.com\",\r\n    \"password\": \"password\"\r\n}",
+          "raw": "{\r\n    \"email\": \"test11@email.com\",\r\n    \"password\": \"password\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -812,7 +812,6 @@
         {
           "listen": "test",
           "script": {
-            "type": "text/javascript",
             "exec": [
               "pm.test('Status code is 2xx', function () {",
               "    pm.expect(pm.response.code).to.be.oneOf([",
@@ -820,7 +819,10 @@
               "        204",
               "    ]);",
               "})"
-            ]
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -848,7 +850,12 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"subject\": \"6a12b4830f0f1a14276fe328\",\r\n    \"topic\": \"Test\",\r\n    \"content\": \"This will be deleted.\"\r\n}"
+          "raw": "{\r\n    \"subject\": \"6a12b4830f0f1a14276fe328\",\r\n    \"topic\": \"Test\",\r\n    \"content\": \"This will be deleted.\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
         },
         "url": {
           "raw": "{{brainbytes}}materials/{{latest_material_id}}",
@@ -959,6 +966,91 @@
           "body": "{\n    \"message\": \"User profile deleted successfully\",\n    \"data\": {\n        \"name\": \"test3\",\n        \"email\": \"test3@email.com\",\n        \"preferredSubject\": \"6a12b64d3d721d44d2da2bac\",\n        \"createdAt\": \"2026-05-24T11:00:37.372Z\",\n        \"id\": \"6a12da552d77cd666957dd79\"\n    }\n}"
         }
       ]
+    },
+    {
+      "name": "Error-Tracking",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test(\"Response body is valid JSON\", function () {",
+              "    pm.response.to.be.json;",
+              "});",
+              "",
+              "pm.test(\"Response has a 'message' property\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"message\");",
+              "});",
+              "",
+              "pm.test(\"The 'message' value equals 'Route not found'\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql(\"Route not found\");",
+              "});",
+              "",
+              "pm.test(\"Response time is under 3000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{brainbytes}}nonexistent",
+          "host": [
+            "{{brainbytes}}nonexistent"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "brainbytes",
+      "value": ""
+    },
+    {
+      "key": "X-Client-Platform",
+      "value": ""
+    },
+    {
+      "key": "X-Network-Type",
+      "value": ""
     }
   ]
 }
