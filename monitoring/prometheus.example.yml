@@ -26,6 +26,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
   
+   #Replace this with the live url
   - job_name: 'backend'
     scrape_timeout: 10s
     sample_limit: 5000 
