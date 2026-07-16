@@ -7,6 +7,7 @@ import {
     validateLearningMaterialCreation,
     validateLearningMaterialUpdate,
 } from '../middleware/validation/learningMaterialValidation.js';
+import { trackMaterialCreation } from '../monitoring/trackers.js';
 
 const router = express.Router();
 const fileName = 'learning-material.js';
@@ -47,6 +48,11 @@ router.post('/', authenticate, validateLearningMaterialCreation, async (req, res
         });
 
         await newMaterial.save();
+
+//----------------MONITORING BLOCK-------------------
+        trackMaterialCreation(subject, content);
+//---------------------------------------------------
+
         res.status(201).json({
             message: 'Learning material created successfully',
             data: newMaterial

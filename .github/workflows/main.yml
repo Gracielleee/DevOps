@@ -147,7 +147,7 @@ jobs:
     name: Backend Tests
     needs: lint-and-scan
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v4
@@ -159,23 +159,29 @@ jobs:
           cache: npm
           cache-dependency-path: backend/package-lock.json
 
+      - name: Cache MongoDB binary
+        uses: actions/cache@v4
+        with:
+          path: backend/.cache/mongodb-binaries/
+          key: mongodb-binaries-${{ runner.os }}-7.0.14
+          restore-keys: |
+            mongodb-binaries-${{ runner.os }}-
+
       - name: Install dependencies
         working-directory: ./backend
         run: npm ci
 
       - name: Run backend tests
         working-directory: ./backend
-        run: |
-          npm test -- --ci \
-            --reporters=default \
-            --reporters=jest-junit
+        run:
+          npm test -- --ci 
 
       - name: Publish backend test report
         if: always()
         uses: dorny/test-reporter@v1
         with:
           name: Backend Tests
-          path: backend/junit.xml
+          path: backend/test-results/test-report.xml
           reporter: jest-junit
 
       - name: Upload backend test results
@@ -183,7 +189,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: backend-test-results
-          path: backend/test-results
+          path: backend/test-results/test-report.xml
 
   build:
     name: Build and Push Docker Images for Production

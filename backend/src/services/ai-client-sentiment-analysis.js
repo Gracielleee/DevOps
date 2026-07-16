@@ -6,7 +6,7 @@ const client = new InferenceClient(process.env.HF_TOKEN, { timeout: 30 });
 const fileName = "ai-client-sentiment-analysis.js";
 
 const SENTIMENT_MODEL = {
-  'sentiment-analysis': 'distilbert-base-uncased-finetuned-sst-2-english:cheapest',
+    'sentiment-analysis': 'distilbert-base-uncased-finetuned-sst-2-english:cheapest',
 };
 
 export async function analyzeSentiment(question) {
@@ -15,7 +15,7 @@ export async function analyzeSentiment(question) {
             model: SENTIMENT_MODEL['sentiment-analysis'],
             inputs: question,
         });
-        
+
         logger.info("Sentiment analysis result:", result, { file: fileName });
         return result;
     } catch (error) {

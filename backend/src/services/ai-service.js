@@ -1,6 +1,7 @@
 import { getResponseFromAI } from "./ai-client-text-gen.js";
 import { getAnswerFromKnowledgeBase, generatePromptPrefix, getBackupResponse } from "./ai-helper.js";
 import logger from "../config/logger.js";
+import { trackAiResponse } from "../monitoring/trackers.js";
 
 const fileName = "ai-service.js";
 
@@ -47,7 +48,11 @@ export async function generateResponse(question, subjectCategory = 'general', co
       };
     } else {
       logger.warn("Empty response from AI", { file: fileName });
+
+//-------------------------Monitoring Block---------------------------
+      trackAiResponse(category, aiResponseString);
       throw new Error("Empty response from AI");
+//--------------------------------------------------------------------
     }
 
   } catch (error) {
