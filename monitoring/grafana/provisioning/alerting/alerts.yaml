@@ -2,7 +2,7 @@ apiVersion: 1
 groups:
   - orgId: 1
     name: BrainBytes Alerts
-    folder: BrainBytes Alerts
+    folder: BrainBytes Alerts Folder
     interval: 1m
     rules:
       - uid: brainbytes_high_error_rate
