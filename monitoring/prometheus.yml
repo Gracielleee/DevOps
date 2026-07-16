@@ -10,6 +10,12 @@ rule_files:
   - "/etc/prometheus/alert_rules.yml"
   - 'recording_rules.yml'
 
+remote_write:
+  - url: https://prometheus-prod-37-prod-ap-southeast-1.grafana.net/api/prom/push
+    basic_auth:
+      username: 3365178
+      password: glc_eyJvIjoiMTg0MTkxMCIsIm4iOiJzdGFjay0xNzIwNDc3LWhtLXJlYWQtYnJhaW5ieXRlcy1ncmFmYW5hLXRva2VuIiwiayI6IkJybTZlNTZEODFxWlZzWEE0OEVuYzgwNSIsIm0iOnsiciI6InByb2QtYXAtc291dGhlYXN0LTEifX0=
+
 scrape_configs:
   - job_name: 'prometheus'
     scrape_timeout: 10s
@@ -34,7 +40,7 @@ scrape_configs:
     scrape_timeout: 12s
     sample_limit: 40000
     static_configs:
-      - targets: ['cadvisor:8080']
+      - targets: ['cadvisor:8081']
 
   - job_name: 'alertmanager'
     scrape_timeout: 10s
