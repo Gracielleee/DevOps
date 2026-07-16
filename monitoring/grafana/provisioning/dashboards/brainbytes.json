@@ -1,0 +1,374 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "panels": [],
+      "title": "Resource Utilization",
+      "type": "row"
+    },
+    {
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 10,
+      "libraryPanel": {
+        "name": "CPU Usage",
+        "uid": "ec727bd9-1138-4904-ac10-31ddb95f6cee"
+      },
+      "title": "CPU Usage"
+    },
+    {
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 10,
+        "y": 1
+      },
+      "id": 11,
+      "libraryPanel": {
+        "name": "Memory Usage",
+        "uid": "e5edcec7-f486-460e-be55-bc4bbef3078e"
+      },
+      "title": "Memory Usage"
+    },
+    {
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 19,
+        "y": 1
+      },
+      "id": 12,
+      "libraryPanel": {
+        "name": "Disk Usage",
+        "uid": "b3d66bc5-7e63-4966-8bb8-2349a7a72199"
+      },
+      "title": "Disk Usage"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 13,
+      "panels": [],
+      "title": "User Experience",
+      "type": "row"
+    },
+    {
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 0,
+        "y": 6
+      },
+      "id": 15,
+      "libraryPanel": {
+        "name": "Active Sessions",
+        "uid": "ea700106-28f3-4bdf-bb73-4fedaf21d0f4"
+      },
+      "title": "Active Sessions"
+    },
+    {
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 3,
+        "y": 6
+      },
+      "id": 20,
+      "libraryPanel": {
+        "name": "Session Trend",
+        "uid": "e5661daf-e905-4b24-b468-0fca9f333882"
+      },
+      "title": "Session Trend"
+    },
+    {
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 15,
+        "y": 6
+      },
+      "id": 17,
+      "libraryPanel": {
+        "name": "Mobile Platform Split",
+        "uid": "c13aadd0-90d7-4806-bcef-4e6f4af122f3"
+      },
+      "title": "Mobile Platform Split"
+    },
+    {
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 20,
+        "y": 6
+      },
+      "id": 18,
+      "libraryPanel": {
+        "name": "Network Type Split",
+        "uid": "eb663b2f-07a6-4769-a11d-69018b6c42ed"
+      },
+      "title": "Network Type Split"
+    },
+    {
+      "gridPos": {
+        "h": 11,
+        "w": 14,
+        "x": 0,
+        "y": 11
+      },
+      "id": 16,
+      "libraryPanel": {
+        "name": "Questions Asked by Subject",
+        "uid": "d343ce66-68f9-4370-bed4-afffe701de62"
+      },
+      "title": "Questions Asked by Subject"
+    },
+    {
+      "gridPos": {
+        "h": 9,
+        "w": 10,
+        "x": 14,
+        "y": 13
+      },
+      "id": 19,
+      "libraryPanel": {
+        "name": "Created Learning Materials by Subject",
+        "uid": "d3ad0392-1958-4d7e-9c15-7c293c10a923"
+      },
+      "title": "Created Learning Materials by Subject"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "id": 2,
+      "panels": [],
+      "title": "Application Performance",
+      "type": "row"
+    },
+    {
+      "gridPos": {
+        "h": 8,
+        "w": 13,
+        "x": 0,
+        "y": 23
+      },
+      "id": 3,
+      "libraryPanel": {
+        "name": "Request Rate by Route",
+        "uid": "d0b9651a-d835-41af-8caf-030b9adf2f74"
+      },
+      "title": "Request Rate by Route"
+    },
+    {
+      "gridPos": {
+        "h": 8,
+        "w": 11,
+        "x": 13,
+        "y": 23
+      },
+      "id": 4,
+      "libraryPanel": {
+        "name": "HTTP Latency p95/p99",
+        "uid": "d04d239f-e68b-44fe-83e3-2e931b740e76"
+      },
+      "title": "HTTP Latency p95/p99"
+    },
+    {
+      "gridPos": {
+        "h": 8,
+        "w": 11,
+        "x": 0,
+        "y": 31
+      },
+      "id": 8,
+      "libraryPanel": {
+        "name": "Requests by Method ",
+        "uid": "d5dca2b9-1598-42c7-9779-7cd88cceadb4"
+      },
+      "title": "Requests by Method "
+    },
+    {
+      "gridPos": {
+        "h": 8,
+        "w": 13,
+        "x": 11,
+        "y": 31
+      },
+      "id": 5,
+      "libraryPanel": {
+        "name": "Status Code Split (req/s)",
+        "uid": "d6fcf207-3cee-4eea-96af-873677dc2ddc"
+      },
+      "title": "Status Code Split (req/s)"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 39
+      },
+      "id": 21,
+      "panels": [],
+      "title": "Error Tracking",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 10
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 40
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "(100 * sum(rate(brainbytes_http_requests_total{status=~\"[45]..\"}[5m])) / sum(rate(brainbytes_http_requests_total[5m]))) or vector(0)",
+          "instant": false,
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Error Rate",
+      "type": "stat"
+    },
+    {
+      "gridPos": {
+        "h": 5,
+        "w": 20,
+        "x": 4,
+        "y": 40
+      },
+      "id": 25,
+      "libraryPanel": {
+        "name": "Error Volume by Status",
+        "uid": "c0650952-9457-4c2d-a8f6-7292017c47df"
+      },
+      "title": "Error Volume by Status"
+    },
+    {
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 45
+      },
+      "id": 7,
+      "libraryPanel": {
+        "name": " Error Rate by Route ",
+        "uid": "d62e8547-d12f-44b4-9bac-ab8dc9c3d98b"
+      },
+      "title": " Error Rate by Route "
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "BrainBytes",
+  "uid": "c233a8e8-83e9-41b5-bbe4-cbfe010dbec9",
+  "version": 3,
+  "weekStart": ""
+}
