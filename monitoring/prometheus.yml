@@ -11,10 +11,10 @@ rule_files:
   - 'recording_rules.yml'
 
 remote_write:
-  - url: https://prometheus-prod-37-prod-ap-southeast-1.grafana.net/api/prom/push
+  - url: "https://prometheus-prod-37-prod-ap-southeast-1.grafana.net/api/prom/push"
     basic_auth:
-      username: 3365178
-      password: glc_eyJvIjoiMTg0MTkxMCIsIm4iOiJzdGFjay0xNzIwNDc3LWhtLXJlYWQtYnJhaW5ieXRlcy1ncmFmYW5hLXRva2VuIiwiayI6IkJybTZlNTZEODFxWlZzWEE0OEVuYzgwNSIsIm0iOnsiciI6InByb2QtYXAtc291dGhlYXN0LTEifX0=
+      username: "3365178"
+      password: "glc_eyJvIjoiMTg0MTkxMCIsIm4iOiJzdGFjay0xNzIwNDc3LWhtLXdyaXRlLWJyYWluYnl0ZXNfcHJvbWV0aGV1c190b2tlbiIsImsiOiJ0S3M5QTRGQ1dDNklpSDA3STI5N2wxN1MiLCJtIjp7InIiOiJwcm9kLWFwLXNvdXRoZWFzdC0xIn19"
 
 scrape_configs:
   - job_name: 'prometheus'
@@ -27,9 +27,22 @@ scrape_configs:
     scrape_timeout: 10s
     sample_limit: 5000 
     body_size_limit: 10MB  
+    static_configs:
+      - targets: ['backend:3000']
+    basic_auth:
+      username: 'brainbytes321'      
+      password: 'I0hUXHiSV3'
+
+  - job_name: 'render-backend'
+    scrape_timeout: 10s
+    sample_limit: 5000 
+    body_size_limit: 10MB  
     scheme: https                 
     static_configs:
-      - targets: ['brainbytes-backend.onrender.com']
+      - targets: ['brainbytes-backend-dyzt.onrender.com']
+    basic_auth:
+      username: 'brainbytes321'      
+      password: 'I0hUXHiSV3'
 
   - job_name: 'node-exporter'
     scrape_timeout: 12s
@@ -41,13 +54,10 @@ scrape_configs:
     scrape_timeout: 12s
     sample_limit: 40000
     static_configs:
-      - targets: ['cadvisor:8081']
+      - targets: ['cadvisor:8080']
 
   - job_name: 'alertmanager'
     scrape_timeout: 10s
     sample_limit: 1000
     static_configs:
       - targets: ['alertmanager:9093']
-
-        
-        

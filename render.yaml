@@ -2,7 +2,7 @@ services:
   - type: web
     name: brainbytes-backend
     runtime: image
-    autoDeploy: false 
+    autoDeploy: false
     region: singapore
     plan: free
     numInstances: 1
@@ -28,6 +28,12 @@ services:
         value: https://brainbytes-frontend-brj1.onrender.com
       - key: PORT
         value: 3000
+      - key: ENABLE_METRICS
+        value: "true"
+      - key: METRICS_AUTH_USERNAME
+        value: METRICS_AUTH_USERNAME
+      - key: METRICS_AUTH_PASSWORD
+        value: METRICS_AUTH_PASSWORD
 
   - type: web
     name: brainbytes-frontend

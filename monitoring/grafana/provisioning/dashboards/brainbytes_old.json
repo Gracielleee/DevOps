@@ -1,0 +1,972 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "panels": [],
+      "title": "Resource Utilization",
+      "type": "row"
+    },
+    {
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 10,
+      "libraryPanel": {
+        "name": "CPU Usage",
+        "uid": "ec727bd9-1138-4904-ac10-31ddb95f6cee"
+      },
+      "title": "CPU Usage"
+    },
+    {
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 4,
+        "y": 1
+      },
+      "id": 11,
+      "libraryPanel": {
+        "name": "Memory Usage",
+        "uid": "e5edcec7-f486-460e-be55-bc4bbef3078e"
+      },
+      "title": "Memory Usage"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 13,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE8EB7BB14D529B55"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "0": {
+                      "index": 0,
+                      "text": "Down"
+                    },
+                    "1": {
+                      "index": 1,
+                      "text": "Up"
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 0
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 7,
+            "x": 0,
+            "y": 15
+          },
+          "id": 26,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "10.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE8EB7BB14D529B55"
+              },
+              "editorMode": "code",
+              "expr": "up{job=\"$instance\"}",
+              "instant": false,
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "App Status",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE8EB7BB14D529B55"
+          },
+          "description": "Tracks the rate of empty AI responses. \n\nA spike here indicates that our Hugging Face (AI Service) monthly free tier quota has likely been exhausted, causing the model to return empty responses and degrade the service.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 7,
+            "x": 7,
+            "y": 15
+          },
+          "id": 29,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "10.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE8EB7BB14D529B55"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(brainbytes_ai_empty_responses_total{job=\"$instance\"}[5m]))",
+              "instant": false,
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "AI Empty Responses",
+          "type": "stat"
+        },
+        {
+          "gridPos": {
+            "h": 8,
+            "w": 5,
+            "x": 14,
+            "y": 15
+          },
+          "id": 17,
+          "libraryPanel": {
+            "name": "Mobile Platform Split",
+            "uid": "c13aadd0-90d7-4806-bcef-4e6f4af122f3"
+          },
+          "title": "Mobile Platform Split"
+        },
+        {
+          "gridPos": {
+            "h": 8,
+            "w": 5,
+            "x": 19,
+            "y": 15
+          },
+          "id": 18,
+          "libraryPanel": {
+            "name": "Network Type Split",
+            "uid": "eb663b2f-07a6-4769-a11d-69018b6c42ed"
+          },
+          "title": "Network Type Split"
+        },
+        {
+          "gridPos": {
+            "h": 7,
+            "w": 4,
+            "x": 0,
+            "y": 19
+          },
+          "id": 15,
+          "libraryPanel": {
+            "name": "Active Sessions",
+            "uid": "ea700106-28f3-4bdf-bb73-4fedaf21d0f4"
+          },
+          "title": "Active Sessions"
+        },
+        {
+          "gridPos": {
+            "h": 7,
+            "w": 10,
+            "x": 4,
+            "y": 19
+          },
+          "id": 20,
+          "libraryPanel": {
+            "name": "Session Trend",
+            "uid": "e5661daf-e905-4b24-b468-0fca9f333882"
+          },
+          "title": "Session Trend"
+        },
+        {
+          "gridPos": {
+            "h": 14,
+            "w": 10,
+            "x": 14,
+            "y": 23
+          },
+          "id": 19,
+          "libraryPanel": {
+            "name": "Learning Materials Created by Size Range",
+            "uid": "d3ad0392-1958-4d7e-9c15-7c293c10a923"
+          },
+          "title": "Learning Materials Created by Size Range"
+        },
+        {
+          "gridPos": {
+            "h": 11,
+            "w": 14,
+            "x": 0,
+            "y": 26
+          },
+          "id": 16,
+          "libraryPanel": {
+            "name": "Questions Asked by Subject",
+            "uid": "d343ce66-68f9-4370-bed4-afffe701de62"
+          },
+          "title": "Questions Asked by Subject"
+        }
+      ],
+      "title": "User Experience",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 2,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE8EB7BB14D529B55"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "reqps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 4,
+            "x": 0,
+            "y": 41
+          },
+          "id": 27,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "10.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE8EB7BB14D529B55"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(brainbytes_http_requests_total{job=\"$instance\"}[5m]))",
+              "instant": false,
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Requests per Second",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE8EB7BB14D529B55"
+          },
+          "description": "Percentage of total traffic staying under the 100 KB low-bandwidth target. Goal is >95%.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 90
+                  },
+                  {
+                    "color": "green",
+                    "value": 95
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 5,
+            "x": 4,
+            "y": 41
+          },
+          "id": 31,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "10.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE8EB7BB14D529B55"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(brainbytes_response_size_bytes_bucket{le=\"100000\", job=\"$instance\"}[5m])) \r\n/ \r\nsum(rate(brainbytes_response_size_bytes_count{job=\"$instance\"}[5m])) * 100",
+              "instant": false,
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Response Size SLO Compliance (<100KB)",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE8EB7BB14D529B55"
+          },
+          "description": "Percentage of inbound HTTP traffic meeting our 3-second latency SLO. Target is >99%.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 95
+                  },
+                  {
+                    "color": "green",
+                    "value": 99
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 5,
+            "x": 9,
+            "y": 41
+          },
+          "id": 32,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "10.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE8EB7BB14D529B55"
+              },
+              "editorMode": "code",
+              "expr": "(sum(rate(brainbytes_http_request_duration_seconds_bucket{le=\"3\", job=\"$instance\"}[5m])) / sum(rate(brainbytes_http_request_duration_seconds_count{job=\"$instance\"}[5m])) * 100) or vector(100)",
+              "instant": false,
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "HTTP Latency SLO Compliance (<3s)",
+          "type": "stat"
+        },
+        {
+          "gridPos": {
+            "h": 6,
+            "w": 10,
+            "x": 14,
+            "y": 41
+          },
+          "id": 5,
+          "libraryPanel": {
+            "name": "Status Code Split (req/s)",
+            "uid": "d6fcf207-3cee-4eea-96af-873677dc2ddc"
+          },
+          "title": "Status Code Split (req/s)"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE8EB7BB14D529B55"
+          },
+          "description": "Tracks the payload sizes of incoming and outgoing backend responses. \n- p95 (95th percentile) shows the upper size limit experienced by 95% of users.\n- p50 (median) shows the typical response size under normal usage.\n\nThe red threshold line marks our low-bandwidth SLO at 100 KB. Peaks above this line indicate heavy payload delivery that could impact users on slow network connections.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "line"
+                }
+              },
+              "mappings": [],
+              "max": 150000,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 100000.0001
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 47
+          },
+          "id": 30,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE8EB7BB14D529B55"
+              },
+              "editorMode": "code",
+              "expr": "histogram_quantile(0.95, sum(rate(brainbytes_response_size_bytes_bucket{job=\"$instance\"}[5m])) by (le))",
+              "instant": false,
+              "legendFormat": "p95",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE8EB7BB14D529B55"
+              },
+              "editorMode": "code",
+              "expr": "histogram_quantile(0.50, sum(rate(brainbytes_response_size_bytes_bucket{job=\"$instance\"}[5m])) by (le))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "p50",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Response Size Distribution (p95 / p50)",
+          "type": "timeseries"
+        },
+        {
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 47
+          },
+          "id": 4,
+          "libraryPanel": {
+            "name": "HTTP Latency p95/p99",
+            "uid": "d04d239f-e68b-44fe-83e3-2e931b740e76"
+          },
+          "title": "HTTP Latency p95/p99"
+        },
+        {
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 57
+          },
+          "id": 3,
+          "libraryPanel": {
+            "name": "Request Rate by Route",
+            "uid": "d0b9651a-d835-41af-8caf-030b9adf2f74"
+          },
+          "title": "Request Rate by Route"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PE8EB7BB14D529B55"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 3
+                  }
+                ]
+              },
+              "unit": "s"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 57
+          },
+          "id": 28,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE8EB7BB14D529B55"
+              },
+              "editorMode": "code",
+              "expr": "histogram_quantile(0.95, sum(rate(brainbytes_ai_response_time_seconds_bucket{job=\"$instance\"}[5m])) by (le))",
+              "instant": false,
+              "legendFormat": "p95",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PE8EB7BB14D529B55"
+              },
+              "editorMode": "code",
+              "expr": "histogram_quantile(0.99, sum(rate(brainbytes_ai_response_time_seconds_bucket{job=\"$instance\"}[5m])) by (le))",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "p99",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "AI Response Time (p95 / p99)",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Application Performance",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 21,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 5
+                  },
+                  {
+                    "color": "red",
+                    "value": 10
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 4,
+            "x": 0,
+            "y": 68
+          },
+          "id": 22,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "10.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "editorMode": "code",
+              "expr": "(100 * sum(rate(brainbytes_http_requests_total{status=~\"[45]..\",job=\"$instance\"}[5m])) / sum(rate(brainbytes_http_requests_total{job=\"$instance\"}[5m]))) or vector(0)",
+              "instant": false,
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Error Rate",
+          "type": "stat"
+        },
+        {
+          "gridPos": {
+            "h": 5,
+            "w": 20,
+            "x": 4,
+            "y": 68
+          },
+          "id": 25,
+          "libraryPanel": {
+            "name": "Error Volume by Status",
+            "uid": "c0650952-9457-4c2d-a8f6-7292017c47df"
+          },
+          "title": "Error Volume by Status"
+        },
+        {
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 73
+          },
+          "id": 7,
+          "libraryPanel": {
+            "name": " Error Rate by Route ",
+            "uid": "d62e8547-d12f-44b4-9bac-ab8dc9c3d98b"
+          },
+          "title": " Error Rate by Route "
+        }
+      ],
+      "title": "Error Tracking",
+      "type": "row"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "GrafanaCloud-Prometheus",
+          "value": "GrafanaCloud-Prometheus"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "datasource",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "local",
+          "value": "backend"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "instance",
+        "multi": false,
+        "name": "instance",
+        "options": [
+          {
+            "selected": true,
+            "text": "local",
+            "value": "backend"
+          },
+          {
+            "selected": false,
+            "text": "render",
+            "value": "render-backend"
+          }
+        ],
+        "query": "local : backend, render : render-backend",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "BrainBytes Old",
+  "uid": "c233a8e8-83e9-41b5-bbe4-cbfe010dbec9",
+  "version": 4,
+  "weekStart": ""
+}

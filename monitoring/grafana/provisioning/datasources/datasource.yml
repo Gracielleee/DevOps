@@ -11,3 +11,13 @@ datasources:
       basicAuthPassword: ${GRAFANA_CLOUD_PASSWORD}
     isDefault: true
     editable: true
+
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: false
+    jsonData:
+      httpMethod: POST
+      manageAlerts: true
+      timeInterval: 15s
