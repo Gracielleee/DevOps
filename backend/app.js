@@ -35,12 +35,25 @@ app.use(express.json());
 
 //----------------------Monitoring Block--------------------------
 if (ENABLE_METRICS) {
+  const username = process.env.METRICS_AUTH_USERNAME?.trim();
+  const password = process.env.METRICS_AUTH_PASSWORD?.trim();
+
   app.use(
     "/metrics",
     basicAuth({
-      users: { [process.env.METRICS_AUTH_USERNAME]: process.env.METRICS_AUTH_PASSWORD },
+      users: { [username]: password },
       challenge: true,
-      unauthorizedResponse: "Unauthorized access.",
+      unauthorizedResponse: (req) => {
+        console.warn(`[Auth Alert] Failed /metrics access attempt.`);
+        console.warn(`Expected: "${username}" | Received: "${req.auth?.user || 'None'}"`);
+        
+        return {
+          status: "error",
+          code: 401,
+          message: "Access Denied: Invalid metrics scraping credentials.",
+          timestamp: new Date().toISOString()
+        };
+      },
     }),
   );
 
