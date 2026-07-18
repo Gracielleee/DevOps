@@ -295,7 +295,7 @@
         "type": "prometheus",
         "uid": "PE8EB7BB14D529B55"
       },
-      "description": "Displays the absolute distribution of mobile traffic by platform type (such as Android or iOS) over the selected time range. This tracks our mobile device user base breakdown.",
+      "description": "Displays the breakdown of mobile traffic by platform type (such as Android or iOS), calculated over a rolling 5-minute window. This helps track our mobile device user base distribution.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -309,7 +309,7 @@
             }
           },
           "mappings": [],
-          "unit": "requests"
+          "unit": "reqps"
         },
         "overrides": []
       },
@@ -329,13 +329,13 @@
         "pieType": "donut",
         "reduceOptions": {
           "calcs": [
-            "sum"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "none"
         }
       },
@@ -346,7 +346,7 @@
             "uid": "PE8EB7BB14D529B55"
           },
           "editorMode": "code",
-          "expr": "sum(increase(brainbytes_mobile_requests_total{job=\"$instance\"}[$__range])) by (platform)",
+          "expr": "sum(rate(brainbytes_mobile_requests_total{job=\"$instance\"}[5m])) by (platform)",
           "legendFormat": "{{platform}}",
           "range": true,
           "refId": "A"
@@ -360,7 +360,7 @@
         "type": "prometheus",
         "uid": "PE8EB7BB14D529B55"
       },
-      "description": "Displays the absolute breakdown of mobile traffic by network type over the selected time range.",
+      "description": "racks the total number of concurrent active user sessions across the application in real time.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -374,7 +374,7 @@
             }
           },
           "mappings": [],
-          "unit": "requests"
+          "unit": "reqps"
         },
         "overrides": []
       },
@@ -394,13 +394,13 @@
         "pieType": "donut",
         "reduceOptions": {
           "calcs": [
-            "sum"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "none"
         }
       },
@@ -411,7 +411,7 @@
             "uid": "PE8EB7BB14D529B55"
           },
           "editorMode": "code",
-          "expr": "sum(increase(brainbytes_mobile_requests_total{job=\"$instance\"}[$__range])) by (network_type)",
+          "expr": "sum(rate(brainbytes_mobile_requests_total{job=\"$instance\"}[5m])) by (network_type)",
           "legendFormat": "{{network_type}}",
           "range": true,
           "refId": "A"
@@ -484,7 +484,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -493,15 +493,15 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "scheme",
+            "fillOpacity": 0,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "smooth",
-            "lineWidth": 3,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -526,10 +526,11 @@
               },
               {
                 "color": "red",
-                "value": 500
+                "value": 5000
               }
             ]
-          }
+          },
+          "unit": "short"
         },
         "overrides": []
       },
@@ -548,19 +549,13 @@
           "showLegend": false
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "multi",
+          "sort": "desc"
         }
       },
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PE8EB7BB14D529B55"
-          },
-          "editorMode": "code",
           "expr": "sum(brainbytes_active_sessions{job=\"$instance\"})",
-          "range": true,
           "refId": "A"
         }
       ],
@@ -1754,7 +1749,7 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},

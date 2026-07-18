@@ -144,7 +144,7 @@ services:
       - GF_SMTP_HOST=smtp.gmail.com:587
       - GF_SMTP_USER=${ALERTS_EMAIL}
       - GF_SMTP_PASSWORD=${ALERTS_PASSWORD}
-      - GF_SMTP_FROM_ADDRESS=y${ALERTS_EMAIL}
+      - GF_SMTP_FROM_ADDRESS=${ALERTS_EMAIL}
       - GF_SMTP_FROM_NAME=Grafana Alerts
     volumes:
       - grafana_data:/var/lib/grafana
