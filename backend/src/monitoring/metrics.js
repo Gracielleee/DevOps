@@ -58,7 +58,7 @@ const mobilePlatformCounter = new client.Counter({
 
 const aiResponseTimeHistogram = new client.Histogram({
   name: "brainbytes_ai_response_time_seconds",
-  help: "Time taken for AI to generate responses (SLO: <3s under normal load)",
+  help: "Time taken for AI to generate responses",
   labelNames: ["subject", "status"],
   buckets: [0.2, 0.5, 1, 2, 3, 5, 10, 20],
   registers: [register],

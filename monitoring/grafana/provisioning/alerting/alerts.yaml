@@ -1,49 +1,180 @@
 apiVersion: 1
 groups:
-  - orgId: 1
-    name: BrainBytes Alerts
-    folder: BrainBytes Alerts Folder
-    interval: 1m
-    rules:
-      - uid: brainbytes_high_error_rate
-        title: BrainBytes High Error Rate
-        for: 5m
-        condition: C
-        data:
-          # Block A: The Prometheus Query
-          - refId: A
-            relativeTimeRange:
-              from: 300
-              to: 0
-            datasourceUid: "PBFA97CFB590B2093"
-            model:
-              expr: "(100 * sum(rate(brainbytes_http_requests_total{status=~\"[45]..\"}[5m])) / sum(rate(brainbytes_http_requests_total[5m]))) or vector(0)"
-              intervalMs: 1000
-              maxDataPoints: 43200
-              refId: A
+    - orgId: 1
+      name: informational-trends
+      folder: BrainBytes Folder
+      interval: 30s
+      rules:
+        - uid: c1dfdb24-7083-484a-9952-f31e3a93f0a1
+          title: LowQuestionVolume
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 86400
+                to: 0
+              datasourceUid: PE8EB7BB14D529B55
+              model:
+                editorMode: code
+                expr: sum(increase(brainbytes_questions_total[12h]))
+                hide: false
+                instant: true
+                intervalMs: 1000
+                maxDataPoints: 43200
+                range: false
+                refId: A
+            - refId: B
+              relativeTimeRange:
+                from: 86400
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+            - refId: C
+              relativeTimeRange:
+                from: 86400
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          noDataState: NoData
+          execErrState: Error
+          for: 1h
+          annotations:
+            description: Possible service degradation or user issue.
+            summary: Question count dropped below 1 in 12 hours
+          labels:
+            severity: info
+            team: product
+          isPaused: false
 
-          # Block B: Reduce
-          - refId: B
-            datasourceUid: "__expr__"
-            model:
-              type: reduce
-              expression: A
-              reducer: last
-
-          # Block C: Threshold
-          - refId: C
-            datasourceUid: "__expr__"
-            model:
-              type: threshold
-              expression: B
-              conditions:
-                - evaluator:
-                    params: [5]
-                    type: gt
-                  operator:
-                    type: and
-
-        annotations:
-          summary: "High error rate detected on BrainBytes services."
-        labels:
-          severity: critical
+        - uid: be8ece97-12a9-42f0-ab17-37f87e390b4f
+          title: HighLearningMaterialSize
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: PE8EB7BB14D529B55
+              model:
+                editorMode: code
+                expr: sum(rate(brainbytes_learning_materials_total{byte_range=~"10000-19999|20000+"}[5m])) by (subject)
+                hide: false
+                instant: true
+                intervalMs: 1000
+                maxDataPoints: 43200
+                range: false
+                refId: A
+            - refId: B
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+            - refId: C
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 5 
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          noDataState: OK
+          execErrState: Error
+          for: 10m 
+          annotations:
+            description: '{{ if $value }}{{ $value }}{{ else }}0{{ end }} materials/sec being generated. Monitor storage impact'
+            summary: Large learning materials created for {{ if $labels.subject }}{{ $labels.subject }}{{ else }}unknown subject{{ end }}
+          labels:
+            severity: info
+            team: product
+          isPaused: false

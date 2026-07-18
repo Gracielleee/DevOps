@@ -1,12 +1,7 @@
 groups:
-  - name: BrainBytes Alerts
+  - name: BrainBytes Critical Alerts
     interval: 30s
     rules:
-
-      # ══════════════════════════════════════════════════════════════
-      # CRITICAL: Service Degradation
-      # ══════════════════════════════════════════════════════════════
-
       - alert: AIServiceEmptyResponses
         expr: sum(rate(brainbytes_ai_empty_responses_total[5m])) > 0.1
         for: 1m
@@ -15,8 +10,7 @@ groups:
           team: ai-service
         annotations:
           summary: "AI returning empty responses"
-          description: "{{ $value | humanizePercentage }} of responses empty. Check AI service health."
-          runbook: ""
+          description: "{{ $value | humanizePercentage }} of responses empty"
 
       - alert: HighErrorRate
         expr: |
@@ -28,49 +22,41 @@ groups:
           team: backend
         annotations:
           summary: "Error rate >5% on {{ $labels.route_pattern }}"
-          description: "{{ $value | humanizePercentage }} of requests failing (5xx). Investigate immediately."
-          runbook: ""
+          description: "{{ $value | humanizePercentage }} of requests failing (5xx)"
 
       - alert: AIResponseSLOViolation
         expr: |
           histogram_quantile(0.95,sum(rate(brainbytes_ai_response_time_seconds_bucket{status="success"}[5m])) by (subject, le)) > 3
-          > 3
         for: 3m
         labels:
           severity: critical
           team: ai-service
         annotations:
-          summary: "AI P95 latency violates SLO (<3s) for {{ $labels.subject }}"
-          description: "P95 latency: {{ $value | humanizeDuration }}. Subject: {{ $labels.subject }}"
-          runbook: ""
+          summary: "AI P95 latency violates SLO for {{ $labels.subject }}"
+          description: "P95: {{ $value | humanizeDuration }}"
 
-      # ══════════════════════════════════════════════════════════════
-      # WARNING: Performance Degradation
-      # ══════════════════════════════════════════════════════════════
-
+  - name: BrainBytes Warning Alerts
+    interval: 30s
+    rules:
       - alert: HTTPResponseSLOViolation
         expr: |
-          histogram_quantile(0.95, sum(rate(brainbytes_http_request_duration_seconds_bucket[5m])) by (route_pattern, le))
-          > 3
+          histogram_quantile(0.95, sum(rate(brainbytes_http_request_duration_seconds_bucket[5m])) by (route_pattern, le)) > 3
         for: 5m
         labels:
           severity: warning
           team: backend
         annotations:
           summary: "HTTP P95 latency >3s on {{ $labels.route_pattern }}"
-          description: "P95: {{ $value | humanizeDuration }}. SLO: <3s."
 
       - alert: LargeResponsesRiskBandwidth
         expr: |
-          histogram_quantile(0.95, sum(rate(brainbytes_response_size_bytes_bucket[5m])) by (endpoint, le))
-          > 100000
+          histogram_quantile(0.95, sum(rate(brainbytes_response_size_bytes_bucket[5m])) by (endpoint, le)) > 100000
         for: 10m
         labels:
           severity: warning
           team: backend
         annotations:
           summary: "P95 response size >100KB (endpoint: {{ $labels.endpoint }})"
-          description: "P95: {{ $value | humanize }}B. Risk violating 1Mbps SLO on slow networks."
 
       - alert: HighConnectionDropRate
         expr: sum(rate(brainbytes_connection_drops_total[5m])) by (reason) > 1
@@ -80,110 +66,105 @@ groups:
           team: backend
         annotations:
           summary: "Connection drops >1/sec (reason: {{ $labels.reason }})"
-          description: "{{ $value | humanize }}/sec drops. Check network stability."
 
-      - alert: HighMobileErrorRate
-        expr: |
-          sum(rate(brainbytes_http_requests_total{status=~"5.."}[5m])) by (status)
-          / sum(rate(brainbytes_http_requests_total[5m])) > 0.03
-        for: 5m
-        labels:
-          severity: warning
-          team: mobile
-        annotations:
-          summary: "Mobile endpoint error rate >3%"
-          description: "{{ $value | humanizePercentage }} errors. May indicate mobile-specific issues."
-
-      # ══════════════════════════════════════════════════════════════
-      # CAPACITY & RESOURCE HEALTH
-      # ══════════════════════════════════════════════════════════════
-
-      - alert: HighCPUUsage
-        expr: |
-          100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)
-          > 85
+  - name: BrainBytes Resource Alerts
+    interval: 30s
+    rules:
+      - alert: BackendCPUUsageHigh
+        expr: rate(process_cpu_seconds_total{job="backend"}[5m]) * 100 > 85
         for: 5m
         labels:
           severity: warning
           team: devops
         annotations:
-          summary: "CPU >85% on {{ $labels.instance }}"
-          description: "Current: {{ $value | humanize }}%. Approaching capacity."
+          summary: "Application CPU >85% on {{ $labels.instance }}"
 
-      - alert: HighMemoryUsage
+      - alert: ContainerMemoryUsageHigh
         expr: |
-          (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100
-          > 85
+          (container_memory_working_set_bytes{container="backend-1"} 
+          / container_spec_memory_limit_bytes{container="backend-1"}
+          ) * 100 > 85
         for: 5m
         labels:
           severity: warning
           team: devops
         annotations:
-          summary: "Memory >85% on {{ $labels.instance }}"
-          description: "Current: {{ $value | humanize }}%. Risk of OOM."
-
-      - alert: LowDiskSpace
-        expr: |
-          (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100
-          < 10
-        for: 5m
-        labels:
-          severity: warning
-          team: devops
-        annotations:
-          summary: "Disk space <10% on {{ $labels.instance }}"
-          description: "Available: {{ $value | humanize }}%. Fill up soon."
+          summary: "Memory >85% on {{ $labels.container }}"
+          description: "Risk of OOM kill"
 
       - alert: HighActiveSessions
-        expr: brainbytes_active_sessions > 5000
+        expr: brainbytes_active_sessions{job="backend"} > 5000
         for: 10m
         labels:
           severity: warning
           team: backend
         annotations:
           summary: "Active sessions >5000"
-          description: "Current: {{ $value | humanize }}. Monitor for cascading failures."
 
-      # ══════════════════════════════════════════════════════════════
-      # NETWORK & INFRASTRUCTURE
-      # ══════════════════════════════════════════════════════════════
-
-      - alert: NetworkErrors
+      - alert: ContainerNetworkErrors
         expr: |
-          (rate(node_network_receive_errs_total[5m]) + rate(node_network_transmit_errs_total[5m]))
-          > 10
+          (rate(container_network_receive_errors_total{container="backend-1"}[5m]) 
+          + rate(container_network_transmit_errors_total{container="backend-1"}[5m])
+          ) > 10
         for: 5m
         labels:
           severity: warning
           team: devops
         annotations:
-          summary: "Network errors >10/sec on {{ $labels.instance }}"
-          description: "{{ $value | humanize }}/sec errors. Check physical link."
+          summary: "Network errors >10/sec on {{ $labels.container }}"
 
-      # ══════════════════════════════════════════════════════════════
-      # INFO: Observability & Trends
-      # ══════════════════════════════════════════════════════════════
-
-      - alert: LowQuestionVolume
-        expr: sum(increase(brainbytes_questions_total[12h])) < 1
-        for: 60m
-        labels:
-          severity: info
-          team: product
-        annotations:
-          summary: "Question count dropped below 1 in 12 hours"
-          description: "Possible service degradation or user issue."
-
-
-      # byte_range value is taken from monitoringConstants.js
-      - alert: HighLearningMaterialSize
+  - name: Infrastructure & Disk Alerts
+    interval: 30s
+    rules:
+      - alert: DiskSpaceRunningOut
         expr: |
-          sum(rate(brainbytes_learning_materials_total{byte_range=~"10000-19999"}[5m])) by (subject)
-          > 5
-        for: 10m
+          (node_filesystem_avail_bytes{mountpoint="/var/lib"} 
+          / node_filesystem_size_bytes{mountpoint="/var/lib"}) < 0.1
+        for: 5m
         labels:
-          severity: info
-          team: product
+          severity: warning
+          team: devops
         annotations:
-          summary: "Large learning materials created for {{ $labels.subject }}"
-          description: "{{ $value | humanize }}/sec. Monitor storage impact."
+          summary: "Docker disk usage >90% on {{ $labels.instance }}"
+          description: "{{ $value | humanizePercentage }} of disk space available"
+
+      - alert: ContainerRestartingFrequently
+        expr: |
+          increase(container_last_seen{name="backend-1"}[5m]) > 2
+        for: 2m
+        labels:
+          severity: critical
+          team: devops
+        annotations:
+          summary: "Backend container restarting frequently"
+          description: "{{ $value }} restarts detected in 5 minutes"
+
+      - alert: HighDockerContainerCPU
+        expr: |
+          rate(container_cpu_usage_seconds_total{container="backend-1"}[5m]) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "Docker container CPU >80% ({{ $labels.container }})"
+
+      - alert: NodeMemoryPressure
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "Node memory pressure >85%"
+          description: "{{ $value | humanize }}% memory used"
+
+      - alert: HighLoadAverage
+        expr: node_load1 > 4
+        for: 5m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "Load average >4 on {{ $labels.instance }}"
+          description: "Current: {{ $value | humanize }}"

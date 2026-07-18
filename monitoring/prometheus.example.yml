@@ -17,7 +17,7 @@ remote_write:
   - url: ${GRAFANA_CLOUD_URL_PUSH} 
     basic_auth:
       username: ${GRAFANA_CLOUD_USER}
-      password: ${GRAFANA_CLOUD_PASSWORD}
+      password: ${GRAFANA_CLOUD_WRITE_PASSWORD}
 
 scrape_configs:
   - job_name: 'prometheus'
@@ -26,13 +26,21 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
   
-   #Replace this with the live url
   - job_name: 'backend'
     scrape_timeout: 10s
     sample_limit: 5000 
     body_size_limit: 10MB  
     static_configs:
       - targets: ['backend:9080']
+
+   #Replace this with the deployed url
+  - job_name: 'render-backend'
+    scrape_timeout: 10s
+    sample_limit: 5000 
+    body_size_limit: 10MB  
+    scheme: https                 
+    static_configs:
+      - targets: ['servicehere.onrender.com']
 
   - job_name: 'node-exporter'
     scrape_timeout: 12s

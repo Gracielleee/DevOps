@@ -4,10 +4,20 @@ datasources:
   - name: GrafanaCloud-Prometheus
     type: prometheus
     access: proxy
-    url: ${GRAFANA_CLOUD_URL}
+    url: "${GRAFANA_CLOUD_URL}"
     basicAuth: true
-    basicAuthUser: ${GRAFANA_CLOUD_USER}
+    basicAuthUser: "${GRAFANA_CLOUD_USER}"
     secureJsonData:
-      basicAuthPassword: ${GRAFANA_CLOUD_PASSWORD}
+      basicAuthPassword: "${GRAFANA_CLOUD_PASSWORD}"
     isDefault: true
     editable: true
+
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: false
+    jsonData:
+      httpMethod: POST
+      manageAlerts: true
+      timeInterval: 15s

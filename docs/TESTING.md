@@ -56,9 +56,11 @@ Simulates real user journeys in a browser environment.
 | **Playwright**             | Browser Automation                      | E2E Flows          |
 | **MongoDB Memory Server**  | In-Memory Database Instance             | Backend Isolation  |
 
-## Code Quality
+## Code Quality and Security
 
 - **ESLint**: Static code analysis for JavaScript, apllied to both backend and frontend source code
+- **Synk***: Vulnerability scanning tool to identify and fix security flaws in open-source dependencies and container images.
+- **TruffleHog**: Secrets scanning to detect and prevent exposed secrets and tokens.
 - **GitHub Actions**: Automated CI pipeline for running tests in `main.yml`
 
 </br>
