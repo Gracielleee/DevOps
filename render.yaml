@@ -31,9 +31,11 @@ services:
       - key: ENABLE_METRICS
         value: "true"
       - key: METRICS_AUTH_USERNAME
-        value: METRICS_AUTH_USERNAME
+        scope: run
+        sync: false
       - key: METRICS_AUTH_PASSWORD
-        value: METRICS_AUTH_PASSWORD
+        scope: run
+        sync: false
 
   - type: web
     name: brainbytes-frontend
