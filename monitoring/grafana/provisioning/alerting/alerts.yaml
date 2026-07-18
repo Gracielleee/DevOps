@@ -91,6 +91,7 @@ groups:
             severity: info
             team: product
           isPaused: false
+
         - uid: be8ece97-12a9-42f0-ab17-37f87e390b4f
           title: HighLearningMaterialSize
           condition: C
@@ -102,7 +103,7 @@ groups:
               datasourceUid: PE8EB7BB14D529B55
               model:
                 editorMode: code
-                expr: sum(rate(brainbytes_learning_materials_total{byte_range="10000-19999"}[5m])) by (subject)
+                expr: sum(rate(brainbytes_learning_materials_total{byte_range=~"10000-19999|20000+"}[5m])) by (subject)
                 hide: false
                 instant: true
                 intervalMs: 1000
@@ -147,7 +148,7 @@ groups:
                 conditions:
                     - evaluator:
                         params:
-                            - 5
+                            - 5 
                         type: gt
                       operator:
                         type: and
@@ -167,12 +168,12 @@ groups:
                 maxDataPoints: 43200
                 refId: C
                 type: threshold
-          noDataState: NoData
+          noDataState: OK
           execErrState: Error
-          for: 10m
+          for: 10m 
           annotations:
-            description: '{{ $value }} materials/sec being generated. Monitor storage impact'
-            summary: Large learning materials created for {{ $labels.subject }}
+            description: '{{ if $value }}{{ $value }}{{ else }}0{{ end }} materials/sec being generated. Monitor storage impact'
+            summary: Large learning materials created for {{ if $labels.subject }}{{ $labels.subject }}{{ else }}unknown subject{{ end }}
           labels:
             severity: info
             team: product
