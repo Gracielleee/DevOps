@@ -3,8 +3,14 @@ name: BrainBytes CI/CD
 on:
   push:
     branches: [main, development]
+    paths-ignore:
+      - "README.md"
+      - "docs/**"
   pull_request:
     branches: [main, development]
+    paths-ignore:
+      - "README.md"
+      - "docs/**"
 
 jobs:
   lint-and-scan:
@@ -45,7 +51,7 @@ jobs:
 
       - name: Lint backend
         working-directory: ./backend
-        run: npm run lint 
+        run: npm run lint
 
       - name: Frontend audit
         working-directory: ./frontend
@@ -93,7 +99,7 @@ jobs:
       - name: Start Application Stack (Docker)
         run: |
           docker compose up -d frontend
-          
+
       - name: Wait for Frontend Container to be Ready
         run: npx wait-on http://localhost:8080 --timeout 60000
 
@@ -131,7 +137,7 @@ jobs:
 
       - name: Run E2E Tests
         working-directory: ./frontend
-        run: npx playwright test 
+        run: npx playwright test
         env:
           BASE_URL: http://localhost:3001
 
@@ -173,8 +179,7 @@ jobs:
 
       - name: Run backend tests
         working-directory: ./backend
-        run:
-          npm test -- --ci 
+        run: npm test -- --ci
 
       - name: Publish backend test report
         if: always()
@@ -254,4 +259,3 @@ jobs:
 
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
