@@ -3,7 +3,7 @@ groups:
     interval: 30s
     rules:
       - alert: AIServiceEmptyResponses
-        expr: sum(rate(brainbytes_ai_empty_responses_total[5m])) > 0.1
+        expr: sum(rate(brainbytes_ai_empty_responses_total[5m])) by (job) > 0.1
         for: 1m
         labels:
           severity: critical
@@ -14,8 +14,8 @@ groups:
 
       - alert: HighErrorRate
         expr: |
-          sum(rate(brainbytes_http_requests_total{status=~"5.."}[5m])) by (route_pattern)
-          / sum(rate(brainbytes_http_requests_total[5m])) by (route_pattern) > 0.05
+          sum(rate(brainbytes_http_requests_total{status=~"5.."}[5m])) by (route_pattern, job)
+          / sum(rate(brainbytes_http_requests_total[5m])) by (route_pattern, job) > 0.05
         for: 2m
         labels:
           severity: critical
@@ -26,7 +26,7 @@ groups:
 
       - alert: AIResponseSLOViolation
         expr: |
-          histogram_quantile(0.95,sum(rate(brainbytes_ai_response_time_seconds_bucket{status="success"}[5m])) by (subject, le)) > 3
+          histogram_quantile(0.95, sum(rate(brainbytes_ai_response_time_seconds_bucket{status="success"}[5m])) by (subject, le, job)) > 3
         for: 3m
         labels:
           severity: critical
@@ -40,7 +40,7 @@ groups:
     rules:
       - alert: HTTPResponseSLOViolation
         expr: |
-          histogram_quantile(0.95, sum(rate(brainbytes_http_request_duration_seconds_bucket[5m])) by (route_pattern, le)) > 3
+          histogram_quantile(0.95, sum(rate(brainbytes_http_request_duration_seconds_bucket[5m])) by (route_pattern, le, job)) > 3
         for: 5m
         labels:
           severity: warning
@@ -50,7 +50,7 @@ groups:
 
       - alert: LargeResponsesRiskBandwidth
         expr: |
-          histogram_quantile(0.95, sum(rate(brainbytes_response_size_bytes_bucket[5m])) by (endpoint, le)) > 100000
+          histogram_quantile(0.95, sum(rate(brainbytes_response_size_bytes_bucket[5m])) by (endpoint, le, job)) > 100000
         for: 10m
         labels:
           severity: warning
@@ -59,7 +59,7 @@ groups:
           summary: "P95 response size >100KB (endpoint: {{ $labels.endpoint }})"
 
       - alert: HighConnectionDropRate
-        expr: sum(rate(brainbytes_connection_drops_total[5m])) by (reason) > 1
+        expr: sum(rate(brainbytes_connection_drops_total[5m])) by (reason, job) > 1
         for: 2m
         labels:
           severity: warning
@@ -71,7 +71,7 @@ groups:
     interval: 30s
     rules:
       - alert: BackendCPUUsageHigh
-        expr: rate(process_cpu_seconds_total{job="backend"}[5m]) * 100 > 85
+        expr: rate(process_cpu_seconds_total[5m]) * 100 > 85
         for: 5m
         labels:
           severity: warning
@@ -93,7 +93,7 @@ groups:
           description: "Risk of OOM kill"
 
       - alert: HighActiveSessions
-        expr: brainbytes_active_sessions{job="backend"} > 5000
+        expr: brainbytes_active_sessions > 5000
         for: 10m
         labels:
           severity: warning
