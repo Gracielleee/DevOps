@@ -84,7 +84,7 @@ Backend (local or prod) → Prometheus (local) → Grafana Cloud → Grafana (lo
 | Job Name         | Target                        | Scope        | Auth Required |
 | ---------------- | ----------------------------- | ------------ | ------------- |
 | `prometheus`     | `localhost:9090`              | Local        | No            |
-| `backend`        | `backend:9080`                | Local dev    | Yes (basic auth) |
+| `backend`        | `backend:3000`                | Local dev    | Yes (basic auth); endpoint is `/metrics` |
 | `render-backend` | `yourservicehere.onrender.com`    | Production   | Yes (basic auth) |
 | `node-exporter`  | `node-exporter:9100`          | Local only   | No            |
 | `cadvisor`       | `cadvisor:8081`               | Local only   | No            |
