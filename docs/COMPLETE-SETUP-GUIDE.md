@@ -73,6 +73,14 @@ Each template file has detailed instructions in its header comments — open the
 
 > If you've already filled in your `.env` file, you can copy those values directly into the Prometheus and Alertmanager configs.
 
+### Environment File Naming
+
+| File Scope | Template File | Output File |
+|---|---|---|
+| Root | `.env.template` | `.env` |
+| Backend | `backend/.env.example` | Use as-is for reference |
+| Frontend | `frontend/.env.example` | Use as-is for reference |
+
 ---
 
 ## Environment Variables
@@ -123,11 +131,11 @@ Each template file has detailed instructions in its header comments — open the
 
 If you just want to run the application without monitoring:
 
-1. Ensure `.env` is configured with at least the backend variables
+1. Copy `.env.template` to `.env` and fill in at least: `HF_TOKEN`, `MONGO_URI`, `JWT_SECRET`, `NODE_ENV`
 2. From the project root:
 
 ```
-bash docker compose up --build frontend backend
+docker compose up --build frontend backend
 ```
 
 | Service      | URL                            | Purpose                   |
@@ -141,12 +149,24 @@ bash docker compose up --build frontend backend
 docker compose down
 ```
 
+## Pre-Flight Checklist
+
+Before running `docker compose up`, verify:
+- [ ] `.env` exists and is filled with actual credentials
+- [ ] `monitoring/prometheus.yml` exists (copied from `monitoring/prometheus.template.yml`)
+- [ ] `monitoring/alertmanager.yml` exists (copied from `monitoring/alertmanager.template.yml`)
+- [ ] `prometheus.yml` contains no placeholder variables (all `${...}` replaced)
+- [ ] `alertmanager.yml` contains no placeholder variables (all `${...}` replaced)
+- [ ] Docker Desktop is running
+
+---
+
 ## Local Run — App + Monitoring
 
 If you want the full stack including dashboards and alerts:
 
-1.  Ensure all three config files are created and filled (.env, prometheus.yml, alertmanager.yml)
-2.  From the project root:
+1. Complete the Pre-Flight Checklist above
+2. From the project root:
 
 ```
 docker compose up --build
