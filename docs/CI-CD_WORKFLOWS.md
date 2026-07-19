@@ -77,3 +77,12 @@ If you encounter issues with the CI/CD setup:
 1. Check the Actions tab for detailed logs
 2. Consult the GitHub Actions documentation
 3. Contact the repository maintainers 
+
+</br>
+
+## Quick Resources
+
+| Resource | File / Link |
+|----------|-------------|
+| Application Testing Approach | [`TESTING`](TESTING.md) |
+| GHCR | [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) |

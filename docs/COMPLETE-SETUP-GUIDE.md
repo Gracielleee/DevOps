@@ -175,7 +175,7 @@ This launches 7 containers:
 | cAdvisor        | `http://localhost:8081/docker/` | N/A                                                            |
 | Node Exporter   | `http://localhost:9100/metrics` | N/A                                                            |
 
-> For detailed monitoring setup, dashboards, and alert configuration, see [MONITORING_GUIDE](docs\MONITORING_GUIDE.md).
+> For detailed monitoring setup, dashboards, and alert configuration, see [`MONITORING-GUIDE`](MONITORING-GUIDE.md).
 
 **Stop:**
 ```
@@ -212,11 +212,11 @@ Make some API calls (login, send chat messages, upload learning materials). Then
 | `brainbytes_ai_response_time_seconds` | AI calls are being measured |
 | `brainbytes_ai_empty_responses_total` | Empty response tracking is active |
 
-> Tip: See the **Generate Mock Traffic** section in [MONITORING_GUIDE](docs\MONITORING_GUIDE.md) for more info on how to simulate traffic.
+> Tip: See the **Generate Mock Traffic** section in [`MONITORING-GUIDE`](MONITORING-GUIDE.md) for more info on how to simulate traffic.
 
 #### 5. Test alert firing
 
-See the **Testing Your Setup** section in [MONITORING_GUIDE](docs\MONITORING_GUIDE.md) for commands to trigger test alerts via webhook and email.
+See the **Testing Your Setup** section in [`MONITORING-GUIDE`](MONITORING-GUIDE.md) for commands to trigger test alerts via webhook and email.
 
 ---
 
@@ -329,7 +329,7 @@ For full CI/CD workflow details, see [CI-CD_WORKFLOWS](docs\CI-CD_WORKFLOWS.md).
 | Alert emails not arriving | Gmail app password incorrect | Ensure 2-Step Verification is on; regenerate App Password; verify `smtp_require_tls: true` |
 | Docker containers keep restarting | Build failure or missing env vars | Run `docker compose logs <service>` to inspect errors |
 
-For more troubleshooting, see [TROUBLESHOOTING_GUIDE](docs\TROUBLESHOOTING-GUIDE.md).
+For more troubleshooting, see [TROUBLESHOOTING-GUIDE](docs/TROUBLESHOOTING-GUIDE.md).
 
 ---
 
@@ -337,9 +337,9 @@ For more troubleshooting, see [TROUBLESHOOTING_GUIDE](docs\TROUBLESHOOTING-GUIDE
 
 | Resource | File / Link |
 |----------|-------------|
-| Monitoring deep dive | [MONITORING_GUIDE](docs\MONITORING_GUIDE.md) |
-| CI/CD workflow details | [CI-CD_WORKFLOWS](docs\CI-CD_WORKFLOWS.md) |
-| Troubleshooting | [TROUBLESHOOTING_GUIDE](docs\TROUBLESHOOTING-GUIDE.md) |
+| Monitoring deep dive | [`MONITORING-GUIDE`](MONITORING-GUIDE.md) |
+| CI/CD workflow details | [`CI-CD_WORKFLOWS`](CI-CD_WORKFLOWS.md) |
+| Troubleshooting | [`TROUBLESHOOTING-GUIDE`](TROUBLESHOOTING-GUIDE.md) |
 | Grafana Cloud | grafana.com |
 | MongoDB Atlas | mongodb.com/cloud/atlas |
 | Hugging Face Tokens | huggingface.co |

@@ -113,7 +113,7 @@ Therefore, ensure the following software is installed on your machine:
     cd brainbytes #navigate to the root of the project (same level as docker-compose.yml).
 
 #### 2. **Configure Environment:**
-See [COMPLETE_SETUP_GUIDE](docs\COMPLETE_SETUP_GUIDE.md) for detailed environment configuration instructions.
+See [COMPLETE-SETUP-GUIDE](docs/COMPLETE-SETUP-GUIDE.md) for detailed environment configuration instructions.
 
     
 #### 3. **Start the Containers:**
@@ -234,7 +234,10 @@ For detailed technical information, please refer to the dedicated docs:
 | **Database Schema** | ERD, field definitions, and indexing strategies | [View DB Schema](docs/DATABASE.md) |
 | **Development Workflow** | Branching strategy, PR rules, and team process | [View Contribution Workflow](docs/CONTRIBUTION.md) |
 | **CI/CD Workflows** | Workflows, Status badges, and workflow troubleshooting | [View Workflows](docs/CI-CD_WORKFLOWS.md) |
-
+COMPLETE-SETUP-GUIDE
+MONITORING-GUIDE
+OPERATIONS-MANUAL
+TROUBLESHOOTING-GUIDE
 
 </br>
 

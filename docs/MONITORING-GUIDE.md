@@ -153,7 +153,7 @@ Grafana's datasource provisioning (`monitoring/grafana/provisioning/datasources/
 
 Both datasources will show the same data if remote write is configured correctly.
 
-> Note: For more info on setting up environment variables, check out `COMPLETE_SETUP_GUIDE.md`
+> Note: For more info on setting up environment variables, check out [`COMPLETE-SETUP-GUIDE`](COMPLETE-SETUP-GUIDE.md)
 
 </br>
 
@@ -446,6 +446,7 @@ For more troubleshooting, visit [`TROUBLESHOOTING-GUIDE`](TROUBLESHOOTING-GUIDE.
 | ------------------------- | ------------------------------------------------------- |
 | Full Setup Guide          | [`COMPLETE-SETUP-GUIDE`](COMPLETE-SETUP-GUIDE.md)        |
 | Detailed Troubleshooting Guide | [`TROUBLESHOOTING-GUIDE`](TROUBLESHOOTING-GUIDE.md) |
+| Operations Manual | [`OPERATIONS-MANUAL`](OPERATIONS-MANUAL.md) |
 | Grafana Cloud Docs        | [grafana.com/docs/cloud](https://grafana.com/docs/cloud/) |
 | Prometheus Docs           | [prometheus.io/docs](https://prometheus.io/docs/)       |
 | Alertmanager Docs         | [prometheus.io/docs/alerting](https://prometheus.io/docs/alerting/latest/) |
