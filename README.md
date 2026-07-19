@@ -10,7 +10,7 @@ See the architecture below:
 
 </br> 
 
-![system architecture diagram](docs\images\devops_architecture.png)
+![system architecture diagram](docs/images/devops_architecture.png)
 
 </br> 
 
