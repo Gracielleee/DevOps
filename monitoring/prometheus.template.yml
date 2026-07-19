@@ -49,7 +49,8 @@ scrape_configs:
     sample_limit: 5000
     body_size_limit: 10MB
     static_configs:
-      - targets: ['backend:9080']
+      # Metrics endpoint is /metrics on port 3000
+      - targets: ['backend:3000']
     basic_auth:
       username: ${METRICS_AUTH_USERNAME}
       password: ${METRICS_AUTH_PASSWORD}
