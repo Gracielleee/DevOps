@@ -29,15 +29,22 @@ jobs:
       - name: Rollback backend
         if: github.event.inputs.service == 'backend' || github.event.inputs.service == 'both'
         run: |
-          echo "Rolling back backend to image tag: ${{ github.event.inputs.image_tag }}"
-          # Render requires the full image URL to be URL-encoded (?imgURL=...)
-          curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}&imgURL=ghcr.io%2F${{ github.repository_owner }}%2Fbrainbytes-backend%3A${{ github.event.inputs.image_tag }}"
+          set -e
+          OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_TAG="${{ github.event.inputs.image_tag }}"
+          echo "Rolling back backend to image tag: $IMAGE_TAG"
+          ENCODED_IMAGE="ghcr.io%2F${OWNER_LOWER}%2Fbrainbytes-backend%3A${IMAGE_TAG}"
+          curl -f -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}&imgURL=${ENCODED_IMAGE}"
 
       - name: Rollback frontend
         if: github.event.inputs.service == 'frontend' || github.event.inputs.service == 'both'
         run: |
-          echo "Rolling back frontend to image tag: ${{ github.event.inputs.image_tag }}"
-          curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}&imgURL=ghcr.io%2F${{ github.repository_owner }}%2Fbrainbytes-frontend%3A${{ github.event.inputs.image_tag }}"
+          set -e
+          OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_TAG="${{ github.event.inputs.image_tag }}"
+          echo "Rolling back frontend to image tag: $IMAGE_TAG"
+          ENCODED_IMAGE="ghcr.io%2F${OWNER_LOWER}%2Fbrainbytes-frontend%3A${IMAGE_TAG}"
+          curl -f -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}&imgURL=${ENCODED_IMAGE}"
 
       - name: Verify Live Backend Deployment
         run: |
