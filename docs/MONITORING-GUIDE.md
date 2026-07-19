@@ -4,6 +4,8 @@
 
 This guide covers the monitoring infrastructure for BrainBytes, which uses **Prometheus** for metrics collection, **Grafana** for visualization, and **Grafana Cloud** for centralized storage.
 
+</br>
+
 ---
 
 ## Table of Contents
@@ -20,6 +22,8 @@ This guide covers the monitoring infrastructure for BrainBytes, which uses **Pro
 10. [Troubleshooting](#troubleshooting)
 11. [Security Notes](#security-notes)
 
+</br>
+
 ---
 
 ## What Are We Monitoring?
@@ -31,6 +35,8 @@ This guide covers the monitoring infrastructure for BrainBytes, which uses **Pro
 | **AI Performance**     | AI response latency, empty responses, etc.            | Monitors the core feature's reliability                     |
 | **Resources**          | CPU, memory, disk space, network errors, etc.         | Prevents crashes from running out of capacity               |
 | **Business Metrics**   | Questions submitted, learning materials created,  etc. | Tracks trends and engagement                        |
+
+</br>
 
 ---
 
@@ -59,6 +65,8 @@ Backend (local or prod) → Prometheus (local) → Grafana Cloud → Grafana (lo
 
 > **Note**: cAdvisor and Node Exporter are **not** used in scraping production — they only apply to local development.
 
+</br>
+
 ---
 
 ## Component Breakdown
@@ -83,6 +91,9 @@ Backend (local or prod) → Prometheus (local) → Grafana Cloud → Grafana (lo
 | `alertmanager`   | `alertmanager:9093`           | Local        | No            |
 
 > **Note**: `yourservicehere.onrender.com` is a placeholder. `yourservicehere.onrender.com` should be replaced with your actual Render service sub-domain or live production URL.
+
+</br>
+
 ---
 
 ## Setup Instructions
@@ -143,6 +154,9 @@ Grafana's datasource provisioning (`monitoring/grafana/provisioning/datasources/
 Both datasources will show the same data if remote write is configured correctly.
 
 > Note: For more info on setting up environment variables, check out `COMPLETE_SETUP_GUIDE.md`
+
+</br>
+
 ---
 
 ## Dashboard Navigation
@@ -172,6 +186,8 @@ Both datasources will show the same data if remote write is configured correctly
 | **Datasource** | GrafanaCloud-Prometheus (default), Prometheus | Choose where to pull data from (both have same data if remote write works) |
 | **Instance** | Local, Render                              | Switch monitoring between local dev and production instances      |
 
+</br>
+
 ---
 
 ## Metrics Reference
@@ -195,6 +211,8 @@ Both datasources will show the same data if remote write is configured correctly
 
 - Metrics definitions: `backend/monitoring/metrics.js`
 - Monitoring root folder: `/monitoring`
+
+</br>
 
 ---
 
@@ -230,6 +248,8 @@ Grafana handles a smaller set of **informational/trend-based alerts** that are b
 
 These are sent via email through Grafana's built-in SMTP integration.
 
+</br>
+
 ---
 
 ### Why Prometheus-Native Alerting Is Preferred Over Grafana-Based Alerting
@@ -241,6 +261,8 @@ For urgent alerts—error spikes, SLO breaches, infrastructure failures, Prometh
 | **Latency**          | Evaluates rules at scrape interval (15s) — near real-time     | Queries through Grafana's API — adds a hop                  |
 | **Dependency chain** | Prometheus → Alertmanager → Notification (2 hops)            | Prometheus → Grafana Cloud → Grafana → Notification (3+ hops) |
 | **Failure surface**  | If Prometheus is down, you likely already know                | If Grafana Cloud or Grafana is down, alerts silently fail   |
+
+</br>
 
 ---
 
@@ -278,6 +300,8 @@ For urgent alerts—error spikes, SLO breaches, infrastructure failures, Prometh
 | `LowQuestionVolume`         | Fewer than 1 question in 12 hours                | 1 hr     | 
 | `HighLearningMaterialSize`  | Large materials created at >5/sec (by subject)   | 2 min    | 
 
+</br>
+
 ---
 
 ### Alert Routing Summary
@@ -306,6 +330,7 @@ The backend webhook handler (`backend/src/routes/alerts.js`) receives alerts and
 - **Firing alerts** → logged as `ALERT FIRING` with full details
 - **Resolved alerts** → logged as `ALERT RESOLVED`
 
+</br>
 
 ---
 
@@ -323,7 +348,11 @@ bash curl -X POST http://localhost:9093/api/v2/alerts
 
 **Expected result**: Wait a few minutes, then check backend logs. You should see `ALERT FIRING: HighErrorRate`.
 
+</br>
+
 ---
+
+</br>
 
 ### Test 2: Verify Email Alerts (Production Route)
 
@@ -336,24 +365,30 @@ bash curl -X POST http://localhost:9093/api/v2/alerts
 
 **Expected result**: Wait a few minutes, then check the email you configured for SMTP. A notification about this alert should arrive.
 
+</br>
+
 ---
 
+</br>
 
 ### Test 3: Generate Mock Traffic
 
 To populate dashboards with realistic metric data:
 
-1. Import the Postman collection: [Mock-traffic.postman_collection.json](docs\collections\Mock-traffic.postman_collection.json)`
+1. Import the Postman collection: [`Mock-traffic.postman_collection.json`](collections/Mock-traffic.postman_collection.json)
 2. Configure environment variables in Postman (the collection includes scripts that auto-inject most variables)
 3. Manually set these headers based on your needs:
    - `X-Client-Platform` — e.g., `ios`, `android`
    - `X-Network-Type` — e.g., `wifi`, `cellular`
 
    Example:
-   ![Environment Variables in Postman](docs\images\traffic_postman_collection_envs.png)
-4. Run the collection (single-run or performance testing)
+   
+   ![Environment Variables in Postman](images/traffic_postman_collection_envs.png)
+5. Run the collection (single-run or performance testing)
 
 > **Important**: The `CREATE message` request uses "Hello" as the question text, which triggers a pre-configured response and does **not** call the AI. If you want mock traffic to hit the AI, replace the question text with more specific questions — but be mindful of AI token limits.
+
+</br>
 
 ---
 
@@ -372,6 +407,8 @@ To populate dashboards with realistic metric data:
 | `monitoring/grafana/provisioning/alerting/policies.yaml`         | Grafana alert routing policies    | Adjusting grouping/repeat intervals  |
 | `backend/src/routes/alerts.js`                                   | Alert webhook handler             | Customizing alert logging            |
 
+</br>
+
 ---
 
 ## Troubleshooting
@@ -385,7 +422,10 @@ To populate dashboards with realistic metric data:
 | Metrics look stale (>15 min)   | Network or connectivity issue        | Check firewall rules and Grafana Cloud connectivity           |
 | Resource panels empty in prod  | cAdvisor/node-exporter not deployed  | These are local-only — resource panels may not work for prod  |
 
-For more troubleshooting, visit [TROUBLESHOOTING-GUIDE](docs/TROUBLESHOOTING-GUIDE.md)
+For more troubleshooting, visit [`TROUBLESHOOTING-GUIDE`](TROUBLESHOOTING-GUIDE.md)
+
+</br>
+
 ---
 
 ## Security Notes
@@ -396,14 +436,16 @@ For more troubleshooting, visit [TROUBLESHOOTING-GUIDE](docs/TROUBLESHOOTING-GUI
 - Grafana Cloud credentials have **separate** read and write passwords — don't reuse them.
 - Alert webhook endpoints should not be publicly exposed; they are intended for internal Docker network communication only.
 
+</br>
+
 ---
 
 ## Additional Resources
 
 | Resource                  | Link                                                    |
 | ------------------------- | ------------------------------------------------------- |
-| Full Setup Guide          | [`COMPLETE_SETUP_GUIDE.md`](docs\COMPLETE_SETUP_GUIDE.md)        |
-| Detailed Troubleshooting Guide | [TROUBLESHOOTING-GUIDE](docs/TROUBLESHOOTING-GUIDE.md) |
+| Full Setup Guide          | [`COMPLETE-SETUP-GUIDE`](COMPLETE-SETUP-GUIDE.md)        |
+| Detailed Troubleshooting Guide | [`TROUBLESHOOTING-GUIDE`](TROUBLESHOOTING-GUIDE.md) |
 | Grafana Cloud Docs        | [grafana.com/docs/cloud](https://grafana.com/docs/cloud/) |
 | Prometheus Docs           | [prometheus.io/docs](https://prometheus.io/docs/)       |
 | Alertmanager Docs         | [prometheus.io/docs/alerting](https://prometheus.io/docs/alerting/latest/) |
