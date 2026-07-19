@@ -27,3 +27,6 @@ backend/test-results/test-report.xml
 
 # Monitoring envs
 monitoring/prometheus.yml
+monitoring/alertmanager.yml
+
+archive
