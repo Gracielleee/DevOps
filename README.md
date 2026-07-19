@@ -10,40 +10,7 @@ See the architecture below:
 
 </br> 
 
-``` mermaid
-graph TD
-    %% Nodes and implied icons/content
-    UB[User Browser<br/>]
-    
-    %% Next.js logo is not directly representable in standard Mermaid text nodes
-    FC[Frontend Container -Next.js<br/>PORT 8080:3001]
-    
-    %% Use HTML-like formatting to add multiple lines of text
-    IP[Inference Provider - Hugging Face API<br/>]
-    
-    %% Node.js logo is not directly representable
-    BC[Backend Container - Node.js <br/>PORT 3000:3000]
-    
-    %% MongoDB logo is not directly representable
-    MA[MongoDB Atlas<br/>]
-
-    %% Connections and labels
-    UB --> FC
-    
-    %% Define bidirectional flow between Frontend and Backend
-    FC -->|request| BC
-    BC -->|response| FC
-    
-    %% Define bidirectional flow between Backend and Inference Provider
-    BC -->|request| IP
-    IP -->|response| BC
-    
-    %% Data flow to MongoDB
-    BC -->|data persistence/retrieval| MA
-
-    %% Set style to simple rectangles
-    classDef default fill:#f9f9f9,stroke:#333,stroke-width:1px,rx:5,ry:5,color:#000;
-```
+![system architecture diagram](docs\images\devops_architecture.png)
 
 </br> 
 
@@ -51,13 +18,18 @@ graph TD
 
 </br> 
 
-|Component	|Role	|Technology	|Port|
-|----|-----|------|-------|
-|User Browser|	Client interface for application access|	Web browser|	N/A|
-|Frontend Container	|Serves the user interface and handles client-side rendering|	Next.js	|8080:3001|
-|Backend Container |	Processes business logic and manages API requests|	Node.js|	3000:3000|
-|MongoDB Atlas	|Persists application data	| MongoDB	|N/A|
-|Inference Provider	|External machine learning service for AI operations|	Hugging Face API	|N/A|
+| Component | Role | Technology | Port |
+|-----------|------|------------|------|
+| User Browser | Client interface for application access | Web browser | N/A |
+| Frontend Container | Serves the user interface and handles client-side rendering | Next.js | 8080:3001 |
+| Backend Container | Processes business logic and manages API requests | Node.js | 3000:3000 |
+| MongoDB Atlas | Persists application data | MongoDB (cloud) | N/A |
+| Inference Provider | External machine learning service for AI operations | Hugging Face API | N/A |
+| Prometheus | Collects and stores metrics data | Prometheus | 9090 |
+| Node Exporter | Tracks host system metrics (CPU, memory, disk) | prom/node-exporter | 9100 |
+| cAdvisor | Monitors container resource usage | google/cadvisor | 8081 |
+| Alertmanager | Handles alert notifications and routing | prom/alertmanager | 9093 |
+| Grafana | Visualizes metrics and displays dashboards | Grafana | 3005 |
 
 </br> 
 
@@ -71,8 +43,8 @@ graph TD
 
 #### Key Benefits of This Architecture
 - **Separation of Concerns**: Each service runs in isolation, ensuring independence and scalability
-- **Lightweight**: Uses managed cloud services (MongoDB Atlas, Hugging Face) to offload infrastructure burden
-- **Centralized Data**: Using MongoDB Atlas instead of Docker MongoDB volumes guarantees data persistence across machines, streamlining collaboration within the development team.
+- **Lightweight**: Uses managed cloud services to offload infrastructure burden
+- **Centralized Data**: Using MongoDB Atlas and Grafana Cloud instead of Docker MongoDB and Grafana data volumes guarantees data persistence across machines, streamlining collaboration within the development team.
 
 </br> 
 
@@ -141,7 +113,7 @@ Therefore, ensure the following software is installed on your machine:
     cd brainbytes #navigate to the root of the project (same level as docker-compose.yml).
 
 #### 2. **Configure Environment:**
-Create the .env file as described above and fill it in.
+See [COMPLETE_SETUP_GUIDE](docs\COMPLETE_SETUP_GUIDE.md) for detailed environment configuration instructions.
 
     
 #### 3. **Start the Containers:**
@@ -252,14 +224,16 @@ Fix:
 
 ## Documentation
 
+
 For detailed technical information, please refer to the dedicated docs:
-|Topic	| Description	| Link
-|---------|-----------|--------|
-**Key Features** | Feature descriptions, user guide, recording of features | [View Key Features](docs/USER-GUIDE.md)
-**API Reference**	| Full endpoint list, auth requirements, and examples | [View API Docs](docs/API.md)
-**Database Schema** |	ERD, field definitions, and indexing strategies |	[View DB Schema](docs/DATABASE.md)
-**Development Workflow**|	Branching strategy, PR rules, and team process	| [View Contribution Workflow](docs/CONTRIBUTION.md)
-**CI/CD Workflows**|	Workflows, Status badges, and workflow troubleshooting	| [View Workflows](docs/CI-CD_WORKFLOWS.md)
+
+| Topic | Description | Link |
+|-------|-------------|------|
+| **Key Features** | Feature descriptions, user guide, recording of features | [View Key Features](docs/USER-GUIDE.md) |
+| **API Reference** | Full endpoint list, auth requirements, and examples | [View API Docs](docs/API.md) |
+| **Database Schema** | ERD, field definitions, and indexing strategies | [View DB Schema](docs/DATABASE.md) |
+| **Development Workflow** | Branching strategy, PR rules, and team process | [View Contribution Workflow](docs/CONTRIBUTION.md) |
+| **CI/CD Workflows** | Workflows, Status badges, and workflow troubleshooting | [View Workflows](docs/CI-CD_WORKFLOWS.md) |
 
 
 </br>
@@ -270,10 +244,14 @@ For detailed technical information, please refer to the dedicated docs:
 - Implement a containerized application with proper networking ✅
 - Create an automated CI/CD pipeline using GitHub Actions ✅
 - Deploy the application to Render ✅
-- Set up monitoring and observability tools
+- Set up monitoring and observability tools ✅
 
 ### Team Members
-- Gracielle - Team Lead - lr.gsalvador@mmdc.mcl.edu.ph
 - J.R - Backend Developer - lr.jportillo@mmdc.mcl.edu.ph
+- Ralph - Backend Developer - lr.rrnocum@mmdc.mcl.edu.ph
 - Krizia - Frontend Developer - lr.kaligado@mmdc.mcl.edu.ph
-- Ralph - DevOps Engineer - lr.rrnocum@mmdc.mcl.edu.ph
+- Gracielle - Team Lead, DevOps Engineer - lr.gsalvador@mmdc.mcl.edu.ph
+
+---
+
+> **Last Updated**: July 19, 2026 

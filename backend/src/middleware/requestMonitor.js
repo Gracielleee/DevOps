@@ -40,6 +40,10 @@ const requestMonitor = (req, res, next) => {
 
     const status = res.statusCode;
 
+    if (status >= 500) {
+    console.log(`[METRICS] 5xx detected - method=${req.method}, route=${routePattern}, status=${status}`);
+    }
+
     // ── HTTP Request Counter ──
     try {
       httpRequestCounter.inc({

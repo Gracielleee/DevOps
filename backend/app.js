@@ -45,13 +45,15 @@ if (ENABLE_METRICS) {
       challenge: true,
       unauthorizedResponse: (req) => {
         console.warn(`[Auth Alert] Failed /metrics access attempt.`);
-        console.warn(`Expected: "${username}" | Received: "${req.auth?.user || 'None'}"`);
-        
+        console.warn(
+          `Expected: "${username}" | Received: "${req.auth?.user || "None"}"`,
+        );
+
         return {
           status: "error",
           code: 401,
           message: "Access Denied: Invalid metrics scraping credentials.",
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         };
       },
     }),
@@ -77,19 +79,21 @@ app.use("/api/subjects", subjectRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api", userProfileRoutes);
 app.use("/api", alertRoutes);
-// app.get('/api/test/500', (req, res) => {
-//   console.log("Error endpoint hit. Triggering 500 status code.");
-//   res.status(500).json({
-//     error: "Internal Server Error",
-//     message: "This is a test error returning 500 error."
-//   });
-// });
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "Backend is healthy" });
 });
 
 app.get("/", (req, res) => {
   res.json({ message: "Backend API is running" });
+});
+
+// Error Simulation
+app.get("/api/test/500", (req, res) => {
+  console.log("Error endpoint hit. Triggering 500 status code.");
+  res.status(500).json({
+    error: "Internal Server Error",
+    message: "This is a test error returning 500 error.",
+  });
 });
 
 // 404 Fallback

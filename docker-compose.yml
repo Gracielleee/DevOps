@@ -30,7 +30,6 @@ services:
     build: ./backend
     ports:
       - "3000:3000"
-      - "9080:9080" # Prometheus metrics port
     volumes:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
@@ -50,20 +49,6 @@ services:
       timeout: 5s        
       retries: 5        
       start_period: 30s
-
-# Cloud MongoDB Atlas is used, so this is commented out for now.
-#   mongo:
-#     image: mongo:4.4
-#     ports:
-#       - "27017:27017"
-#     volumes:
-#       - mongo-data:/data/db
-#     restart: unless-stopped
-
-# volumes:
-#   mongo-data:
-
-
 
 #---------------
 # MONITORING
@@ -88,6 +73,8 @@ services:
 
   node-exporter:
     image: prom/node-exporter:v1.5.0
+    ports:
+    - "9100:9100"
     container_name: node-exporter
     volumes:
       - /proc:/host/proc:ro
@@ -111,6 +98,7 @@ services:
       - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker:/var/lib/docker:ro
     ports:
       - 8081:8080
     restart: unless-stopped
@@ -118,6 +106,11 @@ services:
   alertmanager:
     image: prom/alertmanager:v0.25.0
     container_name: alertmanager
+    environment:
+      - SMTP_SMARTHOST=smtp.gmail.com:587
+      - SMTP_USER=${ALERTS_EMAIL}
+      - SMTP_PASSWORD=${ALERTS_PASSWORD}
+      - SMTP_FROM_ADDRESS=${ALERTS_EMAIL}
     ports:
       - "9093:9093"
     volumes:
@@ -154,5 +147,5 @@ services:
     restart: unless-stopped
 
 volumes:
-  prometheus_data:
-  grafana_data:
+  prometheus_data: {}
+  grafana_data: {}

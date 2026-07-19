@@ -11,7 +11,7 @@ groups:
           data:
             - refId: A
               relativeTimeRange:
-                from: 86400
+                from: 43200
                 to: 0
               datasourceUid: PE8EB7BB14D529B55
               model:
@@ -148,7 +148,7 @@ groups:
                 conditions:
                     - evaluator:
                         params:
-                            - 5 
+                            - 5
                         type: gt
                       operator:
                         type: and
@@ -170,7 +170,7 @@ groups:
                 type: threshold
           noDataState: OK
           execErrState: Error
-          for: 10m 
+          for: 2m 
           annotations:
             description: '{{ if $value }}{{ $value }}{{ else }}0{{ end }} materials/sec being generated. Monitor storage impact'
             summary: Large learning materials created for {{ if $labels.subject }}{{ $labels.subject }}{{ else }}unknown subject{{ end }}

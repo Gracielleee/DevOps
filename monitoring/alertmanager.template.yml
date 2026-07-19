@@ -1,0 +1,57 @@
+# ============================================================
+# ALERTMANAGER CONFIGURATION TEMPLATE
+# ============================================================
+# HOW TO USE:
+#   1. Copy this file and rename it to `alertmanager.yml`
+#   2. Replace every ${VARIABLE} placeholder with your actual values
+#   3. Never commit the completed `alertmanager.yml` to version control
+#
+# PLACEHOLDERS TO REPLACE:
+#   ${ALERTS_EMAIL}    → Gmail address used to SEND alert emails
+#   ${ALERTS_PASSWORD} → Gmail app password (NOT your regular password)
+#                        Create one at: Google Account → Security → App Passwords
+#   ${SMTP_EMAIL}      → Email address to RECEIVE alert notifications
+#
+# If you have set these variables up in your `.env` file, just directly copy and paste it
+#
+# ROUTING LOGIC:
+#   - job = "render-backend" → alerts sent via EMAIL (production alerts)
+#   - job = "backend"        → alerts sent to backend WEBHOOK (local alerts)
+#   - Everything else         → falls through to the default receiver (webhook)
+# ============================================================
+
+global:
+  smtp_smarthost: "smtp.gmail.com:587"
+  smtp_from: "${ALERTS_EMAIL}"
+  smtp_auth_username: "${ALERTS_EMAIL}"
+  smtp_auth_password: "${ALERTS_PASSWORD}"
+  smtp_require_tls: true
+
+route:
+  group_by: ['alertname', 'job']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  receiver: 'local-backend-receiver'
+
+  routes:
+    - matchers:
+        - job = "render-backend"
+      receiver: 'email-receiver'
+      continue: false
+
+    - matchers:
+        - job = "backend"
+      receiver: 'local-backend-receiver'
+      continue: false
+
+receivers:
+  - name: 'email-receiver'
+    email_configs:
+      - to: "${SMTP_EMAIL}"
+        send_resolved: true
+
+  - name: 'local-backend-receiver'
+    webhook_configs:
+      - url: 'http://backend:3000/api/alerts'
+        send_resolved: true
