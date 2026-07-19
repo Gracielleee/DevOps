@@ -26,68 +26,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Validate and sanitize image tag
-        id: sanitize-tag
-        run: |
-          RAW_TAG="${{ github.event.inputs.image_tag }}"
-          
-          CLEAN_TAG=$(echo "$RAW_TAG" | sed 's/^sha256://' | xargs)
-          
-          # If longer than 72 chars, take first 7 (short SHA format)
-          if [ ${#CLEAN_TAG} -gt 16 ]; then
-            CLEAN_TAG="${CLEAN_TAG:0:7}"
-          fi
-          
-          if ! [[ "$CLEAN_TAG" =~ ^[a-zA-Z0-9._-]+$ ]]; then
-            echo "Error: Invalid image tag format: $CLEAN_TAG"
-            exit 1
-          fi
-          
-          echo "original_tag=$RAW_TAG" >> $GITHUB_OUTPUT
-          echo "clean_tag=$CLEAN_TAG" >> $GITHUB_OUTPUT
-          echo "Sanitized tag: $CLEAN_TAG (from $RAW_TAG)"
-
       - name: Rollback backend
         if: github.event.inputs.service == 'backend' || github.event.inputs.service == 'both'
         run: |
           set -e
           OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          IMAGE_TAG="${{ steps.sanitize-tag.outputs.clean_tag }}"
-          echo "Rolling back backend to image tag: $IMAGE_TAG"
-          ENCODED_IMAGE="ghcr.io%2F${OWNER_LOWER}%2Fbrainbytes-backend%3A${IMAGE_TAG}"
-          
-          RESPONSE=$(curl -f -w "\nHTTP_CODE:%{http_code}" -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}&imgURL=${ENCODED_IMAGE}" 2>&1 || true)
-          echo "Render response: $RESPONSE"
-          
-          HTTP_CODE=$(echo "$RESPONSE" | grep "HTTP_CODE:" | cut -d':' -f2)
-          
-          if [ "$HTTP_CODE" != "200" ] && [ "$HTTP_CODE" != "201" ]; then
-            echo "Error: Render rejected the deployment (HTTP $HTTP_CODE)"
-            exit 1
-          fi
-          
-          echo "Backend rollback initiated successfully"
+          echo "Rolling back backend to image tag: ${{ github.event.inputs.image_tag }}"
+          curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}&imgURL=ghcr.io%2F${OWNER_LOWER}%2Fbrainbytes-backend%3A${{ github.event.inputs.image_tag }}"
 
       - name: Rollback frontend
         if: github.event.inputs.service == 'frontend' || github.event.inputs.service == 'both'
         run: |
           set -e
-          OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:upper:]')
-          IMAGE_TAG="${{ steps.sanitize-tag.outputs.clean_tag }}"
-          echo "Rolling back frontend to image tag: $IMAGE_TAG"
-          ENCODED_IMAGE="ghcr.io%2F${OWNER_LOWER}%2Fbrainbytes-frontend%3A${IMAGE_TAG}"
-          
-          RESPONSE=$(curl -f -w "\nHTTP_CODE:%{http_code}" -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}&imgURL=${ENCODED_IMAGE}" 2>&1 || true)
-          echo "Render response: $RESPONSE"
-          
-          HTTP_CODE=$(echo "$RESPONSE" | grep "HTTP_CODE:" | cut -d':' -f2)
-          
-          if [ "$HTTP_CODE" != "200" ] && [ "$HTTP_CODE" != "201" ]; then
-            echo "Error: Render rejected the deployment (HTTP $HTTP_CODE)"
-            exit 1
-          fi
-          
-          echo "Frontend rollback initiated successfully"
+          OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          echo "Rolling back frontend to image tag: ${{ github.event.inputs.image_tag }}"
+          curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}&imgURL=ghcr.io%2F${OWNER_LOWER}%2Fbrainbytes-frontend%3A${{ github.event.inputs.image_tag }}"
 
       - name: Verify Live Backend Deployment
         if: github.event.inputs.service == 'backend' || github.event.inputs.service == 'both'
