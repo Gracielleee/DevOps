@@ -7,7 +7,7 @@ Status: Complete
 - Frontend: Next.js application in `frontend/`, served by Render for production and by Docker Compose locally on `localhost:8080` mapped from container port `3001`.
 - Backend: Node.js / Express application in `backend/`, served by Render for production and by Docker Compose locally on `localhost:3000`.
 - Database: MongoDB Atlas is used via `MONGO_URI`; the local `docker-compose.yml` does not launch a Mongo container. The compose file explicitly comments out a `mongo:` service and relies on the Atlas connection string instead.
-- Monitoring: Local stack includes Prometheus, Alertmanager, Grafana, Node Exporter, and cAdvisor. Backend metrics are exposed on `9080`.
+- Monitoring: Local stack includes Prometheus, Alertmanager, Grafana, Node Exporter, and cAdvisor. Backend metrics are exposed on port 3000 at the `/metrics` endpoint.
 
 ## Deployment Procedure
 
@@ -56,16 +56,16 @@ Status: Complete
 
 | Variable | Defined In | Purpose | Notes |
 | --- | --- | --- | --- |
-| `HF_TOKEN` | `.env.example`, `render.yaml` | Hugging Face API token for backend AI inference | Required for both local and production use |
-| `MONGO_URI` | `.env.example`, `render.yaml` | MongoDB Atlas connection string | Production uses Atlas; local compose does not start Mongo container |
-| `JWT_SECRET` | `.env.example`, `render.yaml` | Backend JWT signing secret | Must be strong in production |
-| `NODE_ENV` | `.env.example`, `render.yaml` | Runtime environment mode | `development` locally, `production` on Render |
-| `GRAFANA_CLOUD_USER` | `.env.example` | Grafana Cloud datasource username | Required for Grafana provisioning |
-| `GRAFANA_CLOUD_PASSWORD` | `.env.example` | Grafana Cloud datasource password | Required for Grafana provisioning |
-| `GRAFANA_CLOUD_URL` | `.env.example` | Grafana Cloud datasource URL | Required for Grafana provisioning |
-| `GRAFANA_CLOUD_URL_PUSH` | `.env.example` | Grafana Cloud remote write endpoint | Intended for Prometheus remote write |
-| `NEXT_PUBLIC_API_URL` | `.env.example`, `render.yaml` | Frontend API endpoint | Local Docker Compose uses `/api/` |
-| `BACKEND_URL` | `.env.example`, `render.yaml` | Backend URL for frontend server-side use | Local compose uses `http://localhost:3000` or internal Docker network |
+| `HF_TOKEN` | `.env.template`, `render.yaml` | Hugging Face API token for backend AI inference | Required for both local and production use |
+| `MONGO_URI` | `.env.template`, `render.yaml` | MongoDB Atlas connection string | Production uses Atlas; local compose does not start Mongo container |
+| `JWT_SECRET` | `.env.template`, `render.yaml` | Backend JWT signing secret | Must be strong in production |
+| `NODE_ENV` | `.env.template`, `render.yaml` | Runtime environment mode | `development` locally, `production` on Render |
+| `GRAFANA_CLOUD_USER` | `.env.template` | Grafana Cloud datasource username | Required for Grafana provisioning |
+| `GRAFANA_CLOUD_PASSWORD` | `.env.template` | Grafana Cloud datasource password | Required for Grafana provisioning |
+| `GRAFANA_CLOUD_URL` | `.env.template` | Grafana Cloud datasource URL | Required for Grafana provisioning |
+| `GRAFANA_CLOUD_URL_PUSH` | `.env.template` | Grafana Cloud remote write endpoint | Intended for Prometheus remote write |
+| `NEXT_PUBLIC_API_URL` | `.env.template`, `render.yaml` | Frontend API endpoint | Local Docker Compose uses `/api/` |
+| `BACKEND_URL` | `.env.template`, `render.yaml` | Backend URL for frontend server-side use | Local compose uses `http://localhost:3000` or internal Docker network |
 | `FE_URL` | `render.yaml` | Backend production frontend URL | Set only in backend Render service |
 | `PORT` | `render.yaml` | Backend runtime port | Set to `3000` for Render backend service |
 
@@ -104,7 +104,7 @@ Status: Complete
 
 ## Monitoring Overview
 
-- Canonical monitoring documentation: `monitoring-docs/MONITORING.md`
+- Canonical monitoring documentation: `docs/MONITORING-GUIDE.md`
 - Verified by repository content:
   - Prometheus scrape jobs and alert rules are configured in `monitoring/prometheus.yml` and `monitoring/alert_rules.yml`
   - Recording rules are configured in `monitoring/recording_rules.yml`
