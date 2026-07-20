@@ -339,10 +339,10 @@ The backend webhook handler (`backend/src/routes/alerts.js`) receives alerts and
 ### Test 1: Verify Webhook Alerts (Local)
 
 Send a test alert to Alertmanager targeting the local backend:
+
+in **cmd**:
 ```
-bash curl -X POST http://localhost:9093/api/v2/alerts
--H "Content-Type: application/json"
--d '[{ "labels": { "alertname": "HighErrorRate", "job": "backend", "severity": "critical", "team": "backend", "route_pattern": "/api/v1/test" }, "annotations": { "summary": "Error rate >5% on /api/v1/test", "description": "10% of requests failing (5xx) - TEST ALERT" } }]'
+curl -X POST http://localhost:9093/api/v2/alerts -H "Content-Type: application/json" -d "[{\"labels\": {\"alertname\": \"HighErrorRate\", \"job\": \"backend\", \"severity\": \"critical\", \"team\": \"backend\", \"route_pattern\": \"/api/v1/test\"}, \"annotations\": {\"summary\": \"Error rate >5%% on /api/v1/test\", \"description\": \"10%% of requests failing (5xx) - TEST ALERT\"}}]"
 ```
 
 
@@ -357,10 +357,10 @@ bash curl -X POST http://localhost:9093/api/v2/alerts
 ### Test 2: Verify Email Alerts (Production Route)
 
 Send a test alert targeting the production route (uses `job = "render-backend"`):
+
+in **cmd**:
 ```
-bash curl -X POST http://localhost:9093/api/v2/alerts
--H "Content-Type: application/json"
--d '[{ "labels": { "alertname": "HighErrorRate", "job": "render-backend", "severity": "critical", "team": "backend", "route_pattern": "/api/v1/test" }, "annotations": { "summary": "Error rate >5% on /api/v1/test", "description": "10% of requests failing (5xx) - TEST ALERT" } }]'
+curl -X POST http://localhost:9093/api/v2/alerts -H "Content-Type: application/json" -d "[{\"labels\": {\"alertname\": \"HighErrorRate\", \"job\": \"render-backend\", \"severity\": \"critical\", \"team\": \"backend\", \"route_pattern\": \"/api/v1/test\"}, \"annotations\": {\"summary\": \"Error rate >5%% on /api/v1/test\", \"description\": \"10%% of requests failing (5xx) - TEST ALERT\"}}]"
 ```
 
 **Expected result**: Wait a few minutes, then check the email you configured for SMTP. A notification about this alert should arrive.
