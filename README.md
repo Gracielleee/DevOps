@@ -98,9 +98,9 @@ Therefore, ensure the following software is installed on your machine:
 
 ### Environment Variables
 
-1. Locate the `.env.example` file in the project's **root directory** (alongside `docker-compose.yml`).
+1. Locate the `.env.template` file in the project's **root directory** (alongside `docker-compose.yml`).
 2. Copy its contents into a new file named `.env`.
-3. Follow the instructions provided in `.env.example` to generate and assign the appropriate values for your environment variables.
+3. Follow the instructions provided in `.env.template` to generate and assign the appropriate values for your environment variables.
 
 
 <br>
@@ -234,10 +234,10 @@ For detailed technical information, please refer to the dedicated docs:
 | **Database Schema** | ERD, field definitions, and indexing strategies | [View DB Schema](docs/DATABASE.md) |
 | **Development Workflow** | Branching strategy, PR rules, and team process | [View Contribution Workflow](docs/CONTRIBUTION.md) |
 | **CI/CD Workflows** | Workflows, Status badges, and workflow troubleshooting | [View Workflows](docs/CI-CD_WORKFLOWS.md) |
-COMPLETE-SETUP-GUIDE
-MONITORING-GUIDE
-OPERATIONS-MANUAL
-TROUBLESHOOTING-GUIDE
+| **Complete Setup Guide** | 	Initial configuration, prerequisites, and installation steps | [View Complete Setup Guide](docs/COMPLETE-SETUP-GUIDE.md) |
+| **Monitoring Guide** | Metrics collection, alerting, and dashboards | [View Monitoring Guide](docs/MONITORING-GUIDE.md) |
+| **Operations Manual** | Deployment procedures, scaling, backups, and runbooks | [View Operations Manual](docs/OPERATIONS-MANUAL.md) |
+| **Troubleshooting Guide** | Common issues, debugging strategies, and error resolution | [View Troubleshooting Guide](docs/TROUBLESHOOTING-GUIDE.md) |
 
 </br>
 
