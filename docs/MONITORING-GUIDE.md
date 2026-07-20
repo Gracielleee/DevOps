@@ -379,7 +379,7 @@ To populate dashboards with realistic metric data:
 2. Configure environment variables in Postman (the collection includes scripts that auto-inject most variables)
 3. Manually set these headers based on your needs:
    - `X-Client-Platform` — e.g., `ios`, `android`
-   - `X-Network-Type` — e.g., `wifi`, `cellular`
+   - `X-Network-Type` — e.g., `wifi`, `4g`
 
    Example:
    
