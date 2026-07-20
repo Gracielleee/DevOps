@@ -240,7 +240,7 @@ export default function Home({ authHeader, onLogout, setGlobalError }) {
         <title>BrainBytes AI Tutor</title>
       </Head>
       <Layout authHeader={authHeader} onLogout={onLogout}>
-      <h1 style={{ textAlign: "center", color: "#3812f9" }}>
+      <h1 style={{ textAlign: "center", color: "#170f3f" }}>
         BrainBytes AI Tutor
       </h1>
 
