@@ -23,9 +23,6 @@ export default [
     ],
   },
 
-  // 1) 💡 THE FIX: GLOBAL PARSER SETTINGS 💡
-  // By putting this at the top, we force ESLint to understand JSX 
-  // across the entire project, completely bypassing path-matching bugs!
   {
     languageOptions: {
       ecmaVersion: 'latest',
