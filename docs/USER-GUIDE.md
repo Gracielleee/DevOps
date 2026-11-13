@@ -30,7 +30,7 @@ Interact with the BrainBytes AI Tutor to get instant answers, explanations, and 
 #### User Modes:
 |Mode |Features | Data Privacy| 
 |---|-----|--------|
-|**Guest User** | Instant access without login. No account required.|🔒 **Private & Temporary:** Chats are not saved on the server. History is lost when you refresh or log out. Ideal for quick, private queries.|
+|**Guest User** | Instant access without login. No account required.|🔒 **Private & Temporary:** Chats are not saved on the server. History is lost when you refresh the browser. Ideal for quick, private queries.|
 **Authenticated User**| All chats are saved. Past conversations are fed back to the AI for better context and continuity. Your preferred subject (set in Profile) loads automatically in the dropdown. | 🧠 **Personalized:** Your data is secure and linked to your account. You can revisit past chat messages anytime.
 
 </br>
