@@ -16,7 +16,7 @@ This document explains the Continuous Integration and Continuous Deployment (CI/
 3. **Build**: Builds production-ready Docker images and automatically pushes them to the GitHub Container Registry (GHCR), tagging them with the Git commit SHA for reliable version control.
 
 **Manual Execution**:
-To run this workflow manually, go to the Actions tab, select "BrainBytes CI/CD", and click "Run workflow".
+To run this workflow manually, go to the Actions tab in the project's GitHub repository, select "BrainBytes CI/CD", and click "Run workflow".
 
 </br>
 
