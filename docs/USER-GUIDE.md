@@ -82,10 +82,10 @@ Manage your account settings and preferences.
 </br>
 
 ## Quick Tips
-- **Context Matters:** Always select a **Subject** before asking a question. The AI performs significantly better with specific context.
+- **Context Matters:** Always select a **Subject** before asking a question. The AI can perform better with specific context.
 - **Ask Smartly:** The AI automatically detects your **intent** based on keywords. Try starting your questions with:
     - "**What is**..." or "**Define**..." for clear **definitions**.
     - "**How does**..." or "**Explain**..." for detailed **explanations**.
     - "**Give me an example**..." or "**Show me**..." for practical **examples**.
 - **Save Your Work:** If you are a **Guest** user, copy important AI responses to a safe area before refreshing or exiting the browser, as they will be lost.
-- **Organize:** Use the **Learning Materials** section to build a personal library of notes that you can reference anytime.
+- **Organize:** Use the **Learning Materials** section to build a personal library of notes that you can come back to anytime.
