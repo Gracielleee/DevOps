@@ -23,7 +23,7 @@ frontend/playwright-report/
 frontend/blob-report/
 frontend/playwright/.cache/
 frontend/playwright/.auth/
-backend/test-results/test-report.xml
+backend/test-results/
 
 # Monitoring envs
 monitoring/prometheus.yml

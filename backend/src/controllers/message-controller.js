@@ -20,7 +20,7 @@ const messageController = {
       let subjectCategory = "general";
       let subjectRef = null;
 
-      // 1. Resolve Subject and Category
+      // Resolve Subject and Category
       if (subjectId) {
         const subjectDoc = await Subject.findById(subjectId);
         if (subjectDoc) {
@@ -80,20 +80,11 @@ const messageController = {
         });
 
 //-----------------------------------------MONITORING BLOCK ---------------------------------------
-      const responseTimeSeconds = endAiTimer();
+      const isSuccess = Boolean(aiResult && aiResult.source == "provider" && aiResult.category !== "error");
+      const status = isSuccess ? "success" : "error";
 
-      if (aiResult && aiResult.category === "error") {
-        // The request timed out or dropped an error
-        aiResponseTimeHistogram.observe({ subject: subjectCategory, status: "error" }, responseTimeSeconds);
-        trackAiRequest(subjectCategory, false);
-
-      } else {
-        // The request succeeded inside the 15-second window
-        if (aiResult && aiResult.category !== "error") {
-          aiResponseTimeHistogram.observe({ subject: subjectCategory, status: "success" }, responseTimeSeconds);
-          trackAiRequest(subjectCategory, true);
-        }
-      }
+      endAiTimer({ subject: subjectCategory, status });
+      trackAiRequest(subjectCategory, isSuccess);
 //-------------------------------------------------------------------------------------------------
 
       if (req.user) {

@@ -16,18 +16,21 @@ export async function generateResponse(question, subjectCategory = 'general', co
   const promptprefix = generatePromptPrefix(question, category);
   logger.debug("Prompt prefix generated", { file: fileName });
 
-  // 1. Check knowledge base first
+  // Check knowledge base first
   logger.debug("Checking knowledge base for direct matches...", { file: fileName });
   const knowledgeBaseAnswer = getAnswerFromKnowledgeBase(question, category);
   
   if (knowledgeBaseAnswer) {
     logger.info("Found answer in knowledge base", { file: fileName });
-    return knowledgeBaseAnswer;
+    return {
+        ...knowledgeBaseAnswer,
+        source: "knowledge_base",
+    };
   }
 
   logger.debug("No direct match in knowledge base, proceeding to call AI", { file: fileName });
 
-  // 2. For other questions, try the API with a strict timeout
+  // For other questions, call the API with a timeout
   try {
     // logger.debug("Analyzing sentiment of question...", { file: fileName });
     // const sentimentResult = await analyzeSentiment(question);
@@ -44,7 +47,8 @@ export async function generateResponse(question, subjectCategory = 'general', co
       logger.debug("Valid text response from AI", { file: fileName });
       return {
         category,
-        response: aiResponseString
+        response: aiResponseString,
+        source: "provider"
       };
     } else {
       logger.warn("Empty response from AI", { file: fileName });
@@ -60,7 +64,8 @@ export async function generateResponse(question, subjectCategory = 'general', co
     logger.debug("Falling back to backup response for category: " + category, { file: fileName });
     return {
       category,
-      response: getBackupResponse(category, question)
+      response: getBackupResponse(category, question),
+      source: "fallback",
     };
   }
 }

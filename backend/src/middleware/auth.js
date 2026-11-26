@@ -16,14 +16,22 @@ const authenticate = async (req, res, next) => {
     if (!token) {
         return res.status(401).json({ message: 'Invalid or expired token' });
     }
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        const user = await User.findById(decoded.id);
-        if (!user) {
-            return res.status(401).json({ message: 'User not found' });
+    let decoded;
+    try {
+        decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+        if (error instanceof jwt.JsonWebTokenError) {
+        return res.status(401).json({ message: 'Invalid or expired token' });
         }
-        
+        return next(error);
+    }
+
+  try {
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return res.status(401).json({ message: 'User not found' });
+    }
         req.user = user;
 
 //----------------------------MONITORING BLOCK--------------------------------
@@ -33,9 +41,9 @@ const authenticate = async (req, res, next) => {
         next();
     } catch (error) {
         logger.error('Authentication error:', error, { file: 'auth.js' });
-        return res.status(401).json({ message: 'Invalid or expired token' });
+        return next(error);
     }
-}
+};
 
 const optionalAuthentication = async (req, res, next) => {
     const authHeader = req.headers.authorization;

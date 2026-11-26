@@ -80,7 +80,7 @@ router.post('/login', validateLogin, async (req, res) => {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' }); // turn to 10s to test if the token expires
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         logger.info(`Login successful`);
         res.json({
             email,
@@ -121,7 +121,7 @@ router.put('/profile/', authenticate, validateProfileUpdate, async (req, res) =>
         const updateData = {};
         if (name !== undefined) updateData.name = name;
         if (email !== undefined) updateData.email = email;
-        if (password !== undefined) updateData.password = password;
+        if (password !== undefined) updateData.password = await bcrypt.hash(password, saltRounds);
         if (preferredSubject !== undefined) updateData.preferredSubject = preferredSubject;
 
         const updatedProfile = await User.findByIdAndUpdate(

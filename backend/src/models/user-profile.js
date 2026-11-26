@@ -26,7 +26,7 @@ const userProfileSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: [CHARACTER_LIMITS.USER_PASSWORD_MIN_LENGTH, `Password must be at least ${CHARACTER_LIMITS.USER_PASSWORD_MIN_LENGTH} characters long`],
-        select: false // Should be false. Don't return password in queries by default
+        select: false // To not return password in queries
     },
     preferredSubject: { 
         type: mongoose.Schema.Types.ObjectId, 
@@ -44,6 +44,7 @@ const userProfileSchema = new mongoose.Schema({
       ret.id = ret._id; 
       delete ret._id;   
       delete ret.__v;
+      delete ret.password; //to not return password when converted to JSON
       return ret;
     }
   }
